@@ -1,0 +1,429 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc} % Per caratteri accentati
+\usepackage[T1]{fontenc}    % Per una corretta codifica dei font
+\usepackage[italian]{babel} % Per sillabazione in italiano
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+%VALORI SISTEMABILI
+\usepackage[a4paper, top= 1 cm, bottom= 1.5 cm, left= 2 cm, right= 2 cm]{geometry}
+
+\title{Algoritmi e strutture dati}
+\author{Francesco Lanzarini}
+\date{ }
+
+\begin{document}
+
+\maketitle
+
+\section{Notazione asintotica}
+Non ci interessiamo direttamente al tempo esatto di calcolo dell'algoritmo ma la crescita del tempo richiesto rispetto alla crescita dell'input. Questa notazione permette di confrontare rapidamente tra loro algoritmi differenti che risolvono lo stesso problema, indipendentemente dall'hardaware.
+\subsection{Definizioni e notazioni matematiche}
+\paragraph{Funzione di costo}
+Associa ad ogni input n la quantità di calcolo necessaria a terminare il calcolo, tutti i numeri sono naturali quindi un numero di bit non negatico e non frazionario ma il codomionio delle funzioni è $\mathbb{R}^+$.
+\paragraph{O-grande}
+Data una funzione $g(n)$ l'insieme delle funzioni $O-grande$ è composto da tutte quellle funzioni con un ordine di crescita inferiorie di $g(n)$; ovveri $g(n)$ è il \textbf{limite asintotico superiore}.
+\paragraph{$\Omega$-grande}
+Data sempre $g(n)$ con $\Omega-grande$ si indica l'insieme delle funzioni con ordine di crescita maggiore o uguale di $g(x)$.
+\paragraph{$\Theta$}
+Data sempre $g(n)$ si indica con $\Theta$ l'insieme di funzioni che hanno lo stesso ordine di crescita di $g(n)$, in altre parole $f(n) = \Theta(g(n)) \iff f(n) = O(g(n)) \land f(n) = \Omega(g(n))$
+\paragraph{o-piccolo} La stessa definizione data in analisi ma più specifica essendo in questo caso applicata alle funzioni di costo.
+\paragraph{$\omega$-piccolo} Ovvero l'insieme di funzioni che dominano asintoticamente $g(n)$
+\paragraph{Complessità computazionale di un algoritmo} Un algoritmo A ha complessità computazionale $O(f (n))$ rispetto ad una certa risorsa di calcolo se la quantità di risorse necessaria per eseguire A su un qualsiasi input di dimensione n è $O(f (n))$.
+\paragraph{Complessità computazionale di un problema} Un problema P ha complessità computazionale $O(f (n))$ rispetto ad una certa risorsa di calcolo se il migliore algoritmo che risolve P ha costo computazionale $O(f (n))$ rispetto a tale risorsa di calcolo. E' molto più complicata da calcolare rispetto a quella di un algoritmo.
+\subsection {Scopo di queste definizioni}
+L'ordine di crescita asintotico può essere confrontato attraverso le notazioni di limite, se il limite all'inifnito tra $f(n)$ e $g(n)$ esiste si presentano 3 casistiche:
+\begin{itemize}
+    \item $\displaystyle \lim_{n \to \infty} \frac{f(n)}{g(n)} = 0$ allora $f(n) =o(g(n)) \Rightarrow f(n) = O(g(n))$
+    \item $\displaystyle \lim_{n \to \infty} \frac{f(n)}{g(n)} = \infty$ allora $f(n) =\omega(g(n)) \Rightarrow f(n) = \Omega(g(n))$
+    \item $\displaystyle \lim_{n \to \infty} \frac{f(n)}{g(n)} = k >0$ allora $f(n) =\Theta(g(n))$
+    
+\end{itemize}
+Oppure si può utilizzare un'interpretazione intuitiva delle seguenti definizioni:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{intuitive notation.png}
+    \caption{Interpretazione intuitiva delle definizioni}
+    \label{fig:intuitive_notation}
+\end{figure}
+
+
+\subsection{Analisi degli algoritmi} 
+Solitamente si analizzano 3 aspetti dell'algoritmo:
+\begin{itemize}
+    \item \textbf{Caso ottimo}: ovvero la complessità computazionale in condizioni ottimali.
+    \item \textbf{Caso pessimo}: ovvero la complessità computazionale in condizioni sfavorevoli.
+    \item \textbf{Caso medio}: ovvero la complessità computazionale media sul possibile input.
+\end{itemize}
+Solitamente quando si sviluppa un algoritmo ci si interessa principalmente al caso \textbf{medio/pessimo} 
+
+\subsection{Analisi Ammortizzata}
+Serve in caso di algoritmi molto complicati  ed è un metodo per valutare il costo medio di una sequenza di operazioni a differenza di quella degli algoritmi che calcola su singola operazione. Ci sono due metodi principali per fare questo tipo di analisi:
+\begin{itemize}
+    \item \textbf{Metodo dell'aggregazioni}: si determina un limite superiore al costo totale si una sequenza di n operazioni e dividiamo per n.
+    \item \textbf{Metodo degli accantonamenti}: si immagina che ci sia un budget per igni singola operazione e si accantona il "resto" che viene usato nel caso il budget non basti per alcune operazioni. Per capire se la stima del budget è corretta alla fine si avrà un surplus positivo, in caso esso sia negativo allora bisogna stimare un budget più alto.
+\end{itemize}
+
+\subsection{Equazioni di ricorrenza}
+Esprimono il valore di una funzione in termini dei valori su input più piccoli, ci sono due metodi per risolvere le equazioni di ricorrenza:
+\begin{itemize}
+    \item \textbf{Metodo dell'iterazione}: è un approccio di tipo \textit{brute force} che consiste nell'sostituire iterativamente la parte ricorsiva finchè non appare un pattern.
+    \item \textbf{Master Theorem}: funziona con equazioni di ricorrenza nella forma $T(n) = aT(n/b) +cn^\beta$ e quindi non puo' essere applicato a tutte le equazioni di ricorrenza (tipo quella di Fibonacci che chiama 2 volte se stessa). Il teorema dice che calcolando $\alpha = log_b(a) = \frac{log(a)}{log(b)}$ ci possono essere 3 casi:
+    \begin{enumerate}
+        \item Se $\alpha > \beta$ allora $T(n) = \Theta(n^\alpha)$
+        \item Se $\alpha = \beta$ allora $T(n) = \Theta(n^\alpha log(n))$
+        \item Se $\alpha < \beta$ allora $T(n) = \Theta(n^\beta)$
+    \end{enumerate}
+    
+\end{itemize}
+
+\section{Problema dell'ordinamento}
+Ci sono due proprietà fondamentali di questi algoritmi: \begin{enumerate}
+    \item \textbf{In place}: l'algoritmo riordina gli elementi nell'array in input e non ne usa di aggiuntivi
+    \item \textbf{Stabile}: valori con la stessa \textbf{chiave} (valore associato all'elemento che è sempre confrontabile con altri elementi) appaiono nell'array ordinato nello stesso ordine di partenza.
+
+\end{enumerate}
+\subsection{Algoritmi incrementali}
+Sono algoritmi più semplici che costruiscono l'ordinamento di un elemento alla volta, allo stesso tempo però sono anche i meno efficienti
+\subsubsection{Selection Sort}
+Si parte da un elemento e lo sostituisce con il minimo presente mel resto dell'array e lo fa per ogni elemento (tranne l'ultimo). Per l'ordine in cui esegue gli swap non è un algoritmo stabile.
+\begin{figure} [H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Selection sort.png}
+    \caption{Possibile implementazione del Selection Sort}
+    \label{fig:Selectionsort}
+\end{figure}
+
+In tutti i casi possibili la complessità computazionale di questo algoritmo è $\Theta(n^2)$.
+\subsubsection{Isertion Sort}
+Partendo dal secondo elemento e andando verso la fine si inserisce l'elemento nella parte di array a sinistra in ordine. Per come esegue i confronti l'algoritmo è stabile
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Insertion sort.png}
+    \caption{Possibile implementazione dell'Insertion sort}
+    \label{fig:insertionsort}
+\end{figure}
+Nel caso ottimo il for viene eseguito $n$ volte e basta quindi $\Theta(n)$; nei casi medio e pessimo invece avrà un costo pari a $\Theta(n^2)$.
+
+\subsection{Divide et impera}
+Viene dalla tecnica romana e consiste nel dividere il problema in problemi più semplici (\textit{Divide}) che poi vengono risolti in maniera facile (\textit{Conquer}) e poi le soluzioni vengono fuse per risolvere il problema generale.
+\subsubsection{MergeSort}
+Consiste nello splittare sempre a metà l'array (e avanti ricorsivamente) ordinandolo a "pezzi", questo algorimto può essere implementato in modo stabile. Attenzione che però è molto complicato implementarlo in modo tale che sia anche in-place.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\linewidth]{Merge Sort.png}
+    \caption{Esempio di implmentazione del MergeSort}
+    \label{fig:MergSort}
+\end{figure}
+Questo algoritmo ha complessità $\Theta(nlog(n))$
+\subsubsection{QuickSort}
+Si sceglie all'interno dell'array un valore a caso (\textit{pivot} e si riordina l'array in modo tale che tutti i numeri più grandi siano nella parte destra dell'array e tutti i più piccoli sono a sinistra. A questo punto si chiama ricorsivamente l'algoritmo nei due sotto array del caso e così si riordina.
+Nel caso ottimo il costo è $\Theta(nlog(n))$, nel caso pessimo $\Theta(n^2)$ mentre nel caso medio è $O(nlog(n))$. Molto importante sapere che la complessità dipende molto da quale numero si scelga come \textit{pivot}) quindi un'implementazione che sceglie il pivot in maniera furba può renderlo molto più veloce, nel nostro caso se si sceglie un numero a caso e si usa quello in modo tale da rendere molto improbabile ricadere nel caso pessimo o sfavorevole.
+\subsubsection{DualPivot Quicksort}
+Crea delle partizioni rispetto a due pivot e rende quindi meno probabile ricadere nel caso pessimo ma è anche abbastanza ibrido come algoritmo perchè a seconda delle situazioni può chiamare diversi algoritmi che lo rendono, in generale, molto efficiente; in media ha complessità $O(nlog(n))$.
+\subsubsection{Tim Sort}
+E' il più recente degli algoritmi che inizialmente fu introdotto in Python e si basa sull'idea che in un array ci siano già delle sottosequenze già ordinate e da li usa il merge o insertion per sistemare le sequenze tra di loro. Come complessità ha costo, nei casi medio e pessimo, pari a $O(nlog(n))$ mentre nel caso ottimo $O(n)$.
+\subsection{Algoritmi di ordinamento in tempo lineare}
+Sono algoritmi che possono essere usati in alcune condizioni speciali
+
+\subsubsection{Counting Sort}
+Questo algoritmo può essere usato solo per ordinare interi all'interno di un intervallo $[a,b]$, esso usa un array d'appoggio di grandezza $k =b-a+1$ per contare quante volte un valore sta nell'array di partenza, riordina l'array senza doppione e riempio l'array di partenza con i numeri in modo ordinato.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{CountingaSortexample.png}
+    \caption{Esempio del funzionamento del CountingSort}
+    \label{fig:ExCountingSort}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{CountingSort.png}
+    \caption{Possibile implementazione CountingSort}
+    \label{fig:CountingSort}
+\end{figure}
+
+Il costo di questo algoritmo è $\Theta(n+k)$ perchè se k è molto più grande di n o viceversa non è per nulla conveniente.
+\subsubsection{RadixSort}
+Questo algoritmo usa il counting sort come sotto-procedura, in pratica il RadicSort considera tutti gli interi con lo steso numero di cifre e li riordina rispetto alla cifra meno significativa (attraverso il RadicSort), poi rispetto alla penultima e così via fino a quella più significativa. Molto importante è tenere a mente che questo algoritmo in alcuni casi potrebbe fallire nel caso non sia stabile; inoltre bisogna riadattare il counting sort con delle chiavi e soprattutto va reso stabile. Il costo di questo algoritmo è di $\Theta(d(n+k))$ con:
+\begin{itemize}
+    \item $d$ il numero massimo di cifre di una chiave
+    \item $k$ è il numero di possibili valori per una cifra
+\end{itemize}
+
+\subsection{Riassunto costi degli algoritmi visti}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\linewidth]{SummarySort.png}
+    \caption{Tabella riassuntiva dei costi degli algoritmi di ordinamento esaminati}
+    \label{fig:SummarySorting}
+\end{figure}
+\section{Strutture di dati elementari}
+Descrivono come sono \textbf{logicamente organizzati} i dati e ne definisce le \textbf{operazioni} per cui non si hanno informazioni riguardo a \textbf{quali} dati sono memorizzati.
+Ci sono due parti principali delle strutture dati:
+\begin{itemize}
+    \item \textbf{Prototipo} \begin{itemize}
+        \item Descrive possibili valori e operazioni
+        \item Nasconde i dettagli implementativi
+        \item Permette di implementare la struttura
+        \item Permette di capire come usare la struttura
+    \end{itemize}
+    \item \textbf{Implementazione} \begin{itemize}
+        \item Realizzazione di una struttura dati in uno specifico linguaggio di programmazione
+        \item Non visibile all'utente
+        \item Può influire sui tempi di esecuzione
+    \end{itemize}
+\end{itemize}
+
+\subsection{Liste}
+Struttura di dati in cui tutti gli elementi sono organizzati in modo sequenziale e deve supportare almeno le operazioni di \textbf{ricerca, inserimento e rimozione}. Esse si possono implementare sia con strutture primitive ovvero degli \textit{array} che hanno il vantaggio di avere un tempo di accesso lineare ma hanno una grandezza fissa dipendete dallo spazio di memoria contigua libera, oppure attraverso \textit{linked list} che hanno una disponibilità di memoria limitata ma hanno un tempo di accesso dipendete dalla lunghezza della lista.
+\subsubsection{Linked List semplice}
+Ogni nodo punta al successivo quindi si può leggere in un solo verso, le operazioni hanno i seguenti costi: \begin{itemize}
+    \item \textbf{Search}\begin{itemize}
+        \item Ottimo: $O(1)$
+        \item Medio: $\Theta (n)$
+        \item Pessimo: $\Theta(n)$
+    \end{itemize}
+    \item \textbf{Insert} \begin{itemize}
+        \item Ottimo: $O(1)$
+        \item Medio: $O(1)$
+        \item Pessimo: $O(1)$
+        \end{itemize}
+    \item \textbf{Append} \begin{itemize}
+        \item Ottimo: $\Theta (n)$
+        \item Medio: $\Theta (n)$
+        \item Pessimo: $\Theta (n)$
+        \end{itemize}
+    \item \textbf{Delete} \begin{itemize}
+        \item Ottimo: $O(1)$
+        \item Medio: $\Theta (n)$
+        \item Pessimo: $\Theta (n)$
+        \end{itemize}
+
+
+
+\subsubsection{Double Linked List}
+Sono come le Linked list semplici ma hanno un puntatore al nodo precedente quindi possono essere lette anche al "contrario". Nonostante ciò tutte le operazioni hanno lo stesso costo computazionale delle Linked List normali ma si deve usare più memoria per ogni singolo elemento.
+
+\subsubsection{Linked List circolari}
+L'ultimo elemento punta alla testa in modo che sia logicamente circolare, costi invariati rispetto alle altre tranne per l'inserimento in coda che è costante.
+
+\subsubsection{Linked List con puntatori a testa e coda}
+Come una normale Linked List ma si ha anche un puntatore alla fine della lista, costi computazionali invariati tranne per l'inserimento in coda che è costante.
+\end{itemize}
+
+\subsection{Pila}
+La struttura pila supporta due operzioni principali: il \textbf{push} (aggiunta di un elemento) e \textbf{pop} (eliminazione dell'elemento più recente). Questa struttura dati si può implementare sia attraverso un array che con un vettore (anche se ha sempre capienza limitata).
+
+\subsection{Code}
+Questa struttura dati supporta solo due operazioni principali: \textbf{enque} (aggiunta di un elemento in fondo) e \textbf{dequeue} (rimuove l'ultimo elemento della coda).
+
+\subsection{Alberi}
+Sono strutture dati gerarchiche, esso e' definito da:
+\begin{itemize}
+    \item \textbf{Nodi}
+    \item \textbf{Archi} che connetono i nodi
+    \item Esiste \textbf{un solo percorso} da un nodo all'altro
+\end{itemize}
+Un albero puo' essere \textbf{ordinato} sse i figli di ogno nodo sono ordinati (primo, secondo, ...) e \textbf{radicato} ovvero se uno dei suoi nodi puo' essere identificato come radice.
+
+\subsection{Alberi Binari}
+Sono alberi in cui ogni nodo ha al massimo 2 figli, per questo e' \textbf{ordinato}.
+La \textbf{profondita'} di un nodo e' la lunghezza dell'unico percorso che lo collega con la radice, questo numero e' identico a quello degli archi che collegano nodo-radice, un \textbf{livello} e' l'insieme di tutti i nodi su uno stesso livello. Per \textbf{altezza} di un albero si intende la massima profondita' (per convenzione si considera -1 la profondita' di un albero vuoto), mentre il \textbf{grado} di un nodo e' il numero dei suoi figli.
+Un albero binario si dice \textbf{completo} sse ogni nodo ha due figli e un albero \textbf{perfetto} e' un albero completo con le fogli alla stessa profondita'.
+\paragraph{Proprieta' fondamentale degli alberi} Ogni albero non vuoto ha esattamente n - 1 archi, con n il numero di nodi dell'albero.
+\subsection{Algoritmi di visita}
+Sono algoritmi per visitare tutti i nodi di una struttura dati albero.
+\subsubsection{Visita in profondita'}
+La ricerca va il piu' in profondita' possibile prima di visitare i nodi nello stesso livello
+\begin{itemize}
+    \item \textbf{Pre-order}: visita il nodo stesso poi l'albero sinistro e infine quello destro; la sua complessita' e' $\Theta(n).$
+    \item \textbf{Post-order}: visita l'albero sinistro poi quello destro e infine il nodo stesso; la sua complessita' e' $\Theta(n).$
+    \item \textbf{In-order}: visita l'albero sinistro poi il nodo stesso e infine quello destro; la sua complessita' e' $\Theta(n).$
+\end{itemize}
+\subsubsection{Visita in ampiezza}
+La ricerca viene eseguita livello per livello
+\begin{itemize}
+    \item \textbf{Visita in ampiezza}: in pratica si fa una coda e ad ogni ciclo si toglie dalla coda il nodo e si mettono in coda i nodi in modo che ci sia una stampa per livello; la complessita' e' sempre $\Theta(n).$
+\end{itemize}
+
+\subsection{Come contare tutti i nodi di un albero?}
+Inizialmente si potrebbe pensare di implementare un algoritmo con la stessa idea di fondo della visita che al posto di stampare valori conta i nodi ma questo richiederebbe una complessita' pari a $\Theta(n)$, esiste pero' un modo di rendere la complessita' di questa operazione costante aggiungendo un campo ad ogni nodo che permette di memorizzare il numero di nodi sottostanti ad esso. Questo pero' rende piu'dispendiosa una qualsiasi modifica dell'albero.
+\subsection{Alberi binari di ricerca (BST)}
+Sono alberi radicati con vincoli sull'organizzazione delle chiavi ovvero che tutte le chiavi a sinistra di un nodo sono minori di esso mentre tutte quelle a destra sono maggiori; con questa organizzazione è possibile fare una ricerca binaria su questa struttura dati e le visita pre-order permette di stampare in ordine tutti gli elementi dell'albero. Le operazioni fondamentali su questa struttura dati sono:
+\begin{itemize}
+    \item \textbf{Search}: ritorna il nodo con chiave $k$, essa sfrutta la topografia della struttura infatti confrontando il valore cercato con la chiave del dingolo nodo si sposta a destra nel caso $k>node.key$, al contrario si sposterà a sinistra. Questa operazione ha un costo nel caso pessimo pari a tutti i nodi (caso alberoi degenere).
+    \item \textbf{Insert}: inserisce un nodo, anche questa operazione sfrutta la topologia della struttura dati per essere piu' efficiente possibile ma nel caso pessimo, ovvero l'albero degenre, ha una complessita' $\Theta(n)$, mediamente dipende pero' dall'altezza dell'albero.
+    \item \textbf{Delete}: rimuove un elemento dalla struttura dati, questa operazione necessita pero' di alcune operazioni di supporto: \begin{itemize}
+        \item \textbf{Max}: ritorna il nodo massimo nell'albero ovvero percorre il percorso tutto a destra dell'albero.
+        \item \textbf{Min}: ritorna il nodo minimo nell'albero ovvero percorre il percorso tutto a sinistra dell'albero.
+        \item \textbf{Predecessor}: ritorna il nodo precedente a T in una visista in-order. Per quanto riguarda l'implementazione ci sono due casi distinti: \begin{enumerate}
+            \item \textbf{Caso 1}: il nodo di cui si vuole trovare il precdecessore ha un figlio sinistro: il nodo predecessore e' il nodo con chiave massima nel sotto-albero sinistro.
+            \item \textbf{Caso 2}: il nodo di cui si vuole trovare il predecessore non ha un figlio sinistro; il nodo predecessore e' il primo antenato per cui il nodo di cui si sta cercando il predecessore e' nell'sotto-albero destro.
+        \end{enumerate}
+        \item \textbf{Successor}: simmetrico a predecessor.
+    \end{itemize}
+Anche nel caso della rimozione ci sono tre casi da considerare nell'implementazione:\begin{enumerate}
+            \item \textbf{Caso 1}: Il nodo da rimuovere e' una foglia, questo caso e' semplice perche' la regolarita' dell'albero non viene intaccata.
+            \item \textbf{Caso 2}: Il nodo da rimuovere ha un solo figlio; in questo caso il figlio del nodo da rimuovere diventa il figlio del geniotore del nodo da rimuovere.
+            \item \textbf{Caso 3}: Il nodo da rimuovere ha 2 figli; in questo caso si copiano i dati del predecessore del nodo da rimuovere nel nodo stesso e si rimuove il nodo di cui sono stati copiati i dati secondo i tre casi.
+        \end{enumerate}
+        \end{itemize}
+\subsection{Riassunto}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Riassunto BTS.png}
+    \caption{Riassunto costi strutture viste fino a questo punto}
+    \label{fig:riassunto_bts}
+\end{figure}
+
+\subsection{Alberi AVL}
+Prendono il nome dai loro inventori, trattasi di BTS (alberi binari di ricerca) ma che siano sempre bilanciati in modo tale da avere un costo delle operazioni nel caso pessimo sempre di $O(log(n))$, per far cio' le operazioni di aggiunta e rimozione sono da modificare in modo da avere un albvero sempre bilanciato
+
+\subsubsection{Quando posso dire che un albero e' bilanciato?}
+Definiamo inizialmente il \textbf{fattore di bilanciamento} di un nodo ovvero la differenza tra l'altezza del suo sotto albero di sdinistra con quello di destra: 
+\begin{center}
+    $\beta (v)=altezza(v.left)-altezza(v.right)$
+\end{center}
+A questo punto possiamo definire un \textbf{albero bilanciato} in altezza come un albero in cui ogni nodo la differenza di altezza tra i suoi sotto-alberi non e' mai maggiore di uno:
+\begin{center}
+    $|\beta(v) \leq 1| $
+\end{center}
+
+\subsubsection{Operazioni basiche}
+\begin{enumerate}
+    \item \textbf{Search}: viene eseguita come una normale ricerca su un albero BTS
+    \item \textbf{Update height}: aggiorna l'altezza dell'albero, ogni nodo ha un suo paramentro che contiene l'altezza del sotto albero sottostante
+    \item \textbf{Balance factor}: aggiorna il fattore di bilanciamento di un nodo tramite il campo height dei suoi figli.
+    \item \textbf{Rotazioni}: esse sono fondamentali per ribilanciarte alberi AVL che in seguito a modifiche non sono piu' bilanciati. Si tratta di scegliere opportunamete un nodo perno e farlo diventare la radice, per mantenere l'albero sia binario che di ricerca bisogna fare si che il sotto-albero destro del nodo perno diventi il sotto albero di sinistra del padre, al contrario in caso di rotazione a destra: 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.55\linewidth]{rotations.png}
+        \caption{Esempio e proprieta' delle rotazioni}
+        \label{fig:ratation}
+    \end{figure}
+    Nel caso dunque che un albero AVL diventi sbilanciato si possono verificare 4 situazioni diverse:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\linewidth]{Rotations_case.png}
+        \caption{Casi di sbilanciamento degli alberi}
+        \label{fig:caserotation}
+    \end{figure}
+    A questo punto si illustrano i modi per ribilanciare gli alberi nelle varie situazioni: \begin{itemize}
+        \item \textbf{SS}: si esegue una rotazione a destra con perno il nodo con $\beta(n) = 2$.
+        \item \textbf{SD}: si esegue una rotazione a destra sul sottoramo sinistro in modo da avere uno sbilaciamento SS e poi si bilancia come un normale SS.
+        \item \textbf{DD}: opposto al caso SS, dunque si opera una rotazione a sinistra con perno il nodo sbilanciato.
+        \item \textbf{DS}: si opera una rotazione a destra sul sottoramo destro e poi si risolve come un DD
+    \end{itemize}
+    \item \textbf{Bilanciamento}: funzione molto semplice a questo punto perche' usa quelle sopra citate si per individuare il caso che risolverlo.
+    \item \textbf{Insert}: inserisce un nodo come in un normale BST ma alla fine chiama la funzione di bilanciamento dell'albero, al massimo puo' aver sbilanciato un nodo
+    \item \textbf{Delete}: anche in questo caso viene utilizzata la funzione dei BST ma questa procedura puo' comportare lo sbilanciamento di piu' nodi.
+\end{enumerate}
+
+\subsubsection{Riassunto}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{SummaryAVL.png}
+    \caption{Riassunto costi delle operazioni delle strutture visto fino ad ora}
+    \label{fig:Summaryavl}
+\end{figure}
+
+\section{Tabelle HASH}
+L'idea dietro a questo tipo di struttra e' quella di riuscire a generalizzare l'indicizzazione in un array normalissimo in modo tale da avere un computazione che mediamente e' molto efficiente. Ci sono due principali implementazioni che si usano in casi diversi: le \textbf{tabelle ad indirizzamento diretto} che si usano quando il numero di chiavi effettivamente utilizzate e' simile a quello di tutte le chiavi possibili e le tabelle HASH che vengono usate quando il numero di chiavi utilizzate e' molto minore di quelle possibili.
+
+\subsection{Tabelle ad indirizzamento diretto}
+Sono implementate tramite array dalla dimensione statica, ogni elemento contiene sia una chiave per essere riconosciuta che un campo per il vlore in se. In realtà la chiave è la posizione dell'elemento all'interno dell'array (unica struttura dati a indirizzamento diretto), le operazioni basilari come \textit{search, insert e delete} hanno un costo computazionale pari a $O(1)$ ma il vero problema e' la memoria che viene utilizzata: se le chiavi realmente utilizzate sono molte meno di quelle disponibili alllore c'e' un alto spreco di memoria.
+\subsection{Tabelle Hash}
+Con le tabelle HASH si cerca una soluzione al problema della memoria attraverso una \textbf{funzione di HASH} $h:U \to [0, ..., m-1]$ che partendo dal dato da memorizzare sono in grado di generare la chiave intera che corrisponde all'indirizzo all'interno dell'array. A questo punto sopraggiunge il problema delle \textbf{collisioni} ovvero come gestire il caso in cui due dati differente siano mappati nello stesso indirizzo.
+
+\subsection{Funzione Hash}
+Una buona funzione di hash soddisfa la proprieta' di \textbf{uniformita' semplice} ovvero c'e' un equiprobabilita' di generare ogni chiave perche' nel caso ci siano indici che vengono scelti piu' frequentemente come conseguenza si avranno sicuramente maggiori coillisioni. Essendo pero' questo irrealistico ci sono 3 assunzioni che vengono fatte riguardo ad una funzione hash: \begin{enumerate}
+    \item Tutte le chiavi sono \textbf{equiprobabili} anche se non e' sempre vero.
+    \item La complessita' di calcolo della funzione hash e' $O(1)$ perche' se no costerebbe di piu' calcolare la funzione che cercare l'elemento all'interno dell'array.
+    \item Tutte le chiavi sono numeri interi e non negativi.
+\end{enumerate}
+\subsubsection{Metodo della divisione}
+Si restituisce il modulo tra il valore e la lunghezza della tabella, nel caso siano stringhe si convertono i singoli caratteri in valori numerici tramite la rappresentazione binaria. Questo metodo è molto efficiente ma dipende in modo molto stretto dalla scelta della lunghezza, infatti se la dimensione dell'array fosse 10 del valore si utilizzerebbe solo l'ultima cifra, mentre se la lunghezza fosse $2^p$ allora di un valore da mappare si utilizzerebbero i $p$ bit meno significativi nella rappresentazione binaria.
+
+\subsubsection{Metodo delle moltiplicazioni}
+Usano la formula $h(k) = \lfloor m(kC-\lfloor kC\rfloor)\rfloor$ con \begin{itemize}
+    \item $m$ = numero di slot nell'array
+    \item $0 < C < 1$
+    \item $\lfloor x\rfloor$ = parte intera di $x$
+\end{itemize}
+$C$ influenza l'uniformità di $h(k)$ ma il valore di $m$ in questo caso non è critico.
+
+\subsubsection{Metodo della codifica algebrica}
+Si prende il valore in binario e la funzione di hash e' la seguente:
+\begin{center}
+    $h(k)=(k_nx^n+k_{n-1}x^{n-1}+...+k_1x+k_0)$
+\end{center}
+\begin{itemize}
+    \item \textbf{$k_n$}: corrisponde all'n-esimo bit della rappresentazione binaria
+    \item x e' un valore costante
+\end{itemize}
+Alla fine si calcola il risultate e si fa il modulo con la grandezza dell'array. Questo medoto ha il vantaggio di dipendere da tutti i caratteri dell chiave ma e' molto costoso infatti non e' piu' costante ma $\Theta(log^2(k))$
+
+\subsubsection{Regola Di Horner}
+valupa il polinomio del metodo precedente in un punto e lo riscrive come 
+\begin{center}
+    $p(x) = a_0+x(a_1+x(...x(a_{n-1}+a_nx)))$
+\end{center}
+
+Questo medoto permette di abbasare il costo a $\Theta(log(k))$ ma in generale essendo il numero di cifre di una 
+chiave relativamente piccolo si puo' assumere come costante il tempo della codifica.
+
+\subsection{Problema delle collisioni}
+Non esiste un modo per eliminare del tutto le collisioni che sono soprendentemente molto probabili per cui e' necessario trovare un modo efficiente di gestire queste eventualita'. Ci sono due possibili tecniche per gestire questa problematica: il \textbf{concatenamento} e l'\textbf{indirizzamento aperto}.
+
+\subsubsection{Concatenamento}
+Lo slot $T(i)$ contiene il puntatore ad una lista concatenata che contiene tutti gli elementi con hash $i$, quando viene inserito un elemento esso e' inserito in testa alla lista mantenedo cosi' un costo costante. Nelle operazioni di ricerca o eliminazione il costo computazionale medio dipende dal numero di accessi che a sua volta dipende dalla distribuzione delle chiavi all'interno dell'array, per viene indicato come \textbf{fattore di carico} il rapporto tra il numero di elementi e la dimensione dell'array: $\alpha=n/m$. Dunque sotto l'assunzione di hashing uniforma semplice ogni slot ha $\alpha$ elementi e un ricerca senza successo o con successo ha costo medio $\Theta(1+\alpha)$ per cui il fattore di carico ha un ruolo determinante per questa strategia.
+
+\subsubsection{Indirizzamento apero}
+L'idea alla base e' che se un solt e' gia' occupato se ne trova un altro che sia libero, la \textbf{sequenza di ispezione} che come parametro ha anche il \textbf{passo di ispezione} deve fornire una permutazione degli indici della tabella; un'altra criticita' e' la gestione della delete: eliminato un elemento non si puo' settare lo slot a null poiche' un eventuale ricerca, che passa per quella casella, si interromperebbe pensando che l'elemento non sia presente anche nel caso in cui la sequenza di ispezione dell'elemento cercato sia passata per l'elemento rimosso e sia andata avanti. Nel caso pessimo le tre operazioni fondamentali hanno costo $\Theta(m)$ con $m$ dimensione della tabella, nel caso medio invece la complessita' dipende molto dalla strategia di ispezione:
+\begin{itemize}
+    \item \textbf{Ispezione lineare}: $h(k,i)=(h'(k)+i)\ mod \ \ m$, ovvero data $h'$ una normale funzione di hashing si va, ad ogni collisone e al crescere di $i$, a ispezionare sempre slot successivi. Questo rende il percorso utile con $m$ percorsi possibili ma porta al \textbf{clusting primario} ovvero delle lunghe sotto-sequenze occupate tendono a diventare sempre piu' lunghe, uno slot vuoit preceduto da $i$ solt pieni ha una probabilita' di rimepirsi di $(i +1)/m$ quinid i tempi di calcolo crescono sempre di piu'.
+    \item \textbf{Ispezione quadratica}: $h(k,i)=(h'(k)+c_1i+c_2i^2)\ mod \ \ m, \ \ \ \ c_1  \not=c_2$, questa ispezione pero' porta al \textbf{clustering secondario}: se due chiavi hanno $h'(k)$ uguale essi faranno le stesse visite
+    \item \textbf{doppio hashing}: $h(k,i)=(h_2(k)+ih_2(k))\ mod \ \ m$, in questo caso si usano due funzioni di hashing in modo da evitare clutering primario e secondario ma $h_2(k) \not=0$ perche' se no non cambia mai lo slot che si visita e ovviamente deve permettere di iterare su tutta la tabella.
+    
+\end{itemize}
+
+A questo punto si puo' analizzare il caso medio dell'ispezione: anche in questo caso si usa il fattore di carico che si assume $\alpha<1$ poiche' ci sono piu' slot che elementi da memorizzare, inoltre si suppone si usi un hashing uniforme semplice e che le permutazioni siano tutte equiprobabili. Dunque una ricerca senza successo necessita di un numero massimo di $\frac{1}{1-\alpha} $, mentre nel caso di successo le operazioni necessarie sono al massimo di $\frac{1}{\alpha}\  ln(\frac{1}{1-\alpha})$. Generalmente si cerca di tenere un fattore di carico $\alpha <0.75$
+
+\subsection{Riassunto}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Summaryhash.png}
+    \caption{Riassunto costi delle strutture viste fino ad ora}
+    \label{fig:summaryhash}
+\end{figure}
+
+\section{Heap binari}
+L'utilizzo di questa struttura dati e' rilegata alle situazioni in cui quando si vogliono estrarre i dati essi devono essere o il minimo o il massimo dato memorizzato. Per implementare questa struttura si usano degli alberi binari \textbf{quasi perfetti} con particolari proprieta' dei nodi.
+\subsection{Albero binario quasi perfetto}
+Un albero binario risulta \textbf{perfetto} se ogni livello dell'albero contiene il massimo dei nodi possibili e il numero di nodi risulta essere $2^{h+1}-1$ per cui l'altezza sara' $h \approx log(N)$, con $N$ il numero di nodi. A questo punto si definisce \textbf{albero binario quasi perfetto} come un albero che e' perfetto in tutti i livelli tranne nel finale, le foglie devono essere compattate a sinistra e solo un nodo all'interno dell'albero deve avere grado minore di 2.
+
+\subsection{Alberi heap}
+\subsubsection{Max-heap} 
+E' un albero binario quasi perfetto in cui ogni nodo padre contiene un valore che e' maggiore di quello del figlio, dunque la radice ha il valore massimo.
+\subsubsection{Min-heap}
+E' un albero binario quasi perfetto in cui ogni nodo padre contiene un valore che e' minore di quello del figlio, dunque la radice ha il valore minimo.
+
+\subsection{Array Heap}
+E' il modo piu' efficace di implementare la struttura logica ad albero: a livello logico si sta usando un albero ma in realta' a livello pratico si usa un array. Per riempire l'array bisogna fare una visita in ampiezza in modo tale da riempire l'array in ordine rispetto ai livelli dell'albero dunque il primo elemento dell'array contiene il valore piu' alto inoltre valgono le relazioni che il figlio sinistro di un elemento $i$ si trova in posizione $2i$ mentre il figlio destro si trova in posizione $2i+1$; se invece si volesse trovare il padre del nodo la sua posizone e' $\lfloor i/2\rfloor$. A questo punto si possono descrivere le varie operazioni possibili su questa struttura:
+\begin{itemize}
+    \item \textbf{findMax}: basta guardare il primo elemento nell'array, il costo e' $O(1)$
+    \item \textbf{fixHeap}: sistema l'albero quando il massimo viene eliminato supponendo pero' che i due sotto-alberi siano quai perfetti. Inizialmente la radice diventa il figlio con valore maggiore, a questo punto il "buco" passa al livello piu' basso e si tratta di risolvere lo stesso problema in maniera ricorsiva ricorsiva fino a quando il "buco" viene sistemato. Questa operaqzione e' stata descritta come post-delete ma si puo' utilizzare anche nel caso di heapify. Il costo computazionale al peggio e' un confronto per ogni livello per cui $\Theta(log(n))$ per cui il caso medio e' $O(log(n))$.
+    \item \textbf{heapify}: partendo da un array senza alcun ordine si crea un array heap, viene implemntato con una funzione ricorsiva che prima si chiama sui due sotto-alberi (grazie alle formule viste prima) e poi chiama fixHeap per sistemare l'alberone. Per stimare il costo computazionale si usa l'equazione di ricorrenza della funzione ricorsiva: $T(n) =2T(n/2)+log(n)$. Col master theorem non si reisce a stimare bene quindi si calcola un limite superiore tramite la disequazione $2T(n/2)+log(n) < 2T(n/2)+n^{\frac{1}{2}}$ per cui col master theorem posso stimare una complessita' di $O(n)$
+    \item \textbf{deleteMax}: rimuove l'elmento massimo mantenendo le proprieta' dell'array heap, per implementarlo basta rimuovere il primo elemento e mettere in prima posizione l'ultimo elemento poi far partire il fixHeap. 
+\end{itemize}
+
+
+\subsection{Heap Sort}
+L'idea e' quella di costruire, a partire da un generico array, un max-heap tramite heapify poi si estrae l'elemento piu' grande come descritto prima e si va avanti cosi' fino a quando non sara' vuoto e avendo cosi' ordinato l'array, il costo computazionale a questo punto risulta essere pseudolineare: $O(nlog(n))$.
+
+\end{document}

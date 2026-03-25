@@ -1,0 +1,565 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.3.25)  25 MAR 2026 21:17
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**main.tex
+(./main.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count196
+\c@section=\count197
+\c@subsection=\count198
+\c@subsubsection=\count199
+\c@paragraph=\count266
+\c@subparagraph=\count267
+\c@figure=\count268
+\c@table=\count269
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen141
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen142
+\Gin@req@width=\dimen143
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2024/02/08 v1.3d Input encoding file
+\inpenc@prehook=\toks18
+\inpenc@posthook=\toks19
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2025/02/14 v25.4 The multilingual framework for pdfLaTeX, LuaLaT
+eX and XeLaTeX
+\babel@savecnt=\count270
+\U@D=\dimen144
+\l@unhyphenated=\language90
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count271
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel-italian/italian.ldf
+Language: italian 2024/10/10 v.1.5.01 Italian support for the babel system
+\it@lettering=\count272
+\it@doublequoteactive=\count273
+\it@ISOcompliance=\count274
+))
+(/usr/share/texlive/texmf-dist/tex/generic/babel/locale/it/babel-italian.tex
+Package babel Info: Importing font and identification data for italian
+(babel)             from babel-it.ini. Reported on input line 11.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count275
+)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count276
+\float@exts=\toks20
+\float@box=\box52
+\@float@everytoks=\toks21
+\@floatcapt=\box53
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count277
+\l__pdf_internal_box=\box54
+)
+(./Appunti.aux)
+\openout1 = `Appunti.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count278
+\scratchdimen=\dimen145
+\scratchbox=\box55
+\nofMPsegments=\count279
+\nofMParguments=\count280
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count281
+\MPscratchDim=\dimen146
+\MPnumerator=\count282
+\makeMPintoPDFobject=\count283
+\everyMPtoPDFconversion=\toks23
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+LaTeX Info: Redefining \it@ocap on input line 14.
+LaTeX Info: Redefining \it@ccap on input line 14.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 15.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 15.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 15.
+<nand foto.png, id=1, 524.96124pt x 188.705pt>
+File: nand foto.png Graphic file (type png)
+<use nand foto.png>
+Package pdftex.def Info: nand foto.png  used on input line 27.
+(pdftex.def)             Requested size: 86.25pt x 31.00252pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 38.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 38.
+<Circuito nand.png, id=3, 356.33125pt x 572.1375pt>
+File: Circuito nand.png Graphic file (type png)
+<use Circuito nand.png>
+Package pdftex.def Info: Circuito nand.png  used on input line 57.
+(pdftex.def)             Requested size: 89.08258pt x 143.03401pt.
+
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/
+dvips/cm-super/cm-super-t1.enc} <./nand foto.png>]
+
+[2{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./Circuito nand
+.png>]
+<arcvon.png, id=19, 522.45187pt x 297.36093pt>
+File: arcvon.png Graphic file (type png)
+<use arcvon.png>
+Package pdftex.def Info: arcvon.png  used on input line 81.
+(pdftex.def)             Requested size: 258.75pt x 147.27351pt.
+
+
+[3 <./arcvon.png>]
+<tab.png, id=24, 742.27313pt x 249.93375pt>
+File: tab.png Graphic file (type png)
+<use tab.png>
+Package pdftex.def Info: tab.png  used on input line 99.
+(pdftex.def)             Requested size: 393.29979pt x 132.42993pt.
+
+Overfull \hbox (48.29979pt too wide) in paragraph at lines 99--100
+ [][] 
+ []
+
+File: arcvon.png Graphic file (type png)
+<use arcvon.png>
+Package pdftex.def Info: arcvon.png  used on input line 114.
+(pdftex.def)             Requested size: 172.5pt x 98.1793pt.
+
+
+[4 <./tab.png>]
+<esempio bus.png, id=29, 570.63188pt x 217.5628pt>
+File: esempio bus.png Graphic file (type png)
+<use esempio bus.png>
+Package pdftex.def Info: esempio bus.png  used on input line 131.
+(pdftex.def)             Requested size: 241.49895pt x 92.07622pt.
+
+
+[5 <./esempio bus.png>]
+
+[6]
+<Multiplexer.png, id=39, 225.84375pt x 195.73125pt>
+File: Multiplexer.png Graphic file (type png)
+<use Multiplexer.png>
+Package pdftex.def Info: Multiplexer.png  used on input line 192.
+(pdftex.def)             Requested size: 103.50105pt x 89.70296pt.
+<clock.png, id=40, 333.49594pt x 243.15843pt>
+File: clock.png Graphic file (type png)
+<use clock.png>
+Package pdftex.def Info: clock.png  used on input line 206.
+(pdftex.def)             Requested size: 172.5pt x 125.77525pt.
+
+
+[7 <./Multiplexer.png (PNG copy)>]
+<Pipeling.png, id=45, 635.37375pt x 321.45094pt>
+File: Pipeling.png Graphic file (type png)
+<use Pipeling.png>
+Package pdftex.def Info: Pipeling.png  used on input line 223.
+(pdftex.def)             Requested size: 241.49895pt x 122.18205pt.
+
+
+[8 <./clock.png> <./Pipeling.png>]
+<Simd.png, id=51, 539.76656pt x 298.11375pt>
+File: Simd.png Graphic file (type png)
+<use Simd.png>
+Package pdftex.def Info: Simd.png  used on input line 234.
+(pdftex.def)             Requested size: 258.75pt x 142.91101pt.
+<Multiprocessori.png, id=52, 321.45094pt x 228.855pt>
+File: Multiprocessori.png Graphic file (type png)
+<use Multiprocessori.png>
+Package pdftex.def Info: Multiprocessori.png  used on input line 243.
+(pdftex.def)             Requested size: 172.5pt x 122.8151pt.
+<memorie.png, id=53, 682.04813pt x 437.38406pt>
+File: memorie.png Graphic file (type png)
+<use memorie.png>
+Package pdftex.def Info: memorie.png  used on input line 258.
+(pdftex.def)             Requested size: 293.2521pt x 188.05812pt.
+
+
+[9 <./Simd.png> <./Multiprocessori.png>]
+<word org.png, id=59, 557.08125pt x 226.59656pt>
+File: word org.png Graphic file (type png)
+<use word org.png>
+Package pdftex.def Info: word org.png  used on input line 271.
+(pdftex.def)             Requested size: 345.0pt x 140.33281pt.
+
+
+[10 <./memorie.png>]
+<cache.png, id=64, 367.3725pt x 158.84344pt>
+File: cache.png Graphic file (type png)
+<use cache.png>
+Package pdftex.def Info: cache.png  used on input line 281.
+(pdftex.def)             Requested size: 258.75pt x 111.88525pt.
+
+
+[11 <./word org.png> <./cache.png>]
+<HD.png, id=72, 784.43062pt x 207.77625pt>
+File: HD.png Graphic file (type png)
+<use HD.png>
+Package pdftex.def Info: HD.png  used on input line 314.
+(pdftex.def)             Requested size: 345.0pt x 91.38377pt.
+
+
+[12 <./HD.png>]
+<porte logiche.png, id=80, 806.26219pt x 288.3272pt>
+File: porte logiche.png Graphic file (type png)
+<use porte logiche.png>
+Package pdftex.def Info: porte logiche.png  used on input line 331.
+(pdftex.def)             Requested size: 345.0pt x 123.37553pt.
+<proprietá logca bol.png, id=81, 536.0025pt x 318.43968pt>
+File: proprietá logca bol.png Graphic file (type png)
+<use proprietá logca bol.png>
+Package pdftex.def Info: proprietá logca bol.png  used on input line 345.
+(pdftex.def)             Requested size: 293.2521pt x 174.21915pt.
+
+
+[13 <./porte logiche.png>]
+<MIntermini.png, id=87, 389.0535pt x 244.5135pt>
+File: MIntermini.png Graphic file (type png)
+<use MIntermini.png>
+Package pdftex.def Info: MIntermini.png  used on input line 360.
+(pdftex.def)             Requested size: 224.2479pt x 140.93741pt.
+<Porte logiche nand.png, id=88, 688.07062pt x 571.38469pt>
+File: Porte logiche nand.png Graphic file (type png)
+<use Porte logiche nand.png>
+Package pdftex.def Info: Porte logiche nand.png  used on input line 369.
+(pdftex.def)             Requested size: 258.75pt x 214.87032pt.
+
+
+[14 <./proprietá logca bol.png> <./MIntermini.png>]
+<PLA.png, id=94, 916.1728pt x 569.12625pt>
+File: PLA.png Graphic file (type png)
+<use PLA.png>
+Package pdftex.def Info: PLA.png  used on input line 382.
+(pdftex.def)             Requested size: 345.0pt x 214.31628pt.
+
+
+[15 <./Porte logiche nand.png>]
+<mk 2.png, id=99, 686.565pt x 305.64188pt>
+File: mk 2.png Graphic file (type png)
+<use mk 2.png>
+Package pdftex.def Info: mk 2.png  used on input line 397.
+(pdftex.def)             Requested size: 258.75pt x 115.18904pt.
+<mk4.png, id=100, 718.93594pt x 529.98pt>
+File: mk4.png Graphic file (type png)
+<use mk4.png>
+Package pdftex.def Info: mk4.png  used on input line 404.
+(pdftex.def)             Requested size: 258.75pt x 190.74413pt.
+
+
+[16 <./PLA.png> <./mk 2.png>]
+<es mk.png, id=106, 330.033pt x 316.18124pt>
+File: es mk.png Graphic file (type png)
+<use es mk.png>
+Package pdftex.def Info: es mk.png  used on input line 413.
+(pdftex.def)             Requested size: 258.75pt x 247.88922pt.
+
+
+[17 <./mk4.png>]
+<esmk2.png, id=111, 898.85812pt x 517.18219pt>
+File: esmk2.png Graphic file (type png)
+<use esmk2.png>
+Package pdftex.def Info: esmk2.png  used on input line 423.
+(pdftex.def)             Requested size: 327.74895pt x 188.57658pt.
+
+
+[18 <./es mk.png>]
+<cirseq.png, id=116, 591.20876pt x 537.00626pt>
+File: cirseq.png Graphic file (type png)
+<use cirseq.png>
+Package pdftex.def Info: cirseq.png  used on input line 433.
+(pdftex.def)             Requested size: 172.5pt x 156.67833pt.
+
+
+[19 <./esmk2.png> <./cirseq.png>]
+<Latchsrio.png, id=123, 1030.85126pt x 376.40625pt>
+File: Latchsrio.png Graphic file (type png)
+<use Latchsrio.png>
+Package pdftex.def Info: Latchsrio.png  used on input line 441.
+(pdftex.def)             Requested size: 327.74895pt x 119.67134pt.
+<LatchSRtemporizzato.png, id=124, 720.6925pt x 269.005pt>
+File: LatchSRtemporizzato.png Graphic file (type png)
+<use LatchSRtemporizzato.png>
+Package pdftex.def Info: LatchSRtemporizzato.png  used on input line 455.
+(pdftex.def)             Requested size: 258.75pt x 96.57901pt.
+
+
+[20 <./Latchsrio.png>]
+<latchDtemporizzato.png, id=129, 723.70375pt x 324.21124pt>
+File: latchDtemporizzato.png Graphic file (type png)
+<use latchDtemporizzato.png>
+Package pdftex.def Info: latchDtemporizzato.png  used on input line 462.
+(pdftex.def)             Requested size: 258.75pt x 115.91454pt.
+<Flip flop D.png, id=130, 735.74875pt x 227.85126pt>
+File: Flip flop D.png Graphic file (type png)
+<use Flip flop D.png>
+Package pdftex.def Info: Flip flop D.png  used on input line 469.
+(pdftex.def)             Requested size: 258.75pt x 80.13156pt.
+<1bitmeme.png, id=131, 619.31375pt x 285.065pt>
+File: 1bitmeme.png Graphic file (type png)
+<use 1bitmeme.png>
+Package pdftex.def Info: 1bitmeme.png  used on input line 477.
+(pdftex.def)             Requested size: 258.75pt x 119.10446pt.
+
+
+[21 <./LatchSRtemporizzato.png> <./latchDtemporizzato.png> <./Flip flop D.png>]
+<Ramn.png, id=138, 508.90125pt x 405.76593pt>
+File: Ramn.png Graphic file (type png)
+<use Ramn.png>
+Package pdftex.def Info: Ramn.png  used on input line 490.
+(pdftex.def)             Requested size: 207.0021pt x 165.0525pt.
+
+
+[22 <./1bitmeme.png> <./Ramn.png>]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 517.
+
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 517.
+
+<ofc2.png, id=144, 809.27344pt x 471.26062pt>
+File: ofc2.png Graphic file (type png)
+<use ofc2.png>
+Package pdftex.def Info: ofc2.png  used on input line 521.
+(pdftex.def)             Requested size: 293.2521pt x 170.76828pt.
+
+
+[23]
+<somma bin.png, id=149, 493.0922pt x 256.70906pt>
+File: somma bin.png Graphic file (type png)
+<use somma bin.png>
+Package pdftex.def Info: somma bin.png  used on input line 532.
+(pdftex.def)             Requested size: 258.75pt x 134.7155pt.
+
+
+[24 <./ofc2.png> <./somma bin.png>]
+
+[25]
+<esempioalu.png, id=159, 699.61375pt x 530.98375pt>
+File: esempioalu.png Graphic file (type png)
+<use esempioalu.png>
+Package pdftex.def Info: esempioalu.png  used on input line 586.
+(pdftex.def)             Requested size: 310.4979pt x 235.6591pt.
+
+
+[26]
+<tablealu.png, id=163, 1033.8625pt x 773.89125pt>
+File: tablealu.png Graphic file (type png)
+<use tablealu.png>
+Package pdftex.def Info: tablealu.png  used on input line 599.
+(pdftex.def)             Requested size: 396.7479pt x 296.98665pt.
+
+Overfull \hbox (51.7479pt too wide) in paragraph at lines 599--600
+ [][] 
+ []
+
+
+
+[27 <./esempioalu.png>]
+<ALUIO.png, id=168, 1172.38pt x 758.835pt>
+File: ALUIO.png Graphic file (type png)
+<use ALUIO.png>
+Package pdftex.def Info: ALUIO.png  used on input line 607.
+(pdftex.def)             Requested size: 396.7479pt x 256.79628pt.
+
+Overfull \hbox (51.7479pt too wide) in paragraph at lines 607--608
+ [][] 
+ []
+
+
+
+[28 <./tablealu.png>]
+<microarchitettura HACK.png, id=173, 713.66624pt x 417.05812pt>
+File: microarchitettura HACK.png Graphic file (type png)
+<use microarchitettura HACK.png>
+Package pdftex.def Info: microarchitettura HACK.png  used on input line 623.
+(pdftex.def)             Requested size: 345.0pt x 201.6111pt.
+
+
+[29 <./ALUIO.png>]
+
+[30 <./microarchitettura HACK.png>]
+<Direct mapped cache esempio.png, id=182, 880.28876pt x 371.3875pt>
+File: Direct mapped cache esempio.png Graphic file (type png)
+<use Direct mapped cache esempio.png>
+Package pdftex.def Info: Direct mapped cache esempio.png  used on input line 64
+4.
+(pdftex.def)             Requested size: 379.5021pt x 160.1072pt.
+
+Overfull \hbox (34.5021pt too wide) in paragraph at lines 644--645
+ [][] 
+ []
+
+
+
+[31 <./Direct mapped cache esempio.png>]
+
+[32]
+<Hack instruction.png, id=191, 1169.36874pt x 150.5625pt>
+File: Hack instruction.png Graphic file (type png)
+<use Hack instruction.png>
+Package pdftex.def Info: Hack instruction.png  used on input line 700.
+(pdftex.def)             Requested size: 345.0pt x 44.42014pt.
+
+
+[33]
+
+[34 <./Hack instruction.png>]
+<esetichette.png, id=200, 1114.1625pt x 619.31375pt>
+File: esetichette.png Graphic file (type png)
+<use esetichette.png>
+Package pdftex.def Info: esetichette.png  used on input line 740.
+(pdftex.def)             Requested size: 327.74895pt x 182.17622pt.
+<ifthenelse.png, id=201, 538.01pt x 514.92375pt>
+File: ifthenelse.png Graphic file (type png)
+<use ifthenelse.png>
+Package pdftex.def Info: ifthenelse.png  used on input line 748.
+(pdftex.def)             Requested size: 172.5pt x 165.09325pt.
+
+
+[35 <./esetichette.png> <./ifthenelse.png>]
+<while.png, id=207, 537.00626pt x 439.6425pt>
+File: while.png Graphic file (type png)
+<use while.png>
+Package pdftex.def Info: while.png  used on input line 757.
+(pdftex.def)             Requested size: 172.5pt x 141.22514pt.
+
+
+[36 <./while.png>]
+
+[37]
+<interrupt priority.png, id=216, 848.4197pt x 555.57562pt>
+File: interrupt priority.png Graphic file (type png)
+<use interrupt priority.png>
+Package pdftex.def Info: interrupt priority.png  used on input line 818.
+(pdftex.def)             Requested size: 293.2521pt x 192.02983pt.
+
+
+[38]
+
+[39 <./interrupt priority.png>]
+
+[40]
+
+[41]
+
+[42]
+<esempio es VM.png, id=233, 316.18124pt x 537.00626pt>
+File: esempio es VM.png Graphic file (type png)
+<use esempio es VM.png>
+Package pdftex.def Info: esempio es VM.png  used on input line 921.
+(pdftex.def)             Requested size: 120.7521pt x 205.08055pt.
+
+
+[43]
+<altro es Vm.png, id=239, 298.11375pt x 416.55624pt>
+File: altro es Vm.png Graphic file (type png)
+<use altro es Vm.png>
+Package pdftex.def Info: altro es Vm.png  used on input line 960.
+(pdftex.def)             Requested size: 120.7521pt x 168.72342pt.
+
+
+[44 <./esempio es VM.png>]
+<ult es VM.png, id=244, 416.55624pt x 437.635pt>
+File: ult es VM.png Graphic file (type png)
+<use ult es VM.png>
+Package pdftex.def Info: ult es VM.png  used on input line 991.
+(pdftex.def)             Requested size: 137.9979pt x 144.98093pt.
+
+
+[45 <./altro es Vm.png>]
+
+[46 <./ult es VM.png>] (./Appunti.aux)
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 3457 strings out of 473197
+ 56282 string characters out of 5718605
+ 463811 words of memory out of 5000000
+ 26705 multiletter control sequences out of 15000+600000
+ 568297 words of font info for 55 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 57i,8n,65p,1210b,300s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf/fonts/type1/public/cm-super
+/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/
+share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/ty
+pe1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/
+sfrm1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/s
+hare/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
+Output written on Appunti.pdf (46 pages, 2614337 bytes).
+PDF statistics:
+ 319 PDF objects out of 1000 (max. 8388607)
+ 151 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 226 words of extra memory for PDF output out of 10000 (max. 10000000)
+
