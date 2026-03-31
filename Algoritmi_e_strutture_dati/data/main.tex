@@ -426,4 +426,41 @@ E' il modo piu' efficace di implementare la struttura logica ad albero: a livell
 \subsection{Heap Sort}
 L'idea e' quella di costruire, a partire da un generico array, un max-heap tramite heapify poi si estrae l'elemento piu' grande come descritto prima e si va avanti cosi' fino a quando non sara' vuoto e avendo cosi' ordinato l'array, il costo computazionale a questo punto risulta essere pseudolineare: $O(nlog(n))$.
 
+
+\section{Coda con priorità}
+E' una struttura dati che contiene delle coppie chiave-elemento che devono però essere confrontabili. Le operazioni possibili con questa struttura dati sono:
+\begin{itemize}
+    \item \textbf{findMin}:restituisce l'elemento associato alla chiave minima che è l'elemento nella radice. Costo costante.
+    \item \textbf{insert}: inserisce una coppia nella struttura dati. Viene aggiunto l'elemento nel primo spazio disponibile e poi tramite la funzione ausiliaria muoviAlto si sistema l'elemento. Costo dell'operazione $O(log_d(n))$
+    \item \textbf{delete}: rimuove un elmento dalla coda indipendentemente dalla sua chiave, supponendo un accesso diretto a tale elemento. Dunque si sostituisce il nodo da rimuovere che l'ultima foglia e poi si usano le due funzioni ausiliarie per sistemarlo propriamente (solo una delle due entrerà in azione). Costo complessivo $O(d\ log_d(n))$.
+    \item \textbf{deleteMIn}: rimuove l'elemento associato alla chiave minore.
+    \item \textbf{increaseKey}: rimpiazza la chiave di un elmento con una chiave maggiore, per implemntarlo si cambia la chiave e poi si usa muoviBasso. Costo di $O(d \ log_d(n))$
+    \item \textbf{decreaseKey}: opposto di increaseKey. In questo caso si decrementa la chiave e poi si esegue un muoviBasso per sistemare la struttura. Costo di $O(log_d(n))$
+\end{itemize}
+
+Per implementare le code con priorità ci sono due principali soluzioni ma quella che studieremo è il \textbf{D-Heap}.
+
+\subsection{D-Heap}
+Estendono il concetto di albero di max/min-heap e si basano su di essi per la loro implementazione, in questo caso però è al contrario rispetto a quello visto in precedenza perchè si usa un min-heap per cui ogni padre è il minore dei figli, in questo modo nella radice dell'albero sarà presente la chiave minima.
+Anche in questo caso si ha una corrispondenza tra l'altezza dell'albero d-heap e il numero $n$ di nodi ovvero $O(log_d(n))$; come negli alberi heap a livello di memoria anche per gli alberi d-heap si usa un array, essendo non binari gli alberi ma $d-ari$ le relazioni tra padre e figli sono:
+\begin{itemize}
+    \item \textbf{Ultimo figlio}: $(i*d)+1$
+    \item \textbf{Primo figlio}: $((i-1)*d)+2$
+    \item \textbf{Padre del nodo}: $\lceil (i-1)/d \rceil$
+\end{itemize}
+Ci sono anche alcune operazioni ausiliarie alle altre procedure ovvero:
+\begin{itemize}
+    \item \textbf{muoviAlto}: che sposta in alto un valore che è mal posizionato, costo pari a $O(h)$.
+    \item \textbf{muoviBasso}: fa il contrario di muoviAlto portando in basso l'elemento. Il costo è pari a $O(dh)$.
+\end{itemize}
+
+\subsection{Riassunto D-Heap}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Summary_d_Heap.png}
+    \caption{Riassunto costi delle procedure relative ai d-heap}
+    \label{fig:summarydheap}
+\end{figure}
+
+
 \end{document}
