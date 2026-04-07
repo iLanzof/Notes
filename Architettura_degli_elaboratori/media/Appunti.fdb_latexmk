@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1774469842.0394 "main.tex" "Appunti.pdf" "Appunti" 1774469843.7433 0
+["pdflatex"] 1775580462.72145 "main.tex" "/home/francesco/Desktop/University/Notes/Architettura_degli_elaboratori/Appunti.pdf" "Appunti" 1775580464.46578 0
   "/etc/texmf/web2c/texmf.cnf" 1774450621.05745 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm" 1136768653 3584 2d666ecf6d466d8b007246bc2f94d9da ""
@@ -64,7 +64,7 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1774462965 3348247 740efc996d827dd2fa456e74a6512035 ""
   "1bitmeme.png" 1774465646 10659 fd7302443aceb68a764f0d9112ff4936 ""
   "ALUIO.png" 1774465646 98955 c31ea702df41ac4f01385f772241514d ""
-  "Appunti.aux" 1774469843.69032 16621 2c7a985b7aca84721e3d533a8986f914 "pdflatex"
+  "Appunti.aux" 1775580464.4106 16621 2c7a985b7aca84721e3d533a8986f914 "pdflatex"
   "Circuito nand.png" 1774465646 48131 72b593405adfd332930f7467c2f8b4b4 ""
   "Direct mapped cache esempio.png" 1774465646 69672 3ec691fb6aa60b34a487f1547092927c ""
   "Flip flop D.png" 1774465646 26081 e15b9def74156658d5e3f3b5b0bb5aa5 ""
@@ -110,7 +110,7 @@
   "while.png" 1774465646 28350 d70fc1b23146df6ed1d0e29a0df3b625 ""
   "word org.png" 1774465646 49132 44f514ecadd4b9e7bd20f27ff36293a6 ""
   (generated)
+  "/home/francesco/Desktop/University/Notes/Architettura_degli_elaboratori/Appunti.pdf"
   "Appunti.aux"
   "Appunti.log"
-  "Appunti.pdf"
   (rewritten before read)
