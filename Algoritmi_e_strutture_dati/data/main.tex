@@ -464,6 +464,41 @@ Ci sono anche alcune operazioni ausiliarie alle altre procedure ovvero:
 
 
 \section{Union Find}
+Questa struttura dati viene impigata quando si ha la necessità di gestire insiemi disgiunti di oggetti, per cui le operazioni fondamentali saranno la creazione di un singoletto, unione di due insiemi e l'identificazione a quale insieme appartiene un dato elemento, piu' precisamente chi e' il rappresentante del tale elemento.
+\begin{itemize}
+    \item \textbf{makeSet}: crea l'insieme singoletto con il dato elemento
+    \item \textbf{find}: restituisce il rappresentante dell'insieme a cui appartiene il dato elemento
+    \item \textbf{union}: unisce due insiemi di cui sono stati forniti i rappresentanti
+\end{itemize}
+
+\subsection{QuickFind}
+Questi algoritmi utilizzano alberi con altezza 1 per implementare la struttura dati Union-find: ogni elemento e' una foglia e il rappresentante e' la radice (quindi il rappresentante e' un duplicato essendo sia radice che foglia).
+\begin{itemize}
+    \item makeSet: crea un albero con l'elemento che e' sia radice che foglia.
+    \item find: dato l'elemento restituisce il proprio padre, dunque questi alberi hanno i puntatori invertiti rispetto a come si implementano di solito.
+    \item union: e' la piu' dispendiosa perche' prende il secondo albero passato (la radice) e cambia tutti i puntatori dei figli facendoli puntare al nuovo padre, nel caso pessimo deve svolgere questa operazione $n-1$ volte.
+\end{itemize}
+\subsubsection{Euristica sul peso (union)}
+Grazie a questo algoritmo si sceglie quale rappresentante mantenere, tra i due dati in input, in base a quanti figli essi hanno (basta riservare un campo specifico nel rappresentante e sommare i numeri ad ogni invocazione). Dunque nel caso pessimo si dovranno eseguire $\frac{n} {2}$ operazioni e attraverso un'analisi ammortizzata il costo risulta essere $O(log(n))$
+
+\subsection{QuickUnion}
+Questi algoritmi utilizzano alberi generali per implementare la struttura dati Union-find: in questo caso gli elemnti possono essere anche nodi per cui il rappresentante e' il nodo che non ha padre.
+\begin{itemize}
+    \item makeSet: crea un albero con l'elemento (no duplicati tra radice e foglia).
+    \item find: scorre l'albero andando verso l'alto fino a quando non arriva alla radice, nel caso pessimo deve quindi scorrere tutti gli elementi.
+    \item union: dati i due insiemi fa puntare il rappresentante del secondo al rappresentante del primo, per cui ha costo costante.
+\end{itemize}
+\subsubsection{Euristica "union by rank" (find)}
+Avere alberi molto alti rende molto inefficiente l'operazione di find quindi memorizzando nelle radici il proprio rank (altezza) si puo' sistamare l'albero opportunamente in modo tale che non degeneri in una lista. Grazie a questo approccio il costo scende a $O(log(n))$.
+
+\subsection{Riassunto Union Find}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Summary_Union_Find.png}
+    \caption{Riassunto costi delle procedure relative alla struttura Union Find}
+    \label{fig:summaryUF}
+\end{figure}
+
 
 
 

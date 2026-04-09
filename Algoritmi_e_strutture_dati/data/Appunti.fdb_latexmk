@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1775580510.73971 "main.tex" "/home/francesco/Desktop/University/Notes/Algoritmi_e_strutture_dati/Appunti.pdf" "Appunti" 1775580512.03881 0
+["pdflatex"] 1775669508.29888 "main.tex" "/home/francesco/Desktop/University/Notes/Algoritmi_e_strutture_dati/Appunti.pdf" "Appunti" 1775669509.64966 0
   "/etc/texmf/web2c/texmf.cnf" 1774450621.05745 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm" 1136768653 3584 2d666ecf6d466d8b007246bc2f94d9da ""
@@ -116,8 +116,8 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1741904018 41538 c016915c1d51223b6dbbfe27341748a8 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1774462928 5467255 9a64d1b40e0b893fc5588ecce9d8accf ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1774462965 3348247 740efc996d827dd2fa456e74a6512035 ""
-  "Appunti.aux" 1775580511.97798 12470 5664de4c84683faefe4a1cc8c3b60a1a "pdflatex"
-  "Appunti.out" 1775580511.97898 9619 0f386ca5cca7cd93e95799483882199f "pdflatex"
+  "Appunti.aux" 1775669509.59291 13531 a5bc8d02c1e2a1e764a0a71ca1d919f7 "pdflatex"
+  "Appunti.out" 1775669509.59391 10550 36b30af4f7fdcf504e4520032c4d4877 "pdflatex"
   "CountingSort.png" 1774465650 81497 09fbedd0833d7560d7dc3c6820492762 ""
   "CountingaSortexample.png" 1774465650 59746 d9ed7356835cebfc3a63e9ad1bce6a57 ""
   "Insertion sort.png" 1774465650 37513 8861e69087f689a7f5cfa22b46018993 ""
@@ -129,9 +129,10 @@
   "Selection sort.png" 1774465650 104420 ce635f883b599f3ef26f9bfc7791a4f3 ""
   "SummaryAVL.png" 1774465650 88449 556a33509538aa9f5ff21da8c6c430ba ""
   "SummarySort.png" 1774465650 132403 88e20ed5fc99a73908aaeeb2165b1168 ""
+  "Summary_Union_Find.png" 1775669364.26362 69994 43fa9eec693df27232be9662f2e24b38 ""
   "Summary_d_Heap.png" 1774954645.09515 78602 392bb466f83d2ddc24f952effdfc7fe5 ""
   "Summaryhash.png" 1774465650 165624 b208ab5c429afec8b965bac9f7bf9927 ""
-  "main.tex" 1775580421.31095 39473 ea6c13e5b83af6b2ede830de41289bc0 ""
+  "main.tex" 1775669504.42898 42471 4fc121196e391f381f0bd4ae6d5d03e8 ""
   (generated)
   "/home/francesco/Desktop/University/Notes/Algoritmi_e_strutture_dati/Appunti.pdf"
   "Appunti.aux"
