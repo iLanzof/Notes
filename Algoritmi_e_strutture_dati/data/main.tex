@@ -517,5 +517,12 @@ Dato un numero intero positivo $R$ bisgona generare qual è il minimo numero di 
 \subsection{Problema dell'imbianchino}
 Simile a quello del resto: si vuole imbiancare una certa parete per cui servono $L$ litri di vernice e vuole comprare la giusta quantità di barattoli per avere $L$ litri.
 
-
+\subsection{Problema dello zaino}
+Si ha uno zaino con una capienza di peso massima $P$ e si hanno a $n$ oggetti con proprio peso e l'obiettivo è trovare il sottoinsieme di cardinalità maggiore che può essere portato nello zaino.
+In elenco alcune soluzioni sbagliate seguendo un approccio \textbf{greedy} che però non funzionano:
+\begin{itemize}
+    \item Ad ogni passo scelgo sempre l'oggetto disponibile con peso maggiore che si può mettere nello zaino finchè non finisce lo spazio oppure nessun oggetto può essere inserito.
+    \item Si calcola un valore specifico dell'oggetto quindi il suo valore/peso e si prendono sempre quelli che hanno un valore specifico più alto.
+\end{itemize}
+Entrambe le situazioni proposte sopra non sono efficaci perchè non trovano sempre la combinazione migliore per cui è necessario un approccio che si basa sulla programmazione dinamica: creo una tabella per vedere il cambiamento in base ai paraetri: capacità dello zaino e numero degli oggetti.
 \end{document}
