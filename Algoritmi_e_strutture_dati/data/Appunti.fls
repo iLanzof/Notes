@@ -271,6 +271,8 @@ INPUT ./Summary_Union_Find.png
 INPUT ./Summary_Union_Find.png
 INPUT ./Summary_Union_Find.png
 INPUT ./Summary_Union_Find.png
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0700.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0500.tfm
 INPUT Appunti.aux
 INPUT ./Appunti.out
 INPUT ./Appunti.out

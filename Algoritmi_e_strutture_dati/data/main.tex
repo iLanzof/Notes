@@ -538,7 +538,43 @@ La programmazione dinamica basa la soluzione sull'utilizzo di 2 matrici con righ
     \item Lo zaino può contenere l'oggetto ma inserirlo non massimizza il valore.
 \end{enumerate}
 
-A livello di formule si tratta di: $max\{A[i-1, j], A[i-1, j-p_oggetto] + valore_oggetto\}$ e alla fine si dovrà prendere la cella con il valore maggiore (ovvero quella più in basso a sinistra).
-La seconda matrice, delle stesse dimensioni della prima, contiene booleani in base a se l'oggetto della riga è stato inserito nello zaino dalla tale capacità. A questo punto per trovare la soluzione al problema originario si parte dall'ultima casella e si torna verso in su secondo la formula $A[i-1, j-p_oggetto]$ solo nel caso in cui si sia trovato True se no si torna alla casella sopra.
+A livello di formule si tratta di: $max\{A[i-1, j], A[i-1, j-p\_oggetto] + valore\_oggetto\}$ e alla fine si dovrà prendere la cella con il valore maggiore (ovvero quella più in basso a sinistra).
+La seconda matrice, delle stesse dimensioni della prima, contiene booleani in base a se l'oggetto della riga è stato inserito nello zaino dalla tale capacità. A questo punto per trovare la soluzione al problema originario si parte dall'ultima casella e si torna verso in su secondo la formula $A[i-1, j-p\_oggetto]$ solo nel caso in cui si sia trovato True se no si torna alla casella sopra.
+
+
+\subsection{Esempi di utilizzo metodo Divide et Impera}
+\subsubsection{Moltiplicazioni di interi di grandezza arbitraria}
+La maggior limitazione delle moltiplicazione è il $max_int$ che dopo fa sballare tutto quindi sono necessari algoritmi per moltiplicare tra di loro numeri molto grandi. Inizialemnte si può pensare di implementare un algoritmo basato su come si fanno le moltiplicazioni in colonna ma esso ha un costo computazionale di $O(n^2)$ per cui è necessaria una versiona più veloce, attraverso il metodo \textit{divide et impera} questo algoritmo può essere implementato inizialmente con una scissione a metà dei numeri:
+\begin{center}
+    $X=X_1*10^{n/2} + X_0$
+
+    $Y=Y_1*10^{n/2} + Y_0$
+
+    $X*Y = (X_1*10^{n/2} + X_0) (Y_1*10^{n/2} + Y_0) = (X_1*Y_1)* 10^{n} + (X_1*Y_0 + X_0 * Y_1)*10^{n/2} + X_0*Y_0$
+\end{center}
+
+A questo punto l'equazione di ricorrenza è $c_1$ per il caso base e $4T(n/2) + c_2n$ altrimenti per cui attraverso il Master Theorem si trova una complessità di $O(n^2)$ per cui non c'è alcun miglioramento rispetto a quello normale.
+Per migliorare si riscrivono gli addendi in modo furbo:
+\begin{itemize}
+    \item $P_1 = (X_1+X_0)*(Y_1+y_0)$
+    \item $X_1*Y_1$
+    \item $X_0*Y_0$
+    \item $X*Y 0 P_2*10^n + (P_1-P_2-P_3)*10^{n/2}+P_3$
+\end {itemize}
+Quindi sono necessarie 3 moltiplicazioni che generano una lunghezza dell'output di $O(n/2)$ cifre quindi l'equazione di ricorrenza di prima cambia in $3T(n/2+c_2*n)$ arrivando a $O(n^{log_2(3)}) \approx O(n^1.59)$
+
+\subsubsection{Sottovettore non vuoto di valore massimo}
+Il problema prevede di trovare un sottovettore ad un array dato (quindi elementi contigui) la cui somma sia massima. Il motodo \textit{brute force} che calcola il valore di ogni combinazione ha un costo di $O(n^2)$ che puoò essere migliorato mantenendo in una variabile il valore della sommatoria precedente  portando ad un costo $O(n^2)$. Con il metodo \textit{divide et impera} l'idea è quella di trovare un pivot e calcolare il sottovettore massimo a destra e a sinistra di esso e poi vedere qual è il massimo possibile a cavallo con il pivot.
+Questo problema è più semplice perchè a cavallo basta prendere il massimo a destra, a sinistra e sommare l'elemento a cavallo e infine ritornare il massimo tra solo destra, a cavallo, solo a sinistra. L'equazione di ricorrenza è dunque $T(n) = 2T(n/2)+n$ con un costo totale di $O(n\\logn(n))$.
+
+\subsection{Esempi di utilizzo metodo Greedy}
+\subsubsection{Problema di scheduling}
+Dati dei "job" da eseguire con un certo tempo di esecuzione l'obiettivo è trovare l'ordine (scheduling) che dia il \textbf{minimo tempo di attesa medio} ovvero ogni quanto un nuovo job è iniziato. Per questo motivo l'ordine migliore è quello che mette in ordine dal più corto al più lungo dunque l'approccio greedy è il migliore.
+
+\subsubsection{Problema della compressione (codifica di Huffman)}
+Data una squenza di caratteri essa deve essere salvata in una memoria digitale quindi codificata e poi deve esssere anche possibile decodificarla, questo processo viene eseguito tramite una tecnica detta \textbf{codifica dei caratteri} quindi "il carattere $x$ è rappresentato dalla sequenza $c$". Data questa codifica è necesario però decodificarla attraverso un semplice decodifica sequenziale. Il problema da risolvere è trovae la codifica che dia la codifica più corta possibile.
+La soluzione migliore è una \textbf{codifica a lunghezza variabile} che si basa sulla percentuale di apparizione del carattere: a caratteri che appaiono più spesso associo una codifica piuù corta e man mano aumento mantenendo una \textbf{code a prefisso} ovvero che nessun codice non può essere il prefisso di un altro codice in modo tale che appena si individua un carattere si sa che può essere solo quello. Per decodificare si può usare la struttura dell'albero binario fatto in modo che ci sia l'altezza media per nodo minore possibile per far si che il cammino medio sia il più piccolo possibile per essere più veloce possibile.
+Per costruire l'albero si usa l'\textbf{algoritmo di Huffman}: si costruisce inizialmente una losta ordinata di nodi in modo crescente rispetto a quante volte appaere il carattere nel file, successivamente si uniscono le foglie a coppie con un padre la cui etichetta ha la somma delle occorrenze ma ad ogni creazione di padre esso si mette nella lista ed essa viene riordinata e si ricrea un altro padre fino a quando non si è ottenuta una radice ed ecco ottenuto l'albero più efficiente possibile con costo computazionale $O(n \\ log(n))$.
+
 
 \end{document}
