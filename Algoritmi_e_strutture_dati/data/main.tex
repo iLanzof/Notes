@@ -565,7 +565,7 @@ Quindi sono necessarie 3 moltiplicazioni che generano una lunghezza dell'output 
 
 \subsubsection{Sottovettore non vuoto di valore massimo}
 Il problema prevede di trovare un sottovettore ad un array dato (quindi elementi contigui) la cui somma sia massima. Il motodo \textit{brute force} che calcola il valore di ogni combinazione ha un costo di $O(n^2)$ che puoò essere migliorato mantenendo in una variabile il valore della sommatoria precedente  portando ad un costo $O(n^2)$. Con il metodo \textit{divide et impera} l'idea è quella di trovare un pivot e calcolare il sottovettore massimo a destra e a sinistra di esso e poi vedere qual è il massimo possibile a cavallo con il pivot.
-Questo problema è più semplice perchè a cavallo basta prendere il massimo a destra, a sinistra e sommare l'elemento a cavallo e infine ritornare il massimo tra solo destra, a cavallo, solo a sinistra. L'equazione di ricorrenza è dunque $T(n) = 2T(n/2)+n$ con un costo totale di $O(n\\logn(n))$.
+Questo problema è più semplice perchè a  per il sotto array a cavallo basta prendere il massimo a destra, a sinistra e sommare l'elemento a cavallo e infine ritornare il massimo tra solo destra, a cavallo, solo a sinistra. L'equazione di ricorrenza è dunque $T(n) = 2T(n/2)+n$ con un costo totale di $O(n\ logn(n))$.
 
 \subsection{Esempi di utilizzo metodo Greedy}
 \subsubsection{Problema di scheduling}
@@ -574,7 +574,20 @@ Dati dei "job" da eseguire con un certo tempo di esecuzione l'obiettivo è trova
 \subsubsection{Problema della compressione (codifica di Huffman)}
 Data una squenza di caratteri essa deve essere salvata in una memoria digitale quindi codificata e poi deve esssere anche possibile decodificarla, questo processo viene eseguito tramite una tecnica detta \textbf{codifica dei caratteri} quindi "il carattere $x$ è rappresentato dalla sequenza $c$". Data questa codifica è necesario però decodificarla attraverso un semplice decodifica sequenziale. Il problema da risolvere è trovae la codifica che dia la codifica più corta possibile.
 La soluzione migliore è una \textbf{codifica a lunghezza variabile} che si basa sulla percentuale di apparizione del carattere: a caratteri che appaiono più spesso associo una codifica piuù corta e man mano aumento mantenendo una \textbf{code a prefisso} ovvero che nessun codice non può essere il prefisso di un altro codice in modo tale che appena si individua un carattere si sa che può essere solo quello. Per decodificare si può usare la struttura dell'albero binario fatto in modo che ci sia l'altezza media per nodo minore possibile per far si che il cammino medio sia il più piccolo possibile per essere più veloce possibile.
-Per costruire l'albero si usa l'\textbf{algoritmo di Huffman}: si costruisce inizialmente una losta ordinata di nodi in modo crescente rispetto a quante volte appaere il carattere nel file, successivamente si uniscono le foglie a coppie con un padre la cui etichetta ha la somma delle occorrenze ma ad ogni creazione di padre esso si mette nella lista ed essa viene riordinata e si ricrea un altro padre fino a quando non si è ottenuta una radice ed ecco ottenuto l'albero più efficiente possibile con costo computazionale $O(n \\ log(n))$.
+Per costruire l'albero si usa l'\textbf{algoritmo di Huffman}: si costruisce inizialmente una losta ordinata di nodi in modo crescente rispetto a quante volte appaere il carattere nel file, successivamente si uniscono le foglie a coppie con un padre la cui etichetta ha la somma delle occorrenze ma ad ogni creazione di padre esso si mette nella lista ed essa viene riordinata e si ricrea un altro padre fino a quando non si è ottenuta una radice ed ecco ottenuto l'albero più efficiente possibile con costo computazionale $O(n \ log(n))$.
+
+
+\subsection{Esempi di utilizzo di programmazione dinamica}
+E' una tecnica iterativa che affronta i problemi con un approccio \textit{bottom-up} e che è molto vantaggiosa quando si tratta di risolvere sottoproblemi ripetuti, comporta sempre l'appoggio ad una struttura dati ausiliaria.
+\subsubsection{Numero di Fibonacci, tecnica della Memorization}
+Questa tecnica usa una struttura \textit{cache} che memorizza i valori che sono già stati calcolati rendendo così tutto più veloce perchè si va sempre a vedere se il numero è stato calcolato.
+
+\subsubsection{Sottovettore di valore masismo}
+La soluzione ragione per step: progressivamente trova il sottovettore massimo per l'i-esima cella del vettore che la contiene e per riempire la i-esima cella si fa $max(A[i-1]+S[i], S[i])$ con S l'array in input e A l'array ausiliario. Per evitare di dover cercare nell'array di appoggio il valore massimo si memorizza in una variabile l'indice del massimo e quindi il costo computazionale totale risulta essere di $\Theta(n)$.
+Per tagliare il costo di di memoria si possono usare delle variabili su cui ci si può appoggiare.
+
+\subsubsection{Seam Carving}
+Il problema vuole ridimensionare un'immagine tagliando solo delle cuciture di pixel removibili.
 
 
 \end{document}
