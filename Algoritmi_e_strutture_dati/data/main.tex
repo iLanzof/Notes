@@ -587,7 +587,25 @@ La soluzione ragione per step: progressivamente trova il sottovettore massimo pe
 Per tagliare il costo di di memoria si possono usare delle variabili su cui ci si può appoggiare.
 
 \subsubsection{Seam Carving}
-Il problema vuole ridimensionare un'immagine tagliando solo delle cuciture di pixel removibili.
+Il problema vuole ridimensionare un'immagine tagliando solo delle cuciture di pixel removibili, i "pixel removibili" sono quelli con valore assegnatoli, tramite algoritmi non studiati, minore. Essendo l'immagine iniziale una matrice anche la struttura dati di appoggio sara' la medesima delle medesime dimensioni.
+Per quanto riguarda l'algoritmo in se' si tratta di stabilire, partendo dall'ultima riga, qual e' il valore del percorso piu' "basso" che parte dalla cima. Ricorsivamente si va a calcolare lo stesso per le 3 caselle adiacenti sopra e una volta riempita la matrice di appoggio con gli opportuni valori per trovare la cucitura da eliminare basta trovare il minimo nell'ultima riga e da li' risalir fino alla cime con un approccio greedy.
 
+
+\subsubsection{Distanza di Levenshtein}
+E' il problema che affrontano i controllori ortografici quando suggeriscono parole simili come correzioni a quelle digitate e la loro somiglianza si basa sul concetto di \textit{edit distance} ovvero il numero di operazioni necessaria per trasformare una stringa T in una stringa S. 
+Le uniche trasformazioni ammesse sono: \begin{itemize}
+    \item Lasciare immutato il carattere   $\rightarrow$ costo 0
+    \item Cancellare un carattere $\rightarrow$ costo 1
+    \item Inserire un carattere $\rightarrow$ costo 1
+    \item Sostituire un carattere con uno differente $\rightarrow$ costo 1
+\end{itemize}
+Ovviamente la conversione viene operata carattere per carattere sulla stringa T.
+Per definizione la \textbf{distanza di Levenshtein} tra $S[1 .. n]$ e $T[1 .. m]$ e' il costo minimo (riferito a quelli esplicitati prima) tra tutte le sequenze di \textit{operazioni di editing} che trasformano S in T.
+Per calcolare la soluzione si ricorre ad una matrice di appoggio in cui ci si segna quante operazioni devono essere effetuate (almeno) per trasformare la sequenza $L[0 .. i][0]$ in $L [0][0 .. j]$ in pratica si fa un confronto con le 
+tre caselle precedenti (quella a sinistra, quella sopra e quella sopra a sinistra) e si guarda il carattere nella riga i e quello nella colonna j, se sono:
+\begin{itemize}
+    \item \textbf{Uguali}: si prende il minimo tra casella a sinistra + 1, casella sopra + 1 e casella in alto a sinistra
+    \item \textbf{Diversi}: si prende il minimo tra le tre caselle precedenti e si incrementa di 1
+\end{itemize}
 
 \end{document}
