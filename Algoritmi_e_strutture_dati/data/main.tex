@@ -608,4 +608,85 @@ tre caselle precedenti (quella a sinistra, quella sopra e quella sopra a sinistr
     \item \textbf{Diversi}: si prende il minimo tra le tre caselle precedenti e si incrementa di 1
 \end{itemize}
 
+\section{Grafi}
+Sono strutture dati che permettono di memorizzare quanto i diversi elementi si interfacciano tra di loro, i problemi che affronteremo sui grafi sono la visita (in ampiezza e in profondità), alberi di copertura minimi e cammini minimi (in caso di singola sorgente e fra tutte le coppie).
+Ci sono due definizioni di grafo che distinguono i due tipi:
+\begin{itemize}
+    \item \textbf{Grafo orientato}: è una coppia di insiemi, il primo è quello dei vertici e l'insieme delle relazioni tra i vertici. Viene definito \textbf{cappio} un nodo in relazione con se stesso.
+    \item \textbf{Grafo non orientato}: gli archi (ovvero le relazioni tra grafi) sono non ordinate (quindi non c'è una direzione) e i cappi non sono ammessi.
+\end{itemize}
+Ci sono alcune definizioni che sono itili in questa struttura: \textbf{incidenza} che, in un grafo orientato, indica che partendo da un vertice si può andare nel secondo mentre se due nodi sono \textbf{adiacenti} signigfica che c'è una relazione tra i due (ovvero ci si può arrivare).
+Le operazioni di base che il grafo deve supportare sono:
+\begin{itemize}
+    \item NumVertici
+    \item NumArchi
+    \item grado (vertice) ovvero quanti collegamenti ha
+    \item archiIncidenti
+    \item estremi (arco)
+    \item sonoAdiacenti (vertice, vertice)
+    \item aggiungiVertice
+    \item aggiungiArco
+    \item rimuoviVertice
+    \item rimuoviArco
+\end{itemize}
+
+\subsection{Implementazione grafo non orientato, matrice di adiacenza}
+Si usa una matrice con tutti gli elementi sia nelle righe che nelle colonne e si mette 1 se due elementi sono collegati 0 se non lo sono. Quella che risulta è una matrice simmetrica con diagonale tutta 0 per l'assenza cappi.
+Lo spazio necessario è $\Theta(|V|^2)$. I costi delle operazioni sono:
+\begin{itemize}
+    \item grado (vertice) $\rightarrow$  $\Theta(n)$
+    \item archiIncidenti $\rightarrow$ $\Theta(n)$
+    \item sonoAdiacenti (vertice, vertice) $\rightarrow$ $\Theta(1)$
+    \item aggiungiVertice $\rightarrow$ $\Theta(n^2)$
+    \item aggiungiArco $\rightarrow$ $\Theta(1)$
+    \item rimuoviVertice $\rightarrow$ $\Theta(n^2)$
+    \item rimuoviArco $\rightarrow$ $\Theta(1)$
+\end{itemize}
+
+\subsection{Implementazione grafo non orientato, lista di adiacenza}
+L'idea è quella di avere un array degli elementi che sono inizi di liste che contengono gli elementi a cui sono adiacenti, lo spazio di memoria è $\Theta(|V|+|E|)$ con V vertici e E le relazioni
+\begin{itemize}
+    \item grado (vertice) $\rightarrow$  $\Theta(\gamma(v))$
+    \item archiIncidenti $\rightarrow$ $\Theta(\gamma(v))$
+    \item sonoAdiacenti (vertice, vertice) $\rightarrow$ $\Theta(min\{\gamma(x),\gamma(y)\})$
+    \item aggiungiVertice $\rightarrow$ $\Theta(1)$
+    \item aggiungiArco $\rightarrow$ $\Theta(1)$
+    \item rimuoviVertice (vertice) $\rightarrow$ $\Theta(numero \ archi)$
+    \item rimuoviArco (arco) $\rightarrow$ $\Theta(\gamma(x)+\gamma(y))$ con l'arco = $\{x,y\}$
+\end{itemize}
+
+\subsection{IMplementazione grafo orientato, matrice di adiacenza}
+Uguale a quella con il non ordinato ma non è più simmetrica perchè in questo caso l'ordine di relazione conta e ci sono cappi.
+
+
+\subsection{Grafi pesati}
+Sono grafi in cui ogni arco ha un peso/peso, dunque si determina il costo tramite un'opportuna funzione che, per comodità, restituisce $\infty$ quando non c'è una relazione tra i due elementi. Questo per quanto riguarda la matrice di adiacenza mentre nella lista si aggiunge un campo al nodo.
+
+
+\subsection{Definizione di Grado}
+Dato un grafo non orientato il grado di un vertice è il numero di archi del dato vertice.
+Mentre per il grafo orientato c'è la distinzione in \textbf{grado entrante} e \textbf{grado uscente}.
+
+\subsection{Definizione di cammino}
+Il cammino è il percordo che collega due vertici e se esiste si dice che $w$ è raggiungibile da $v$ tramite il cammino $v$. Il cammino prende in considerazione l'orientamento dei collegamenti nel caso del grafo orientato.
+
+\subsection{Definizione di grafi connessi}
+Nel caso non orientato un grafo è connesso se esiste un cammino che da ogni vertice arriva ad ogni altro vertice.
+Nel caso orientato un grafo è \textbf{fortemente connesso} se esiste un cammino da ogni vertice ad ogni altro vertice mentre si dice \textbf{debolmente connesso} se l'equivalente non orientato del grafo orientato è connsesso.
+
+
+\subsection{Definizione di ciclo}
+E' un cammino che parte da un elemento e attraversa in grafo ritornandoci. Nel caso di grafo orientato bisogna fare almeno 1 passo mentre in quelli non orientati almeno 3 passi.
+Un \textbf{ciclo semplice} è un cammino che non ritorno su nessun nodo già attraversato, mentre il \textbf{ciclo complesso} ha dei nodi ripetuti nel cammino.
+
+\subsection{Grafi aciclici}
+Un grafo non orientato è aciclico se è senza cicli semplici mentre quello orientato lo è solo se non ci sono cicli.
+
+\subsection{Grafo completo}
+UN grafico non orientato è completo se ha un arco per ogni possibile vertice, per calcolare il numero di archi necessari a ciò si può usare la formula: $\frac{|V|*(|V|-1)} {2}$
+
+
+\subsection{Albero}
+Un \textbf{albero libero} è un grafo non orientato connesso e aciclico, mentre se chiamiamo uno dei vertice radice otteniamo un albero radicato
+
 \end{document}
