@@ -683,10 +683,16 @@ Un \textbf{ciclo semplice} è un cammino che non ritorno su nessun nodo già att
 Un grafo non orientato è aciclico se è senza cicli semplici mentre quello orientato lo è solo se non ci sono cicli.
 
 \subsection{Grafo completo}
-UN grafico non orientato è completo se ha un arco per ogni possibile vertice, per calcolare il numero di archi necessari a ciò si può usare la formula: $\frac{|V|*(|V|-1)} {2}$
+Un Grafo non orientato è completo se ha un arco per ogni possibile vertice, per calcolare il numero di archi necessari a ciò si può usare la formula: $\frac{|V|*(|V|-1)} {2}$
 
 
 \subsection{Albero}
 Un \textbf{albero libero} è un grafo non orientato connesso e aciclico, mentre se chiamiamo uno dei vertice radice otteniamo un albero radicato
 
+\subsection{Algoritmi di visita dei grafi}
+Dato un grafo ed un vertice (\textbf{sorgente}) l'obiettivo è visitare ogni possibile vertice del grafo raggiungibile dalla sorgente.
+\subsubsection{Visita in ampiezza}
+Visita i nodi espandendo la frontiera tra nodi scoperti e nodi da scoprire.
+\subsubsection{Visita in profondità}
+Visita i nodi andando il più possibile lontano dalla sorgente.
 \end{document}
