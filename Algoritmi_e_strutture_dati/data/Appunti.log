@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.3.25)  17 APR 2026 13:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.3.25)  21 APR 2026 17:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -463,7 +463,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 23.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<intuitive notation.png, id=385, 643.40375pt x 407.5225pt>
+<intuitive notation.png, id=369, 643.40375pt x 407.5225pt>
 File: intuitive notation.png Graphic file (type png)
 <use intuitive notation.png>
 Package pdftex.def Info: intuitive notation.png  used on input line 50.
@@ -475,7 +475,7 @@ Package pdftex.def Info: intuitive notation.png  used on input line 50.
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/
 dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-su
 per-ts1.enc}]
-<Selection sort.png, id=415, 1032.85875pt x 833.1125pt>
+<Selection sort.png, id=398, 1032.85875pt x 833.1125pt>
 File: Selection sort.png Graphic file (type png)
 <use Selection sort.png>
 Package pdftex.def Info: Selection sort.png  used on input line 97.
@@ -483,12 +483,12 @@ Package pdftex.def Info: Selection sort.png  used on input line 97.
 
 
 [2 <./Intuitive notation.png>]
-<Insertion sort.png, id=428, 1032.85875pt x 315.1775pt>
+<Insertion sort.png, id=412, 1032.85875pt x 315.1775pt>
 File: Insertion sort.png Graphic file (type png)
 <use Insertion sort.png>
 Package pdftex.def Info: Insertion sort.png  used on input line 107.
 (pdftex.def)             Requested size: 241.84843pt x 73.7974pt.
-<Merge Sort.png, id=429, 1247.66125pt x 982.67125pt>
+<Merge Sort.png, id=413, 1247.66125pt x 982.67125pt>
 File: Merge Sort.png Graphic file (type png)
 <use Merge Sort.png>
 Package pdftex.def Info: Merge Sort.png  used on input line 119.
@@ -496,7 +496,7 @@ Package pdftex.def Info: Merge Sort.png  used on input line 119.
 
 
 [3 <./Selection sort.png> <./Insertion sort.png>]
-<CountingaSortexample.png, id=438, 860.21375pt x 435.6275pt>
+<CountingaSortexample.png, id=422, 860.21375pt x 435.6275pt>
 File: CountingaSortexample.png Graphic file (type png)
 <use CountingaSortexample.png>
 Package pdftex.def Info: CountingaSortexample.png  used on input line 138.
@@ -504,12 +504,12 @@ Package pdftex.def Info: CountingaSortexample.png  used on input line 138.
 
 
 [4 <./Merge Sort.png>]
-<CountingSort.png, id=445, 1114.1625pt x 706.64pt>
+<CountingSort.png, id=429, 1114.1625pt x 706.64pt>
 File: CountingSort.png Graphic file (type png)
 <use CountingSort.png>
 Package pdftex.def Info: CountingSort.png  used on input line 145.
 (pdftex.def)             Requested size: 241.84843pt x 153.38026pt.
-<SummarySort.png, id=446, 1199.48125pt x 910.40125pt>
+<SummarySort.png, id=430, 1199.48125pt x 910.40125pt>
 File: SummarySort.png Graphic file (type png)
 <use SummarySort.png>
 Package pdftex.def Info: SummarySort.png  used on input line 161.
@@ -521,7 +521,7 @@ Package pdftex.def Info: SummarySort.png  used on input line 161.
 [6 <./SummarySort.png>]
 
 [7]
-<Riassunto BTS.png, id=466, 1841.88126pt x 971.63pt>
+<Riassunto BTS.png, id=450, 1841.88126pt x 971.63pt>
 File: Riassunto BTS.png Graphic file (type png)
 <use Riassunto BTS.png>
 Package pdftex.def Info: Riassunto BTS.png  used on input line 279.
@@ -529,12 +529,12 @@ Package pdftex.def Info: Riassunto BTS.png  used on input line 279.
 
 
 [8]
-<rotations.png, id=477, 862.22125pt x 528.97626pt>
+<rotations.png, id=461, 862.22125pt x 528.97626pt>
 File: rotations.png Graphic file (type png)
 <use rotations.png>
 Package pdftex.def Info: rotations.png  used on input line 305.
 (pdftex.def)             Requested size: 266.03474pt x 163.20607pt.
-<Rotations_case.png, id=478, 887.315pt x 424.58624pt>
+<Rotations_case.png, id=462, 887.315pt x 424.58624pt>
 File: Rotations_case.png Graphic file (type png)
 <use Rotations_case.png>
 Package pdftex.def Info: Rotations_case.png  used on input line 312.
@@ -542,7 +542,7 @@ Package pdftex.def Info: Rotations_case.png  used on input line 312.
 
 
 [9 <./Riassunto BTS.png> <./Rotations.png>]
-<SummaryAVL.png, id=491, 887.315pt x 424.58624pt>
+<SummaryAVL.png, id=475, 887.315pt x 424.58624pt>
 File: SummaryAVL.png Graphic file (type png)
 <use SummaryAVL.png>
 Package pdftex.def Info: SummaryAVL.png  used on input line 330.
@@ -552,7 +552,7 @@ Package pdftex.def Info: SummaryAVL.png  used on input line 330.
 [10 <./Rotations_case.png> <./SummaryAVL.png>]
 
 [11]
-<Summaryhash.png, id=511, 1635.10875pt x 721.69624pt>
+<Summaryhash.png, id=495, 1635.10875pt x 721.69624pt>
 File: Summaryhash.png Graphic file (type png)
 <use Summaryhash.png>
 Package pdftex.def Info: Summaryhash.png  used on input line 400.
@@ -562,7 +562,7 @@ Package pdftex.def Info: Summaryhash.png  used on input line 400.
 [12 <./Summaryhash.png>]
 
 [13]
-<Summary_d_Heap.png, id=524, 1105.12875pt x 670.505pt>
+<Summary_d_Heap.png, id=508, 1105.12875pt x 670.505pt>
 File: Summary_d_Heap.png Graphic file (type png)
 <use Summary_d_Heap.png>
 Package pdftex.def Info: Summary_d_Heap.png  used on input line 460.
@@ -570,7 +570,7 @@ Package pdftex.def Info: Summary_d_Heap.png  used on input line 460.
 
 
 [14 <./Summary_d_Heap.png>]
-<Summary_Union_Find.png, id=531, 1402.23875pt x 396.48125pt>
+<Summary_Union_Find.png, id=515, 1402.23875pt x 396.48125pt>
 File: Summary_Union_Find.png Graphic file (type png)
 <use Summary_Union_Find.png>
 Package pdftex.def Info: Summary_Union_Find.png  used on input line 497.
@@ -593,13 +593,13 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `Appunti.out' has not changed.
-(rerunfilecheck)             Checksum: ABC300B5A2F02BB11CD5D296E620ED00;16454.
+(rerunfilecheck)             Checksum: 04CE5096339CBFA24CA7D764A2A638DA;16052.
  ) 
 Here is how much of TeX's memory you used:
  13379 strings out of 473197
- 204654 string characters out of 5718605
- 622007 words of memory out of 5000000
- 36303 multiletter control sequences out of 15000+600000
+ 204606 string characters out of 5718605
+ 622013 words of memory out of 5000000
+ 36299 multiletter control sequences out of 15000+600000
  573126 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,7n,79p,817b,576s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -616,10 +616,10 @@ re/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1
 /public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfr
 m1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/shar
 e/texmf/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on Appunti.pdf (20 pages, 1171316 bytes).
+Output written on Appunti.pdf (20 pages, 1175305 bytes).
 PDF statistics:
- 666 PDF objects out of 1000 (max. 8388607)
- 579 compressed objects within 6 object streams
- 162 named destinations out of 1000 (max. 500000)
- 831 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 659 PDF objects out of 1000 (max. 8388607)
+ 572 compressed objects within 6 object streams
+ 166 named destinations out of 1000 (max. 500000)
+ 799 words of extra memory for PDF output out of 10000 (max. 10000000)
 

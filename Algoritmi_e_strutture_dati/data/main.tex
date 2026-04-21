@@ -36,7 +36,7 @@ Data sempre $g(n)$ si indica con $\Theta$ l'insieme di funzioni che hanno lo ste
 \paragraph{$\omega$-piccolo} Ovvero l'insieme di funzioni che dominano asintoticamente $g(n)$
 \paragraph{Complessità computazionale di un algoritmo} Un algoritmo A ha complessità computazionale $O(f (n))$ rispetto ad una certa risorsa di calcolo se la quantità di risorse necessaria per eseguire A su un qualsiasi input di dimensione n è $O(f (n))$.
 \paragraph{Complessità computazionale di un problema} Un problema P ha complessità computazionale $O(f (n))$ rispetto ad una certa risorsa di calcolo se il migliore algoritmo che risolve P ha costo computazionale $O(f (n))$ rispetto a tale risorsa di calcolo. E' molto più complicata da calcolare rispetto a quella di un algoritmo.
-\subsection {Scopo di queste definizioni}
+\subsection{Scopo di queste definizioni}
 L'ordine di crescita asintotico può essere confrontato attraverso le notazioni di limite, se il limite all'inifnito tra $f(n)$ e $g(n)$ esiste si presentano 3 casistiche:
 \begin{itemize}
     \item $\displaystyle \lim_{n \to \infty} \frac{f(n)}{g(n)} = 0$ allora $f(n) =o(g(n)) \Rightarrow f(n) = O(g(n))$
@@ -49,7 +49,7 @@ Oppure si può utilizzare un'interpretazione intuitiva delle seguenti definizion
     \centering
     \includegraphics[width=0.4\linewidth]{intuitive notation.png}
     \caption{Interpretazione intuitiva delle definizioni}
-    \label{fig:intuitive_notation}
+\label{fig:intuitive_notation}
 \end{figure}
 
 
@@ -66,7 +66,7 @@ Solitamente quando si sviluppa un algoritmo ci si interessa principalmente al ca
 Serve in caso di algoritmi molto complicati  ed è un metodo per valutare il costo medio di una sequenza di operazioni a differenza di quella degli algoritmi che calcola su singola operazione. Ci sono due metodi principali per fare questo tipo di analisi:
 \begin{itemize}
     \item \textbf{Metodo dell'aggregazioni}: si determina un limite superiore al costo totale si una sequenza di n operazioni e dividiamo per n.
-    \item \textbf{Metodo degli accantonamenti}: si immagina che ci sia un budget per igni singola operazione e si accantona il "resto" che viene usato nel caso il budget non basti per alcune operazioni. Per capire se la stima del budget è corretta alla fine si avrà un surplus positivo, in caso esso sia negativo allora bisogna stimare un budget più alto.
+    \item \textbf{Metodo degli accantonamenti}: si immagina che ci sia un budget per igni singola operazione e si accantona il 'resto' che viene usato nel caso il budget non basti per alcune operazioni. Per capire se la stima del budget è corretta alla fine si avrà un surplus positivo, in caso esso sia negativo allora bisogna stimare un budget più alto.
 \end{itemize}
 
 \subsection{Equazioni di ricorrenza}
@@ -573,7 +573,7 @@ Dati dei "job" da eseguire con un certo tempo di esecuzione l'obiettivo è trova
 
 \subsubsection{Problema della compressione (codifica di Huffman)}
 Data una squenza di caratteri essa deve essere salvata in una memoria digitale quindi codificata e poi deve esssere anche possibile decodificarla, questo processo viene eseguito tramite una tecnica detta \textbf{codifica dei caratteri} quindi "il carattere $x$ è rappresentato dalla sequenza $c$". Data questa codifica è necesario però decodificarla attraverso un semplice decodifica sequenziale. Il problema da risolvere è trovae la codifica che dia la codifica più corta possibile.
-La soluzione migliore è una \textbf{codifica a lunghezza variabile} che si basa sulla percentuale di apparizione del carattere: a caratteri che appaiono più spesso associo una codifica piuù corta e man mano aumento mantenendo una \textbf{code a prefisso} ovvero che nessun codice non può essere il prefisso di un altro codice in modo tale che appena si individua un carattere si sa che può essere solo quello. Per decodificare si può usare la struttura dell'albero binario fatto in modo che ci sia l'altezza media per nodo minore possibile per far si che il cammino medio sia il più piccolo possibile per essere più veloce possibile.
+La soluzione migliore è una \textbf{codifica a lunghezza variabile} che si basa sulla percentuale di apparizione del carattere: a caratteri che appaiono più spesso associo una codifica più corta e man mano aumento mantenendo una \textbf{code a prefisso} ovvero che nessun codice non può essere il prefisso di un altro codice in modo tale che appena si individua un carattere si sa che può essere solo quello. Per decodificare si può usare la struttura dell'albero binario fatto in modo che ci sia l'altezza media per nodo minore possibile per far si che il cammino medio sia il più piccolo possibile per essere più veloce possibile.
 Per costruire l'albero si usa l'\textbf{algoritmo di Huffman}: si costruisce inizialmente una losta ordinata di nodi in modo crescente rispetto a quante volte appaere il carattere nel file, successivamente si uniscono le foglie a coppie con un padre la cui etichetta ha la somma delle occorrenze ma ad ogni creazione di padre esso si mette nella lista ed essa viene riordinata e si ricrea un altro padre fino a quando non si è ottenuta una radice ed ecco ottenuto l'albero più efficiente possibile con costo computazionale $O(n \ log(n))$.
 
 
@@ -655,44 +655,50 @@ L'idea è quella di avere un array degli elementi che sono inizi di liste che co
     \item rimuoviArco (arco) $\rightarrow$ $\Theta(\gamma(x)+\gamma(y))$ con l'arco = $\{x,y\}$
 \end{itemize}
 
-\subsection{IMplementazione grafo orientato, matrice di adiacenza}
+\subsection{Implementazione grafo orientato, matrice di adiacenza}
 Uguale a quella con il non ordinato ma non è più simmetrica perchè in questo caso l'ordine di relazione conta e ci sono cappi.
 
+\subsection{Alcune definizioni}
+\begin{enumerate}
+    \item \textbf{Grafi pesati}: sono grafi in cui ogni arco ha un peso/costo, dunque per determinare il costo si utilizza un'opportuna funzione che, per comodità, restituisce $\infty$ quando non c'è una relazione tra i due elementi. 
+    Questa implementazione riguarda la matrice di adiacenza mentre nella lista di adiacenza si aggiunge un campo al singolo nodo.
+    \item \textbf{Grado}: dato un grafo non orientato il grado di un vertice è il numero di archi del dato vertice.
+    Nel caso di grafo orientato c'è la distinzione in \textbf{grado entrante} e \textbf{grado uscente} ovvero il numero di archi in arrivo e in uscita.
+    \item \textbf{Cammino}: percorso che collega due vertici e se esiste si dice che $w$ è raggiungibile da $v$ tramite il cammino $v$. 
+    Il cammino prende in considerazione l'orientamento dei collegamenti nel caso del grafo orientato.
+    \item \textbf{Grafi connessi}: nel caso del grafo non orientato esso è connesso se esiste un cammino che da ogni vertice arriva ad ogni altro vertice.
+    Nel caso del grafo orientato esso è \textbf{fortemente connesso} se esiste un cammino da ogni vertice ad ogni altro vertice mentre si dice \textbf{debolmente connesso} se l'equivalente non orientato del grafo orientato è connsesso.
+    \item \textbf{Ciclo}: cammino che parte da un elemento e attraversa un grafo ritornandoci. Nel caso di grafo orientato bisogna fare almeno 1 passo mentre in quelli non orientati almeno 3 passi.
+    Un \textbf{ciclo semplice} è un cammino che non ritorno su nessun nodo già attraversato, mentre il \textbf{ciclo complesso} ha dei nodi ripetuti nel cammino.
+    \item \textbf{Grafi aciclici}: un grafo non orientato è aciclico se è senza cicli semplici mentre quello orientato lo è solo se non ci sono cicli.
+    \item \textbf{Grafo completo}: un Grafo non orientato è completo se ha un arco per ogni possibile vertice, per calcolare il numero di archi necessari a ciò si può usare la formula: $\frac{|V|*(|V|-1)} {2}$
+    \item \textbf{Albero}: un \textbf{albero libero} è un grafo non orientato connesso e aciclico, mentre se chiamiamo uno dei vertice radice otteniamo un \textbf{albero radicato}
+\end{enumerate}
 
-\subsection{Grafi pesati}
-Sono grafi in cui ogni arco ha un peso/peso, dunque si determina il costo tramite un'opportuna funzione che, per comodità, restituisce $\infty$ quando non c'è una relazione tra i due elementi. Questo per quanto riguarda la matrice di adiacenza mentre nella lista si aggiunge un campo al nodo.
-
-
-\subsection{Definizione di Grado}
-Dato un grafo non orientato il grado di un vertice è il numero di archi del dato vertice.
-Mentre per il grafo orientato c'è la distinzione in \textbf{grado entrante} e \textbf{grado uscente}.
-
-\subsection{Definizione di cammino}
-Il cammino è il percordo che collega due vertici e se esiste si dice che $w$ è raggiungibile da $v$ tramite il cammino $v$. Il cammino prende in considerazione l'orientamento dei collegamenti nel caso del grafo orientato.
-
-\subsection{Definizione di grafi connessi}
-Nel caso non orientato un grafo è connesso se esiste un cammino che da ogni vertice arriva ad ogni altro vertice.
-Nel caso orientato un grafo è \textbf{fortemente connesso} se esiste un cammino da ogni vertice ad ogni altro vertice mentre si dice \textbf{debolmente connesso} se l'equivalente non orientato del grafo orientato è connsesso.
-
-
-\subsection{Definizione di ciclo}
-E' un cammino che parte da un elemento e attraversa in grafo ritornandoci. Nel caso di grafo orientato bisogna fare almeno 1 passo mentre in quelli non orientati almeno 3 passi.
-Un \textbf{ciclo semplice} è un cammino che non ritorno su nessun nodo già attraversato, mentre il \textbf{ciclo complesso} ha dei nodi ripetuti nel cammino.
-
-\subsection{Grafi aciclici}
-Un grafo non orientato è aciclico se è senza cicli semplici mentre quello orientato lo è solo se non ci sono cicli.
-
-\subsection{Grafo completo}
-Un Grafo non orientato è completo se ha un arco per ogni possibile vertice, per calcolare il numero di archi necessari a ciò si può usare la formula: $\frac{|V|*(|V|-1)} {2}$
-
-
-\subsection{Albero}
-Un \textbf{albero libero} è un grafo non orientato connesso e aciclico, mentre se chiamiamo uno dei vertice radice otteniamo un albero radicato
 
 \subsection{Algoritmi di visita dei grafi}
 Dato un grafo ed un vertice (\textbf{sorgente}) l'obiettivo è visitare ogni possibile vertice del grafo raggiungibile dalla sorgente.
-\subsubsection{Visita in ampiezza}
-Visita i nodi espandendo la frontiera tra nodi scoperti e nodi da scoprire.
-\subsubsection{Visita in profondità}
-Visita i nodi andando il più possibile lontano dalla sorgente.
+\subsubsection{Visita in ampiezza (BFS)}
+Visita i nodi espandendo la frontiera tra nodi scoperti e nodi da scoprire. Alla fine dell'esecuzione ha creato un albero radicato in $s$ (il nodo di partenza) che contiene tutti i nodi che si posso raggiungere da esso.
+Durante l'esecuzione un nodo puo' essere: \textbf{inesplorato} ovvero non ancora incontrato, \textbf{aperto} ovvero quando viene incontrato la prima volta oppure \textbf{chiuso} ovvero il vertice e' stato esplorato completamente.
+Per quanto riguarda l'implementazione essa si basa su il campo $mark$ di ogni nodo che inizialmente setta in tutti a $false$ e poi grazie ad una coda esplora apre un nodo, mette in coda tutti i nodi nonm aperti raggiungibili da quello analizzato, chiude il nodo e continua con il successivo nodo in coda.
+Per quanto riguarda la creazione dell'albero ad ogni adiacente che viene aperto si riempie il campo $parent$ con il nodo che si sta analizzando. Alla fine viene ritornato l'albero.
+Per quanto riguarda la complessità computazionale nel caso di \textit{liste di adiacenza} e' $O(n+m)$ mentre nel caso della \textit{matrice di adiacenza} e' di $O(n^2)$, con $n$ numero di vertici e $m$ numero di archi.
+Questo tipo di visita e' utile per capire quale sia il cammino piu' breve tra due nodi nel caso ci sia una BFS partita dal nodo di inizio: 
+si crea l'albero e poi, partendo dal nodo finale, tramite una funzione ricorsiva che a ritroso arriva fino al nodo di inizio si può stampare il cammino più corto.
+\subsubsection{Visita in profondità (DFS)}
+Visita i nodi andando il più possibile lontano dalla sorgente e a differenza del BFS arriva a tutti i nodi del grafo, non solo quelli collegati ad un nodo. Per questo motivo la funzione crea un foresta ovvero un insieme di alberi.
+L'algoritmo e' ricorsivo e per ogni nodo riempie due paramentr: un \textit{discorvery time} ovvero il momento in cui e' stato scoperto e un \textit{finish time} ovvero quando termina la visita del nodo. La visita funziona che parte dal nodo iniziale al momento 1 poi passa ad un altro nodo fino a quando no si arriva ad un nodo che non ha piu' nodi non ancora scoperti disponibili.
+A quel punto il tale nodo viene chiuso l'esecuzione torna sul nodo precedente e se ha altri nodi adiacenti inesplorati salta a loro se no anche esso viene chiuso e così via fino a quando non tutti i nodi sono chiusi. Gli alberi vengono creati come prima ma essendo che si guardano tutti i nodi in casi di nodi scollegati o cappi vengono restituiti piu' alberi.
+Per quanto riguarda la complessità essa rimane invariata rispetto al BFS perche' i passaggi di inizializzazione dei campi necessari allo svolgimento sono quelli piu' dispendiosi.
+Grazie ai campi \textbf{discorvery time} e \textbf{finish time} e le relazione tra quelli di due nodi si possono avere diverse informazioni:
+\begin{itemize}
+    \item $[u.dt,\ u.ft]$ e $[u.dt,\ u.ft]$ sono \textbf{disgiunti} allora u e v non sono discendenti.
+    \item $[u.dt,\ u.ft]$ e' contenuto in $[u.dt,\ u.ft]$ allora u e' discendente di v.
+    \item $[u.dt,\ u.ft]$ contiene $[u.dt,\ u.ft]$ allora v e' discendente di u.
+    \item $v.dt < u.dt \land u.ft < v.ft$ allora l'arco $(u,v)$ e' all'\textbf{indietro}.
+    \item $u.dt < v.dt \land v.ft < u.ft$ allora l'arco $(u,v)$ e' in \textbf{avanti}.
+    \item $v.ft < u.dt$ allora l'arco $(u,v)$ e' \textbf{di attraversamento a sinistra}.
+\end{itemize}
+Per quanto riguarda le applicazioni questa visita rende particolarmente facile \textbf{Verificare DAG (Direct Acyclic Graph)} ovvero verificare che non ci siano archi all'indietro e fare l'\textbf{ordinamento topologico}.
 \end{document}
