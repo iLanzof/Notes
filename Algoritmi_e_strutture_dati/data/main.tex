@@ -700,5 +700,15 @@ Grazie ai campi \textbf{discorvery time} e \textbf{finish time} e le relazione t
     \item $u.dt < v.dt \land v.ft < u.ft$ allora l'arco $(u,v)$ e' in \textbf{avanti}.
     \item $v.ft < u.dt$ allora l'arco $(u,v)$ e' \textbf{di attraversamento a sinistra}.
 \end{itemize}
-Per quanto riguarda le applicazioni questa visita rende particolarmente facile \textbf{Verificare DAG (Direct Acyclic Graph)} ovvero verificare che non ci siano archi all'indietro e fare l'\textbf{ordinamento topologico}.
+Per quanto riguarda le applicazioni questa visita rende particolarmente facile \textbf{Verificare DAG (Direct Acyclic Graph)} ovvero verificare che non ci siano archi all'indietro e fare l'\textbf{ordinamento topologico} nella sottocategoria dei DAG.
+L'ordinamento topologico è interessante perchè può essere interpretato come dipendenze logiche tra eventi tipo catena di montaggio. L'algoritmo si basa appunto su un iniziale DFS e ritorno una lista che viene fatta mettendo in ordine decrescente i finish time di ogni nodo, in modo pratico si fa una head-push ogni volta che un nodo viene chiuso.
+
+\subsection{Componenti connesse (grafi non orientati)}
+Succede quando a volte ci sono nodi disconnessi dai grafi, il problema dunque è partizionare un grafo in insiemi di vertici collegati tra di loro.
+
+\subsection{Componenti fortemente connesse (grafi orientati)}
+Si esegue un iniziale partizionamento del grafo di tutti i vertici fortemente connessi dal dato elemento, per fare questo basta calcolare $D(x)$ ovvero tutti i discendenti del nodo $x$ e $A(x)$ ovvero l'insieme di tutti i nodi da cui si può raggiungere $x$.
+Per calcolare $D(x)$ basta fare una visita qualunque per calcolare $A(x)$ basta invertire l'orientamento delle freccie e fare una nuova ricerca. A questo punto per avere il partizionamento cercato è $D(x) \cap A(x)$.
+Per risolvere il problema di partizionare l'intero grafo tra i suoi elementi fortementi connessi tra di loro basta iterare l'algoritmo per ogni nodo e trovare l'intersezione tra tutti i nodi. La complessità computazionale è di $O(nm+n^2)$ per cui in realtà esistono algoritmi più efficienti.
+
 \end{document}
