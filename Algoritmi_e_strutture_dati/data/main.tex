@@ -704,11 +704,39 @@ Per quanto riguarda le applicazioni questa visita rende particolarmente facile \
 L'ordinamento topologico è interessante perchè può essere interpretato come dipendenze logiche tra eventi tipo catena di montaggio. L'algoritmo si basa appunto su un iniziale DFS e ritorno una lista che viene fatta mettendo in ordine decrescente i finish time di ogni nodo, in modo pratico si fa una head-push ogni volta che un nodo viene chiuso.
 
 \subsection{Componenti connesse (grafi non orientati)}
-Succede quando a volte ci sono nodi disconnessi dai grafi, il problema dunque è partizionare un grafo in insiemi di vertici collegati tra di loro.
+Succede quando a volte ci sono nodi disconnessi dai grafi, il problema dunque è partizionare un grafo in insiemi di vertici collegati tra di loro. %sistema
 
 \subsection{Componenti fortemente connesse (grafi orientati)}
 Si esegue un iniziale partizionamento del grafo di tutti i vertici fortemente connessi dal dato elemento, per fare questo basta calcolare $D(x)$ ovvero tutti i discendenti del nodo $x$ e $A(x)$ ovvero l'insieme di tutti i nodi da cui si può raggiungere $x$.
 Per calcolare $D(x)$ basta fare una visita qualunque per calcolare $A(x)$ basta invertire l'orientamento delle freccie e fare una nuova ricerca. A questo punto per avere il partizionamento cercato è $D(x) \cap A(x)$.
 Per risolvere il problema di partizionare l'intero grafo tra i suoi elementi fortementi connessi tra di loro basta iterare l'algoritmo per ogni nodo e trovare l'intersezione tra tutti i nodi. La complessità computazionale è di $O(nm+n^2)$ per cui in realtà esistono algoritmi più efficienti.
+
+
+\subsection{Minimum Spanning Tree}
+Il problema è quello di voler determinare come connettere diversi elementi tra di loro usando meno collegamenti possibili all'interno di un grafo non orientato, connesso e pesato. E' come se si volesse collegare con la fibra ottica un paese usando meno cavo possibile.
+Per trovare la combinazione giusta bisogna trovare l'albero di copertura minore possibile, per \textbf{albero di copertura} si intende un sottografo di un grado non orientato e connesso che contiene tutti i nodi del grafo, anch'esso è pesato ma come collegamenti ha un sotto insieme di quelli di partenza.
+Per trovare l'\textbf{albero di copertura di peso minimo} bisgna trovare l'albero che minimizza il peso complessivo. Precisazione importante è quella che il problema non sempre ha una soluzione univoca e il numero necessario per collegare $n$ nodi è necessario avere $n-1$ cammini. Inoltre, un arco è definito \textbf{sicuro} se aggiungendolo ad un MST l'unione rimane un MST quindi nella soluzione si devono prediligere questi archi.
+Il \textbf{metodo generico} per risolvere il problema è quello di creare un albero e unirlo sempre con archi sicuri.
+\subsubsection{Regole del ciclo e del taglio}
+Un \textbf{taglio} di un grafo non orientato è una partizione del grafo in due sottinsiemi disgiunti e un \textbf{arco leggero} è l'arco che che costa meno e che collega i due insiemi disgiunti dal taglio; un arco \textbf{attraversa il taglio} se dato l'arco ${u, v}$ allora $u \in S \land v \in V-S$ con $V$ il grafo iniziale e $V - S$ il sottoinsieme post taglio.
+La \textbf{regola del taglio} vuole che scelto un taglio nel grafo che non "spezza" archi già considerati come ottimi e si può prendere come ottimo quello di costo minore.
+La \textbf{regola del ciclo} vuole che dato un ciclo senza archi già individuati come pessimi possiamo considerare pessimo l'arco con peso peggiore.
+Applicando queste regole si puoò individuare il MST però bisogna capire come e quando applicare queste tecniche.
+
+\subsubsection{Algoritmo di Kruskal}
+Analizza gli archi in costo crescente e se i due nodi non sono già collegati tra loro con scelte già fatte allora si considera un taglio che tira fuori il nodo iniziale del collegamento dal grafo e quindi lo sceglie come ottimo, se invece sono già collegati significa che quell'arco è il peggiore del ciclo e lo scarta.
+
+\subsubsection{Algoritmo di Prim}
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
