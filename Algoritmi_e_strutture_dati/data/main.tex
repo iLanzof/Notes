@@ -725,10 +725,11 @@ Applicando queste regole si puoò individuare il MST però bisogna capire come e
 
 \subsubsection{Algoritmo di Kruskal}
 Analizza gli archi in costo crescente e se i due nodi non sono già collegati tra loro con scelte già fatte allora si considera un taglio che tira fuori il nodo iniziale del collegamento dal grafo e quindi lo sceglie come ottimo, se invece sono già collegati significa che quell'arco è il peggiore del ciclo e lo scarta.
-
+Per implementare questo algoritmo si usano le Union find e un albero che includerà la rappresentazione del MST. %finisci per bene
+Il costo totale è $\Theta(m\ log(n))$.
 \subsubsection{Algoritmo di Prim}
-
-
+Questo algoritmo parte da un nodo e taglia i suoi cammini, procede sempre e solo con la regola del taglio e si 'espande' sempre il taglio tenendo da una parte i nodi già nell'albero e dall'altra del taglio quelli ancora da inserire. Per implementare questo algoritmo si usano le code con priorità che gestiscono il peso del cammino e l'arrivo. 
+La complessità di questo algoritmo è di $\Theta(m\ log(n))$.
 
 
 
