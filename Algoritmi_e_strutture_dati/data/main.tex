@@ -731,12 +731,9 @@ Il costo totale è $\Theta(m\ log(n))$.
 Questo algoritmo parte da un nodo e taglia i suoi cammini, procede sempre e solo con la regola del taglio e si 'espande' sempre il taglio tenendo da una parte i nodi già nell'albero e dall'altra del taglio quelli ancora da inserire. Per implementare questo algoritmo si usano le code con priorità che gestiscono il peso del cammino e l'arrivo. 
 La complessità di questo algoritmo è di $\Theta(m\ log(n))$.
 
-
-
-
-
-
-
+\subsection{Camminimi minimi}
+Considerando un grafo orientato si cuole trovare il cammino di costo minimo che collega due nodi dati in input. Ci sonodiverse formulazioni del problema oltre a quella appena fornita, per esempio il \textit{single surce shortest path} che dato un solo punto deve restituire tutti i cammini minimi da esso agli altri oppure l'\textit{All-pairs shortest path} ovvero determinare il minimo cammino tra tutte le coppie di punti.
+UNa proprietà del cammino ottimale è quella di essere anche il cammino ottimale per collegare il punto di inizio con qualsiasi altro nodo intermedio a quello finale. Inoltre si possono costruire \textbf{Alberi di costo minimo} che contiene il minore cammino dal nodo di partenza a qualsiasi altro nodo. La distanza tra vertici di un grafo è il costo totale nel caso esista mentre è $+\infty$.
 
 
 
