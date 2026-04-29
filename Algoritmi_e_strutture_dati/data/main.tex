@@ -732,9 +732,26 @@ Questo algoritmo parte da un nodo e taglia i suoi cammini, procede sempre e solo
 La complessità di questo algoritmo è di $\Theta(m\ log(n))$.
 
 \subsection{Camminimi minimi}
-Considerando un grafo orientato si cuole trovare il cammino di costo minimo che collega due nodi dati in input. Ci sonodiverse formulazioni del problema oltre a quella appena fornita, per esempio il \textit{single surce shortest path} che dato un solo punto deve restituire tutti i cammini minimi da esso agli altri oppure l'\textit{All-pairs shortest path} ovvero determinare il minimo cammino tra tutte le coppie di punti.
-UNa proprietà del cammino ottimale è quella di essere anche il cammino ottimale per collegare il punto di inizio con qualsiasi altro nodo intermedio a quello finale. Inoltre si possono costruire \textbf{Alberi di costo minimo} che contiene il minore cammino dal nodo di partenza a qualsiasi altro nodo. La distanza tra vertici di un grafo è il costo totale nel caso esista mentre è $+\infty$.
+Considerando un grafo orientato si vuole trovare il cammino di costo minimo che collega due nodi dati in input. Ci sono diverse formulazioni del problema oltre a quella appena fornita, per esempio il \textit{single surce shortest path} che dato un solo punto deve restituire tutti i cammini minimi da esso agli altri oppure l'\textit{All-pairs shortest path} ovvero determinare il minimo cammino tra tutte le coppie di punti.
+Ci sono dei casi in cui  non si può trovare un cammino minimo, principalmente solo due: quando i due punti non sono raggiungibili (tipo alcuni nodi di grafi orientati) oppure cammini con costo negativo all'interno di un ciclo che complessivamente ha un costo negativo perchè basta continuare a girare nel ciclo abbassando il costo. 
+Ci sono alcune cose tecniche da sapere a riguardo di questo problema, per esempio se due nodi sono collegati allora esiste sempre un cammino semplice (senza cicli) si costo minimo.
+Un'altra proprietà del cammino ottimale è quella di essere anche il cammino ottimale per collegare il punto di inizio con qualsiasi altro nodo intermedio a quello finale.
+Inoltre si possono costruire \textbf{Alberi di costo minimo} che contengono il cammino minimo dal nodo di partenza a qualsiasi altro nodo. 
+Ci sono anche alcune utili \textbf{proprietà della distanza tra vertici} tra cui:
+\begin{itemize}
+    \item $d_{vv} = 0 \   \forall v$
+    \item $d_{xy} = min_{(z,y) \in E} (d_{xz}+w(z,y))$ ovvero se esite un cammino da $x$ a $y$ allora esiste almeno un vertice $z$ che è l'ultimo arco del camminimo minimo prima di $y$.
+    Questa proprietà può suggerire un approccio divide et impera tramite una chiamata ricorsiva ma questo aprroccio in realtà non funziona.
+    \item $d_{xy} = \infty$
+\end {itemize}
 
-
+\subsubsection{Algoritmo di Belman Ford}
+Questo algoritmo risolve il problema nella forma \textit{single surce shortest path}: data la sorgente $s$ mantiene una stima per eccesso $D_{sv} \geq d_{sv}$ del cammino minimo ad ogni nodo $v$, al termine dell'esecuzione del problema le stime saranno precise per cui $D_{sv} = d_{sv}$ sse non ci sono cicli di costo negativo.
+Inizialmente pone $D_{ss} = 0, \   d_{sv} = \infty \ \forall s \neg= v$, successivamente esegue dei \textit{rilassamenti} che migliorano le approssimazioni. 
+Questi rilassamenti sono piuttosto intuitivi: se c'è un cammino tra un nodo intermedio tra $s$ e $v$ chiamato $D_{su}$ che sommato al cammino tra $u$ e $v$ risulta minore di $D_{sv}$ allora si sostituisce il valore della somma essendo un cammino minimo.
+Per eseguire un ciclo di rilassamento bisgna anallizzare tutti gli archi del grafo vedendo se permettono un effettivo rilassamento.
+A questo punto tocca capire quante iterazioni di rilasamenti devono essere fatti per arrivare ad una convergenza sicura, la risposta è che dopo $k$ iterazioni si è trovato il cammino minimo che attraversa al massimo $k$ archi.
+Per cui essendoci al massimo $n-1$ archi in un grafo allora alla $n-1$ ierazione avremo coperto tutti i cammini possibili e trovato dunque il minimo, il costo computazionale è $O(nm)$.
+In realtà una possibile modifica che lo rende più efficiente è terminare non sempre a $n-1$ ierazioni ma quando non si effettuano più rilassamenti, un'altra modifica è controllare se ci sono cicli negativi: basta, una volta finito il rilassamento, controllare se è possibile eseguirne un altro e in caso affermativo c'è un ciclo di costo negativo.
 
 \end{document}
