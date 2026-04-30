@@ -704,7 +704,8 @@ Per quanto riguarda le applicazioni questa visita rende particolarmente facile \
 L'ordinamento topologico è interessante perchè può essere interpretato come dipendenze logiche tra eventi tipo catena di montaggio. L'algoritmo si basa appunto su un iniziale DFS e ritorno una lista che viene fatta mettendo in ordine decrescente i finish time di ogni nodo, in modo pratico si fa una head-push ogni volta che un nodo viene chiuso.
 
 \subsection{Componenti connesse (grafi non orientati)}
-Succede quando a volte ci sono nodi disconnessi dai grafi, il problema dunque è partizionare un grafo in insiemi di vertici collegati tra di loro. %sistema
+Due vertici $u$ e $v$ di un grafo sono \textbf{connessi} quando e' possibile raggiungere $v$ partendo da $u$, questa definizione induce un possibile partizionamento del grafo in insiemi di nodi connessi tra di loro.\
+Per risolvere questo problema basta etichettare inizialmente tutti i nodi con un valore di "non visitato" poi per ogni nodo non ancora visitato si chiama una funzione ricorsiva che etichetta con un valore (che per ogni insieme differente deve cambiare) il nodo poi riempi il campo $parent$ dei nodi con il nodo iniziale e la chiama ricorsivamente sugli stessi.
 
 \subsection{Componenti fortemente connesse (grafi orientati)}
 Si esegue un iniziale partizionamento del grafo di tutti i vertici fortemente connessi dal dato elemento, per fare questo basta calcolare $D(x)$ ovvero tutti i discendenti del nodo $x$ e $A(x)$ ovvero l'insieme di tutti i nodi da cui si può raggiungere $x$.
@@ -724,11 +725,13 @@ La \textbf{regola del ciclo} vuole che dato un ciclo senza archi già individuat
 Applicando queste regole si puoò individuare il MST però bisogna capire come e quando applicare queste tecniche.
 
 \subsubsection{Algoritmo di Kruskal}
-Analizza gli archi in costo crescente e se i due nodi non sono già collegati tra loro con scelte già fatte allora si considera un taglio che tira fuori il nodo iniziale del collegamento dal grafo e quindi lo sceglie come ottimo, se invece sono già collegati significa che quell'arco è il peggiore del ciclo e lo scarta.
-Per implementare questo algoritmo si usano le Union find e un albero che includerà la rappresentazione del MST. %finisci per bene
+Analizza gli archi in costo crescente e utilizza un approccio greedy che si basa sulle union find: se i due nodi del collegamento appartengono gia' allo stesso insieme allora esso e' un arco da scartare (si tratta di un ciclo) mentre se i due nodi sono disgiunti allora e' uin ponte tra le due porzioni di taglio per cui e' il percorso ottimale.
+In tutto questo per determinare l'MST ogni volta che si fa una union tra due insieme anche i nodi vengono uniti nell'albero finale
 Il costo totale è $\Theta(m\ log(n))$.
 \subsubsection{Algoritmo di Prim}
-Questo algoritmo parte da un nodo e taglia i suoi cammini, procede sempre e solo con la regola del taglio e si 'espande' sempre il taglio tenendo da una parte i nodi già nell'albero e dall'altra del taglio quelli ancora da inserire. Per implementare questo algoritmo si usano le code con priorità che gestiscono il peso del cammino e l'arrivo. 
+Questo algoritmo parte da un nodo e taglia i suoi cammini, procede sempre e solo con la regola del taglio e si 'espande' sempre il taglio tenendo da una parte i nodi già nell'albero (ovvero quelli esplorati) e dall'altra del taglio quelli ancora da inserire.
+Per implementare questo algoritmo si usano le code con priorità: partendo dal primo nodo si inseriscono nella coda coppie $(nodo\ di\ arrivo, distanza)$ possibili (ovvero i collegamenti dal nodo in analisi) e iterativamente questo processo viene compiuto per ogni nodo secondo l'ordine nella lista con priorita'.
+A questo punto si capisce perche' nell'implementazione della coda con priorita' e' necessario prevedere il caso in cui un elemento gia' inserito sia reinserito ma con un peso differente: nel caso si sia trovata una strada piu' efficiente per un nodo esso dovra' cambiare di posizione nella coda. 
 La complessità di questo algoritmo è di $\Theta(m\ log(n))$.
 
 \subsection{Camminimi minimi}
@@ -753,5 +756,12 @@ Per eseguire un ciclo di rilassamento bisgna anallizzare tutti gli archi del gra
 A questo punto tocca capire quante iterazioni di rilasamenti devono essere fatti per arrivare ad una convergenza sicura, la risposta è che dopo $k$ iterazioni si è trovato il cammino minimo che attraversa al massimo $k$ archi.
 Per cui essendoci al massimo $n-1$ archi in un grafo allora alla $n-1$ ierazione avremo coperto tutti i cammini possibili e trovato dunque il minimo, il costo computazionale è $O(nm)$.
 In realtà una possibile modifica che lo rende più efficiente è terminare non sempre a $n-1$ ierazioni ma quando non si effettuano più rilassamenti, un'altra modifica è controllare se ci sono cicli negativi: basta, una volta finito il rilassamento, controllare se è possibile eseguirne un altro e in caso affermativo c'è un ciclo di costo negativo.
+
+\subsubsection{Algoritmo di Dijkstra}
+Anche questo algoritmo è necesario a risolvere il \textit{single surce shortes path} che però è più efficiente si quello di Belman-Ford ma non funziona in caso di cammini negativi.
+Il lemma su cui si basa questo algoritmo è che dato il grafo senza cammini negativi e un albero di cammini minimi dalla radice alle foglie allora il cammino tra una foglia e un nodo non appartenete all'albero è proprio quello dalla foglia al nodo.
+L'algoritmo viene implementato tramite una coda con priorita' che resituisce sempre il nodo con distanza minima disponibile e li analiza tutti i collegamenti ad essi andando am mettere nella coda con priorita' i nodi man mano che vengono scoperti.
+
+
 
 \end{document}
