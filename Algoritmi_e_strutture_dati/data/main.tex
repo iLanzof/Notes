@@ -762,6 +762,15 @@ Anche questo algoritmo è necesario a risolvere il \textit{single surce shortes 
 Il lemma su cui si basa questo algoritmo è che dato il grafo senza cammini negativi e un albero di cammini minimi dalla radice alle foglie allora il cammino tra una foglia e un nodo non appartenete all'albero è proprio quello dalla foglia al nodo.
 L'algoritmo viene implementato tramite una coda con priorita' che resituisce sempre il nodo con distanza minima disponibile e li analiza tutti i collegamenti ad essi andando am mettere nella coda con priorita' i nodi man mano che vengono scoperti.
 
-
+\subsubsection{Algoritmo di Floyd e Warshall}
+Questo algoritmo risolve il problema dell'\textit{all-pairs shortest paths} e inizialmente e' necessario capire come potre rappresentare la soluzione ovvero voler rappresentare sia le distanze che i cammini tutte le copiie di nodi.
+Per rappresentare la distanza tra coppie di punti la matrice e' la struttura dati miliore mentre per rappresentare ogni cammino il metodo migliore e' anche in questo caso sempre una matrice che per ogni coppia di partenza-destinazione contiene il primo passo del cammino migliore per cui si andra' iterativamente a cambiare cella fino ad arrivare al nodo finale.
+Gia' si puo' intuire che questo algoritmo si basa molto sulla programmazione dinamica e iterativamente calcola $D_{xy}^k$ ovvero il cammino tra $x$ e $y$ usando $k$ nodi con $k=1,...,n$ e alla fine la soluzione sara' proprio $D_{xy}^n$.
+L'inizializzazione e' semplice perche' $D_{xy}^0$ e' $0$ se $x=y$, $w(x,y)$ se sono collegati mentre $\infty$ se non sono collegati; a questo punto tocca capire come calcolare tutti gli altri problemi dando pero' per scontato che il problema $k-1$ sia stato risolto:
+la soluzione e' $D_{xy}^k = min{D_{xy}^k-1, D_{xk}^k-1 + D_{ky}^k-1}$ e a questo punto si puo' costruire l'algoritmo.
+Si inizializza una matrice 3 dimensionale che ha lati: n, n, n+1 le righe sono la partenza le colonne l'arrivo e la profondita' e' la pesantezza del cammino da $x \rightarrow y$; la prima facciata e' $D_{xy}^0$ con x,y che sono i due possibili vertici (cosi' si analizzano tutte le combinazioni). A questo punto con un ciclo diverso si itera la formula precedente per ogni $n + 1$ faccia del cubo e su ogni cella della singola faccia.
+L'ultima facciata pero' non ci offre anche un modo di trovare un cammino per cui e' necessatrio utilizzare una matrice d'appoggio che tutte le volte che si trova un cammino migliore nel cubo nella matrice d'appoggio si segna il nodo successivo a quello analizzato.
+Dunque la complessita' computazionale e' $O(n^3)$, si puo' effettuare una piccola ottimizzazione a livello memonico infatti al posto di usare un cubo si puo' usare una tabella normale che cambia ad ogni iterazione ma il valore $k$ e' ancora necessaria per la quantita' di iterazioni.
+Inoltre si possono anche individuare i cicli negativi nel grafo: a iterazione finita basta controllare se la distanza tra un vertice e se stesso e' inferiore a 0.
 
 \end{document}
