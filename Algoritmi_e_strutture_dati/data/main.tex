@@ -22,20 +22,24 @@
 \maketitle
 
 \section{Notazione asintotica}
-Non ci interessiamo direttamente al tempo esatto di calcolo dell'algoritmo ma la crescita del tempo richiesto rispetto alla crescita dell'input. Questa notazione permette di confrontare rapidamente tra loro algoritmi differenti che risolvono lo stesso problema, indipendentemente dall'hardaware.
+Non ci interessiamo direttamente al tempo esatto di calcolo dell'algoritmo ma la crescita del tempo richiesto rispetto alla crescita dell'input. 
+Questa notazione permette di confrontare rapidamente tra loro algoritmi differenti che risolvono lo stesso problema, indipendentemente dall'hardaware.
 \subsection{Definizioni e notazioni matematiche}
 \paragraph{Funzione di costo}
-Associa ad ogni input n la quantità di calcolo necessaria a terminare il calcolo, tutti i numeri sono naturali quindi un numero di bit non negatico e non frazionario ma il codomionio delle funzioni è $\mathbb{R}^+$.
+Associa ad ogni input n la quantità di calcolo necessaria a terminare il calcolo, tutti i numeri sono naturali quindi un numero di bit non negativo e non frazionario ma il codomionio delle funzioni è $\mathbb{R}^+$.
+Una volta trovata la funzione di costo ne si sstudia l'andamento asintotico per capirne il \textbf{tasso di crescita}.
 \paragraph{O-grande}
-Data una funzione $g(n)$ l'insieme delle funzioni $O-grande$ è composto da tutte quellle funzioni con un ordine di crescita inferiorie di $g(n)$; ovveri $g(n)$ è il \textbf{limite asintotico superiore}.
+Data una funzione $g(n)$ l'insieme delle funzioni $O-grande$ è composto da tutte quelle funzioni con un ordine di crescita inferiorie di $g(n)$; $g(n)$ è dunque il \textbf{limite asintotico superiore}.
 \paragraph{$\Omega$-grande}
-Data sempre $g(n)$ con $\Omega-grande$ si indica l'insieme delle funzioni con ordine di crescita maggiore o uguale di $g(x)$.
+Data sempre $g(n)$ con $\Omega-grande$ si indica l'insieme delle funzioni con ordine di crescita maggiore o uguale di $g(x)$; $g(x)$ e' dunque il \textbf{limite di crescita inferiore}.
 \paragraph{$\Theta$}
-Data sempre $g(n)$ si indica con $\Theta$ l'insieme di funzioni che hanno lo stesso ordine di crescita di $g(n)$, in altre parole $f(n) = \Theta(g(n)) \iff f(n) = O(g(n)) \land f(n) = \Omega(g(n))$
+Data sempre $g(n)$ si indica con $\Theta$ l'insieme di funzioni che hanno lo stesso ordine di crescita di $g(n)$, 
+in altre parole $f(n) = \Theta(g(n)) \iff f(n) = O(g(n)) \land f(n) = \Omega(g(n))$
 \paragraph{o-piccolo} La stessa definizione data in analisi ma più specifica essendo in questo caso applicata alle funzioni di costo.
 \paragraph{$\omega$-piccolo} Ovvero l'insieme di funzioni che dominano asintoticamente $g(n)$
 \paragraph{Complessità computazionale di un algoritmo} Un algoritmo A ha complessità computazionale $O(f (n))$ rispetto ad una certa risorsa di calcolo se la quantità di risorse necessaria per eseguire A su un qualsiasi input di dimensione n è $O(f (n))$.
-\paragraph{Complessità computazionale di un problema} Un problema P ha complessità computazionale $O(f (n))$ rispetto ad una certa risorsa di calcolo se il migliore algoritmo che risolve P ha costo computazionale $O(f (n))$ rispetto a tale risorsa di calcolo. E' molto più complicata da calcolare rispetto a quella di un algoritmo.
+\paragraph{Complessità computazionale di un problema} Un problema P ha complessità computazionale $O(f (n))$ rispetto ad una certa risorsa di calcolo se il migliore algoritmo che risolve P ha costo computazionale $O(f (n))$ rispetto a tale risorsa di calcolo. 
+E' molto più complicata da calcolare rispetto a quella di un algoritmo.
 \subsection{Scopo di queste definizioni}
 L'ordine di crescita asintotico può essere confrontato attraverso le notazioni di limite, se il limite all'inifnito tra $f(n)$ e $g(n)$ esiste si presentano 3 casistiche:
 \begin{itemize}
