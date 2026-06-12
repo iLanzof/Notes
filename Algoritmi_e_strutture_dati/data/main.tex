@@ -70,13 +70,14 @@ Solitamente quando si sviluppa un algoritmo ci si interessa principalmente al ca
 Serve in caso di algoritmi molto complicati  ed è un metodo per valutare il costo medio di una sequenza di operazioni a differenza di quella degli algoritmi che calcola su singola operazione. Ci sono due metodi principali per fare questo tipo di analisi:
 \begin{itemize}
     \item \textbf{Metodo dell'aggregazioni}: si determina un limite superiore al costo totale si una sequenza di n operazioni e dividiamo per n.
-    \item \textbf{Metodo degli accantonamenti}: si immagina che ci sia un budget per igni singola operazione e si accantona il 'resto' che viene usato nel caso il budget non basti per alcune operazioni. Per capire se la stima del budget è corretta alla fine si avrà un surplus positivo, in caso esso sia negativo allora bisogna stimare un budget più alto.
+    \item \textbf{Metodo degli accantonamenti}: si immagina che ci sia un budget per ogni singola operazione e si accantona il 'resto' che viene usato nel caso il budget non basti per alcune operazioni. Per capire se la stima del budget è corretta alla fine si avrà un surplus positivo, in caso esso sia negativo allora bisogna stimare un budget più alto.
 \end{itemize}
 
 \subsection{Equazioni di ricorrenza}
 Esprimono il valore di una funzione in termini dei valori su input più piccoli, ci sono due metodi per risolvere le equazioni di ricorrenza:
 \begin{itemize}
-    \item \textbf{Metodo dell'iterazione}: è un approccio di tipo \textit{brute force} che consiste nell'sostituire iterativamente la parte ricorsiva finchè non appare un pattern.
+    \item \textbf{Metodo dell'iterazione}: è un approccio di tipo \textit{brute force} che consiste nell'eseguire iterativamente l'algoritmo in analisi per dedurre il patter e modellizzarlo matematicamente. 
+    A questo punto con il caso base si trova il valore dell'icognita $i$ e la si sostituisce nella modellizzazione in modo tale da trovare il costo computazionale dell'algoritmo.
     \item \textbf{Master Theorem}: funziona con equazioni di ricorrenza nella forma $T(n) = aT(n/b) +cn^\beta$ e quindi non puo' essere applicato a tutte le equazioni di ricorrenza (tipo quella di Fibonacci che chiama 2 volte se stessa). Il teorema dice che calcolando $\alpha = log_b(a) = \frac{log(a)}{log(b)}$ ci possono essere 3 casi:
     \begin{enumerate}
         \item Se $\alpha > \beta$ allora $T(n) = \Theta(n^\alpha)$
@@ -87,15 +88,18 @@ Esprimono il valore di una funzione in termini dei valori su input più piccoli,
 \end{itemize}
 
 \section{Problema dell'ordinamento}
+Sono degli algoritmi che dato in input un array di numeri lo ordinano in modo crescente o decrescente.
 Ci sono due proprietà fondamentali di questi algoritmi: \begin{enumerate}
     \item \textbf{In place}: l'algoritmo riordina gli elementi nell'array in input e non ne usa di aggiuntivi
     \item \textbf{Stabile}: valori con la stessa \textbf{chiave} (valore associato all'elemento che è sempre confrontabile con altri elementi) appaiono nell'array ordinato nello stesso ordine di partenza.
 
 \end{enumerate}
 \subsection{Algoritmi incrementali}
-Sono algoritmi più semplici che costruiscono l'ordinamento di un elemento alla volta, allo stesso tempo però sono anche i meno efficienti
+Sono algoritmi più semplici che costruiscono l'ordinamento dell'array un elemento alla volta, allo stesso tempo però sono anche i meno efficienti
 \subsubsection{Selection Sort}
-Si parte da un elemento e lo sostituisce con il minimo presente mel resto dell'array e lo fa per ogni elemento (tranne l'ultimo). Per l'ordine in cui esegue gli swap non è un algoritmo stabile.
+Partendo da un elemento lo scambia con l'elemento minimo presente nel resto dell'array; questa operazione la si ripete per ogni elemento (tranne l'ultimo) andando sempre ad avere a sinistra dell'elmento in analisi un array ordinato.
+A causa dell'implementazione degli array la funzione di swap necessita di ulteriore memoria rendendo l'algoritmo $non-stabile$.
+
 \begin{figure} [H]
     \centering
     \includegraphics[width=0.5\linewidth]{Selection sort.png}
@@ -103,9 +107,11 @@ Si parte da un elemento e lo sostituisce con il minimo presente mel resto dell'a
     \label{fig:Selectionsort}
 \end{figure}
 
-In tutti i casi possibili la complessità computazionale di questo algoritmo è $\Theta(n^2)$.
+La ricerca del minimo richiede di analizzare tutti gli elementi da $i + 1$ a $n$ ($\Theta(n)$), questa operazione va pero' ripetuta $\Theta(n)$ volte 
+portando la complessità computazionale di questo algoritmo a $\Theta(n^2)$.
 \subsubsection{Isertion Sort}
-Partendo dal secondo elemento e andando verso la fine si inserisce l'elemento nella parte di array a sinistra in ordine. Per come esegue i confronti l'algoritmo è stabile
+Partendo dal secondo elemento e andando verso l'ultimo si inserisce il valore nella parte di array a sinistra nell'ordine giusto scambiandolo con tutti i valori maggiori di esso. 
+Per come vengono eseguiti i confronti l'algoritmo è stabile.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\linewidth]{Insertion sort.png}
@@ -117,23 +123,36 @@ Nel caso ottimo il for viene eseguito $n$ volte e basta quindi $\Theta(n)$; nei 
 \subsection{Divide et impera}
 Viene dalla tecnica romana e consiste nel dividere il problema in problemi più semplici (\textit{Divide}) che poi vengono risolti in maniera facile (\textit{Conquer}) e poi le soluzioni vengono fuse per risolvere il problema generale.
 \subsubsection{MergeSort}
-Consiste nello splittare sempre a metà l'array (e avanti ricorsivamente) ordinandolo a "pezzi", questo algorimto può essere implementato in modo stabile. Attenzione che però è molto complicato implementarlo in modo tale che sia anche in-place.
+Consiste nello dividere ricorsivamente a metà l'array per poi oridnare i sotto-array che diventano sempre piu' grandi ma allo stesso tempo ogni meta' e' ordinata; questo algorimto può essere implementato in modo stabile.
+E' pero' molto complicato implementare questo algoritmo in modo tale che sia anche in-place.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\linewidth]{Mergesortfirst.png}
+    \caption{Esempio di implmentazione del MergeSort}
+    \label{fig:MergSortfs}
+\end{figure}
+
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\linewidth]{Merge Sort.png}
-    \caption{Esempio di implmentazione del MergeSort}
+    \caption{Esempio di implmentazione della funzione Merge}
     \label{fig:MergSort}
 \end{figure}
 Questo algoritmo ha complessità $\Theta(nlog(n))$
 \subsubsection{QuickSort}
-Si sceglie all'interno dell'array un valore a caso (\textit{pivot} e si riordina l'array in modo tale che tutti i numeri più grandi siano nella parte destra dell'array e tutti i più piccoli sono a sinistra. A questo punto si chiama ricorsivamente l'algoritmo nei due sotto array del caso e così si riordina.
-Nel caso ottimo il costo è $\Theta(nlog(n))$, nel caso pessimo $\Theta(n^2)$ mentre nel caso medio è $O(nlog(n))$. Molto importante sapere che la complessità dipende molto da quale numero si scelga come \textit{pivot}) quindi un'implementazione che sceglie il pivot in maniera furba può renderlo molto più veloce, nel nostro caso se si sceglie un numero a caso e si usa quello in modo tale da rendere molto improbabile ricadere nel caso pessimo o sfavorevole.
+Si sceglie all'interno dell'array un valore detto \textit{pivot} e si riordina l'array in modo tale che tutti i numeri più grandi siano nella parte destra dell'array e tutti i più piccoli sono a sinistra; a livello pratico si ha un contatore che tiene traccia dell'indice dell'ultimo elemento che deve stare a sdinistra del pivot e quando se ne incontra un altro si scambia con quello successivo.
+A questo punto si chiama ricorsivamente l'algoritmo nei due sotto array escluso il pivot per riordinare l'array.
+Nel caso ottimo il costo è $\Theta(nlog(n))$, nel caso pessimo $\Theta(n^2)$ mentre nel caso medio è $O(nlog(n))$. 
+La complessità dipende molto da quale numero si scelga come \textit{pivot} perche' la piu' sono bilanciati i due sotto array piu' e' efficiente l'algoritmo, quindi un'implementazione che sceglie il pivot in maniera furba può rendere l'algoritmo estramamente rapido. 
+Nel caso studito si sceglie un numero a caso perche' rende molto improbabile ricadere nel caso pessimo o sfavorevole.
 \subsubsection{DualPivot Quicksort}
-Crea delle partizioni rispetto a due pivot e rende quindi meno probabile ricadere nel caso pessimo ma è anche abbastanza ibrido come algoritmo perchè a seconda delle situazioni può chiamare diversi algoritmi che lo rendono, in generale, molto efficiente; in media ha complessità $O(nlog(n))$.
+Crea delle partizioni rispetto a due \textit{pivot} e rende quindi meno probabile ricadere nel caso pessimo ma è anche abbastanza ibrido come algoritmo perchè a seconda delle situazioni può chiamare diversi algoritmi che lo rendono, in generale, molto efficiente; in media ha complessità $O(nlog(n))$.
 \subsubsection{Tim Sort}
-E' il più recente degli algoritmi che inizialmente fu introdotto in Python e si basa sull'idea che in un array ci siano già delle sottosequenze già ordinate e da li usa il merge o insertion per sistemare le sequenze tra di loro. Come complessità ha costo, nei casi medio e pessimo, pari a $O(nlog(n))$ mentre nel caso ottimo $O(n)$.
+E' il più recente degli algoritmi che inizialmente fu introdotto in Python e si basa sull'idea che in un array ci siano già delle sottosequenze ordinate e da li usa il merge o insertion per sistemare le sequenze tra di loro. Come complessità ha costo, nei casi medio e pessimo, pari a $O(nlog(n))$ mentre nel caso ottimo $O(n)$.
 \subsection{Algoritmi di ordinamento in tempo lineare}
-Sono algoritmi che possono essere usati in alcune condizioni speciali
+Sono algoritmi che possono essere usati in alcune condizioni speciali perche' un qualsiasi algoritmo di ordinamento basato sulla comparazione di valori non puo' avere un'efficienza migliore fi $\Theta(nlog(n))$ nel caso pessimo.
 
 \subsubsection{Counting Sort}
 Questo algoritmo può essere usato solo per ordinare interi all'interno di un intervallo $[a,b]$, esso usa un array d'appoggio di grandezza $k =b-a+1$ per contare quante volte un valore sta nell'array di partenza, riordina l'array senza doppione e riempio l'array di partenza con i numeri in modo ordinato.
@@ -152,8 +171,29 @@ Questo algoritmo può essere usato solo per ordinare interi all'interno di un in
 \end{figure}
 
 Il costo di questo algoritmo è $\Theta(n+k)$ perchè se k è molto più grande di n o viceversa non è per nulla conveniente.
+Per rendere l'algoritmo stabile basta, una volta riempito l'array d'appoggio che conta gli elementi identici, bisogna eseguire le seguenti operazioni:
+\begin {enumerate}{
+    \item Ricodificare l'array d'appoggio per ottenere l'ultima posizione del dato elemento nell'array finale. Per farlo basta usare la formula:
+    \begin{verbatim}
+        V[j] = V[j-1] + V[j];
+    \end{verbatim}
+    \item Riempire l'array finale partendo dall'ultimo elemento dell'array iniziale e metterlo nella posizione codificata dall'array d'appoggio:
+    \begin{verbatim}
+        A[n]; //given array
+        B[a, ..., b]; //support array alredy refactored
+        C[n]; //final array
+        for (int i = n-1; i >= 0: i--){
+            C[B[A[i]]] = A[i];
+            B[A[i]]--;
+        }
+    \end{verbatim}
+
+}
+\end{enumerate}
 \subsubsection{RadixSort}
-Questo algoritmo usa il counting sort come sotto-procedura, in pratica il RadicSort considera tutti gli interi con lo steso numero di cifre e li riordina rispetto alla cifra meno significativa (attraverso il RadicSort), poi rispetto alla penultima e così via fino a quella più significativa. Molto importante è tenere a mente che questo algoritmo in alcuni casi potrebbe fallire nel caso non sia stabile; inoltre bisogna riadattare il counting sort con delle chiavi e soprattutto va reso stabile. Il costo di questo algoritmo è di $\Theta(d(n+k))$ con:
+Questo algoritmo usa il counting sort come sotto-procedura infatti il RadixSort considera tutti gli interi con lo stesso numero di cifre 
+e li riordina rispetto alla cifra meno significativa (attraverso il CountingSort), poi rispetto alla penultima e così via fino a quella più significativa. 
+Il costo di questo algoritmo nel caso in cui \textbf{CountingSort} sia stabile (se no non funziona) è di $\Theta(d(n+k))$ con:
 \begin{itemize}
     \item $d$ il numero massimo di cifre di una chiave
     \item $k$ è il numero di possibili valori per una cifra
