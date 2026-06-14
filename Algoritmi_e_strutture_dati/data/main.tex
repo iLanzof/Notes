@@ -224,50 +224,59 @@ Ci sono due parti principali delle strutture dati:
 \end{itemize}
 
 \subsection{Liste}
-Struttura di dati in cui tutti gli elementi sono organizzati in modo sequenziale e deve supportare almeno le operazioni di \textbf{ricerca, inserimento e rimozione}. Esse si possono implementare sia con strutture primitive ovvero degli \textit{array} che hanno il vantaggio di avere un tempo di accesso lineare ma hanno una grandezza fissa dipendete dallo spazio di memoria contigua libera, oppure attraverso \textit{linked list} che hanno una disponibilità di memoria limitata ma hanno un tempo di accesso dipendete dalla lunghezza della lista.
+Struttura di dati in cui tutti gli elementi sono organizzati in modo sequenziale e deve supportare almeno le operazioni di \textbf{ricerca, inserimento e rimozione}. 
+Esse si possono implementare sia con strutture primitive ovvero degli \textit{array} che hanno il vantaggio di avere un tempo di accesso lineare ma hanno una grandezza fissa dipendete dallo spazio di memoria contigua libera, 
+oppure attraverso \textit{linked list} che non dipendono dalla quantità di memoria contigua libera ma hanno un tempo di accesso agli elementi dipendete dalla lunghezza della lista.
 \subsubsection{Linked List semplice}
-Ogni nodo punta al successivo quindi si può leggere in un solo verso, le operazioni hanno i seguenti costi: \begin{itemize}
-    \item \textbf{Search}\begin{itemize}
+Ogni nodo punta al successivo quindi la si puo' scorrere in un solo verso, le operazioni hanno i seguenti costi: \begin{itemize}
+    \item \textbf{Search}: e' implementata attraverso una semplice ricerca lineare per cui ha costi:
+    \begin{itemize}
         \item Ottimo: $O(1)$
         \item Medio: $\Theta (n)$
         \item Pessimo: $\Theta(n)$
     \end{itemize}
-    \item \textbf{Insert} \begin{itemize}
+    \item \textbf{Insert}: inserimento in testa alla coda:
+    \begin{itemize}
         \item Ottimo: $O(1)$
         \item Medio: $O(1)$
         \item Pessimo: $O(1)$
         \end{itemize}
-    \item \textbf{Append} \begin{itemize}
+    \item \textbf{Append}: inserimento in coda, per cui e' necessario scorrere tutta la lista:
+    \begin{itemize}
         \item Ottimo: $\Theta (n)$
         \item Medio: $\Theta (n)$
         \item Pessimo: $\Theta (n)$
         \end{itemize}
-    \item \textbf{Delete} \begin{itemize}
+    \item \textbf{Delete}: simile all'operazione di search ma elimina l'elemento: 
+    \begin{itemize}
         \item Ottimo: $O(1)$
         \item Medio: $\Theta (n)$
         \item Pessimo: $\Theta (n)$
         \end{itemize}
 
-
+\end{itemize}
 
 \subsubsection{Double Linked List}
 Sono come le Linked list semplici ma hanno un puntatore al nodo precedente quindi possono essere lette anche al "contrario". Nonostante ciò tutte le operazioni hanno lo stesso costo computazionale delle Linked List normali ma si deve usare più memoria per ogni singolo elemento.
 
 \subsubsection{Linked List circolari}
-L'ultimo elemento punta alla testa in modo che sia logicamente circolare, costi invariati rispetto alle altre tranne per l'inserimento in coda che è costante.
+Sono \textit{Double Linked List} ma con la differenza che l'ultimo e il primo elemento si puntano a vicenda in modo che sia logicamente circolare, 
+i costi invariati rispetto alle altre tranne per l'inserimento in coda che è costante.
 
 \subsubsection{Linked List con puntatori a testa e coda}
-Come una normale Linked List ma si ha anche un puntatore alla fine della lista, costi computazionali invariati tranne per l'inserimento in coda che è costante.
-\end{itemize}
+Come una normale Linked List con la differenza che si ha un puntatore anche per la coda della lista per cui 
+costi computazionali rimangono invariati tranne per l'inserimento in coda che è costante.
 
 \subsection{Pila}
-La struttura pila supporta due operzioni principali: il \textbf{push} (aggiunta di un elemento) e \textbf{pop} (eliminazione dell'elemento più recente). Questa struttura dati si può implementare sia attraverso un array che con un vettore (anche se ha sempre capienza limitata).
+La struttura pila supporta due operzioni principali: il \textbf{push} (aggiunta di un elemento) e \textbf{pop} (eliminazione dell'elemento più recente). 
+Questa struttura dati si può implementare sia attraverso un array che con una lista. Nel caso di uso di un array \textbf{statico} ci possono essere errori di underflow/overflow ma costi computazionali costanti, mentre con un \textbf{array dinamico} si puo' variare l'array ma avendo un costo medio di $O(n)$ per ognuna delle operazioni.
 
 \subsection{Code}
-Questa struttura dati supporta solo due operazioni principali: \textbf{enque} (aggiunta di un elemento in fondo) e \textbf{dequeue} (rimuove l'ultimo elemento della coda).
+Questa struttura dati supporta solo due operazioni principali: \textbf{enque} (aggiunta di un elemento in fondo) e \textbf{dequeue} (rimuove l'ultimo elemento della coda); in pratica si tartta di \textit{Linked List} con operazioni limtate.
+Questa struttura dati puo' essere efficientemente implementata (ovvero le operazioni hanno costo costante) attraverso \textit{Linked list circolari}, \textit{Linked List semplici} o \textit{array circolari}.
 
 \subsection{Alberi}
-Sono strutture dati gerarchiche, esso e' definito da:
+Sono strutture dati \textbf{gerarchiche}, a differenza delle precedenti che sono dette \textit{lineari}, definite da:
 \begin{itemize}
     \item \textbf{Nodi}
     \item \textbf{Archi} che connetono i nodi
@@ -276,10 +285,12 @@ Sono strutture dati gerarchiche, esso e' definito da:
 Un albero puo' essere \textbf{ordinato} sse i figli di ogno nodo sono ordinati (primo, secondo, ...) e \textbf{radicato} ovvero se uno dei suoi nodi puo' essere identificato come radice.
 
 \subsection{Alberi Binari}
-Sono alberi in cui ogni nodo ha al massimo 2 figli, per questo e' \textbf{ordinato}.
-La \textbf{profondita'} di un nodo e' la lunghezza dell'unico percorso che lo collega con la radice, questo numero e' identico a quello degli archi che collegano nodo-radice, un \textbf{livello} e' l'insieme di tutti i nodi su uno stesso livello. Per \textbf{altezza} di un albero si intende la massima profondita' (per convenzione si considera -1 la profondita' di un albero vuoto), mentre il \textbf{grado} di un nodo e' il numero dei suoi figli.
-Un albero binario si dice \textbf{completo} sse ogni nodo ha due figli e un albero \textbf{perfetto} e' un albero completo con le fogli alla stessa profondita'.
-\paragraph{Proprieta' fondamentale degli alberi} Ogni albero non vuoto ha esattamente n - 1 archi, con n il numero di nodi dell'albero.
+Sono alberi in cui ogni nodo ha al massimo 2 figli, dunque, potendo identificare \textit{figlio destro} e \textit{figlio sinistro}, e' per definizione \textbf{ordinato} .
+La \textbf{profondita'} di un nodo e' la lunghezza dell'unico percorso che lo collega con la radice, 
+questo numero e' identico a quello degli archi che collegano nodo-radice mentre un \textbf{livello} e' l'insieme di tutti i nodi su uno stesso livello. 
+Per \textbf{altezza} di un albero si intende la massima profondita' (per convenzione si considera -1 la profondita' di un albero vuoto), mentre il \textbf{grado} di un nodo e' il numero dei suoi figli.
+Un albero binario si dice \textbf{completo} sse ogni nodo ha due figli e un albero \textbf{perfetto} e' un albero completo con tutte le foglie alla stessa profondita'.
+\paragraph{Proprieta' fondamentale degli alberi} Ogni albero non vuoto ha esattamente $n - 1$ archi, con n il numero di nodi dell'albero.
 \subsection{Algoritmi di visita}
 Sono algoritmi per visitare tutti i nodi di una struttura dati albero.
 \subsubsection{Visita in profondita'}
@@ -296,27 +307,36 @@ La ricerca viene eseguita livello per livello
 \end{itemize}
 
 \subsection{Come contare tutti i nodi di un albero?}
-Inizialmente si potrebbe pensare di implementare un algoritmo con la stessa idea di fondo della visita che al posto di stampare valori conta i nodi ma questo richiederebbe una complessita' pari a $\Theta(n)$, esiste pero' un modo di rendere la complessita' di questa operazione costante aggiungendo un campo ad ogni nodo che permette di memorizzare il numero di nodi sottostanti ad esso. Questo pero' rende piu'dispendiosa una qualsiasi modifica dell'albero.
+Inizialmente si potrebbe pensare di implementare un algoritmo con la stessa idea di fondo della visita che al posto di stampare valori conta i nodi ma questo richiederebbe una complessita' pari a $\Theta(n)$, esiste dunque un modo di rendere la complessita' di questa operazione costante aggiungendo un campo ad ogni nodo che permette di memorizzare il numero di nodi sottostanti ad esso. Questo pero' rende piu'dispendiosa una qualsiasi modifica dell'albero.
+
+
 \subsection{Alberi binari di ricerca (BST)}
-Sono alberi radicati con vincoli sull'organizzazione delle chiavi ovvero che tutte le chiavi a sinistra di un nodo sono minori di esso mentre tutte quelle a destra sono maggiori; con questa organizzazione è possibile fare una ricerca binaria su questa struttura dati e le visita pre-order permette di stampare in ordine tutti gli elementi dell'albero. Le operazioni fondamentali su questa struttura dati sono:
+Sono alberi radicati con vincoli sull'organizzazione delle chiavi: tutte le chiavi a sinistra di un nodo sono minori di esso mentre tutte quelle a destra sono maggiori;
+con questa organizzazione è possibile fare una ricerca binaria su questa struttura dati e le visita \textbf{in-order} permette di stampare in ordine tutti gli elementi dell'albero. 
+Le operazioni fondamentali su questa struttura dati sono:
 \begin{itemize}
-    \item \textbf{Search}: ritorna il nodo con chiave $k$, essa sfrutta la topografia della struttura infatti confrontando il valore cercato con la chiave del dingolo nodo si sposta a destra nel caso $k>node.key$, al contrario si sposterà a sinistra. Questa operazione ha un costo nel caso pessimo pari a tutti i nodi (caso alberoi degenere).
-    \item \textbf{Insert}: inserisce un nodo, anche questa operazione sfrutta la topologia della struttura dati per essere piu' efficiente possibile ma nel caso pessimo, ovvero l'albero degenre, ha una complessita' $\Theta(n)$, mediamente dipende pero' dall'altezza dell'albero.
+    \item \textbf{Search}: ritorna il nodo con chiave $k$, essa sfrutta la topografia della struttura infatti confrontando il valore cercato con la chiave del singolo nodo si sposta a destra nel caso $k>node.key$, al contrario si sposterà a sinistra. Questa operazione ha un costo nel caso pessimo pari a tutti i nodi (caso alberoi degenere).
+    \item \textbf{Insert}: inserisce un nodo, anche questa operazione sfrutta la topologia della struttura dati ed e' simile alla search, nel caso pessimo, ovvero l'albero degenre, ha una complessita' $\Theta(n)$, mediamente il costo dipende pero' dall'altezza dell'albero.
     \item \textbf{Delete}: rimuove un elemento dalla struttura dati, questa operazione necessita pero' di alcune operazioni di supporto: \begin{itemize}
-        \item \textbf{Max}: ritorna il nodo massimo nell'albero ovvero percorre il percorso tutto a destra dell'albero.
-        \item \textbf{Min}: ritorna il nodo minimo nell'albero ovvero percorre il percorso tutto a sinistra dell'albero.
-        \item \textbf{Predecessor}: ritorna il nodo precedente a T in una visista in-order. Per quanto riguarda l'implementazione ci sono due casi distinti: \begin{enumerate}
+        \item \textbf{Max}: ritorna il nodo massimo nell'albero ovvero lo percorre scegliendo sempre il figlio destro.
+        \item \textbf{Min}: ritorna il nodo minimo nell'albero ovvero lo percorre scegliendo sempre il figlio sinistro.
+        \item \textbf{Predecessor}: ritorna il nodo precedente a T in una visista in-order. Per quanto riguarda l'implementazione ci sono due casi distinti: 
+        \begin{itemize}
             \item \textbf{Caso 1}: il nodo di cui si vuole trovare il precdecessore ha un figlio sinistro: il nodo predecessore e' il nodo con chiave massima nel sotto-albero sinistro.
+                                   Per trovarlo e' necessario usare la funzione max nel sotto-albero sinitro: $pred\ =\ max(T.left)$ 
             \item \textbf{Caso 2}: il nodo di cui si vuole trovare il predecessore non ha un figlio sinistro; il nodo predecessore e' il primo antenato per cui il nodo di cui si sta cercando il predecessore e' nell'sotto-albero destro.
-        \end{enumerate}
+                                   Per trovarlo e' sufficiente ripercorrere l'albero verso l'alto (trmite il campo $parent$) fino a quando $N\_pred = T.left$
+        \end{itemize}
         \item \textbf{Successor}: simmetrico a predecessor.
     \end{itemize}
-Anche nel caso della rimozione ci sono tre casi da considerare nell'implementazione:\begin{enumerate}
+Anche nel caso della rimozione ci sono tre casi da considerare nell'implementazione:
+\begin{itemize}
             \item \textbf{Caso 1}: Il nodo da rimuovere e' una foglia, questo caso e' semplice perche' la regolarita' dell'albero non viene intaccata.
-            \item \textbf{Caso 2}: Il nodo da rimuovere ha un solo figlio; in questo caso il figlio del nodo da rimuovere diventa il figlio del geniotore del nodo da rimuovere.
-            \item \textbf{Caso 3}: Il nodo da rimuovere ha 2 figli; in questo caso si copiano i dati del predecessore del nodo da rimuovere nel nodo stesso e si rimuove il nodo di cui sono stati copiati i dati secondo i tre casi.
-        \end{enumerate}
+            \item \textbf{Caso 2}: Il nodo da rimuovere ha un solo figlio; in questo caso il figlio del nodo da rimuovere diventa il figlio del genitore del nodo da rimuovere.
+            \item \textbf{Caso 3}: Il nodo da rimuovere ha 2 figli; in questo caso si copiano i dati del predecessore del nodo da rimuovere nel nodo stesso e si rimuove il nodo di cui sono stati copiati i dati.
         \end{itemize}
+    \end{itemize}
+A livello implementativo si usano 2 funzioni: la funzione \textbf{delete} che scambia i nodi nel caso 2 e 3 mentre la funzione \textbf{disconnect} che disconnette il nodo cfon controlli per casi particolari.
 \subsection{Riassunto}
 \begin{figure}[H]
     \centering

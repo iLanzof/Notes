@@ -236,43 +236,43 @@ INPUT ./SummarySort.png
 INPUT ./SummarySort.png
 INPUT ./SummarySort.png
 INPUT ./SummarySort.png
-INPUT ./Riassunto BTS.png
-INPUT ./Riassunto BTS.png
-INPUT ./Riassunto BTS.png
-INPUT ./Riassunto BTS.png
-INPUT ./Riassunto BTS.png
-INPUT ./Rotations.png
-INPUT ./Rotations.png
-INPUT ./Rotations.png
-INPUT ./Rotations.png
-INPUT ./Rotations.png
-INPUT ./Rotations_case.png
-INPUT ./Rotations_case.png
-INPUT ./Rotations_case.png
-INPUT ./Rotations_case.png
-INPUT ./Rotations_case.png
-INPUT ./SummaryAVL.png
-INPUT ./SummaryAVL.png
-INPUT ./SummaryAVL.png
-INPUT ./SummaryAVL.png
-INPUT ./SummaryAVL.png
-INPUT ./Summaryhash.png
-INPUT ./Summaryhash.png
-INPUT ./Summaryhash.png
-INPUT ./Summaryhash.png
-INPUT ./Summaryhash.png
-INPUT ./Summary_d_Heap.png
-INPUT ./Summary_d_Heap.png
-INPUT ./Summary_d_Heap.png
-INPUT ./Summary_d_Heap.png
-INPUT ./Summary_d_Heap.png
-INPUT ./Summary_Union_Find.png
-INPUT ./Summary_Union_Find.png
-INPUT ./Summary_Union_Find.png
-INPUT ./Summary_Union_Find.png
-INPUT ./Summary_Union_Find.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0700.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0500.tfm
+INPUT ./Riassunto BTS.png
+INPUT ./Riassunto BTS.png
+INPUT ./Riassunto BTS.png
+INPUT ./Riassunto BTS.png
+INPUT ./Riassunto BTS.png
+INPUT ./Rotations.png
+INPUT ./Rotations.png
+INPUT ./Rotations.png
+INPUT ./Rotations.png
+INPUT ./Rotations.png
+INPUT ./Rotations_case.png
+INPUT ./Rotations_case.png
+INPUT ./Rotations_case.png
+INPUT ./Rotations_case.png
+INPUT ./Rotations_case.png
+INPUT ./SummaryAVL.png
+INPUT ./SummaryAVL.png
+INPUT ./SummaryAVL.png
+INPUT ./SummaryAVL.png
+INPUT ./SummaryAVL.png
+INPUT ./Summaryhash.png
+INPUT ./Summaryhash.png
+INPUT ./Summaryhash.png
+INPUT ./Summaryhash.png
+INPUT ./Summaryhash.png
+INPUT ./Summary_d_Heap.png
+INPUT ./Summary_d_Heap.png
+INPUT ./Summary_d_Heap.png
+INPUT ./Summary_d_Heap.png
+INPUT ./Summary_d_Heap.png
+INPUT ./Summary_Union_Find.png
+INPUT ./Summary_Union_Find.png
+INPUT ./Summary_Union_Find.png
+INPUT ./Summary_Union_Find.png
+INPUT ./Summary_Union_Find.png
 INPUT Appunti.aux
 INPUT ./Appunti.out
 INPUT ./Appunti.out
