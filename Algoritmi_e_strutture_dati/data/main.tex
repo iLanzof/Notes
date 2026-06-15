@@ -315,7 +315,7 @@ Sono alberi radicati con vincoli sull'organizzazione delle chiavi: tutte le chia
 con questa organizzazione è possibile fare una ricerca binaria su questa struttura dati e le visita \textbf{in-order} permette di stampare in ordine tutti gli elementi dell'albero. 
 Le operazioni fondamentali su questa struttura dati sono:
 \begin{itemize}
-    \item \textbf{Search}: ritorna il nodo con chiave $k$, essa sfrutta la topografia della struttura infatti confrontando il valore cercato con la chiave del singolo nodo si sposta a destra nel caso $k>node.key$, al contrario si sposterà a sinistra. Questa operazione ha un costo nel caso pessimo pari a tutti i nodi (caso alberoi degenere).
+    \item \textbf{Search}: ritorna il nodo con chiave $k$, essa sfrutta la topografia della struttura infatti confrontando il valore cercato con la chiave del singolo nodo si sposta a destra nel caso $k>node.key$, al contrario si sposterà a sinistra. Questa operazione ha un costo nel caso pessimo pari a tutti i nodi (caso albero degenere).
     \item \textbf{Insert}: inserisce un nodo, anche questa operazione sfrutta la topologia della struttura dati ed e' simile alla search, nel caso pessimo, ovvero l'albero degenre, ha una complessita' $\Theta(n)$, mediamente il costo dipende pero' dall'altezza dell'albero.
     \item \textbf{Delete}: rimuove un elemento dalla struttura dati, questa operazione necessita pero' di alcune operazioni di supporto: \begin{itemize}
         \item \textbf{Max}: ritorna il nodo massimo nell'albero ovvero lo percorre scegliendo sempre il figlio destro.
@@ -404,12 +404,19 @@ A questo punto possiamo definire un \textbf{albero bilanciato} in altezza come u
 \end{figure}
 
 \section{Tabelle HASH}
-L'idea dietro a questo tipo di struttra e' quella di riuscire a generalizzare l'indicizzazione in un array normalissimo in modo tale da avere un computazione che mediamente e' molto efficiente. Ci sono due principali implementazioni che si usano in casi diversi: le \textbf{tabelle ad indirizzamento diretto} che si usano quando il numero di chiavi effettivamente utilizzate e' simile a quello di tutte le chiavi possibili e le tabelle HASH che vengono usate quando il numero di chiavi utilizzate e' molto minore di quelle possibili.
+L'idea dietro a questa struttra e' quella di replicare l'indicizzazione di un array in una struttura dati dinamica.
+In questo modo, sotto le opportune ipotesi, tutte le operazioni di base hanno un costo medio che è costante mentre solo il pessimo ha costo lineare.
+Ci sono due principali implementazioni che si usano in casi diversi: le \textbf{tabelle ad indirizzamento diretto} che si usano quando il numero di chiavi effettivamente utilizzate è circa lo stesso numero di tutte le chiavi possibili 
+e le \textbf{tabelle HASH} che vengono usate quando il numero di chiavi utilizzate e' molto minore rispetto a quello di chiavi possibili.
 
 \subsection{Tabelle ad indirizzamento diretto}
-Sono implementate tramite array dalla dimensione statica, ogni elemento contiene sia una chiave per essere riconosciuta che un campo per il vlore in se. In realtà la chiave è la posizione dell'elemento all'interno dell'array (unica struttura dati a indirizzamento diretto), le operazioni basilari come \textit{search, insert e delete} hanno un costo computazionale pari a $O(1)$ ma il vero problema e' la memoria che viene utilizzata: se le chiavi realmente utilizzate sono molte meno di quelle disponibili alllore c'e' un alto spreco di memoria.
+Sono implementate tramite array dalla dimensione statica, ogni elemento contiene sia una chiave per essere riconosciuta che un campo per il vlore in se. 
+In realtà la chiave è la posizione dell'elemento all'interno dell'array (unica struttura dati a indirizzamento diretto), le operazioni basilari come \textit{search, insert e delete} hanno un costo computazionale pari a $O(1)$ ma il vero problema e' la memoria che viene utilizzata: 
+se le chiavi realmente utilizzate sono molte meno di quelle disponibili allore c'e' un alto spreco di memoria; stesso discorso nel caso di un insieme universo con molte chiavi che porta ad un'enorme necessità di memoria.
 \subsection{Tabelle Hash}
-Con le tabelle HASH si cerca una soluzione al problema della memoria attraverso una \textbf{funzione di HASH} $h:U \to [0, ..., m-1]$ che partendo dal dato da memorizzare sono in grado di generare la chiave intera che corrisponde all'indirizzo all'interno dell'array. A questo punto sopraggiunge il problema delle \textbf{collisioni} ovvero come gestire il caso in cui due dati differente siano mappati nello stesso indirizzo.
+Con le tabelle HASH si cerca una soluzione al problema della memoria attraverso una \textbf{funzione di HASH} $h:U \to [0, ..., m-1]$ 
+che partendo dalla chiave del dato da memorizzare è in grado di mappare un indirizzo dell'array. 
+Il problema di questa implementazione è l'inevitabile presenza delle \textbf{collisioni} ovvero due chiavi differenti sono mappate nello stesso indirizzo dell'array.
 
 \subsection{Funzione Hash}
 Una buona funzione di hash soddisfa la proprieta' di \textbf{uniformita' semplice} ovvero c'e' un equiprobabilita' di generare ogni chiave perche' nel caso ci siano indici che vengono scelti piu' frequentemente come conseguenza si avranno sicuramente maggiori coillisioni. Essendo pero' questo irrealistico ci sono 3 assunzioni che vengono fatte riguardo ad una funzione hash: \begin{enumerate}
@@ -418,7 +425,8 @@ Una buona funzione di hash soddisfa la proprieta' di \textbf{uniformita' semplic
     \item Tutte le chiavi sono numeri interi e non negativi.
 \end{enumerate}
 \subsubsection{Metodo della divisione}
-Si restituisce il modulo tra il valore e la lunghezza della tabella, nel caso siano stringhe si convertono i singoli caratteri in valori numerici tramite la rappresentazione binaria. Questo metodo è molto efficiente ma dipende in modo molto stretto dalla scelta della lunghezza, infatti se la dimensione dell'array fosse 10 del valore si utilizzerebbe solo l'ultima cifra, mentre se la lunghezza fosse $2^p$ allora di un valore da mappare si utilizzerebbero i $p$ bit meno significativi nella rappresentazione binaria.
+Si restituisce il modulo tra il valore e la lunghezza della tabella, nel caso siano stringhe si convertono i singoli caratteri in valori numerici tramite la rappresentazione binaria. 
+Questo metodo è molto efficiente ma dipende in modo molto stretto dalla scelta della lunghezza, infatti se la dimensione dell'array fosse 10 del valore si utilizzerebbe solo l'ultima cifra, mentre se la lunghezza fosse $2^p$ allora di un valore da mappare solo\ i $p$ bit meno significativi nella rappresentazione binaria.
 
 \subsubsection{Metodo delle moltiplicazioni}
 Usano la formula $h(k) = \lfloor m(kC-\lfloor kC\rfloor)\rfloor$ con \begin{itemize}
@@ -440,24 +448,30 @@ Si prende il valore in binario e la funzione di hash e' la seguente:
 Alla fine si calcola il risultate e si fa il modulo con la grandezza dell'array. Questo medoto ha il vantaggio di dipendere da tutti i caratteri dell chiave ma e' molto costoso infatti non e' piu' costante ma $\Theta(log^2(k))$
 
 \subsubsection{Regola Di Horner}
-valupa il polinomio del metodo precedente in un punto e lo riscrive come 
+valuta il polinomio del metodo precedente in un punto e lo riscrive come 
 \begin{center}
     $p(x) = a_0+x(a_1+x(...x(a_{n-1}+a_nx)))$
 \end{center}
 
-Questo medoto permette di abbasare il costo a $\Theta(log(k))$ ma in generale essendo il numero di cifre di una 
-chiave relativamente piccolo si puo' assumere come costante il tempo della codifica.
+Questo medoto permette di abbasare il costo del calcolo della funzione di HASH a $\Theta(log(k))$ ma in generale essendo il numero di cifre di una 
+chiave relativamente piccolo si puo' assumere come costante.
 
 \subsection{Problema delle collisioni}
 Non esiste un modo per eliminare del tutto le collisioni che sono soprendentemente molto probabili per cui e' necessario trovare un modo efficiente di gestire queste eventualita'. Ci sono due possibili tecniche per gestire questa problematica: il \textbf{concatenamento} e l'\textbf{indirizzamento aperto}.
 
 \subsubsection{Concatenamento}
-Lo slot $T(i)$ contiene il puntatore ad una lista concatenata che contiene tutti gli elementi con hash $i$, quando viene inserito un elemento esso e' inserito in testa alla lista mantenedo cosi' un costo costante. Nelle operazioni di ricerca o eliminazione il costo computazionale medio dipende dal numero di accessi che a sua volta dipende dalla distribuzione delle chiavi all'interno dell'array, per viene indicato come \textbf{fattore di carico} il rapporto tra il numero di elementi e la dimensione dell'array: $\alpha=n/m$. Dunque sotto l'assunzione di hashing uniforma semplice ogni slot ha $\alpha$ elementi e un ricerca senza successo o con successo ha costo medio $\Theta(1+\alpha)$ per cui il fattore di carico ha un ruolo determinante per questa strategia.
+Lo slot $T(i)$ contiene il puntatore ad una lista concatenata che contiene tutti gli elementi con hash $i$, quando viene inserito un elemento esso e' inserito in testa alla lista mantenedo cosi' un costo costante.
+Nelle operazioni di ricerca o eliminazione il costo computazionale medio dipende dal numero di accessi, esso a sua volta dipende dalla distribuzione degli elementi all'interno dell'array.
+Dunque viene chiamato \textbf{fattore di carico} il rapporto tra il numero di elementi e la dimensione dell'array: $\alpha=n/m$. 
+Sotto l'assunzione di \textit{hashing uniforma semplice} ogni slot ha $\alpha$ elementi e una ricerca senza successo o con successo ha costo medio $\Theta(1+\alpha)$ per cui il fattore di carico ha un ruolo determinante per questa strategia.
 
-\subsubsection{Indirizzamento apero}
-L'idea alla base e' che se un solt e' gia' occupato se ne trova un altro che sia libero, la \textbf{sequenza di ispezione} che come parametro ha anche il \textbf{passo di ispezione} deve fornire una permutazione degli indici della tabella; un'altra criticita' e' la gestione della delete: eliminato un elemento non si puo' settare lo slot a null poiche' un eventuale ricerca, che passa per quella casella, si interromperebbe pensando che l'elemento non sia presente anche nel caso in cui la sequenza di ispezione dell'elemento cercato sia passata per l'elemento rimosso e sia andata avanti. Nel caso pessimo le tre operazioni fondamentali hanno costo $\Theta(m)$ con $m$ dimensione della tabella, nel caso medio invece la complessita' dipende molto dalla strategia di ispezione:
+\subsubsection{Indirizzamento aperto}
+L'idea alla base e' che se uno slot e' gia' occupato se ne trova un altro che sia libero, la \textbf{sequenza di ispezione} viene stabilita da una \textit{funzione di hashing} che come parametro ha anche il \textbf{passo di ispezione} e dunque fornisce una permutazione degli indici della tabella; 
+un'altra criticita' e' la gestione della delete: eliminato un elemento non si puo' settare lo slot a NULL poiche' un'eventuale ricerca, che passa per quella casella, si interromperebbe pensando che l'elemento non sia presente anche nel caso in cui la sequenza di ispezione dell'elemento cercato sia passata per l'elemento rimosso e sia andata avanti, per cui si utilizza un valore DELETED. 
+Nel caso pessimo le tre operazioni fondamentali hanno costo $\Theta(m)$ con $m$ dimensione della tabella, nel caso medio invece la complessita' dipende molto dalla strategia di ispezione:
 \begin{itemize}
-    \item \textbf{Ispezione lineare}: $h(k,i)=(h'(k)+i)\ mod \ \ m$, ovvero data $h'$ una normale funzione di hashing si va, ad ogni collisone e al crescere di $i$, a ispezionare sempre slot successivi. Questo rende il percorso utile con $m$ percorsi possibili ma porta al \textbf{clusting primario} ovvero delle lunghe sotto-sequenze occupate tendono a diventare sempre piu' lunghe, uno slot vuoit preceduto da $i$ solt pieni ha una probabilita' di rimepirsi di $(i +1)/m$ quinid i tempi di calcolo crescono sempre di piu'.
+    \item \textbf{Ispezione lineare}: $h(k,i)=(h'(k)+i)\ mod \ \ m$, ovvero data $h'$ una normale funzione di hashing si va, per ogni collisone che fa crescere $i$, a ispezionare sempre lo slot successivo.
+    Questo porta al \textbf{clusting primario} ovvero delle lunghe sotto-sequenze occupate tendono a diventare sempre piu' lunghe, dunque slot vuoto preceduto da $i$ solt pieni ha una probabilita' di rimepirsi di $(i +1)/m$ quinid i tempi di calcolo crescono sempre di piu'.
     \item \textbf{Ispezione quadratica}: $h(k,i)=(h'(k)+c_1i+c_2i^2)\ mod \ \ m, \ \ \ \ c_1  \not=c_2$, questa ispezione pero' porta al \textbf{clustering secondario}: se due chiavi hanno $h'(k)$ uguale essi faranno le stesse visite
     \item \textbf{doppio hashing}: $h(k,i)=(h_2(k)+ih_2(k))\ mod \ \ m$, in questo caso si usano due funzioni di hashing in modo da evitare clutering primario e secondario ma $h_2(k) \not=0$ perche' se no non cambia mai lo slot che si visita e ovviamente deve permettere di iterare su tutta la tabella.
     
@@ -488,32 +502,36 @@ E' un albero binario quasi perfetto in cui ogni nodo padre contiene un valore ch
 E' il modo piu' efficace di implementare la struttura logica ad albero: a livello logico si sta usando un albero ma in realta' a livello pratico si usa un array. Per riempire l'array bisogna fare una visita in ampiezza in modo tale da riempire l'array in ordine rispetto ai livelli dell'albero dunque il primo elemento dell'array contiene il valore piu' alto inoltre valgono le relazioni che il figlio sinistro di un elemento $i$ si trova in posizione $2i$ mentre il figlio destro si trova in posizione $2i+1$; se invece si volesse trovare il padre del nodo la sua posizone e' $\lfloor i/2\rfloor$. A questo punto si possono descrivere le varie operazioni possibili su questa struttura:
 \begin{itemize}
     \item \textbf{findMax}: basta guardare il primo elemento nell'array, il costo e' $O(1)$
-    \item \textbf{fixHeap}: sistema l'albero quando il massimo viene eliminato supponendo pero' che i due sotto-alberi siano quai perfetti. Inizialmente la radice diventa il figlio con valore maggiore, a questo punto il "buco" passa al livello piu' basso e si tratta di risolvere lo stesso problema in maniera ricorsiva fino a quando il "buco" viene sistemato. Questa operaqzione e' stata descritta come post-delete ma si puo' utilizzare anche nel caso di heapify. Il costo computazionale al peggio e' un confronto per ogni livello per cui $\Theta(log(n))$ per cui il caso medio e' $O(log(n))$.
-    \item \textbf{heapify}: partendo da un array senza alcun ordine si crea un array heap, viene implemntato con una funzione ricorsiva che prima si chiama sui due sotto-alberi (grazie alle formule viste prima) e poi chiama fixHeap per sistemare l'alberone. Per stimare il costo computazionale si usa l'equazione di ricorrenza della funzione ricorsiva: $T(n) =2T(n/2)+log(n)$. Col master theorem non si reisce a stimare bene quindi si calcola un limite superiore tramite la disequazione $2T(n/2)+log(n) < 2T(n/2)+n^{\frac{1}{2}}$ per cui col master theorem posso stimare una complessita' di $O(n)$
-    \item \textbf{deleteMax}: rimuove l'elmento massimo mantenendo le proprieta' dell'array heap, per implementarlo basta rimuovere il primo elemento e mettere in prima posizione l'ultimo elemento poi far partire il fixHeap. 
+    \item \textbf{fixHeap}: ripristina le proprieta' di ordinamento di un max-heap rispetto ad un nodo radice. A livello implementativo quando un nodo viene sostiuito, supponendo che i suoi sotto-alberi siano a loro volta dei max heap,
+    basta scambiarlo ricorsivamente con il figlio che ha il valore maggiore quando il padre non e' il massimo valore tra i figli. Nel caso pessimo il numero di scambi da effettuare e' la profondita' dell'albero ovvero $O(log(n))$.
+    \item \textbf{heapify}: questa funzione si basa completaente sulla ricorsione infatti chiamato n l'indice dell'elemento che e' la radice viene chiamata ricorsivamente la funzione heapify sul sotto-albero destro e sinistro e infine chiama $fixHeap$ per sistemare l'array.
+    L'equazione di ricorrenza sarebbe $T(n)=2T(n/2)+ log(n)$ ma non potendo usare il master theorem si cacola il costo con una funzione sicuramente peggiore, scambiando $log(n)$ con $\sqrt{n}$, che da come risultato un costo di $O(n)$. 
+    \item \textbf{deleteMax}: rimuove l'elmento massimo e lo sostituisce con l'ultimo elemento dell'array e chiama la funzione heapfy per sistemare le proprieta' dell'albero. Il costo di questa operazione e' identico a quello dell'fixHeap ovvero $O(log(n))$.
 \end{itemize}
 
 
 \subsection{Heap Sort}
-L'idea e' quella di costruire, a partire da un generico array, un max-heap tramite heapify poi si estrae l'elemento piu' grande come descritto prima e si va avanti cosi' fino a quando non sara' vuoto e avendo cosi' ordinato l'array, il costo computazionale a questo punto risulta essere pseudolineare: $O(nlog(n))$.
+L'idea e' quella di costruire, a partire da un generico array, un max-heap tramite heapify poi si estrae l'elemento piu' grande come descritto prima e si va avanti cosi' fino a quando non sara' vuoto; alla fine si otterra' l'array ordinato. Il costo computazionale a questo punto risulta essere pseudolineare: $O(nlog(n))$.
 
 
 \section{Coda con priorità}
-E' una struttura dati che contiene delle coppie chiave-elemento che devono però essere confrontabili. Le operazioni possibili con questa struttura dati sono:
+E' una struttura dati che contiene delle coppie chiave-elemento, l'ordine all'interno della coda e' stabilito dalla relazione tra le varie chiavi.
+Le operazioni possibili con questa struttura dati sono:
 \begin{itemize}
     \item \textbf{findMin}: restituisce l'elemento associato alla chiave minima che è l'elemento nella radice. Costo costante.
     \item \textbf{insert}: inserisce una coppia nella struttura dati. Viene aggiunto l'elemento nel primo spazio disponibile e poi tramite la funzione ausiliaria muoviAlto si sistema l'elemento. Costo dell'operazione $O(log_d(n))$
     \item \textbf{delete}: rimuove un elmento dalla coda indipendentemente dalla sua chiave, supponendo un accesso diretto a tale elemento. Dunque si sostituisce il nodo da rimuovere che l'ultima foglia e poi si usano le due funzioni ausiliarie per sistemarlo propriamente (solo una delle due entrerà in azione). Costo complessivo $O(d\ log_d(n))$.
     \item \textbf{deleteMin}: rimuove l'elemento associato alla chiave minore.
-    \item \textbf{increaseKey}: rimpiazza la chiave di un elmento con una chiave maggiore, per implemntarlo si cambia la chiave e poi si usa muoviBasso. Costo di $O(d \ log_d(n))$
+    \item \textbf{increaseKey}: rimpiazza la chiave di un elmento con una chiave maggiore, per implementarlo si cambia la chiave e poi si usa muoviBasso. Costo di $O(d \ log_d(n))$
     \item \textbf{decreaseKey}: opposto di increaseKey. In questo caso si decrementa la chiave e poi si esegue un muoviBasso per sistemare la struttura. Costo di $O(log_d(n))$
 \end{itemize}
 
-Per implementare le code con priorità ci sono due principali soluzioni ma quella che studieremo è il \textbf{D-Heap}.
+Per implementare le code con priorità ci sono due principali soluzioni ma quella che studieremo è il \textbf{D-Heap}, le implementazioni descritte sopra fanno gia' riferimento ai D-Heap.
 
 \subsection{D-Heap}
-Estendono il concetto di albero di max/min-heap e si basano su di essi per la loro implementazione, in questo caso però è al contrario rispetto a quello visto in precedenza perchè si usa un min-heap per cui ogni padre è il minore dei figli, in questo modo nella radice dell'albero sarà presente la chiave minima.
-Anche in questo caso si ha una corrispondenza tra l'altezza dell'albero d-heap e il numero $n$ di nodi ovvero $O(log_d(n))$; come negli alberi heap a livello di memoria anche per gli alberi d-heap si usa un array, essendo non binari gli alberi ma $d-ari$ le relazioni tra padre e figli sono:
+Estendono il concetto di albero di max/min-heap binario infatti sono alberi i cui nodi al massimo hanno d figlio; nonostante ciò si basano su di essi per la loro implementazione.
+In questa implementazione si usa un min-heap per cui ogni padre è il minore dei figli, in questo modo nella radice dell'albero sarà presente la chiave minima.
+Anche in questo caso si ha una corrispondenza tra l'altezza dell'albero d-heap e il numero $n$ di nodi ovvero $O(log_d(n))$; come negli alberi heap binari a livello di memoria anche per gli alberi d-heap si usa un array, essendo non binari gli alberi ma $d-ari$ le relazioni tra padre e figli sono:
 \begin{itemize}
     \item \textbf{Ultimo figlio}: $(i*d)+1$
     \item \textbf{Primo figlio}: $((i-1)*d)+2$

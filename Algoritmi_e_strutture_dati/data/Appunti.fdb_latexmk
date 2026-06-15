@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1781519483.76098 "main.tex" "/home/francesco/Desktop/University/Notes/Algoritmi_e_strutture_dati/Appunti.pdf" "Appunti" 1781519485.06048 0
+["pdflatex"] 1781541626.31781 "main.tex" "/home/francesco/Desktop/University/Notes/Algoritmi_e_strutture_dati/Appunti.pdf" "Appunti" 1781541627.62797 0
   "/etc/texmf/web2c/texmf.cnf" 1779095512.72313 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm" 1136768653 3584 2d666ecf6d466d8b007246bc2f94d9da ""
@@ -116,8 +116,8 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1769369718 41603 27f93b3067076450172040dcd57ca8b3 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1779095931 5541477 3118940318599480888143717dd32d64 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1779096012 3638852 21021323e96c46248c82aa4aaf098c48 ""
-  "Appunti.aux" 1781519484.98958 18623 5f08401ee230135774531a84d1f1f2c0 "pdflatex"
-  "Appunti.out" 1781519484.99058 18123 626a6512f96247efb0bffb6bc6bcb6ae "pdflatex"
+  "Appunti.aux" 1781541627.56928 18624 1a89fb9dce3e5e3edd70a1ff3d1c7593 "pdflatex"
+  "Appunti.out" 1781541627.57028 18128 3ee025238b596eacaf849ca4fc36b994 "pdflatex"
   "CountingSort.png" 1774465650 81497 09fbedd0833d7560d7dc3c6820492762 ""
   "CountingaSortexample.png" 1774465650 59746 d9ed7356835cebfc3a63e9ad1bce6a57 ""
   "Insertion sort.png" 1774465650 37513 8861e69087f689a7f5cfa22b46018993 ""
@@ -133,7 +133,7 @@
   "Summary_Union_Find.png" 1775669364.26362 69994 43fa9eec693df27232be9662f2e24b38 ""
   "Summary_d_Heap.png" 1774954645.09515 78602 392bb466f83d2ddc24f952effdfc7fe5 ""
   "Summaryhash.png" 1774465650 165624 b208ab5c429afec8b965bac9f7bf9927 ""
-  "main.tex" 1781518961.22022 81151 8b852de051398899e8757451ce67aa6e ""
+  "main.tex" 1781541623.62026 81375 eae29bfbac99b108beb37080edb315d6 ""
   (generated)
   "/home/francesco/Desktop/University/Notes/Algoritmi_e_strutture_dati/Appunti.pdf"
   "Appunti.aux"
