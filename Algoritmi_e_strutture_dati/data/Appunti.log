@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.5.18)  14 JUN 2026 18:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.5.18)  15 JUN 2026 12:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -529,37 +529,37 @@ Package pdftex.def Info: Riassunto BTS.png  used on input line 343.
 <rotations.png, id=502, 862.22125pt x 528.97626pt>
 File: rotations.png Graphic file (type png)
 <use rotations.png>
-Package pdftex.def Info: rotations.png  used on input line 369.
+Package pdftex.def Info: rotations.png  used on input line 374.
 (pdftex.def)             Requested size: 266.03474pt x 163.20607pt.
  [9 <./Riassunto BTS.png>]
 <Rotations_case.png, id=513, 887.315pt x 424.58624pt>
 File: Rotations_case.png Graphic file (type png)
 <use Rotations_case.png>
-Package pdftex.def Info: Rotations_case.png  used on input line 376.
+Package pdftex.def Info: Rotations_case.png  used on input line 381.
 (pdftex.def)             Requested size: 362.77264pt x 173.5891pt.
 <SummaryAVL.png, id=514, 887.315pt x 424.58624pt>
 File: SummaryAVL.png Graphic file (type png)
 <use SummaryAVL.png>
-Package pdftex.def Info: SummaryAVL.png  used on input line 394.
+Package pdftex.def Info: SummaryAVL.png  used on input line 401.
 (pdftex.def)             Requested size: 362.77264pt x 173.5891pt.
  [10 <./Rotations.png> <./Rotations_case.png>] [11 <./SummaryAVL.png>]
 [12]
 <Summaryhash.png, id=540, 1635.10875pt x 721.69624pt>
 File: Summaryhash.png Graphic file (type png)
 <use Summaryhash.png>
-Package pdftex.def Info: Summaryhash.png  used on input line 464.
+Package pdftex.def Info: Summaryhash.png  used on input line 471.
 (pdftex.def)             Requested size: 362.77264pt x 160.11714pt.
  [13 <./Summaryhash.png>]
 <Summary_d_Heap.png, id=548, 1105.12875pt x 670.505pt>
 File: Summary_d_Heap.png Graphic file (type png)
 <use Summary_d_Heap.png>
-Package pdftex.def Info: Summary_d_Heap.png  used on input line 524.
+Package pdftex.def Info: Summary_d_Heap.png  used on input line 531.
 (pdftex.def)             Requested size: 362.77264pt x 220.101pt.
  [14] [15 <./Summary_d_Heap.png>]
 <Summary_Union_Find.png, id=560, 1402.23875pt x 396.48125pt>
 File: Summary_Union_Find.png Graphic file (type png)
 <use Summary_Union_Find.png>
-Package pdftex.def Info: Summary_Union_Find.png  used on input line 561.
+Package pdftex.def Info: Summary_Union_Find.png  used on input line 568.
 (pdftex.def)             Requested size: 362.77264pt x 102.5745pt.
  [16 <./Summary_Union_Find.png>] [17] [18] [19] [20] [21] [22] [23] (./Appunti.
 aux)
@@ -592,7 +592,7 @@ re/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1
 m1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/shar
 e/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/
 public/cm-super/sftt1000.pfb>
-Output written on Appunti.pdf (23 pages, 1265112 bytes).
+Output written on Appunti.pdf (23 pages, 1265918 bytes).
 PDF statistics:
  719 PDF objects out of 1000 (max. 8388607)
  624 compressed objects within 7 object streams

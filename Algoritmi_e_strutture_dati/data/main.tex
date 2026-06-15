@@ -346,10 +346,10 @@ A livello implementativo si usano 2 funzioni: la funzione \textbf{delete} che sc
 \end{figure}
 
 \subsection{Alberi AVL}
-Prendono il nome dai loro inventori, trattasi di BTS (alberi binari di ricerca) ma che siano sempre bilanciati in modo tale da avere un costo delle operazioni nel caso pessimo sempre di $O(log(n))$, per far cio' le operazioni di aggiunta e rimozione sono da modificare in modo da avere un albvero sempre bilanciato
-
+Prendono il nome dai loro inventori, sostanzialmente sono dei BTS (alberi binari di ricerca) gestiti in maniera tale che siano sempre bilanciati, questo permette di avere un costo delle operazioni nel caso pessimo sempre di $O(log(n))$. 
+Per renderelo possibile e' necessario modificare le operazioni di aggiunta e rimozione in modo tale da avere un albero sempre bilanciato.
 \subsubsection{Quando posso dire che un albero e' bilanciato?}
-Definiamo inizialmente il \textbf{fattore di bilanciamento} di un nodo ovvero la differenza tra l'altezza del suo sotto albero di sdinistra con quello di destra: 
+Definiamo inizialmente il \textbf{fattore di bilanciamento} (riferito ad un nodo), ovvero la differenza tra l'altezza del suo sotto albero di sinistra con quello di destra: 
 \begin{center}
     $\beta (v)=altezza(v.left)-altezza(v.right)$
 \end{center}
@@ -360,10 +360,15 @@ A questo punto possiamo definire un \textbf{albero bilanciato} in altezza come u
 
 \subsubsection{Operazioni basiche}
 \begin{enumerate}
-    \item \textbf{Search}: viene eseguita come una normale ricerca su un albero BTS
+    \item \textbf{Search}: viene eseguita come una normale ricerca su un albero BTS dato che non cambia nessun elemento dell'albero.
     \item \textbf{Update height}: aggiorna l'altezza dell'albero, ogni nodo ha un suo paramentro che contiene l'altezza del sotto albero sottostante
     \item \textbf{Balance factor}: aggiorna il fattore di bilanciamento di un nodo tramite il campo height dei suoi figli.
-    \item \textbf{Rotazioni}: esse sono fondamentali per ribilanciarte alberi AVL che in seguito a modifiche non sono piu' bilanciati. Si tratta di scegliere opportunamete un nodo perno e farlo diventare la radice, per mantenere l'albero sia binario che di ricerca bisogna fare si che il sotto-albero destro del nodo perno diventi il sotto albero di sinistra del padre, al contrario in caso di rotazione a destra: 
+    \item \textbf{Rotazioni}: esse sono fondamentali per ribilanciarte alberi AVL che, in seguito a modifiche, non sono piu' bilanciati.
+    L'operazione di rotazione modifica il fattore di bilanciamento dei soli due nodi coinvolti nell'operaziome.
+    A livello implemntativo la \textbf{rotazione a destra} del nodo u consiste nel considerare il suo figlio sinistro (nodo v) e rendere il figlio destro di v il figlio sinistro di u; 
+    fatto questo il nodo u diventa il figlio destro di v con opportuni controlli ed aggiustamenti.
+    Al contratio, l'operazione di \textbf{rotazione a sinistra} del nodo v consiste nell'individuare il figlio di destra di v (il nodo u) e far diventare sotto-albero destro il soottoalbero sinistro di u;
+    fatto cio' il nodo v diventa sotto-alberio sinistro del nodo u con opportuni controlli ed aggiustamenti. 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.55\linewidth]{rotations.png}
@@ -379,13 +384,15 @@ A questo punto possiamo definire un \textbf{albero bilanciato} in altezza come u
     \end{figure}
     A questo punto si illustrano i modi per ribilanciare gli alberi nelle varie situazioni: \begin{itemize}
         \item \textbf{SS}: si esegue una rotazione a destra con perno il nodo con $\beta(n) = 2$.
-        \item \textbf{SD}: si esegue una rotazione a destra sul sottoramo sinistro in modo da avere uno sbilaciamento SS e poi si bilancia come un normale SS.
+        \item \textbf{SD}: si esegue una rotazione a destra sul sotto-albero sinistro in modo da avere uno sbilaciamento SS e poi si bilancia come un normale SS.
         \item \textbf{DD}: opposto al caso SS, dunque si opera una rotazione a sinistra con perno il nodo sbilanciato.
         \item \textbf{DS}: si opera una rotazione a destra sul sottoramo destro e poi si risolve come un DD
     \end{itemize}
-    \item \textbf{Bilanciamento}: funzione molto semplice a questo punto perche' usa quelle sopra citate si per individuare il caso che risolverlo.
-    \item \textbf{Insert}: inserisce un nodo come in un normale BST ma alla fine chiama la funzione di bilanciamento dell'albero, al massimo puo' aver sbilanciato un nodo
-    \item \textbf{Delete}: anche in questo caso viene utilizzata la funzione dei BST ma questa procedura puo' comportare lo sbilanciamento di piu' nodi.
+    \item \textbf{Bilanciamento}: funzione molto semplice perche' si basa sulle funzioni descritte sopra, il suoi unico compito e' verificare il tipo di sbilanciamento e chiamare le funzioni di rotazione su gli opportuni nodi per cui ha costo costante.
+    \item \textbf{Insert}: inserisce un nodo come in un normale BST ma alla fine chiama la funzione di bilanciamento dell'albero, al massimo puo' aver sbilanciato al massimo un solo nodo 
+    per cui il ciclo che aggiorna il campo height dei nosi soprastanti a quello inserito si ferma o quando si arriva alla radice oppure appena si trova il nodo sbilanciato e lo si sistema.
+    Grazie alla topografia di questa struttura dati l'operazione ha costo $\Theta(log(n))$.
+    \item \textbf{Delete}: anche in questo caso viene utilizzata la funzione dei BST ma questa procedura puo' comportare lo sbilanciamento di piu' nodi per cui occorre verificare il bilanciamento di ogni singolo nodo di cui si aggiorna il campo height.
 \end{enumerate}
 
 \subsubsection{Riassunto}
