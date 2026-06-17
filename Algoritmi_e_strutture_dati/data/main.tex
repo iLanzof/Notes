@@ -553,7 +553,8 @@ Ci sono anche alcune operazioni ausiliarie alle altre procedure ovvero:
 
 
 \section{Union Find}
-Questa struttura dati viene impigata quando si ha la necessità di gestire insiemi disgiunti di oggetti, per cui le operazioni fondamentali saranno la creazione di un singoletto, unione di due insiemi e l'identificazione a quale insieme appartiene un dato elemento, piu' precisamente chi e' il rappresentante del tale elemento.
+Questa struttura dati viene impigata quando si ha la necessità di gestire insiemi disgiunti di oggetti, 
+per cui le operazioni fondamentali saranno la creazione di un singoletto, unione di due insiemi e l'identificazione a quale insieme appartiene un dato elemento, piu' precisamente identificare il \textbf{rappresentante} del tale elemento.
 \begin{itemize}
     \item \textbf{makeSet}: crea l'insieme singoletto con il dato elemento
     \item \textbf{find}: restituisce il rappresentante dell'insieme a cui appartiene il dato elemento
@@ -561,7 +562,7 @@ Questa struttura dati viene impigata quando si ha la necessità di gestire insie
 \end{itemize}
 
 \subsection{QuickFind}
-Questi algoritmi utilizzano alberi con altezza 1 per implementare la struttura dati Union-find: ogni elemento e' una foglia e il rappresentante e' la radice (quindi il rappresentante e' un duplicato essendo sia radice che foglia).
+L'implementazione della struttura dati si basa su alberi con altezza 1: ogni elemento e' una foglia e il rappresentante e' la radice (quindi il rappresentante e' un duplicato essendo sia radice che foglia).
 \begin{itemize}
     \item makeSet: crea un albero con l'elemento che e' sia radice che foglia.
     \item find: dato l'elemento restituisce il proprio padre, dunque questi alberi hanno i puntatori invertiti rispetto a come si implementano di solito.
@@ -571,14 +572,15 @@ Questi algoritmi utilizzano alberi con altezza 1 per implementare la struttura d
 Grazie a questo algoritmo si sceglie quale rappresentante mantenere, tra i due dati in input, in base a quanti figli essi hanno (basta riservare un campo specifico nel rappresentante e sommare i numeri ad ogni invocazione). Dunque nel caso pessimo si dovranno eseguire $\frac{n} {2}$ operazioni e attraverso un'analisi ammortizzata il costo risulta essere $O(log(n))$
 
 \subsection{QuickUnion}
-Questi algoritmi utilizzano alberi generali per implementare la struttura dati Union-find: in questo caso gli elemnti possono essere anche nodi per cui il rappresentante e' il nodo che non ha padre.
+Questi algoritmi utilizzano alberi generali per implementare la struttura dati Union-find: 
+in questo caso gli elementi possono essere anche nodi per cui il rappresentante e' il nodo che non ha padre, ovvero la radice dell'albero.
 \begin{itemize}
     \item makeSet: crea un albero con l'elemento (no duplicati tra radice e foglia).
     \item find: scorre l'albero andando verso l'alto fino a quando non arriva alla radice, nel caso pessimo deve quindi scorrere tutti gli elementi.
     \item union: dati i due insiemi fa puntare il rappresentante del secondo al rappresentante del primo, per cui ha costo costante.
 \end{itemize}
 \subsubsection{Euristica "union by rank" (find)}
-Avere alberi molto alti rende molto inefficiente l'operazione di find quindi memorizzando nelle radici il proprio rank (altezza) si puo' sistamare l'albero opportunamente in modo tale che non degeneri in una lista. Grazie a questo approccio il costo scende a $O(log(n))$.
+Avere alberi molto alti rende molto inefficiente l'operazione di find quindi memorizzando nelle radici il proprio rank (altezza) si puo' sistamare l'albero in modo tale che non degeneri in una lista. Grazie a questo approccio il costo scende a $O(log(n))$.
 
 \subsection{Riassunto Union Find}
 \begin{figure}[H]
@@ -591,7 +593,7 @@ Avere alberi molto alti rende molto inefficiente l'operazione di find quindi mem
 
 \section{Tecniche algoritmiche}
 \begin{itemize}
-    \item \textbf{Divide-et-impera}: un problema viene diviso in sotto-problemi da risolvere ricorsivamente.
+    \item \textbf{Divide-et-impera}: un problema viene diviso in sotto-problemi da risolvere ricorsivamente (top-down).
     \item \textbf{Greedy}: Ad ogni passo si fa sempre la scelta che in quel momento eà a migliore e non si ripercorrono mai le scelte fatte in precedenza.
     \item \textbf{Programmazione dinamica}: la soluzione viene costruita con un approccio bottom-up a partire da un insieme di sotto-problemi.
 \end{itemize}
@@ -599,7 +601,9 @@ Avere alberi molto alti rende molto inefficiente l'operazione di find quindi mem
 \subsection{Torre di Hanoi}
 E' un gioco matematico in cui ci sono 3 pioli, $n$ dischi in un piolo in ordine crescente e l'obiettivo e' trasferire l'intera pila su un altro piolo.
 Le regole sono che si puo' spostare un disco alla volte e che un disco deve essere impilato solo sui dischi piu' grandi di esso.
-L'analisi del costo computazionale si puo' fare tramite l'equazione di ricorrenza $T(n) = 2T(n-1)+1$ e usando la tecnica dell'iterazione si arriva ad avere un costo totale pari a $O(n^2)$
+Per risolverso si usa l'approccio \textit{divide et impera}: nel caso di un solo disco lo si sposta dal primo al terzo piolo, nel caso di $n$ dischi se ne spostano $n-1$ sul secondo piolo (usando il terzo come appoggio), 
+si sposta l'$n-esimo$ disco dal primo al terzo e alla fine si rispostano gli $n-1$ dischi dal secondo al terzo piolo, usano il primo come appoggio.
+L'analisi del costo computazionale si puo' fare tramite l'equazione di ricorrenza $T(n) = 2T(n-1)+1$ e usando la tecnica dell'iterazione si arriva ad avere un costo totale pari a $O(2^n)$
 
 \subsection{Problema del resto}
 Dato un numero intero positivo $R$ bisgona generare qual è il minimo numero di monete che permette di raggiungere quel resto.
@@ -608,32 +612,46 @@ In questo caso l'approccio greedy e' quello che funziona meglio: ad ogni passo p
 
 
 \subsection{Problema dell'imbianchino}
-E' un problema imile a quello del resto: si vuole imbiancare una certa parete per cui servono $L$ litri di vernice e vuole comprare la giusta quantità di barattoli per avere $L$ litri.
-Come visto prima l'approccio greedy non e' efficace in tutte le situazioni per cui si puo' usare la tecnica \textit{divide-et-impera} che a livello logico costruisce un albero sondando ogni possibile combinazione di barattoli prendibile e scegliendo quella che ne richiede di meno.
-Con questo approccio pero' molti calcoli vengono fatti inutilmente per cui conviene utilizzare la programmazione dinamica per risolvere il problema: si utilizza un array $[0, ..., L]$ con le soluzioni migliori ad ogni grandezza minore di L ed ogni elemento si calcola facendo il minimo tra tutte le combinazioni possibili andando anche a vedere le soluzioni gia' ottenute per evitare di rifare calcoli.
+E' un problema simile a quello del resto: si vuole imbiancare una certa parete per cui servono $L$ litri di vernice e si vuole comprare la giusta quantità di barattoli per avere $L$ litri.
+Come visto prima l'approccio greedy non e' efficace in tutte le situazioni per cui si puo' usare la tecnica \textit{divide-et-impera} che nel caso in cui i litri siano 0 ritorni 0, nel caso in cui non esistano volumi minori o uguali ritorni $\infty$.
+Nel caso in cui esistano barattoli minori o uguali ai litri di vernice da comprare devo scegliere l'$i-esimo$ barattolo di vernice tale che il numero di barattoli da comperare (+1) per 
+imbiancare $V_{tot}-V_{i-esimo\ barattolo}$ sia minimo.
+Volendo rappresentare graficamente le operazioni attraverso un albero ci si accorge che molti risultati vengono calcolati piu' volte dunque si puo' usare la \textbf{programmazione dinamica}
+per evitaredi ripetere i calcoli. In questo caso si puo' usare un array di appoggio: $SOLUZIONI[0, ..., n]$ ($con\ n = litri\ da\ comperare$) che salva la migliore soluzione per ogni $j \in [0,...,n]$ in modo da calcolre una sola volta
+la soluzione ottima per ogni litro. Alla fine la soluzione al problema sara' in $SOLUZIONI[n]$.
 
 \subsection{Problema dello zaino}
-Si ha uno zaino con una capienza di peso massima $P$ e si hanno a $n$ oggetti con proprio peso e valore, l'obiettivo è trovare il valore maggiore che può essere portato nello zaino.
+Da un insieme di oggetti $X=\{1,...,n\}$ in cui ogni $i-esimo$ oggetto ha un peso ($p[i]$), un valore ($v[i]$) e uno zaino che puo' portare un peso massimo $P$,
+si vuole determinare un sott'insieme di $X$ tale che il peso degli oggetti di $X$ sia minore o uguale a $P$ e il valore di essi sia massimo.
 In elenco alcune soluzioni sbagliate seguendo un approccio \textbf{greedy}:
 \begin{itemize}
-    \item Ad ogni passo scelgo sempre l'oggetto disponibile con peso maggiore che si può mettere nello zaino finchè non finisce lo spazio oppure nessun oggetto può essere inserito.
+    \item Ad ogni passo scelgo sempre l'oggetto disponibile con valore maggiore che si può mettere nello zaino finchè non finisce lo spazio oppure nessun oggetto può essere inserito.
     \item Si calcola un valore specifico dell'oggetto (valore/peso) e si prende sempre quello piu' conveniente possibile.
 \end{itemize}
 Entrambe le situazioni proposte sopra non sono efficaci perchè non trovano sempre la combinazione migliore per cui è necessario un approccio che si basa sulla programmazione dinamica.
-La programmazione dinamica basa la soluzione sull'utilizzo di 2 matrici con righe il numero di oggetti e colonne lo spazio dello zaino da 0 a $P$; ogni casella viene riempita nel modo più efficiente possibile a seconda dell'elemento che ha lo stesso indice della riga. A livello matematico ci sono 4 casi:
-\begin{enumerate}
-    \item L'oggetto è maggiore della capienza dello zaino.
-    \item Lo zaino può contenere l'oggetto e inserirlo massimizza il valore.
-    \item Lo zaino può contenere l'oggetto ma inserirlo non massimizza il valore.
-\end{enumerate}
-
-A livello di formule si tratta di: $max\{A[i-1, j], A[i-1, j-p\_oggetto] + valore\_oggetto\}$ e alla fine si dovrà prendere la cella con il valore maggiore (ovvero quella più in basso a sinistra).
-La seconda matrice, delle stesse dimensioni della prima, contiene booleani in base a se l'oggetto della riga è stato inserito nello zaino dalla tale capacità. A questo punto per trovare la soluzione al problema originario si parte dall'ultima casella e si torna verso in su secondo la formula $A[i-1, j-p\_oggetto]$ solo nel caso in cui si sia trovato True se no si torna alla casella sopra.
-
+Prima di coinvolgere una struttura dati e' utile definire un sotto-problema $P(i,j)$ ovvero riempire uno zaino di capienza $j$ usando un sott'insieme dei primi $i$ oggetti;
+la soluzione a questo sotto-problema ($V[i,j]$) e' il \textbf{massimo valore} ottenibile con capacita' $j$ e $i$ oggetti predibili.
+A questo punto si adopera una soluzione \textbf{divide et impera}:
+\begin{itemize}
+\item \textbf{$V[i,0] = 0$} ovvero se non c'e' posto il valore e' nullo.
+\item \textbf{$V[1,j]$} nel caso sia disponibile un solo oggetto si puo' prendere o meno a seconda del peso.
+\item \textbf{$V[i,j]$:} 
+        \begin{itemize}
+            \item \textbf{$j < p[i] \rightarrow V[i,j] = V[i-1,j]$} ovvero se l'$i-esimo$ oggetto ha un peso troppo grande allora non va considerato l'oggetto.
+            \item \textbf{$j \geq p[i] \rightarrow V[i,j] = max\{ A[i-1, j], A[i-1, j-p[i]] + v[i]\}$}   ovvero bisogna prendere il massimo valore tra il valore nel caso non prendessimo l'$i-esimo$ oggetto
+                    e il valore nel caso prendessimo l'$i-esimo$ oggetto andando pero' a togliere del peso.
+        \end{itemize}  
+\end{itemize}
+Dunque si usera' una matrice $i X j$ (numero di oggetti presi X capienza) che conterra' i risultati, la soluzione al problema sara' in $V[n,P]$ ma sara' il valore massimo trasportabile e non quali oggetti si devono prendere.
+Per sapere quale sia la combinazione giusta di oggetti occorre un seconda tabella booleana che viene riempita contemporaneamente alla prima nel seguente modo:
+$k[i,j] = true$ sse l'$i-esimo$ oggetto fa parte delle soluzione ottima per $P[i,j]$, in altre parole se il massimo nell'espressione di prima e' il secondo argomento.
+Per stampare la soluzione si parte dall'ultima casella e si torna verso in su secondo la formula $K[i-1, j-p\_oggetto]$ solo nel caso in cui si sia trovato True se no si torna alla casella sopra.
 
 \subsection{Esempi di utilizzo metodo Divide et Impera}
 \subsubsection{Moltiplicazioni di interi di grandezza arbitraria}
-La maggior limitazione delle moltiplicazione è il $max_int$ che dopo fa sballare tutto quindi sono necessari algoritmi per moltiplicare tra di loro numeri molto grandi. Inizialemnte si può pensare di implementare un algoritmo basato su come si fanno le moltiplicazioni in colonna ma esso ha un costo computazionale di $O(n^2)$ per cui è necessaria una versiona più veloce, attraverso il metodo \textit{divide et impera} questo algoritmo può essere implementato inizialmente con una scissione a metà dei numeri:
+La maggior limitazione delle moltiplicazione è il $max\ int$ che passato un certo limite rende errati tutti i calcoli dunque sono necessari algoritmi per moltiplicare tra di loro numeri molto grandi. 
+Inizialemnte si può pensare di implementare un algoritmo basato su come si fanno le moltiplicazioni in colonna ma esso ha un costo computazionale di $O(n^2)$ per cui è necessaria una versiona più veloce, 
+attraverso il metodo \textit{divide et impera} questo algoritmo può essere implementato dividento in due parti i due numeri:
 \begin{center}
     $X=X_1*10^{n/2} + X_0$
 
@@ -642,19 +660,25 @@ La maggior limitazione delle moltiplicazione è il $max_int$ che dopo fa sballar
     $X*Y = (X_1*10^{n/2} + X_0) (Y_1*10^{n/2} + Y_0) = (X_1*Y_1)* 10^{n} + (X_1*Y_0 + X_0 * Y_1)*10^{n/2} + X_0*Y_0$
 \end{center}
 
-A questo punto l'equazione di ricorrenza è $c_1$ per il caso base e $4T(n/2) + c_2n$ altrimenti per cui attraverso il Master Theorem si trova una complessità di $O(n^2)$ per cui non c'è alcun miglioramento rispetto a quello normale.
+Ricordando che moltiplicare per $10^n$ richiede tempo $O(n)$, l'equazione di ricorrenza $4T(n/2) + c_2n$, 
+attraverso il Master Theorem si trova una complessità di $O(n^2)$ per cui non c'è alcun miglioramento rispetto a quello normale.
 Per migliorare si riscrivono gli addendi in modo furbo:
 \begin{itemize}
-    \item $P_1 = (X_1+X_0)*(Y_1+y_0)$
-    \item $X_1*Y_1$
-    \item $X_0*Y_0$
-    \item $X*Y 0 P_2*10^n + (P_1-P_2-P_3)*10^{n/2}+P_3$
-\end {itemize}
-Quindi sono necessarie 3 moltiplicazioni che generano una lunghezza dell'output di $O(n/2)$ cifre quindi l'equazione di ricorrenza di prima cambia in $3T(n/2+c_2*n)$ arrivando a $O(n^{log_2(3)}) \approx O(n^1.59)$
+    \item $P_1 = (X_1+X_0)*(Y_1+Y_0)$
+    \item $P_2 = X_1*Y_1$
+    \item $P_3 = X_0*Y_0$
+    \item $X*Y = P_2*10^n + (P_1-P_2-P_3)*10^{n/2}+P_3$
+\end{itemize}
+Quindi sono necessarie 3 moltiplicazioni che generano una lunghezza dell'output di $O(n/2)$ cifre 
+quindi l'equazione di ricorrenza di prima cambia in $3T(n/2)+c_2*n$ arrivando a $O(n^{log_2(3)}) \approx O(n^{1.59})$
 
 \subsubsection{Sottovettore non vuoto di valore massimo}
-Il problema prevede di trovare un sottovettore ad un array dato (quindi elementi contigui) la cui somma sia massima. Il motodo \textit{brute force} che calcola il valore di ogni combinazione ha un costo di $O(n^2)$ che puoò essere migliorato mantenendo in una variabile il valore della sommatoria precedente  portando ad un costo $O(n^2)$. Con il metodo \textit{divide et impera} l'idea è quella di trovare un pivot e calcolare il sottovettore massimo a destra e a sinistra di esso e poi vedere qual è il massimo possibile a cavallo con il pivot.
-Questo problema è più semplice perchè a  per il sotto array a cavallo basta prendere il massimo a destra, a sinistra e sommare l'elemento a cavallo e infine ritornare il massimo tra solo destra, a cavallo, solo a sinistra. L'equazione di ricorrenza è dunque $T(n) = 2T(n/2)+n$ con un costo totale di $O(n\ logn(n))$.
+Il problema prevede di trovare un sottovettore ad un array dato (quindi elementi contigui) la cui somma sia massima. 
+Il metodo \textit{brute force} che calcola il valore di ogni combinazione ha un costo di $O(n^3)$ che puoò essere migliorato mantenendo in una variabile il valore della sommatoria precedente  portando ad un costo $O(n^2)$. 
+Con il metodo \textit{divide et impera} l'idea è quella di trovare un pivot e calcolare il sottovettore massimo a destra del pivot, a sinistra del pivot e il massimo valore a cavallo con il pivot.
+Per calcolare il massimo a destra e a sinistra basta una chiamata ricorsiva mentre per il sotto-array a cavallo servono due cicli che scorrono a destra e a sinistra del pivot. 
+Per trovare il valore massimo si usano due variabili $somma$ e $massimo$: la prima viene incrementata ad ogni elemento del valore dello stesso mentre la seconda viene cambiata tutte le volte che la prima raggiunge un nuovo massimo. 
+L'equazione di ricorrenza è dunque $T(n) = 2T(n/2)+n$ con un costo totale di $O(n\ logn(n))$.
 
 \subsection{Esempi di utilizzo metodo Greedy}
 \subsubsection{Problema di scheduling}
