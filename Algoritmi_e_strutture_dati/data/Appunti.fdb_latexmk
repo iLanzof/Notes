@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1781713753.20701 "main.tex" "/home/francesco/Desktop/University/Notes/Algoritmi_e_strutture_dati/Appunti.pdf" "Appunti" 1781713754.54904 0
+["pdflatex"] 1781804085.42399 "main.tex" "/home/francesco/Desktop/University/Notes/Algoritmi_e_strutture_dati/Appunti.pdf" "Appunti" 1781804087.52029 0
   "/etc/texmf/web2c/texmf.cnf" 1779095512.72313 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm" 1136768653 3584 2d666ecf6d466d8b007246bc2f94d9da ""
@@ -101,6 +101,7 @@
   "/usr/share/texlive/texmf-dist/tex/latex/listings/lstpatch.sty" 1710360531 353 9024412f43e92cd5b21fe9ded82d0610 ""
   "/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty" 1576624809 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1750533675 9684 a33a14b82ce60d6e77cb9be689d79ee6 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty" 1761946296 33142 efe8f4750fc02524935e7423b4bdef69 ""
   "/usr/share/texlive/texmf-dist/tex/latex/url/url.sty" 1388531844 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1769369718 41603 27f93b3067076450172040dcd57ca8b3 ""
   "/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1764096569 2971 def0b6c1f0b107b3b936def894055589 ""
@@ -116,8 +117,8 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1769369718 41603 27f93b3067076450172040dcd57ca8b3 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1779095931 5541477 3118940318599480888143717dd32d64 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1779096012 3638852 21021323e96c46248c82aa4aaf098c48 ""
-  "Appunti.aux" 1781713754.46409 18624 5b72b2afe93bcdda824c38076948375e "pdflatex"
-  "Appunti.out" 1781713754.46509 18128 3ee025238b596eacaf849ca4fc36b994 "pdflatex"
+  "Appunti.aux" 1781804087.43111 18791 b730d4b7687a2bc6bca53ea6420470f8 "pdflatex"
+  "Appunti.out" 1781804087.43211 18464 59a8242fd22fc8f71a752df8bb3060e2 "pdflatex"
   "CountingSort.png" 1774465650 81497 09fbedd0833d7560d7dc3c6820492762 ""
   "CountingaSortexample.png" 1774465650 59746 d9ed7356835cebfc3a63e9ad1bce6a57 ""
   "Insertion sort.png" 1774465650 37513 8861e69087f689a7f5cfa22b46018993 ""
@@ -133,7 +134,7 @@
   "Summary_Union_Find.png" 1775669364.26362 69994 43fa9eec693df27232be9662f2e24b38 ""
   "Summary_d_Heap.png" 1774954645.09515 78602 392bb466f83d2ddc24f952effdfc7fe5 ""
   "Summaryhash.png" 1774465650 165624 b208ab5c429afec8b965bac9f7bf9927 ""
-  "main.tex" 1781713751.13582 83151 3b0aca8c0a31164cdb90aea911dfdeaa ""
+  "main.tex" 1781804082.29103 86203 9b50ffab4ce1c6d4e2a0e47bba7eb99e ""
   (generated)
   "/home/francesco/Desktop/University/Notes/Algoritmi_e_strutture_dati/Appunti.pdf"
   "Appunti.aux"

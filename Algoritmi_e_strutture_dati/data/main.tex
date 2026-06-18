@@ -9,6 +9,7 @@
 \usepackage{color}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{multicol}
 
 %VALORI SISTEMABILI
 \usepackage[a4paper, top= 1 cm, bottom= 1.5 cm, left= 2 cm, right= 2 cm]{geometry}
@@ -520,7 +521,7 @@ Le operazioni possibili con questa struttura dati sono:
 \begin{itemize}
     \item \textbf{findMin}: restituisce l'elemento associato alla chiave minima che è l'elemento nella radice. Costo costante.
     \item \textbf{insert}: inserisce una coppia nella struttura dati. Viene aggiunto l'elemento nel primo spazio disponibile e poi tramite la funzione ausiliaria muoviAlto si sistema l'elemento. Costo dell'operazione $O(log_d(n))$
-    \item \textbf{delete}: rimuove un elmento dalla coda indipendentemente dalla sua chiave, supponendo un accesso diretto a tale elemento. Dunque si sostituisce il nodo da rimuovere che l'ultima foglia e poi si usano le due funzioni ausiliarie per sistemarlo propriamente (solo una delle due entrerà in azione). Costo complessivo $O(d\ log_d(n))$.
+    \item \textbf{delete}: rimuove un elmento dalla coda indipendentemente dalla sua chiave, supponendo un accesso diretto a tale elemento. Si sostituisce il nodo da rimuovere con l'ultima foglia e poi si usano le due funzioni ausiliarie per sistemarlo propriamente (solo una delle due entrerà in azione). Costo complessivo $O(d\ log_d(n))$.
     \item \textbf{deleteMin}: rimuove l'elemento associato alla chiave minore.
     \item \textbf{increaseKey}: rimpiazza la chiave di un elmento con una chiave maggiore, per implementarlo si cambia la chiave e poi si usa muoviBasso. Costo di $O(d \ log_d(n))$
     \item \textbf{decreaseKey}: opposto di increaseKey. In questo caso si decrementa la chiave e poi si esegue un muoviBasso per sistemare la struttura. Costo di $O(log_d(n))$
@@ -682,30 +683,52 @@ L'equazione di ricorrenza è dunque $T(n) = 2T(n/2)+n$ con un costo totale di $O
 
 \subsection{Esempi di utilizzo metodo Greedy}
 \subsubsection{Problema di scheduling}
-Dati dei "job" da eseguire con un certo tempo di esecuzione l'obiettivo è trovare l'ordine (scheduling) che dia il \textbf{minimo tempo di attesa medio} ovvero ogni quanto un nuovo job è iniziato. Per questo motivo l'ordine migliore è quello che mette in ordine dal più corto al più lungo dunque l'approccio greedy è il migliore.
+Dati dei "job" da eseguire con un certo tempo di esecuzione l'obiettivo è trovare l'ordine (scheduling) che dia il \textbf{minimo tempo di attesa medio} ovvero ogni quanto un nuovo job è iniziato. 
+Per questo motivo l'ordine migliore è quello che mette in ordine dal più corto al più lungo dunque l'approccio greedy è il migliore dunque si implementa un algoritmo che mandi in esecuzione iljob con minor tempo richiesto ancora da fare.
 
 \subsubsection{Problema della compressione (codifica di Huffman)}
-Data una squenza di caratteri essa deve essere salvata in una memoria digitale quindi codificata e poi deve esssere anche possibile decodificarla, questo processo viene eseguito tramite una tecnica detta \textbf{codifica dei caratteri} quindi "il carattere $x$ è rappresentato dalla sequenza $c$". Data questa codifica è necesario però decodificarla attraverso un semplice decodifica sequenziale. Il problema da risolvere è trovae la codifica che dia la codifica più corta possibile.
-La soluzione migliore è una \textbf{codifica a lunghezza variabile} che si basa sulla percentuale di apparizione del carattere: a caratteri che appaiono più spesso associo una codifica più corta e man mano aumento mantenendo una \textbf{code a prefisso} ovvero che nessun codice non può essere il prefisso di un altro codice in modo tale che appena si individua un carattere si sa che può essere solo quello. Per decodificare si può usare la struttura dell'albero binario fatto in modo che ci sia l'altezza media per nodo minore possibile per far si che il cammino medio sia il più piccolo possibile per essere più veloce possibile.
-Per costruire l'albero si usa l'\textbf{algoritmo di Huffman}: si costruisce inizialmente una losta ordinata di nodi in modo crescente rispetto a quante volte appaere il carattere nel file, successivamente si uniscono le foglie a coppie con un padre la cui etichetta ha la somma delle occorrenze ma ad ogni creazione di padre esso si mette nella lista ed essa viene riordinata e si ricrea un altro padre fino a quando non si è ottenuta una radice ed ecco ottenuto l'albero più efficiente possibile con costo computazionale $O(n \ log(n))$.
+Il problema che si vuole risolvere e' quello della rappresentazione di delle sequenze di caratteri: data una sequenza vogliamo un codifica, tramite tecnica detta \textbf{codifica dei caratteri}, che minimizzi la lunghezza e che sia possibile decifrare in modo \textbf{sequenziale}.
+La soluzione migliore è una \textbf{codifica a lunghezza variabile} che si basa sulla percentuale di apparizione del carattere:
+ a caratteri che appaiono più spesso associo una codifica più corta e man mano aumento la lunghezza della sequenza codificante.
+Questa operazione deve mantenere un \textbf{codice a prefisso} cioe' nessun codice non può essere il prefisso di un altro codice in modo tale che appena si individua un carattere si sa che può essere solo quello. 
+Per rappresentare il codice di codifica/decodifica si puo' usare un albero binario in cui ogni figlio di sinistra rappresenta uno zero e quello di destra un uno, nelle foglie si troveranno i caratteri.
+Per creare quest'albero si usa l'\textbf{algoritmo di Huffman}:
+\begin{enumerate}
+    \item Costruzione di una lista \textbf{ordinata} in cui ogni nodo e' una coppia $(carattere, frequenza\ di\ apparizione)$
+    \item Rimuovere i due nodi con frequenza minore e collegarli ad un padre che abbia la frequenza con somma delle frequenze dei nodi figli.
+    \item Aggiungere il nodo padre alla lista mettendolo in ordine.
+    \item Ripetere fino a quando non rimane un solo nodo. 
+\end{enumerate}
+L'albero creato con queste caratteristiche ha la stessa caratteristica dei figli di quello descritto sopra perche' il codice e' strettamente correlato al singolo file.
 
 
 \subsection{Esempi di utilizzo di programmazione dinamica}
 E' una tecnica iterativa che affronta i problemi con un approccio \textit{bottom-up} e che è molto vantaggiosa quando si tratta di risolvere sottoproblemi ripetuti, comporta sempre l'appoggio ad una struttura dati ausiliaria.
 \subsubsection{Numero di Fibonacci, tecnica della Memorization}
-Questa tecnica usa una struttura \textit{cache} che memorizza i valori che sono già stati calcolati rendendo così tutto più veloce perchè si va sempre a vedere se il numero è stato calcolato.
+Questa tecnica usa una struttura \textit{cache} (ovvero un array) che memorizza i valori intermedi che sono già stati calcolati 
+evitando cosi' di ripetere calcoli gia' eseguiti. 
+Un ulteriore modifca per rendere l'algoritmo piu' efficiente a livello di memoria e' quella di usare una array di dimensione 3 per salvare $fib(n-2), fib(n-1), fib(n)$.
 
 \subsubsection{Sottovettore di valore masismo}
-La soluzione ragione per step: progressivamente trova il sottovettore massimo per l'i-esima cella del vettore che la contiene e per riempire la i-esima cella si fa $max(A[i-1]+S[i], S[i])$ con S l'array in input e A l'array ausiliario. Per evitare di dover cercare nell'array di appoggio il valore massimo si memorizza in una variabile l'indice del massimo e quindi il costo computazionale totale risulta essere di $\Theta(n)$.
-Per tagliare il costo di di memoria si possono usare delle variabili su cui ci si può appoggiare.
+E' il problema gia' affrontato con la tecnica \textit{divide et impera}, per risolverlo con la programmazione dinamica 
+si ultilizza un vettore soluzione $S[i,...,n]$ che viene riempito secondo la formula $max\{V[i], V[i] + S[i-1]\}$, ovvero chiedendosi
+se la soluzione per il sotto-vettore $V[0,...,i-1]$ sommata a $V[i]$ e' migliore o peggiore di $V[i]$. 
+Per trovare \textbf{quale} sia tale sotto-vettore basta trovare il massimo di $S$ nella posizione $i$ (esso sara' lo stesso indice dell'ultimo elemento di $V$ del sotto-vettore massimo)
+e andare a ritroso in $V$ fin quando la somma degli elementi $V[i]+...+V[x]$ non e' ugule al valore di $S[i]$. 
+
 
 \subsubsection{Seam Carving}
-Il problema vuole ridimensionare un'immagine tagliando solo delle cuciture di pixel removibili, i "pixel removibili" sono quelli con valore assegnatoli, tramite algoritmi non studiati, minore. Essendo l'immagine iniziale una matrice anche la struttura dati di appoggio sara' la medesima delle medesime dimensioni.
-Per quanto riguarda l'algoritmo in se' si tratta di stabilire, partendo dall'ultima riga, qual e' il valore del percorso piu' "basso" che parte dalla cima. Ricorsivamente si va a calcolare lo stesso per le 3 caselle adiacenti sopra e una volta riempita la matrice di appoggio con gli opportuni valori per trovare la cucitura da eliminare basta trovare il minimo nell'ultima riga e da li' risalir fino alla cime con un approccio greedy.
+Il problema e' quello di voler ridimensionare un'immagine tagliando solo delle cuciture di pixel adiacenti removibili,
+ i "pixel removibili" sono quelli con valore assegnatoli, tramite algoritmi non studiati, minore. 
+Essendo l'immagine iniziale una matrice anche la struttura dati di appoggio sara' la medesima, delle medesime dimensioni.
+Per quanto riguarda l'algoritmo in se' si tratta di stabilire, partendo dall'ultima riga, qual e' il valore del percorso piu' "basso" che parte dalla cima: 
+ricorsivamente si va a calcolare il valore minimo per le 3 caselle adiacenti sopra. 
+Una volta riempita la matrice di appoggio con gli opportuni valori, per trovare la cucitura da eliminare basta trovare il minimo valore presente nell'ultima riga e da risalire fino alla cima selezionando le caselle che nella matrice d'appoggio hanno valore minore tramite un approccio greedy.
 
 
 \subsubsection{Distanza di Levenshtein}
-E' il problema che affrontano i controllori ortografici quando suggeriscono parole simili come correzioni a quelle digitate e la loro somiglianza si basa sul concetto di \textit{edit distance} ovvero il numero di operazioni necessaria per trasformare una stringa T in una stringa S. 
+E' il problema che affrontano i controllori ortografici quando suggeriscono parole simili come correzioni a quelle digitate;
+la loro somiglianza tra due stringhe di caratteri si basa sul concetto di \textbf{edit distance} ovvero il numero di operazioni necessarie per trasformare una stringa T in una stringa S. 
 Le uniche trasformazioni ammesse sono: \begin{itemize}
     \item Lasciare immutato il carattere   $\rightarrow$ costo 0
     \item Cancellare un carattere $\rightarrow$ costo 1
@@ -714,71 +737,107 @@ Le uniche trasformazioni ammesse sono: \begin{itemize}
 \end{itemize}
 Ovviamente la conversione viene operata carattere per carattere sulla stringa T.
 Per definizione la \textbf{distanza di Levenshtein} tra $S[1 .. n]$ e $T[1 .. m]$ e' il costo minimo (riferito a quelli esplicitati prima) tra tutte le sequenze di \textit{operazioni di editing} che trasformano S in T.
-Per calcolare la soluzione si ricorre ad una matrice di appoggio in cui ci si segna quante operazioni devono essere effetuate (almeno) per trasformare la sequenza $L[0 .. i][0]$ in $L [0][0 .. j]$ in pratica si fa un confronto con le 
-tre caselle precedenti (quella a sinistra, quella sopra e quella sopra a sinistra) e si guarda il carattere nella riga i e quello nella colonna j, se sono:
-\begin{itemize}
-    \item \textbf{Uguali}: si prende il minimo tra casella a sinistra + 1, casella sopra + 1 e casella in alto a sinistra
-    \item \textbf{Diversi}: si prende il minimo tra le tre caselle precedenti e si incrementa di 1
-\end{itemize}
+Per determinare la distanza di Levenshtein definisamo il sotto-problema $P(i,j)$: determinare il minor numero di operazioni per trasformare $S[1,...,i]$ in $T[1,...,j]$.
+Per calcolare le soluzioni $L[i,j]$:
+\begin{verbatim}
+    if (i==0 \lor j==0) // nel caso ci sia una sequenza nulla bisogna 
+                        //trasformarla in quella non nulla
+        L[i,j] = max{i,j};
+    else if (S[i] == T[j])
+        L[i,j] = min{L[i-1,j]+1,L[i,j-1]+1,L[i-1,j-1]}; //devo prendere il minimo di operazioni tra 
+                                                        //trasformare S[1,...,i-1] in T[1,..,j] ed 
+                                                        //eliminare l'ultimo carattere, fare lo stesso
+                                                        // ma a sequenze invertite oppure trasformare 
+                                                        //S[1,...,i-1] in T[1,...,j-1] e lasciare 
+                                                        //l'ultimo carattere invariato
+    else
+        L[i,j] = min{L[i-1,j]+1,L[i,j-1]+1,L[i-1,j-1]+1}; //devo prendere il minimo di operazioni tra 
+                                                        //trasformare S[1,...,i-1] in T[1,..,j] ed 
+                                                        //eliminare l'ultimo carattere, fare lo stesso
+                                                        // ma a sequenze invertite oppure trasformare 
+                                                        //S[1,...,i-1] in T[1,...,j-1] e cambiare solo 
+                                                        //l'ultimo carattere
+\end{verbatim}
+
+Per memorizzare le soluzioni si utilizzera' una matrice $L=nXm$ e la distanza di Levenshtein si trovera' in $L[n,m]$
+
 
 \section{Grafi}
-Sono strutture dati che permettono di memorizzare quanto i diversi elementi si interfacciano tra di loro, i problemi che affronteremo sui grafi sono la visita (in ampiezza e in profondità), alberi di copertura minimi e cammini minimi (in caso di singola sorgente e fra tutte le coppie).
+Sono strutture dati che permettono di memorizzare quanto i diversi elementi si interfacciano tra di loro, 
+i problemi che affronteremo sui grafi sono la \textbf{visita} (in ampiezza e in profondità), \textbf{alberi di copertura minimi} e \textbf{cammini minimi} (in caso di singola sorgente e fra tutte le coppie).
 Ci sono due definizioni di grafo che distinguono i due tipi:
 \begin{itemize}
-    \item \textbf{Grafo orientato}: è una coppia di insiemi, il primo è quello dei vertici e l'insieme delle relazioni tra i vertici. Viene definito \textbf{cappio} un nodo in relazione con se stesso.
-    \item \textbf{Grafo non orientato}: gli archi (ovvero le relazioni tra grafi) sono non ordinate (quindi non c'è una direzione) e i cappi non sono ammessi.
+    \item \textbf{Grafo orientato}: è una coppia di insiemi, il primo è quello dei vertici e il secondo e' quello delle relazioni tra i vertici. 
+    Viene definito \textbf{cappio} un nodo in relazione con se stesso.
+    \item \textbf{Grafo non orientato}: gli archi (ovvero le relazioni tra elementi) sono non ordinate (quindi non c'è una direzione) e i cappi non sono ammessi.
 \end{itemize}
-Ci sono alcune definizioni che sono itili in questa struttura: \textbf{incidenza} che, in un grafo orientato, indica che partendo da un vertice si può andare nel secondo mentre se due nodi sono \textbf{adiacenti} signigfica che c'è una relazione tra i due (ovvero ci si può arrivare).
+Ci sono alcune definizioni che sono utili per questa struttura tipo l'\textbf{incidenza} che, in un grafo orientato, indica che un arco e' in relazione tra due vertici; 
+se due nodi sono \textbf{adiacenti} significa che c'è una relazione tra i due (ovvero ci si può arrivare).
 Le operazioni di base che il grafo deve supportare sono:
+\begin{multicols}{2}
 \begin{itemize}
-    \item NumVertici
-    \item NumArchi
-    \item grado (vertice) ovvero quanti collegamenti ha
-    \item archiIncidenti
-    \item estremi (arco)
-    \item sonoAdiacenti (vertice, vertice)
-    \item aggiungiVertice
+    \item NumVertici $\to$ int
+    \item NumArchi $\to$ int
+    \item grado (vertice) $\to$ int ($n.collegmaneti$)
+    \item archiIncidenti $\to$ (arco, ..., arco)
+    \item estremi (arco) $\to$ (vertice, vertice)
+    \item sonoAdiacenti (vertice, vertice) $\to$ bool
+    \item aggiungiVertice 
     \item aggiungiArco
     \item rimuoviVertice
     \item rimuoviArco
 \end{itemize}
+\end{multicols}
 
 \subsection{Implementazione grafo non orientato, matrice di adiacenza}
 Si usa una matrice con tutti gli elementi sia nelle righe che nelle colonne e si mette 1 se due elementi sono collegati 0 se non lo sono. Quella che risulta è una matrice simmetrica con diagonale tutta 0 per l'assenza cappi.
 Lo spazio necessario è $\Theta(|V|^2)$. I costi delle operazioni sono:
+\begin{multicols}{2}
 \begin{itemize}
-    \item grado (vertice) $\rightarrow$  $\Theta(n)$
+    \item grado $\rightarrow$  $\Theta(n)$
     \item archiIncidenti $\rightarrow$ $\Theta(n)$
-    \item sonoAdiacenti (vertice, vertice) $\rightarrow$ $\Theta(1)$
+    \item sonoAdiacenti  $\rightarrow$ $\Theta(1)$
     \item aggiungiVertice $\rightarrow$ $\Theta(n^2)$
     \item aggiungiArco $\rightarrow$ $\Theta(1)$
     \item rimuoviVertice $\rightarrow$ $\Theta(n^2)$
     \item rimuoviArco $\rightarrow$ $\Theta(1)$
 \end{itemize}
+\end{multicols}
 
 \subsection{Implementazione grafo non orientato, lista di adiacenza}
-L'idea è quella di avere un array degli elementi che sono inizi di liste che contengono gli elementi a cui sono adiacenti, lo spazio di memoria è $\Theta(|V|+|E|)$ con V vertici e E le relazioni
+L'idea è quella di avere un array degli elementi che sono inizi di liste che contengono gli elementi a cui sono adiacenti, lo spazio di memoria è $\Theta(|V|+|E|)$ con V vertici e E le relazioni.
+Di seguito i costi delle operazioni ricordando che $\delta(x)$ e' il grado del nodo x e $m$ il numero di archi:
+\begin{multicols}{2}
 \begin{itemize}
-    \item grado (vertice) $\rightarrow$  $\Theta(\gamma(v))$
-    \item archiIncidenti $\rightarrow$ $\Theta(\gamma(v))$
-    \item sonoAdiacenti (vertice, vertice) $\rightarrow$ $\Theta(min\{\gamma(x),\gamma(y)\})$
+    \item grado $\rightarrow$  $\Theta(\delta(v))$
+    \item archiIncidenti $\rightarrow$ $\Theta(\delta(v))$
+    \item sonoAdiacenti $\rightarrow$ $\Theta(min\{\delta(x),\delta(y)\})$
     \item aggiungiVertice $\rightarrow$ $\Theta(1)$
     \item aggiungiArco $\rightarrow$ $\Theta(1)$
-    \item rimuoviVertice (vertice) $\rightarrow$ $\Theta(numero \ archi)$
-    \item rimuoviArco (arco) $\rightarrow$ $\Theta(\gamma(x)+\gamma(y))$ con l'arco = $\{x,y\}$
+    \item rimuoviVertice $\rightarrow$ $\Theta(m)$
+    \item rimuoviArco $\rightarrow$ $\Theta(\delta(x)+\delta(y))$, arco = $\{x,y\}$
 \end{itemize}
-
+\end{multicols}
 \subsection{Implementazione grafo orientato, matrice di adiacenza}
-Uguale a quella con il non ordinato ma non è più simmetrica perchè in questo caso l'ordine di relazione conta e ci sono cappi.
+L'implementazione e' molto simile a quella per il grafo non orientato ma la matrice non e' piu' simmetrica perche' l'ordine 
+di relazione conta in questo caso. Nello specifico il vertice di partenza e' nelle righe e quello di arrivo nelle colonne.
+
+\subsection{Implementazione grafo orientato, lista di adiacenza}
+Anche questa implementazione e' molto simile a quella per il grafo non orientato, la differenza e' che l'elemento dell'array indica 
+il nodo di partenza e la lista contiene quelli a cui si puo' arrivare ma non vale il contrario.
+
 
 \subsection{Alcune definizioni}
 \begin{enumerate}
-    \item \textbf{Grafi pesati}: sono grafi in cui ogni arco ha un peso/costo, dunque per determinare il costo si utilizza un'opportuna funzione che, per comodità, restituisce $\infty$ quando non c'è una relazione tra i due elementi. 
-    Questa implementazione riguarda la matrice di adiacenza mentre nella lista di adiacenza si aggiunge un campo al singolo nodo.
+    \item \textbf{Grafi pesati}: sono grafi in cui ogni arco ha un peso/costo, per determinare il costo si utilizza un'opportuna funzione che, per comodità, restituisce $\infty$ quando non c'è una relazione tra i due elementi. 
+    Nel caso di un implementazione con matrice di adiacenza quando c'e' un arco tra due vertici al posto di 1 si mette il costo, al posto di 0 si mette $\infty$.
+    Per la lista lista di adiacenza invece l'arco ha un campo che ne indica il peso.
     \item \textbf{Grado}: dato un grafo non orientato il grado di un vertice è il numero di archi del dato vertice.
     Nel caso di grafo orientato c'è la distinzione in \textbf{grado entrante} e \textbf{grado uscente} ovvero il numero di archi in arrivo e in uscita.
-    \item \textbf{Cammino}: percorso che collega due vertici e se esiste si dice che $w$ è raggiungibile da $v$ tramite il cammino $v$. 
-    Il cammino prende in considerazione l'orientamento dei collegamenti nel caso del grafo orientato.
+    \item \textbf{Cammino}: percorso che collega due vertici, se esiste si dice che $w$ è raggiungibile da $v$ tramite il cammino $w$.
+    La lunghezza del cammino e' pari al numero di vertici attraversati -1 oppure al numero di archi attraversati; 
+    un cammino e' \textbf{semplice} se i vertici compaiono una volta.
+    Nel caso di grafi orientati il cammino prende in considerazione l'orientamento dei collegamenti.
     \item \textbf{Grafi connessi}: nel caso del grafo non orientato esso è connesso se esiste un cammino che da ogni vertice arriva ad ogni altro vertice.
     Nel caso del grafo orientato esso è \textbf{fortemente connesso} se esiste un cammino da ogni vertice ad ogni altro vertice mentre si dice \textbf{debolmente connesso} se l'equivalente non orientato del grafo orientato è connsesso.
     \item \textbf{Ciclo}: cammino che parte da un elemento e attraversa un grafo ritornandoci. Nel caso di grafo orientato bisogna fare almeno 1 passo mentre in quelli non orientati almeno 3 passi.
@@ -790,26 +849,34 @@ Uguale a quella con il non ordinato ma non è più simmetrica perchè in questo 
 
 
 \subsection{Algoritmi di visita dei grafi}
-Dato un grafo ed un vertice (\textbf{sorgente}) l'obiettivo è visitare ogni possibile vertice del grafo raggiungibile dalla sorgente.
+Dato un grafo ed un vertice (\textbf{sorgente}) l'obiettivo è visitare ogni possibile vertice del grafo raggiungibile dalla sorgente una sola volta.
 \subsubsection{Visita in ampiezza (BFS)}
 Visita i nodi espandendo la frontiera tra nodi scoperti e nodi da scoprire. Alla fine dell'esecuzione ha creato un albero radicato in $s$ (il nodo di partenza) che contiene tutti i nodi che si posso raggiungere da esso.
 Durante l'esecuzione un nodo puo' essere: \textbf{inesplorato} ovvero non ancora incontrato, \textbf{aperto} ovvero quando viene incontrato la prima volta oppure \textbf{chiuso} ovvero il vertice e' stato esplorato completamente.
-Per quanto riguarda l'implementazione essa si basa su il campo $mark$ di ogni nodo che inizialmente setta in tutti a $false$ e poi grazie ad una coda esplora apre un nodo, mette in coda tutti i nodi nonm aperti raggiungibili da quello analizzato, chiude il nodo e continua con il successivo nodo in coda.
-Per quanto riguarda la creazione dell'albero ad ogni adiacente che viene aperto si riempie il campo $parent$ con il nodo che si sta analizzando. Alla fine viene ritornato l'albero.
+Per quanto riguarda l'implementazione essa si basa su il campo $mark$ di ogni nodo che inizialmente setta in tutti i nodi a $false$ e poi grazie ad una coda apre un nodo, mette in coda tutti i nodi non aperti raggiungibili da quello analizzato, chiude il nodo e continua con il successivo nodo in coda.
+Per quanto riguarda la creazione dell'albero ad ogni nodo adiacente che viene aperto si riempie il campo $parent$ con il nodo che si sta analizzando. Alla fine viene ritornato l'albero.
 Per quanto riguarda la complessità computazionale nel caso di \textit{liste di adiacenza} e' $O(n+m)$ mentre nel caso della \textit{matrice di adiacenza} e' di $O(n^2)$, con $n$ numero di vertici e $m$ numero di archi.
 Questo tipo di visita e' utile per capire quale sia il cammino piu' breve tra due nodi nel caso ci sia una BFS partita dal nodo di inizio: 
 si crea l'albero e poi, partendo dal nodo finale, tramite una funzione ricorsiva che a ritroso arriva fino al nodo di inizio si può stampare il cammino più corto.
+
+
 \subsubsection{Visita in profondità (DFS)}
 Visita i nodi andando il più possibile lontano dalla sorgente e a differenza del BFS arriva a tutti i nodi del grafo, non solo quelli collegati ad un nodo. Per questo motivo la funzione crea un foresta ovvero un insieme di alberi.
-L'algoritmo e' ricorsivo e per ogni nodo riempie due paramentr: un \textit{discorvery time} ovvero il momento in cui e' stato scoperto e un \textit{finish time} ovvero quando termina la visita del nodo. La visita funziona che parte dal nodo iniziale al momento 1 poi passa ad un altro nodo fino a quando no si arriva ad un nodo che non ha piu' nodi non ancora scoperti disponibili.
-A quel punto il tale nodo viene chiuso l'esecuzione torna sul nodo precedente e se ha altri nodi adiacenti inesplorati salta a loro se no anche esso viene chiuso e così via fino a quando non tutti i nodi sono chiusi. Gli alberi vengono creati come prima ma essendo che si guardano tutti i nodi in casi di nodi scollegati o cappi vengono restituiti piu' alberi.
+L'algoritmo e' ricorsivo e per ogni nodo riempie due paramentr: un \textit{discorvery time} ovvero il momento in cui e' stato scoperto e un \textit{finish time} ovvero quando termina la visita del nodo. 
+La visita funziona che parte dal nodo iniziale al momento 1 poi passa ad un altro nodo fino a quando non si arriva ad un nodo che non ha piu' nodi non ancora scoperti disponibili.
+A quel punto tale nodo viene chiuso l'esecuzione torna sul nodo precedente e se ha altri nodi adiacenti inesplorati salta a loro se no anche esso viene chiuso e così via fino a quando tutti i nodi sono chiusi; 
+questo viene controllato da un ciclo while che si assicura che tutti i nodi del grafo siano stati considerati per cui anche nodi non connesi al nodo iniziale vengono considerati.
+Gli alberi vengono creati come prima ma essendo che si guardano tutti i nodi in casi di nodi scollegati o cappi vengono restituiti piu' alberi.
 Per quanto riguarda la complessità essa rimane invariata rispetto al BFS perche' i passaggi di inizializzazione dei campi necessari allo svolgimento sono quelli piu' dispendiosi.
-Grazie ai campi \textbf{discorvery time} e \textbf{finish time} e le relazione tra quelli di due nodi si possono avere diverse informazioni:
+Grazie ai campi \textbf{discorvery time} e \textbf{finish time}  di due nodi si possono avere diverse informazioni in base alla relazione tra gli intervalli:
 \begin{itemize}
-    \item $[u.dt,\ u.ft]$ e $[u.dt,\ u.ft]$ sono \textbf{disgiunti} allora u e v non sono discendenti.
-    \item $[u.dt,\ u.ft]$ e' contenuto in $[u.dt,\ u.ft]$ allora u e' discendente di v.
-    \item $[u.dt,\ u.ft]$ contiene $[u.dt,\ u.ft]$ allora v e' discendente di u.
-    \item $v.dt < u.dt \land u.ft < v.ft$ allora l'arco $(u,v)$ e' all'\textbf{indietro}.
+    \item $[u.dt,\ u.ft]$ e $[v.dt,\ v.ft]$ sono \textbf{disgiunti} allora u e v non sono discendenti.
+    \item $[u.dt,\ u.ft]$ e' contenuto in $[v.dt,\ v.ft]$ allora u e' discendente di v.
+    \item $[u.dt,\ u.ft]$ contiene $[v.dt,\ v.ft]$ allora v e' discendente di u.
+\end{itemize}
+Mentre nel caso di grafi orientati, nel caso di un arco non incluso nella foresta:
+\begin{itemize}
+    \item $v.dt < u.dt \land u.ft < v.ft$ allora l'arco $(u,v)$ e' all'\textbf{indietro}. 
     \item $u.dt < v.dt \land v.ft < u.ft$ allora l'arco $(u,v)$ e' in \textbf{avanti}.
     \item $v.ft < u.dt$ allora l'arco $(u,v)$ e' \textbf{di attraversamento a sinistra}.
 \end{itemize}
@@ -818,32 +885,42 @@ L'ordinamento topologico è interessante perchè può essere interpretato come d
 
 \subsection{Componenti connesse (grafi non orientati)}
 Due vertici $u$ e $v$ di un grafo sono \textbf{connessi} quando e' possibile raggiungere $v$ partendo da $u$, questa definizione induce un possibile partizionamento del grafo in insiemi di nodi connessi tra di loro.\
-Per risolvere questo problema basta etichettare inizialmente tutti i nodi con un valore di "non visitato" poi per ogni nodo non ancora visitato si chiama una funzione ricorsiva che etichetta con un valore (che per ogni insieme differente deve cambiare) il nodo poi riempi il campo $parent$ dei nodi con il nodo iniziale e la chiama ricorsivamente sugli stessi.
+Per risolvere questo problema basta etichettare inizialmente tutti i nodi con un valore di "non visitato" poi, per ogni nodo non ancora visitato, si chiama una funzione ricorsiva che etichetta con un valore (che per ogni insieme differente deve cambiare) il nodo, riempie il campo $parent$ dei nodi come nelle altre visite e si richiama ricorsivamente sui nodi connessi.
 
 \subsection{Componenti fortemente connesse (grafi orientati)}
-Si esegue un iniziale partizionamento del grafo di tutti i vertici fortemente connessi dal dato elemento, per fare questo basta calcolare $D(x)$ ovvero tutti i discendenti del nodo $x$ e $A(x)$ ovvero l'insieme di tutti i nodi da cui si può raggiungere $x$.
-Per calcolare $D(x)$ basta fare una visita qualunque per calcolare $A(x)$ basta invertire l'orientamento delle freccie e fare una nuova ricerca. A questo punto per avere il partizionamento cercato è $D(x) \cap A(x)$.
-Per risolvere il problema di partizionare l'intero grafo tra i suoi elementi fortementi connessi tra di loro basta iterare l'algoritmo per ogni nodo e trovare l'intersezione tra tutti i nodi. La complessità computazionale è di $O(nm+n^2)$ per cui in realtà esistono algoritmi più efficienti.
+Si esegue un iniziale partizionamento del grafo di tutti i vertici fortemente connessi tra loro, per fare questo basta calcolare $D(x)$ ovvero tutti i discendenti del nodo $x$ e $A(x)$ ovvero l'insieme di tutti i nodi da cui si può raggiungere $x$.
+Per calcolare $D(x)$ basta fare una visita qualunque per calcolare $A(x)$ basta invertire la direzione degli archi e fare una nuova ricerca partendo sempre da $x$.
+A questo punto per avere il partizionamento cercato basta calcolare $D(x) \cap A(x)$.
+Per risolvere il problema di partizionare l'intero grafo tra i suoi elementi fortementi connessi tra di loro basta iterare l'algoritmo per ogni nodo e trovare l'intersezione tra tutti i nodi.
+La complessità computazionale è di $O(nm+n^2)$ per cui in realtà esistono algoritmi più efficienti.
 
 
 \subsection{Minimum Spanning Tree}
-Il problema è quello di voler determinare come connettere diversi elementi tra di loro usando meno collegamenti possibili all'interno di un grafo non orientato, connesso e pesato. E' come se si volesse collegare con la fibra ottica un paese usando meno cavo possibile.
-Per trovare la combinazione giusta bisogna trovare l'albero di copertura minore possibile, per \textbf{albero di copertura} si intende un sottografo di un grado non orientato e connesso che contiene tutti i nodi del grafo, anch'esso è pesato ma come collegamenti ha un sotto insieme di quelli di partenza.
-Per trovare l'\textbf{albero di copertura di peso minimo} bisgna trovare l'albero che minimizza il peso complessivo. Precisazione importante è quella che il problema non sempre ha una soluzione univoca e il numero necessario per collegare $n$ nodi è necessario avere $n-1$ cammini. Inoltre, un arco è definito \textbf{sicuro} se aggiungendolo ad un MST l'unione rimane un MST quindi nella soluzione si devono prediligere questi archi.
+Il problema è quello di voler determinare come connettere gli elementi di un grafo tra di loro usando collegamenti meno pesanti possibili; il grafo non è orientato ma è connesso e pesato. 
+E' come se si volesse collegare con la fibra ottica un paese usando meno cavo possibile.
+Per trovare la combinazione giusta bisogna trovare l'albero di copertura minore possibile, per \textbf{albero di copertura} si intende un sottografo di un grafo non orientato e connesso che contiene tutti i nodi del grafo, anch'esso è pesato ma come collegamenti ha un sotto insieme di quelli di partenza.
+Per trovare l'\textbf{albero di copertura di peso minimo} bisgna trovare l'albero che minimizza il peso complessivo. 
+Precisazione importante è quella che il problema non sempre ha una soluzione univoca e il numero necessario per collegare $n$ nodi è necessario avere $n-1$ cammini. 
+Inoltre, un arco è definito \textbf{sicuro} se aggiungendolo ad un MST l'unione rimane un MST quindi nella soluzione si devono prediligere questi archi.
 Il \textbf{metodo generico} per risolvere il problema è quello di creare un albero e unirlo sempre con archi sicuri.
+
+
 \subsubsection{Regole del ciclo e del taglio}
-Un \textbf{taglio} di un grafo non orientato è una partizione del grafo in due sottinsiemi disgiunti e un \textbf{arco leggero} è l'arco che che costa meno e che collega i due insiemi disgiunti dal taglio; un arco \textbf{attraversa il taglio} se dato l'arco ${u, v}$ allora $u \in S \land v \in V-S$ con $V$ il grafo iniziale e $V - S$ il sottoinsieme post taglio.
+Un \textbf{taglio} di un grafo non orientato è una partizione del grafo in due sottinsiemi disgiunti e un \textbf{arco leggero} è l'arco che che costa meno e che collega i due insiemi disgiunti dal taglio; 
+un arco \textbf{attraversa il taglio} se dato l'arco ${u, v}$ allora $u \in S \land v \in V-S$ con $V$ il grafo iniziale e $V - S$ il sottoinsieme post taglio.
 La \textbf{regola del taglio} vuole che scelto un taglio nel grafo che non "spezza" archi già considerati come ottimi e si può prendere come ottimo quello di costo minore.
 La \textbf{regola del ciclo} vuole che dato un ciclo senza archi già individuati come pessimi possiamo considerare pessimo l'arco con peso peggiore.
 Applicando queste regole si puoò individuare il MST però bisogna capire come e quando applicare queste tecniche.
 
 \subsubsection{Algoritmo di Kruskal}
-Analizza gli archi in costo crescente e utilizza un approccio greedy che si basa sulle union find: se i due nodi del collegamento appartengono gia' allo stesso insieme allora esso e' un arco da scartare (si tratta di un ciclo) mentre se i due nodi sono disgiunti allora e' uin ponte tra le due porzioni di taglio per cui e' il percorso ottimale.
+Analizza gli archi in costo crescente e utilizza un approccio greedy che si basa sulle union find: se i due nodi del collegamento appartengono gia' allo stesso insieme allora esso e' un arco da scartare (si tratta di un ciclo) mentre se i due nodi sono disgiunti allora e' un ponte tra le due porzioni di taglio per cui e' il percorso ottimale.
 In tutto questo per determinare l'MST ogni volta che si fa una union tra due insieme anche i nodi vengono uniti nell'albero finale
 Il costo totale è $\Theta(m\ log(n))$.
+
 \subsubsection{Algoritmo di Prim}
 Questo algoritmo parte da un nodo e taglia i suoi cammini, procede sempre e solo con la regola del taglio e si 'espande' sempre il taglio tenendo da una parte i nodi già nell'albero (ovvero quelli esplorati) e dall'altra del taglio quelli ancora da inserire.
-Per implementare questo algoritmo si usano le code con priorità: partendo dal primo nodo si inseriscono nella coda coppie $(nodo\ di\ arrivo, distanza)$ possibili (ovvero i collegamenti dal nodo in analisi) e iterativamente questo processo viene compiuto per ogni nodo secondo l'ordine nella lista con priorita'.
+Per implementare questo algoritmo si usano le code con priorità: partendo dal primo nodo si inseriscono nella coda con priorità coppie $(nodo\ di\ arrivo, distanza)$ possibili (ovvero i collegamenti dal nodo in analisi) e iterativamente questo processo viene compiuto per ogni nodo secondo l'ordine nella lista con priorita'.
+Per generare l'albero ogni nodo diventa il padre dei nodi che sblocca nodi o di cui riduce il cammino minimo.
 A questo punto si capisce perche' nell'implementazione della coda con priorita' e' necessario prevedere il caso in cui un elemento gia' inserito sia reinserito ma con un peso differente: nel caso si sia trovata una strada piu' efficiente per un nodo esso dovra' cambiare di posizione nella coda. 
 La complessità di questo algoritmo è di $\Theta(m\ log(n))$.
 
