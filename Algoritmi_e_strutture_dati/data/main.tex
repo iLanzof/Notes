@@ -860,9 +860,34 @@ Questo tipo di visita e' utile per capire quale sia il cammino piu' breve tra du
 si crea l'albero e poi, partendo dal nodo finale, tramite una funzione ricorsiva che a ritroso arriva fino al nodo di inizio si può stampare il cammino più corto.
 
 
+\begin{verbatim}
+    Tree BFS (Graph G, Vertex s){
+        for (Vertex v : Graph.getVertexes)
+            v.mark = false;
+        
+        Tree T = s;
+        s.mark = true;
+        Queue Q = new Queue;
+        Q.enqueue(s);
+        while (!Q.isEmpty()){
+            Vertex vert = Q.dequeue;
+            for (Vertex adiacent : vert.GetAdiacents){
+                if (adiacent.mark == false) {
+                    adiacent.mark = true;
+                    adiacent.parent = vert;
+                    adiacent.distance = vert.distance + 1;
+                    Q.enqueue(adiacent);
+                }
+            }
+        }
+        return T;
+    }
+\end{verbatim}
+
+
 \subsubsection{Visita in profondità (DFS)}
 Visita i nodi andando il più possibile lontano dalla sorgente e a differenza del BFS arriva a tutti i nodi del grafo, non solo quelli collegati ad un nodo. Per questo motivo la funzione crea un foresta ovvero un insieme di alberi.
-L'algoritmo e' ricorsivo e per ogni nodo riempie due paramentr: un \textit{discorvery time} ovvero il momento in cui e' stato scoperto e un \textit{finish time} ovvero quando termina la visita del nodo. 
+L'algoritmo e' ricorsivo e per ogni nodo riempie due parametri: un \textit{discorvery time} ovvero il momento in cui e' stato scoperto e un \textit{finish time} ovvero quando termina la visita del nodo. 
 La visita funziona che parte dal nodo iniziale al momento 1 poi passa ad un altro nodo fino a quando non si arriva ad un nodo che non ha piu' nodi non ancora scoperti disponibili.
 A quel punto tale nodo viene chiuso l'esecuzione torna sul nodo precedente e se ha altri nodi adiacenti inesplorati salta a loro se no anche esso viene chiuso e così via fino a quando tutti i nodi sono chiusi; 
 questo viene controllato da un ciclo while che si assicura che tutti i nodi del grafo siano stati considerati per cui anche nodi non connesi al nodo iniziale vengono considerati.
@@ -883,6 +908,41 @@ Mentre nel caso di grafi orientati, nel caso di un arco non incluso nella forest
 Per quanto riguarda le applicazioni questa visita rende particolarmente facile \textbf{Verificare DAG (Direct Acyclic Graph)} ovvero verificare che non ci siano archi all'indietro e fare l'\textbf{ordinamento topologico} nella sottocategoria dei DAG.
 L'ordinamento topologico è interessante perchè può essere interpretato come dipendenze logiche tra eventi tipo catena di montaggio. L'algoritmo si basa appunto su un iniziale DFS e ritorno una lista che viene fatta mettendo in ordine decrescente i finish time di ogni nodo, in modo pratico si fa una head-push ogni volta che un nodo viene chiuso.
 
+\begin{verbatim}
+    global int time = 0;
+
+    Tree DFS (Graph G){
+        for (Vertex v : Graph.getVertexes){
+            v.mark = false;
+            v.parent = null;
+        }
+        
+        Tree T;
+        for (Vertex vert : G.getVertexes){
+            if (vert.mark == false)
+                T = DFS_search(vert);
+        }
+        return T;
+    }
+
+    Tree DFS_search (Vertex vert){
+        vert.mark = true;
+        vert.dt = time;
+        time++;
+        for (Vertex v : vert.GetAdiacents){
+            if (v.mark == false){
+                v.parent = vert;
+                DFS_search(v);
+            }
+        }
+        time ++;
+        vert.ft = time;
+        return vert; //as a tree
+    }
+
+\end{verbatim}
+
+ 
 \subsection{Componenti connesse (grafi non orientati)}
 Due vertici $u$ e $v$ di un grafo sono \textbf{connessi} quando e' possibile raggiungere $v$ partendo da $u$, questa definizione induce un possibile partizionamento del grafo in insiemi di nodi connessi tra di loro.\
 Per risolvere questo problema basta etichettare inizialmente tutti i nodi con un valore di "non visitato" poi, per ogni nodo non ancora visitato, si chiama una funzione ricorsiva che etichetta con un valore (che per ogni insieme differente deve cambiare) il nodo, riempie il campo $parent$ dei nodi come nelle altre visite e si richiama ricorsivamente sui nodi connessi.
@@ -900,7 +960,7 @@ Il problema è quello di voler determinare come connettere gli elementi di un gr
 E' come se si volesse collegare con la fibra ottica un paese usando meno cavo possibile.
 Per trovare la combinazione giusta bisogna trovare l'albero di copertura minore possibile, per \textbf{albero di copertura} si intende un sottografo di un grafo non orientato e connesso che contiene tutti i nodi del grafo, anch'esso è pesato ma come collegamenti ha un sotto insieme di quelli di partenza.
 Per trovare l'\textbf{albero di copertura di peso minimo} bisgna trovare l'albero che minimizza il peso complessivo. 
-Precisazione importante è quella che il problema non sempre ha una soluzione univoca e il numero necessario per collegare $n$ nodi è necessario avere $n-1$ cammini. 
+Precisazione importante è quella che il problema non sempre ha una soluzione univoca e che per collegare $n$ nodi è necessario fare almeno $n-1$ passi. 
 Inoltre, un arco è definito \textbf{sicuro} se aggiungendolo ad un MST l'unione rimane un MST quindi nella soluzione si devono prediligere questi archi.
 Il \textbf{metodo generico} per risolvere il problema è quello di creare un albero e unirlo sempre con archi sicuri.
 
@@ -917,15 +977,81 @@ Analizza gli archi in costo crescente e utilizza un approccio greedy che si basa
 In tutto questo per determinare l'MST ogni volta che si fa una union tra due insieme anche i nodi vengono uniti nell'albero finale
 Il costo totale è $\Theta(m\ log(n))$.
 
+
+\begin{verbatim}
+    Tree Kruskal (Graph G) {
+        PriorityQueue Q = new PriorityQueue;
+        UnionFind S = new UnionFind;
+        for (Edge edge : G.getEdges())
+            Q.insert(edge, w(Edge));
+        
+        for (Vertex V : g.getVertexes()){
+            S.makeSet(V);
+            V.parent = null;
+        }
+
+        while (!Q.isEmpty()){
+            Edge e = Q.find();
+            Q.deleteMin();
+            Vertex So = e.getSource():
+            Vertex D = e.getDest();
+            if (S.find(So) != S.find(D))
+                D.parent = So;
+        }
+        
+        return T; //Supposing T is the root of the tree.
+    }
+\end{verbatim}
+
+
 \subsubsection{Algoritmo di Prim}
-Questo algoritmo parte da un nodo e taglia i suoi cammini, procede sempre e solo con la regola del taglio e si 'espande' sempre il taglio tenendo da una parte i nodi già nell'albero (ovvero quelli esplorati) e dall'altra del taglio quelli ancora da inserire.
+Questo algoritmo parte da un nodo e taglia i suoi cammini, procede sempre e solo con la regola del taglio ed 'espande' sempre il taglio tenendo da una parte i nodi già nell'albero (ovvero quelli esplorati) e dall'altra del taglio quelli ancora da inserire.
 Per implementare questo algoritmo si usano le code con priorità: partendo dal primo nodo si inseriscono nella coda con priorità coppie $(nodo\ di\ arrivo, distanza)$ possibili (ovvero i collegamenti dal nodo in analisi) e iterativamente questo processo viene compiuto per ogni nodo secondo l'ordine nella lista con priorita'.
 Per generare l'albero ogni nodo diventa il padre dei nodi che sblocca nodi o di cui riduce il cammino minimo.
 A questo punto si capisce perche' nell'implementazione della coda con priorita' e' necessario prevedere il caso in cui un elemento gia' inserito sia reinserito ma con un peso differente: nel caso si sia trovata una strada piu' efficiente per un nodo esso dovra' cambiare di posizione nella coda. 
 La complessità di questo algoritmo è di $\Theta(m\ log(n))$.
 
+\begin{verbatim}
+    Tree Prim (Graph G, Vertex a) {
+        Tree T = a;
+        PriorityQueue Q = new PriorityQueue;
+        Q.enqueue(a,0);
+
+        for (Vertex v : G.getVertexes()){
+            v.mark = false;
+            v.parent = mull;
+            v.distance = infty;
+            }
+        
+        while (!Q.isEmpty()){
+            Vertex vert = Q.find();
+            Q.deleteMin();
+            if (vert.mark == false) {
+                vert.mark = true;
+                for (Edge e : vert.getOutEdges()){
+                    if (e.getDest.mark == false){
+                        Q.enqueue(e.getdest,w(e))
+                        e.getDest.distance = vert.distance + w(e);
+                        e.getDest.parent = vert;
+                    } else if (e.getDest.distance > w(e) + vert.distance){
+                        Q.decareseKey(e.getDest, w(e));
+                        e.getDest.distance = vert.distance + w(e);
+                        e.getDest.parent = vert;
+                    }
+                }
+            }
+    
+        }
+        return T;
+    }
+\end{verbatim}
+
+
+
+
+
 \subsection{Camminimi minimi}
-Considerando un grafo orientato si vuole trovare il cammino di costo minimo che collega due nodi dati in input. Ci sono diverse formulazioni del problema oltre a quella appena fornita, per esempio il \textit{single surce shortest path} che dato un solo punto deve restituire tutti i cammini minimi da esso agli altri oppure l'\textit{All-pairs shortest path} ovvero determinare il minimo cammino tra tutte le coppie di punti.
+Considerando un grafo orientato e pesato si vuole trovare il cammino di costo minimo che collega due nodi dati in input. Ci sono diverse formulazioni del problema oltre a quella appena fornita, per esempio il \textit{single surce shortest path} che dato un solo punto deve restituire tutti i cammini minimi da esso agli altri oppure l'\textit{All-pairs shortest path} ovvero determinare il minimo cammino tra tutte le coppie di punti.
 Ci sono dei casi in cui  non si può trovare un cammino minimo, principalmente solo due: quando i due punti non sono raggiungibili (tipo alcuni nodi di grafi orientati) oppure cammini con costo negativo all'interno di un ciclo che complessivamente ha un costo negativo perchè basta continuare a girare nel ciclo abbassando il costo. 
 Ci sono alcune cose tecniche da sapere a riguardo di questo problema, per esempio se due nodi sono collegati allora esiste sempre un cammino semplice (senza cicli) si costo minimo.
 Un'altra proprietà del cammino ottimale è quella di essere anche il cammino ottimale per collegare il punto di inizio con qualsiasi altro nodo intermedio a quello finale.
@@ -938,30 +1064,141 @@ Ci sono anche alcune utili \textbf{proprietà della distanza tra vertici} tra cu
     \item $d_{xy} = \infty$
 \end {itemize}
 
-\subsubsection{Algoritmo di Belman Ford}
+\subsubsection{Algoritmo di Bellman Ford}
 Questo algoritmo risolve il problema nella forma \textit{single surce shortest path}: data la sorgente $s$ mantiene una stima per eccesso $D_{sv} \geq d_{sv}$ del cammino minimo ad ogni nodo $v$, al termine dell'esecuzione del problema le stime saranno precise per cui $D_{sv} = d_{sv}$ sse non ci sono cicli di costo negativo.
-Inizialmente pone $D_{ss} = 0, \   d_{sv} = \infty \ \forall s \neg= v$, successivamente esegue dei \textit{rilassamenti} che migliorano le approssimazioni. 
+Inizialmente pone $D_{ss} = 0, \   d_{sv} = \infty \ \forall s \not= v$, successivamente esegue dei \textit{rilassamenti} che migliorano le approssimazioni. 
 Questi rilassamenti sono piuttosto intuitivi: se c'è un cammino tra un nodo intermedio tra $s$ e $v$ chiamato $D_{su}$ che sommato al cammino tra $u$ e $v$ risulta minore di $D_{sv}$ allora si sostituisce il valore della somma essendo un cammino minimo.
 Per eseguire un ciclo di rilassamento bisgna anallizzare tutti gli archi del grafo vedendo se permettono un effettivo rilassamento.
-A questo punto tocca capire quante iterazioni di rilasamenti devono essere fatti per arrivare ad una convergenza sicura, la risposta è che dopo $k$ iterazioni si è trovato il cammino minimo che attraversa al massimo $k$ archi.
-Per cui essendoci al massimo $n-1$ archi in un grafo allora alla $n-1$ ierazione avremo coperto tutti i cammini possibili e trovato dunque il minimo, il costo computazionale è $O(nm)$.
+A questo punto tocca capire quante iterazioni di rilassamenti devono essere fatte per arrivare ad una convergenza sicura, la risposta è che dopo $k$ iterazioni si è trovato il cammino minimo che attraversa al massimo $k$ archi.
+Per cui essendoci al massimo $n-1$ archi in un grafo allora alla $n-1$ iterazione avremo coperto tutti i cammini possibili e trovato dunque il minimo, il costo computazionale è $O(nm)$.
 In realtà una possibile modifica che lo rende più efficiente è terminare non sempre a $n-1$ ierazioni ma quando non si effettuano più rilassamenti, un'altra modifica è controllare se ci sono cicli negativi: basta, una volta finito il rilassamento, controllare se è possibile eseguirne un altro e in caso affermativo c'è un ciclo di costo negativo.
+Il costo di questo algoritmo e' $O(nm)$
+
+\begin{verbatim}
+
+    //L'algoritmo e' implementato in modo tale che restituisca un albero, volendo si puo'
+    //creare un array pred[1,...,n] che per ogni vertice v e il suo predecessore u
+    //memorizza nell'array la relazione: pred[v] = u; 
+
+
+    Tree Bellman-Ford (Graph G, Vertex a) {
+        Tree T = a;
+        for (Vertex v : G.getVertexes){
+            v.distance = infty;
+            v.parent = null;
+        }
+        a.distance = 0;
+        bool mod = true;
+        for (int i = 0; int < G.NumVertici && mod; i++){
+            mod = false;
+            for (Edge e : G.getEdges()){
+                if (e.getDest.distance > e.getSource.distance + w(e)){
+                    e.getDest.distance = e.getSource.distance + w(e);
+                    e.getDest.parent = e.getSource;
+                    mod = true;
+                }
+            }
+        }
+        mod = false;
+
+        for (Edge e : G.getEdges()){
+                if (e.getDest.distance > e.getSource.distance + w(e))
+                    mod = true;
+            }
+
+        if (!mod)
+            return T;
+        else
+            print "C'e' almeno un ciclo negativo";
+    }
+\end{verbatim}
+
+
+
+
+
 
 \subsubsection{Algoritmo di Dijkstra}
-Anche questo algoritmo è necesario a risolvere il \textit{single surce shortes path} che però è più efficiente si quello di Belman-Ford ma non funziona in caso di cammini negativi.
-Il lemma su cui si basa questo algoritmo è che dato il grafo senza cammini negativi e un albero di cammini minimi dalla radice alle foglie allora il cammino tra una foglia e un nodo non appartenete all'albero è proprio quello dalla foglia al nodo.
-L'algoritmo viene implementato tramite una coda con priorita' che resituisce sempre il nodo con distanza minima disponibile e li analiza tutti i collegamenti ad essi andando am mettere nella coda con priorita' i nodi man mano che vengono scoperti.
+Anche questo algoritmo è necesario a risolvere il \textit{single surce shortes path} che però è più efficiente di quello di Belman-Ford ma non funziona in caso di cammini negativi.
+Il lemma su cui si basa questo algoritmo è che dato il grafo senza cammini negativi e un albero di cammini minimi dalla radice alle foglie allora il cammino minimo tra una foglia e un nodo non appartenente all'albero è proprio quello dalla foglia al nodo.
+L'algoritmo viene implementato tramite una coda con priorita' che resituisce sempre il nodo con distanza minima disponibile, per ogni nodo aggiorna, quando e' possibile, il valore della distanza dalla sorgente di tutti i nodi a lui adiacenti, li mette nella coda e li connette ad esso nell'albero di costo minimo.
+Il costo computazionale di questo algoritmo e' $O(mlog(n))$.
+
+\begin{verbatim}
+    Vertex [] Dijksta (Graph G, Vertex a) {
+        Vertex pred [1,..., G.NumVertici()];
+        PriorityQueue Q;
+        for (Vertex v : G.getVertexes())
+            v.distance = infty;
+        a.distance = 0;
+        pred[a] = a;
+        Q.enqueue(a,0);
+        while(!Q.isEmpty()){
+            Vertex v = Q.findMin();
+            Q.deleteMin();
+            for (Edge e : v.getOutEdges()){
+                if (e.getDest().distance == infty){
+                    e.getDest().distance = v.distance + w(e);
+                    pred[e.getDest()] = v;
+                    Q.enqueue(e.getDest(), e.getDest().distance);
+                } else if (e.getDest().distance > v.distance + w(e)) {
+                    e.getDest().distance = v.distance + w(e)
+                    pred[e.getDest()] = v;
+                    Q.decareseKey(e.getDest(), e.getDest().distance);
+                }
+            }
+        }
+        return pred;
+    }
+\end{verbatim}
+
+
 
 \subsubsection{Algoritmo di Floyd e Warshall}
-Questo algoritmo risolve il problema dell'\textit{all-pairs shortest paths} e inizialmente e' necessario capire come potre rappresentare la soluzione ovvero voler rappresentare sia le distanze che i cammini tutte le copiie di nodi.
-Per rappresentare la distanza tra coppie di punti la matrice e' la struttura dati miliore mentre per rappresentare ogni cammino il metodo migliore e' anche in questo caso sempre una matrice che per ogni coppia di partenza-destinazione contiene il primo passo del cammino migliore per cui si andra' iterativamente a cambiare cella fino ad arrivare al nodo finale.
-Gia' si puo' intuire che questo algoritmo si basa molto sulla programmazione dinamica e iterativamente calcola $D_{xy}^k$ ovvero il cammino tra $x$ e $y$ usando $k$ nodi con $k=1,...,n$ e alla fine la soluzione sara' proprio $D_{xy}^n$.
-L'inizializzazione e' semplice perche' $D_{xy}^0$ e' $0$ se $x=y$, $w(x,y)$ se sono collegati mentre $\infty$ se non sono collegati; a questo punto tocca capire come calcolare tutti gli altri problemi dando pero' per scontato che il problema $k-1$ sia stato risolto:
-la soluzione e' $D_{xy}^k = min{D_{xy}^k-1, D_{xk}^k-1 + D_{ky}^k-1}$ e a questo punto si puo' costruire l'algoritmo.
-Si inizializza una matrice 3 dimensionale che ha lati: n, n, n+1 le righe sono la partenza le colonne l'arrivo e la profondita' e' la pesantezza del cammino da $x \rightarrow y$; la prima facciata e' $D_{xy}^0$ con x,y che sono i due possibili vertici (cosi' si analizzano tutte le combinazioni). A questo punto con un ciclo diverso si itera la formula precedente per ogni $n + 1$ faccia del cubo e su ogni cella della singola faccia.
-L'ultima facciata pero' non ci offre anche un modo di trovare un cammino per cui e' necessatrio utilizzare una matrice d'appoggio che tutte le volte che si trova un cammino migliore nel cubo nella matrice d'appoggio si segna il nodo successivo a quello analizzato.
-Dunque la complessita' computazionale e' $O(n^3)$, si puo' effettuare una piccola ottimizzazione a livello memonico infatti al posto di usare un cubo si puo' usare una tabella normale che cambia ad ogni iterazione ma il valore $k$ e' ancora necessaria per la quantita' di iterazioni.
+Questo algoritmo risolve il problema dell'\textit{all-pairs shortest paths}, si basa sulla programmazione dinamica: iterativamente calcola $D_{xy}^k$ ovvero il cammino tra $x$ e $y$ usando $k$ nodi con $k=1,...,n$; 
+alla fine dell' esecuzione la soluzione sara' proprio $D_{xy}^n$. Per rappresentare le soluzioni intermedie si utilizza una matrice di dimensioni del numero di nodi.
+I casi base del calcolo sono semplici perche' $D_{xy}^0$ e' $0$ se $x=y$, $w(x,y)$ se sono collegati mentre $\infty$ se non sono collegati.
+Per calcolare tutti gli altri sotto-problemi si usa la formula $D_{xy}^k = min\{D_{xy}^k-1, D_{xk}^k-1 + D_{ky}^k-1\}$, ovvero ci si chiede se, andando da $x$ a $y$, e' piu' conveniente andarci direttamente oppure andare da $x$ a $k$ e poi da $k$ a $y$.
+Si inizializza una matrice 3 dimensionale che ha lati: n, n, n+1 le righe sono la partenza, le colonne l'arrivo e la profondita' e' la pesantezza del cammino da $x \rightarrow y$; 
+la prima facciata e' $D_{xy}^0$ con x,y che sono i due possibili vertici (cosi' si analizzano tutte le combinazioni).
+ A questo punto con un ciclo diverso si itera la formula precedente per ogni $n + 1$ faccia del cubo e su ogni cella della singola faccia.
+L'ultima facciata pero' non ci offre anche un modo di trovare un cammino per cui e' necessatrio utilizzare una matrice d'appoggio che tutte le volte che si trova un cammino migliore memorizza, nella matrice d'appoggio, il nodo successivo a quello analizzato.
+A questo la tabella d'appoggio per ogni coppia $(partenza, arrivo)$ contiene il passo successivo da fare e cosi' si puo' trovare il cammino minimo.
+Dunque la complessita' computazionale e' $O(n^3)$, si puo' effettuare una piccola ottimizzazione a livello di memoria: al posto di usare un cubo si puo' usare una tabella normale che cambia ad ogni iterazione ma il valore $k$ e' ancora necessario per la quantita' di iterazioni.
 Inoltre si possono anche individuare i cicli negativi nel grafo: a iterazione finita basta controllare se la distanza tra un vertice e se stesso e' inferiore a 0.
 
+\begin{verbatim}
+    Vertex [] [] Floyd_Warshall (Graph G) {
+        int n = G.NumVertici();
+        Vertex M [n] [n];
+        Vertex pred [n][n]
+        for (int i = 0; i < n; i++){
+            for (int j = 0; j < n; j++){
+                if (i == j)
+                    M[i][j] = 0;
+                else if (G.getEdge(i,j) != null)
+                    M[i][j] = w(G.getEdge(i,j));
+                else
+                    M[i][j] = infty;
+            }
+        }
+        for (int k = 0; k < n; k++){
+           for (int i = 0; i < n; i++){
+                for (int j = 0; j < n; j++){
+                    if (M[i][j] > M[i][k] + M[k][j]){
+                        M[i][j] = M[i][k] + M[k][j]
+                        pred[i][j] = pred [i] [k];
+                    }
+                }
+            } 
+        }
+        for (int i = 0; i < n; i++) {
+            if ( D[x,x] < 0 ) then
+                error “Il grafo contiene cicli negativi”
+            else
+                return pred;
+        }
+    }
+\end{verbatim}
 
 \end{document}
