@@ -1201,4 +1201,83 @@ Inoltre si possono anche individuare i cicli negativi nel grafo: a iterazione fi
     }
 \end{verbatim}
 
+
+
+\section{Tabella riassuntiva di tutti i costi visti}
+
+\begin{center}
+\begin{tabular}{||c | c c c||} 
+ \hline
+ Algoritmo & Costo ottimo & Costo medio & Costo pessimo \\ [0.5ex] 
+ \hline\hline
+ SelectioSort & $\Theta(n^2)$ & $\Theta(n^2)$ & $\Theta(n^2)$ \\ 
+ \hline
+ InsertionSort & $\Theta(n)$ & $\Theta(n^2)$ & $\Theta(n^2)$ \\
+ \hline
+ MergeSort & $\Theta(n\ log(n))$ & $\Theta(n\ log(n))$ & $\Theta(n\ log(n))$ \\
+ \hline
+ QuickSort & $\Theta(n\ log(n))$ & $\Theta(n\ log(n))$ & $\Theta(n^2)$ \\
+ \hline
+ CountingSort & $\Theta(n + k)$ & $\Theta(n + k)$ & $\Theta(n + k)$ \\  
+ \hline
+ RadixSort & $\Theta(d(n + k))$ & $\Theta(d(n + k))$ & $\Theta(d(n + k))$ \\ [0.5ex] 
+ \hline
+ findMin & & & $O(1)$\\
+ \hline
+ insert & & & $O(log_d(n))$\\
+ \hline
+ delete & & & $O(d\ log_d(n))$\\
+ \hline
+ deleteMin & & & $O(log_d(n))$\\
+ \hline
+ increaseKey & & & $O(d\ log_d(n))$\\
+ \hline
+ decareseKey & & & $O(log_d(n))$\\
+ \hline
+\end{tabular}
+\end{center}
+Legenda:
+\begin{itemize}
+    \item n = numero di elementi da ordinare
+    \item d = numero massimo di cifre in una chiave
+    \item k = ampiezza range di valori chiave
+\end {itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Summaryhash.png}
+    \caption{Riassunto costi delle operazioni su un dizionario implmentato con le diverse strutture viste}
+    \label{fig:summaryhash}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Summary_Union_Find.png}
+    \caption{Riassunto costi delle procedure relative alla struttura Union Find}
+    \label{fig:summaryUF}
+\end{figure}
+
+\begin{center}
+\begin{tabular}{||c | c c||} 
+ \hline
+ Algoritmo & Matrice di Adiacenza & Lista di Adiacenza \\ [0.5ex] 
+ \hline\hline
+ BFS & $O(n^2)$ & $O(n + m)$ \\ 
+ \hline
+ DFS & $O(n^2)$ & $O(n + m)$ \\ 
+ \hline
+ Kruskal &  & $O(m\ log(n))$ \\ 
+ \hline
+ Prim &  & $O(m\ log(n))$  \\ 
+ \hline
+ Bellman Ford &  & $O(nm)$ \\ 
+ \hline
+ Dijksta &  & $O(m\ log(n))$ \\ 
+ \hline
+ Floyd Warshall &  & $O(n^3)$ \\ 
+ \hline
+\end{tabular}
+\end{center}
+
+
 \end{document}
