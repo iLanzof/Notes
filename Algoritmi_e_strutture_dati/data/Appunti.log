@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.5.18)  22 JUN 2026 09:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.5.18)  26 JUN 2026 19:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -584,116 +584,116 @@ Package pdftex.def Info: Merge Sort.png  used on input line 140.
 <CountingaSortexample.png, id=479, 860.21375pt x 435.6275pt>
 File: CountingaSortexample.png Graphic file (type png)
 <use CountingaSortexample.png>
-Package pdftex.def Info: CountingaSortexample.png  used on input line 162.
+Package pdftex.def Info: CountingaSortexample.png  used on input line 166.
 (pdftex.def)             Requested size: 241.84843pt x 122.4734pt.
 <CountingSort.png, id=480, 1114.1625pt x 706.64pt>
 File: CountingSort.png Graphic file (type png)
 <use CountingSort.png>
-Package pdftex.def Info: CountingSort.png  used on input line 169.
+Package pdftex.def Info: CountingSort.png  used on input line 173.
 (pdftex.def)             Requested size: 241.84843pt x 153.38026pt.
  [5 <./CountingaSortexample.png> <./CountingSort.png>]
 <SummarySort.png, id=492, 1199.48125pt x 910.40125pt>
 File: SummarySort.png Graphic file (type png)
 <use SummarySort.png>
-Package pdftex.def Info: SummarySort.png  used on input line 206.
+Package pdftex.def Info: SummarySort.png  used on input line 210.
 (pdftex.def)             Requested size: 314.40001pt x 238.62967pt.
  [6 <./SummarySort.png>] [7] [8]
 <Riassunto BTS.png, id=509, 1841.88126pt x 971.63pt>
 File: Riassunto BTS.png Graphic file (type png)
 <use Riassunto BTS.png>
-Package pdftex.def Info: Riassunto BTS.png  used on input line 344.
+Package pdftex.def Info: Riassunto BTS.png  used on input line 348.
 (pdftex.def)             Requested size: 241.84843pt x 127.57652pt.
 <rotations.png, id=510, 862.22125pt x 528.97626pt>
 File: rotations.png Graphic file (type png)
 <use rotations.png>
-Package pdftex.def Info: rotations.png  used on input line 375.
+Package pdftex.def Info: rotations.png  used on input line 379.
 (pdftex.def)             Requested size: 266.03474pt x 163.20607pt.
  [9 <./Riassunto BTS.png>]
 <Rotations_case.png, id=522, 887.315pt x 424.58624pt>
 File: Rotations_case.png Graphic file (type png)
 <use Rotations_case.png>
-Package pdftex.def Info: Rotations_case.png  used on input line 382.
+Package pdftex.def Info: Rotations_case.png  used on input line 386.
 (pdftex.def)             Requested size: 362.77264pt x 173.5891pt.
 <SummaryAVL.png, id=523, 887.315pt x 424.58624pt>
 File: SummaryAVL.png Graphic file (type png)
 <use SummaryAVL.png>
-Package pdftex.def Info: SummaryAVL.png  used on input line 402.
+Package pdftex.def Info: SummaryAVL.png  used on input line 406.
 (pdftex.def)             Requested size: 362.77264pt x 173.5891pt.
  [10 <./Rotations.png> <./Rotations_case.png>] [11 <./SummaryAVL.png>]
 [12]
 <Summaryhash.png, id=548, 1635.10875pt x 721.69624pt>
 File: Summaryhash.png Graphic file (type png)
 <use Summaryhash.png>
-Package pdftex.def Info: Summaryhash.png  used on input line 486.
+Package pdftex.def Info: Summaryhash.png  used on input line 490.
 (pdftex.def)             Requested size: 362.77264pt x 160.11714pt.
  [13 <./Summaryhash.png>]
 <Summary_d_Heap.png, id=556, 1105.12875pt x 670.505pt>
 File: Summary_d_Heap.png Graphic file (type png)
 <use Summary_d_Heap.png>
-Package pdftex.def Info: Summary_d_Heap.png  used on input line 550.
+Package pdftex.def Info: Summary_d_Heap.png  used on input line 554.
 (pdftex.def)             Requested size: 362.77264pt x 220.101pt.
  [14] [15 <./Summary_d_Heap.png>]
 <Summary_Union_Find.png, id=567, 1402.23875pt x 396.48125pt>
 File: Summary_Union_Find.png Graphic file (type png)
 <use Summary_Union_Find.png>
-Package pdftex.def Info: Summary_Union_Find.png  used on input line 589.
+Package pdftex.def Info: Summary_Union_Find.png  used on input line 593.
 (pdftex.def)             Requested size: 362.77264pt x 102.5745pt.
  [16 <./Summary_Union_Find.png>] [17] [18]
-Overfull \hbox (35.92624pt too wide) in paragraph at lines 760--760
+Overfull \hbox (35.92624pt too wide) in paragraph at lines 764--764
 []        \T1/cmtt/m/n/10 L[i,j] = min{L[i-1,j]+1,L[i,j-1]+1,L[i-1,j-1]}; //dev
 o prendere il minimo di operazioni tra[] 
  []
 
 
-Overfull \hbox (30.67752pt too wide) in paragraph at lines 760--760
+Overfull \hbox (30.67752pt too wide) in paragraph at lines 764--764
 []                                                        \T1/cmtt/m/n/10 //tra
 sformare S[1,...,i-1] in T[1,..,j] ed[] 
  []
 
 
-Overfull \hbox (51.6724pt too wide) in paragraph at lines 760--760
+Overfull \hbox (51.6724pt too wide) in paragraph at lines 764--764
 []                                                        \T1/cmtt/m/n/10 //eli
 minare l'ultimo carattere, fare lo stesso[] 
  []
 
 
-Overfull \hbox (46.42368pt too wide) in paragraph at lines 760--760
+Overfull \hbox (46.42368pt too wide) in paragraph at lines 764--764
 []                                                        \T1/cmtt/m/n/10 // ma
  a sequenze invertite oppure trasformare[] 
  []
 
 
-Overfull \hbox (25.4288pt too wide) in paragraph at lines 760--760
+Overfull \hbox (25.4288pt too wide) in paragraph at lines 764--764
 []                                                        \T1/cmtt/m/n/10 //S[1
 ,...,i-1] in T[1,...,j-1] e lasciare[] 
  []
 
 
-Overfull \hbox (46.42368pt too wide) in paragraph at lines 760--760
+Overfull \hbox (46.42368pt too wide) in paragraph at lines 764--764
 []        \T1/cmtt/m/n/10 L[i,j] = min{L[i-1,j]+1,L[i,j-1]+1,L[i-1,j-1]+1}; //d
 evo prendere il minimo di operazioni tra[] 
  []
 
 
-Overfull \hbox (30.67752pt too wide) in paragraph at lines 760--760
+Overfull \hbox (30.67752pt too wide) in paragraph at lines 764--764
 []                                                        \T1/cmtt/m/n/10 //tra
 sformare S[1,...,i-1] in T[1,..,j] ed[] 
  []
 
 
-Overfull \hbox (51.6724pt too wide) in paragraph at lines 760--760
+Overfull \hbox (51.6724pt too wide) in paragraph at lines 764--764
 []                                                        \T1/cmtt/m/n/10 //eli
 minare l'ultimo carattere, fare lo stesso[] 
  []
 
 
-Overfull \hbox (46.42368pt too wide) in paragraph at lines 760--760
+Overfull \hbox (46.42368pt too wide) in paragraph at lines 764--764
 []                                                        \T1/cmtt/m/n/10 // ma
  a sequenze invertite oppure trasformare[] 
  []
 
 
-Overfull \hbox (51.6724pt too wide) in paragraph at lines 760--760
+Overfull \hbox (51.6724pt too wide) in paragraph at lines 764--764
 []                                                        \T1/cmtt/m/n/10 //S[1
 ,...,i-1] in T[1,...,j-1] e cambiare solo[] 
  []
@@ -701,11 +701,11 @@ Overfull \hbox (51.6724pt too wide) in paragraph at lines 760--760
 [19] [20] [21] [22] [23] [24] [25] [26]
 File: Summaryhash.png Graphic file (type png)
 <use Summaryhash.png>
-Package pdftex.def Info: Summaryhash.png  used on input line 1247.
+Package pdftex.def Info: Summaryhash.png  used on input line 1251.
 (pdftex.def)             Requested size: 362.77264pt x 160.11714pt.
 File: Summary_Union_Find.png Graphic file (type png)
 <use Summary_Union_Find.png>
-Package pdftex.def Info: Summary_Union_Find.png  used on input line 1255.
+Package pdftex.def Info: Summary_Union_Find.png  used on input line 1259.
 (pdftex.def)             Requested size: 362.77264pt x 102.5745pt.
  [27] [28] (./Appunti.aux)
  ***********
@@ -741,7 +741,7 @@ re/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1
 m1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/shar
 e/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/
 public/cm-super/sftt1000.pfb>
-Output written on Appunti.pdf (28 pages, 1289923 bytes).
+Output written on Appunti.pdf (28 pages, 1290187 bytes).
 PDF statistics:
  754 PDF objects out of 1000 (max. 8388607)
  654 compressed objects within 7 object streams

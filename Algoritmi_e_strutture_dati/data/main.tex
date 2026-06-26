@@ -28,7 +28,7 @@ Questa notazione permette di confrontare rapidamente tra loro algoritmi differen
 \subsection{Definizioni e notazioni matematiche}
 \paragraph{Funzione di costo}
 Associa ad ogni input n la quantità di calcolo necessaria a terminare il calcolo, tutti i numeri sono naturali quindi un numero di bit non negativo e non frazionario ma il codomionio delle funzioni è $\mathbb{R}^+$.
-Una volta trovata la funzione di costo ne si sstudia l'andamento asintotico per capirne il \textbf{tasso di crescita}.
+Una volta trovata la funzione di costo ne si studia l'andamento asintotico per capirne il \textbf{tasso di crescita}.
 \paragraph{O-grande}
 Data una funzione $g(n)$ l'insieme delle funzioni $O-grande$ è composto da tutte quelle funzioni con un ordine di crescita inferiorie di $g(n)$; $g(n)$ è dunque il \textbf{limite asintotico superiore}.
 \paragraph{$\Omega$-grande}
@@ -111,7 +111,7 @@ A causa dell'implementazione degli array la funzione di swap necessita di ulteri
 La ricerca del minimo richiede di analizzare tutti gli elementi da $i + 1$ a $n$ ($\Theta(n)$), questa operazione va pero' ripetuta $\Theta(n)$ volte 
 portando la complessità computazionale di questo algoritmo a $\Theta(n^2)$.
 \subsubsection{Isertion Sort}
-Partendo dal secondo elemento e andando verso l'ultimo si inserisce il valore nella parte di array a sinistra nell'ordine giusto scambiandolo con tutti i valori maggiori di esso. 
+Partendo dal secondo elemento e andando verso l'ultimo si inserisce il valore nella parte di array a sinistra dell'elemento preso in esame nell'indice giusto, per far ciò viene scambiato con tutti i valori maggiori di esso. 
 Per come vengono eseguiti i confronti l'algoritmo è stabile.
 \begin{figure}[H]
     \centering
@@ -122,10 +122,10 @@ Per come vengono eseguiti i confronti l'algoritmo è stabile.
 Nel caso ottimo il for viene eseguito $n$ volte e basta quindi $\Theta(n)$; nei casi medio e pessimo invece avrà un costo pari a $\Theta(n^2)$.
 
 \subsection{Divide et impera}
-Viene dalla tecnica romana e consiste nel dividere il problema in problemi più semplici (\textit{Divide}) che poi vengono risolti in maniera facile (\textit{Conquer}) e poi le soluzioni vengono fuse per risolvere il problema generale.
+Viene dalla tecnica romana e consiste nel dividere il problema in problemi più semplici (\textit{Divide}) che poi vengono risolti in maniera facile (\textit{Conquer}), le soluzioni vengono poi fuse per risolvere il problema generale.
 \subsubsection{MergeSort}
-Consiste nello dividere ricorsivamente a metà l'array per poi oridnare i sotto-array che diventano sempre piu' grandi ma allo stesso tempo ogni meta' e' ordinata; questo algorimto può essere implementato in modo stabile.
-E' pero' molto complicato implementare questo algoritmo in modo tale che sia anche in-place.
+Consiste nel dividere ricorsivamente a metà l'array per poi ordinare i sotto-array che nonostante diventino sempre piu' grandi, sono però ordinati.
+Questo algoritmo può essere implementato in modo stabile ma è più complicata l'implementazione in-place.
 
 \begin{figure}[H]
     \centering
@@ -143,20 +143,24 @@ E' pero' molto complicato implementare questo algoritmo in modo tale che sia anc
 \end{figure}
 Questo algoritmo ha complessità $\Theta(nlog(n))$
 \subsubsection{QuickSort}
-Si sceglie all'interno dell'array un valore detto \textit{pivot} e si riordina l'array in modo tale che tutti i numeri più grandi siano nella parte destra dell'array e tutti i più piccoli sono a sinistra; a livello pratico si ha un contatore che tiene traccia dell'indice dell'ultimo elemento che deve stare a sdinistra del pivot e quando se ne incontra un altro si scambia con quello successivo.
-A questo punto si chiama ricorsivamente l'algoritmo nei due sotto array escluso il pivot per riordinare l'array.
+Si sceglie all'interno dell'array un valore detto \textit{pivot} e si riordina l'array in modo tale che tutti i numeri più grandi siano nella parte destra dell'array e tutti i più piccoli siano a sinistra.
+A livello implementativo si scambia inizialmente il \textit{pivot} con l'ultimo elemento dell'array, successivamente tutti i valori minori del \textit{pivot} vengono accantonati nella parte più a sinistra dell'array,
+per far ciò si usa una variabile indice che tiene traccia dell'ultimo numero minore del pivot sistemato bene nell'array in modo tale da fare eventuali scambi di numeri inferiori del pivot con il successivo del contatore.
+Una volta finito, sempre tramite la variabile indice, si sistema il pivot con un ulteriore swap e si chiama ricorsivamente l'algoritmo sui due array (pivot escluso).
 Nel caso ottimo il costo è $\Theta(nlog(n))$, nel caso pessimo $\Theta(n^2)$ mentre nel caso medio è $O(nlog(n))$. 
 La complessità dipende molto da quale numero si scelga come \textit{pivot} perche' la piu' sono bilanciati i due sotto array piu' e' efficiente l'algoritmo, quindi un'implementazione che sceglie il pivot in maniera furba può rendere l'algoritmo estramamente rapido. 
-Nel caso studito si sceglie un numero a caso perche' rende molto improbabile ricadere nel caso pessimo o sfavorevole.
+Nel caso studiato si sceglie un numero a caso perche' rende molto improbabile ricadere nel caso pessimo o sfavorevole.
 \subsubsection{DualPivot Quicksort}
 Crea delle partizioni rispetto a due \textit{pivot} e rende quindi meno probabile ricadere nel caso pessimo ma è anche abbastanza ibrido come algoritmo perchè a seconda delle situazioni può chiamare diversi algoritmi che lo rendono, in generale, molto efficiente; in media ha complessità $O(nlog(n))$.
 \subsubsection{Tim Sort}
 E' il più recente degli algoritmi che inizialmente fu introdotto in Python e si basa sull'idea che in un array ci siano già delle sottosequenze ordinate e da li usa il merge o insertion per sistemare le sequenze tra di loro. Come complessità ha costo, nei casi medio e pessimo, pari a $O(nlog(n))$ mentre nel caso ottimo $O(n)$.
 \subsection{Algoritmi di ordinamento in tempo lineare}
-Sono algoritmi che possono essere usati in alcune condizioni speciali perche' un qualsiasi algoritmo di ordinamento basato sulla comparazione di valori non puo' avere un'efficienza migliore fi $\Theta(nlog(n))$ nel caso pessimo.
+Sono algoritmi che possono essere usati in alcune condizioni speciali perche' un qualsiasi algoritmo di ordinamento basato sulla comparazione di valori non puo' avere un'efficienza migliore di $\Theta(nlog(n))$ nel caso pessimo.
 
 \subsubsection{Counting Sort}
-Questo algoritmo può essere usato solo per ordinare interi all'interno di un intervallo $[a,b]$, esso usa un array d'appoggio di grandezza $k =b-a+1$ per contare quante volte un valore sta nell'array di partenza, riordina l'array senza doppione e riempio l'array di partenza con i numeri in modo ordinato.
+Questo algoritmo può essere usato solo per ordinare interi all'interno di un intervallo $[a,b]$, 
+esso usa un array d'appoggio di grandezza $k =b-a+1$ per contare quante volte un valore sta nell'array di partenza e lo 
+riordina inserendo i numeri in modo ordinato secondo la loro frequenza.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\linewidth]{CountingaSortexample.png}
@@ -171,12 +175,12 @@ Questo algoritmo può essere usato solo per ordinare interi all'interno di un in
     \label{fig:CountingSort}
 \end{figure}
 
-Il costo di questo algoritmo è $\Theta(n+k)$ perchè se k è molto più grande di n o viceversa non è per nulla conveniente.
-Per rendere l'algoritmo stabile basta, una volta riempito l'array d'appoggio che conta gli elementi identici, bisogna eseguire le seguenti operazioni:
+Il costo di questo algoritmo è $\Theta(n+k)$ perchè se k è molto più grande di n o viceversa è quel valore che vince asintoticamente.
+Per rendere l'algoritmo stabile basta, una volta riempito l'array d'appoggio che conta gli elementi identici, eseguire le seguenti operazioni:
 \begin {enumerate}{
-    \item Ricodificare l'array d'appoggio per ottenere l'ultima posizione del dato elemento nell'array finale. Per farlo basta usare la formula:
+    \item Ricodificare l'array d'appoggio per ottenere l'ultimo indice del dato elemento nell'array finale. Per farlo basta usare la formula:
     \begin{verbatim}
-        V[j] = V[j-1] + V[j];
+        V[j] = V[j-1] + V[j]; //V is the support array
     \end{verbatim}
     \item Riempire l'array finale partendo dall'ultimo elemento dell'array iniziale e metterlo nella posizione codificata dall'array d'appoggio:
     \begin{verbatim}
@@ -225,8 +229,8 @@ Ci sono due parti principali delle strutture dati:
 \end{itemize}
 
 \subsection{Liste}
-Struttura di dati in cui tutti gli elementi sono organizzati in modo sequenziale e deve supportare almeno le operazioni di \textbf{ricerca, inserimento e rimozione}. 
-Esse si possono implementare sia con strutture primitive ovvero degli \textit{array} che hanno il vantaggio di avere un tempo di accesso lineare ma hanno una grandezza fissa dipendete dallo spazio di memoria contigua libera, 
+Struttura di dati in cui tutti gli elementi sono organizzati in modo sequenziale, deve supportare almeno le operazioni di \textbf{ricerca, inserimento e rimozione}. 
+Esse si possono implementare sia con strutture primitive ovvero degli \textit{array} che hanno il vantaggio di avere un tempo di accesso costante ma hanno una grandezza fissa dipendete dallo spazio di memoria contigua libera, 
 oppure attraverso \textit{linked list} che non dipendono dalla quantità di memoria contigua libera ma hanno un tempo di accesso agli elementi dipendete dalla lunghezza della lista.
 \subsubsection{Linked List semplice}
 Ogni nodo punta al successivo quindi la si puo' scorrere in un solo verso, le operazioni hanno i seguenti costi: \begin{itemize}
@@ -262,7 +266,7 @@ Sono come le Linked list semplici ma hanno un puntatore al nodo precedente quind
 
 \subsubsection{Linked List circolari}
 Sono \textit{Double Linked List} ma con la differenza che l'ultimo e il primo elemento si puntano a vicenda in modo che sia logicamente circolare, 
-i costi invariati rispetto alle altre tranne per l'inserimento in coda che è costante.
+i costi sono invariati rispetto alle altre tranne per l'inserimento in coda che è costante.
 
 \subsubsection{Linked List con puntatori a testa e coda}
 Come una normale Linked List con la differenza che si ha un puntatore anche per la coda della lista per cui 
@@ -356,7 +360,7 @@ Definiamo inizialmente il \textbf{fattore di bilanciamento} (riferito ad un nodo
 \end{center}
 A questo punto possiamo definire un \textbf{albero bilanciato} in altezza come un albero in cui ogni nodo la differenza di altezza tra i suoi sotto-alberi non e' mai maggiore di uno:
 \begin{center}
-    $|\beta(v) \leq 1| $
+    $|\beta(v)| \leq 1 $
 \end{center}
 
 \subsubsection{Operazioni basiche}
@@ -366,9 +370,9 @@ A questo punto possiamo definire un \textbf{albero bilanciato} in altezza come u
     \item \textbf{Balance factor}: aggiorna il fattore di bilanciamento di un nodo tramite il campo height dei suoi figli.
     \item \textbf{Rotazioni}: esse sono fondamentali per ribilanciarte alberi AVL che, in seguito a modifiche, non sono piu' bilanciati.
     L'operazione di rotazione modifica il fattore di bilanciamento dei soli due nodi coinvolti nell'operaziome.
-    A livello implemntativo la \textbf{rotazione a destra} del nodo u consiste nel considerare il suo figlio sinistro (nodo v) e rendere il figlio destro di v il figlio sinistro di u; 
+    A livello implementativo la \textbf{rotazione a destra} del nodo u consiste nel considerare il suo figlio sinistro (nodo v) e rendere il figlio destro di v il figlio sinistro di u; 
     fatto questo il nodo u diventa il figlio destro di v con opportuni controlli ed aggiustamenti.
-    Al contratio, l'operazione di \textbf{rotazione a sinistra} del nodo v consiste nell'individuare il figlio di destra di v (il nodo u) e far diventare sotto-albero destro il soottoalbero sinistro di u;
+    Al contratio, l'operazione di \textbf{rotazione a sinistra} del nodo v consiste nell'individuare il figlio di destra di v (il nodo u) e far diventare sotto-albero sinitro di u il sottoalbero destro di u;
     fatto cio' il nodo v diventa sotto-alberio sinistro del nodo u con opportuni controlli ed aggiustamenti. 
     \begin{figure}[H]
         \centering
