@@ -308,7 +308,7 @@ La ricerca va il piu' in profondita' possibile prima di visitare i nodi nello st
 \subsubsection{Visita in ampiezza}
 La ricerca viene eseguita livello per livello
 \begin{itemize}
-    \item \textbf{Visita in ampiezza}: in pratica si fa una coda e ad ogni ciclo si toglie dalla coda il nodo e si mettono in coda i nodi in modo che ci sia una stampa per livello; la complessita' e' sempre $\Theta(n).$
+    \item \textbf{Visita in ampiezza}: in pratica si fa una coda e ad ogni ciclo si toglie dalla coda il nodo e si mettono in coda i suoi figli in modo che ci sia una stampa per livello; la complessita' e' sempre $\Theta(n).$
 \end{itemize}
 
 \subsection{Come contare tutti i nodi di un albero?}
@@ -320,8 +320,9 @@ Sono alberi radicati con vincoli sull'organizzazione delle chiavi: tutte le chia
 con questa organizzazione è possibile fare una ricerca binaria su questa struttura dati e le visita \textbf{in-order} permette di stampare in ordine tutti gli elementi dell'albero. 
 Le operazioni fondamentali su questa struttura dati sono:
 \begin{itemize}
-    \item \textbf{Search}: ritorna il nodo con chiave $k$, essa sfrutta la topografia della struttura infatti confrontando il valore cercato con la chiave del singolo nodo si sposta a destra nel caso $k>node.key$, al contrario si sposterà a sinistra. Questa operazione ha un costo nel caso pessimo pari a tutti i nodi (caso albero degenere).
-    \item \textbf{Insert}: inserisce un nodo, anche questa operazione sfrutta la topologia della struttura dati ed e' simile alla search, nel caso pessimo, ovvero l'albero degenre, ha una complessita' $\Theta(n)$, mediamente il costo dipende pero' dall'altezza dell'albero.
+    \item \textbf{Search}: ritorna il nodo con chiave $k$, essa sfrutta la topografia della struttura infatti confrontando il valore cercato con la chiave del singolo nodo si sposta a destra nel caso $k>node.key$, al contrario si sposterà a sinistra. Questa operazione ha un costo nel caso pessimo pari a tutti i nodi (caso albero degenere) dunque $O(n)$.
+    \item \textbf{Insert}: inserisce un nodo, anche questa operazione sfrutta la topologia della struttura dati ed e' simile alla search infatti scorre l'albero per individuare quale sara' il padre del nodo da inserire. 
+                            Nel caso pessimo, ovvero l'albero degenere, ha una complessita' $\Theta(n)$, mediamente il costo dipende pero' dall'altezza dell'albero.
     \item \textbf{Delete}: rimuove un elemento dalla struttura dati, questa operazione necessita pero' di alcune operazioni di supporto: \begin{itemize}
         \item \textbf{Max}: ritorna il nodo massimo nell'albero ovvero lo percorre scegliendo sempre il figlio destro.
         \item \textbf{Min}: ritorna il nodo minimo nell'albero ovvero lo percorre scegliendo sempre il figlio sinistro.
@@ -330,7 +331,7 @@ Le operazioni fondamentali su questa struttura dati sono:
             \item \textbf{Caso 1}: il nodo di cui si vuole trovare il precdecessore ha un figlio sinistro: il nodo predecessore e' il nodo con chiave massima nel sotto-albero sinistro.
                                    Per trovarlo e' necessario usare la funzione max nel sotto-albero sinitro: $pred\ =\ max(T.left)$ 
             \item \textbf{Caso 2}: il nodo di cui si vuole trovare il predecessore non ha un figlio sinistro; il nodo predecessore e' il primo antenato per cui il nodo di cui si sta cercando il predecessore e' nell'sotto-albero destro.
-                                   Per trovarlo e' sufficiente ripercorrere l'albero verso l'alto (trmite il campo $parent$) fino a quando $N\_pred = T.left$
+                                   Per trovarlo e' sufficiente ripercorrere l'albero verso l'alto (trmite il campo $parent$) fino a quando $N\_pred = T.right$
         \end{itemize}
         \item \textbf{Successor}: simmetrico a predecessor.
     \end{itemize}
@@ -393,9 +394,9 @@ A questo punto possiamo definire un \textbf{albero bilanciato} in altezza come u
         \item \textbf{DD}: opposto al caso SS, dunque si opera una rotazione a sinistra con perno il nodo sbilanciato.
         \item \textbf{DS}: si opera una rotazione a destra sul sottoramo destro e poi si risolve come un DD
     \end{itemize}
-    \item \textbf{Bilanciamento}: funzione molto semplice perche' si basa sulle funzioni descritte sopra, il suoi unico compito e' verificare il tipo di sbilanciamento e chiamare le funzioni di rotazione su gli opportuni nodi per cui ha costo costante.
-    \item \textbf{Insert}: inserisce un nodo come in un normale BST ma alla fine chiama la funzione di bilanciamento dell'albero, al massimo puo' aver sbilanciato al massimo un solo nodo 
-    per cui il ciclo che aggiorna il campo height dei nosi soprastanti a quello inserito si ferma o quando si arriva alla radice oppure appena si trova il nodo sbilanciato e lo si sistema.
+    \item \textbf{Bilanciamento}: funzione molto semplice perche' si basa sulle funzioni descritte sopra, il suo unico compito e' verificare il tipo di sbilanciamento e chiamare le funzioni di rotazione su gli opportuni nodi per cui ha costo costante.
+    \item \textbf{Insert}: inserisce un nodo come in un normale BST ma alla fine chiama la funzione di bilanciamento dell'albero, al massimo puo' aver sbilanciato  un solo nodo 
+    per cui il ciclo che aggiorna il campo height dei nodi soprastanti a quello inserito e si ferma quando si arriva alla radice oppure appena si trova il nodo sbilanciato e lo si sistema.
     Grazie alla topografia di questa struttura dati l'operazione ha costo $\Theta(log(n))$.
     \item \textbf{Delete}: anche in questo caso viene utilizzata la funzione dei BST ma questa procedura puo' comportare lo sbilanciamento di piu' nodi per cui occorre verificare il bilanciamento di ogni singolo nodo di cui si aggiorna il campo height.
 \end{enumerate}
@@ -415,12 +416,12 @@ Ci sono due principali implementazioni che si usano in casi diversi: le \textbf{
 e le \textbf{tabelle HASH} che vengono usate quando il numero di chiavi utilizzate e' molto minore rispetto a quello di chiavi possibili.
 
 \subsection{Tabelle ad indirizzamento diretto}
-Sono implementate tramite array dalla dimensione statica, ogni elemento contiene sia una chiave per essere riconosciuta che un campo per il vlore in se. 
+Sono implementate tramite array dalla dimensione statica, ogni elemento contiene sia una chiave per essere riconosciuta che un campo per il valore in se. 
 In realtà la chiave è la posizione dell'elemento all'interno dell'array (unica struttura dati a indirizzamento diretto), le operazioni basilari come \textit{search, insert e delete} hanno un costo computazionale pari a $O(1)$ ma il vero problema e' la memoria che viene utilizzata: 
 se le chiavi realmente utilizzate sono molte meno di quelle disponibili allore c'e' un alto spreco di memoria; stesso discorso nel caso di un insieme universo con molte chiavi che porta ad un'enorme necessità di memoria.
 \subsection{Tabelle Hash}
 Con le tabelle HASH si cerca una soluzione al problema della memoria attraverso una \textbf{funzione di HASH} $h:U \to [0, ..., m-1]$ 
-che partendo dalla chiave del dato da memorizzare è in grado di mappare un indirizzo dell'array. 
+che partendo dalla chiave del dato da memorizzare è in grado di mappare un indirizzo all'interno dell'array. 
 Il problema di questa implementazione è l'inevitabile presenza delle \textbf{collisioni} ovvero due chiavi differenti sono mappate nello stesso indirizzo dell'array.
 
 \subsection{Funzione Hash}
@@ -431,7 +432,7 @@ Una buona funzione di hash soddisfa la proprieta' di \textbf{uniformita' semplic
 \end{enumerate}
 \subsubsection{Metodo della divisione}
 Si restituisce il modulo tra il valore e la lunghezza della tabella, nel caso siano stringhe si convertono i singoli caratteri in valori numerici tramite la rappresentazione binaria. 
-Questo metodo è molto efficiente ma dipende in modo molto stretto dalla scelta della lunghezza, infatti se la dimensione dell'array fosse 10 del valore si utilizzerebbe solo l'ultima cifra, mentre se la lunghezza fosse $2^p$ allora di un valore da mappare solo\ i $p$ bit meno significativi nella rappresentazione binaria.
+Questo metodo è molto efficiente ma dipende in modo molto stretto dalla scelta della lunghezza, infatti se la dimensione dell'array fosse 10 del valore si utilizzerebbe solo l'ultima cifra, mentre se la lunghezza fosse $2^p$ allora del valore da mappare solo i $p$ bit meno significativi nella rappresentazione binaria sarebbero rilevanti.
 
 \subsubsection{Metodo delle moltiplicazioni}
 Usano la formula $h(k) = \lfloor m(kC-\lfloor kC\rfloor)\rfloor$ con \begin{itemize}
@@ -476,7 +477,7 @@ un'altra criticita' e' la gestione della delete: eliminato un elemento non si pu
 Nel caso pessimo le tre operazioni fondamentali hanno costo $\Theta(m)$ con $m$ dimensione della tabella, nel caso medio invece la complessita' dipende molto dalla strategia di ispezione:
 \begin{itemize}
     \item \textbf{Ispezione lineare}: $h(k,i)=(h'(k)+i)\ mod \ \ m$, ovvero data $h'$ una normale funzione di hashing si va, per ogni collisone che fa crescere $i$, a ispezionare sempre lo slot successivo.
-    Questo porta al \textbf{clusting primario} ovvero delle lunghe sotto-sequenze occupate tendono a diventare sempre piu' lunghe, dunque slot vuoto preceduto da $i$ solt pieni ha una probabilita' di rimepirsi di $(i +1)/m$ quinid i tempi di calcolo crescono sempre di piu'.
+    Questo porta al \textbf{clusting primario} ovvero delle lunghe sotto-sequenze occupate tendono a diventare sempre piu' lunghe, dunque slot vuoto preceduto da $i$ solt pieni ha una probabilita' di rimepirsi di $(i +1)/m$ quindi i tempi di calcolo crescono sempre di piu'.
     \item \textbf{Ispezione quadratica}: $h(k,i)=(h'(k)+c_1i+c_2i^2)\ mod \ \ m, \ \ \ \ c_1  \not=c_2$, questa ispezione pero' porta al \textbf{clustering secondario}: se due chiavi hanno $h'(k)$ uguale essi faranno le stesse visite
     \item \textbf{doppio hashing}: $h(k,i)=(h_2(k)+ih_2(k))\ mod \ \ m$, in questo caso si usano due funzioni di hashing in modo da evitare clutering primario e secondario ma $h_2(k) \not=0$ perche' se no non cambia mai lo slot che si visita e ovviamente deve permettere di iterare su tutta la tabella.
     
@@ -511,7 +512,7 @@ E' il modo piu' efficace di implementare la struttura logica ad albero: a livell
     basta scambiarlo ricorsivamente con il figlio che ha il valore maggiore quando il padre non e' il massimo valore tra i figli. Nel caso pessimo il numero di scambi da effettuare e' la profondita' dell'albero ovvero $O(log(n))$.
     \item \textbf{heapify}: questa funzione si basa completaente sulla ricorsione infatti chiamato n l'indice dell'elemento che e' la radice viene chiamata ricorsivamente la funzione heapify sul sotto-albero destro e sinistro e infine chiama $fixHeap$ per sistemare l'array.
     L'equazione di ricorrenza sarebbe $T(n)=2T(n/2)+ log(n)$ ma non potendo usare il master theorem si cacola il costo con una funzione sicuramente peggiore, scambiando $log(n)$ con $\sqrt{n}$, che da come risultato un costo di $O(n)$. 
-    \item \textbf{deleteMax}: rimuove l'elmento massimo e lo sostituisce con l'ultimo elemento dell'array e chiama la funzione heapfy per sistemare le proprieta' dell'albero. Il costo di questa operazione e' identico a quello dell'fixHeap ovvero $O(log(n))$.
+    \item \textbf{deleteMax}: rimuove l'elmento massimo, lo rimpiazza con l'ultimo elemento dell'array e chiama la funzione heapfy per sistemare le proprieta' dell'albero. Il costo di questa operazione e' identico a quello dell'fixHeap ovvero $O(log(n))$.
 \end{itemize}
 
 
@@ -528,13 +529,13 @@ Le operazioni possibili con questa struttura dati sono:
     \item \textbf{delete}: rimuove un elmento dalla coda indipendentemente dalla sua chiave, supponendo un accesso diretto a tale elemento. Si sostituisce il nodo da rimuovere con l'ultima foglia e poi si usano le due funzioni ausiliarie per sistemarlo propriamente (solo una delle due entrerà in azione). Costo complessivo $O(d\ log_d(n))$.
     \item \textbf{deleteMin}: rimuove l'elemento associato alla chiave minore.
     \item \textbf{increaseKey}: rimpiazza la chiave di un elmento con una chiave maggiore, per implementarlo si cambia la chiave e poi si usa muoviBasso. Costo di $O(d \ log_d(n))$
-    \item \textbf{decreaseKey}: opposto di increaseKey. In questo caso si decrementa la chiave e poi si esegue un muoviBasso per sistemare la struttura. Costo di $O(log_d(n))$
+    \item \textbf{decreaseKey}: opposto di increaseKey. In questo caso si decrementa la chiave e poi si esegue un muoviAlto per sistemare la struttura. Costo di $O(log_d(n))$
 \end{itemize}
 
 Per implementare le code con priorità ci sono due principali soluzioni ma quella che studieremo è il \textbf{D-Heap}, le implementazioni descritte sopra fanno gia' riferimento ai D-Heap.
 
 \subsection{D-Heap}
-Estendono il concetto di albero di max/min-heap binario infatti sono alberi i cui nodi al massimo hanno d figlio; nonostante ciò si basano su di essi per la loro implementazione.
+Estendono il concetto di albero di max/min-heap binario infatti sono alberi i cui nodi al massimo hanno d figli; nonostante ciò si basano su di essi per la loro implementazione.
 In questa implementazione si usa un min-heap per cui ogni padre è il minore dei figli, in questo modo nella radice dell'albero sarà presente la chiave minima.
 Anche in questo caso si ha una corrispondenza tra l'altezza dell'albero d-heap e il numero $n$ di nodi ovvero $O(log_d(n))$; come negli alberi heap binari a livello di memoria anche per gli alberi d-heap si usa un array, essendo non binari gli alberi ma $d-ari$ le relazioni tra padre e figli sono:
 \begin{itemize}
@@ -558,7 +559,7 @@ Ci sono anche alcune operazioni ausiliarie alle altre procedure ovvero:
 
 
 \section{Union Find}
-Questa struttura dati viene impigata quando si ha la necessità di gestire insiemi disgiunti di oggetti, 
+Questa struttura dati viene impiegata quando si ha la necessità di gestire insiemi disgiunti di oggetti, 
 per cui le operazioni fondamentali saranno la creazione di un singoletto, unione di due insiemi e l'identificazione a quale insieme appartiene un dato elemento, piu' precisamente identificare il \textbf{rappresentante} del tale elemento.
 \begin{itemize}
     \item \textbf{makeSet}: crea l'insieme singoletto con il dato elemento
@@ -585,7 +586,9 @@ in questo caso gli elementi possono essere anche nodi per cui il rappresentante 
     \item union: dati i due insiemi fa puntare il rappresentante del secondo al rappresentante del primo, per cui ha costo costante.
 \end{itemize}
 \subsubsection{Euristica "union by rank" (find)}
-Avere alberi molto alti rende molto inefficiente l'operazione di find quindi memorizzando nelle radici il proprio rank (altezza) si puo' sistamare l'albero in modo tale che non degeneri in una lista. Grazie a questo approccio il costo scende a $O(log(n))$.
+Avere alberi molto alti rende molto inefficiente l'operazione di find quindi memorizzando nelle radici il proprio rank (altezza) si puo' sistamare l'albero in modo tale che non degeneri in una lista. 
+Basta rendere figlia la radice che ha altezza minore tra le due da unire.
+Grazie a questo approccio il costo scende a $O(log(n))$.
 
 \subsection{Riassunto Union Find}
 \begin{figure}[H]
@@ -622,7 +625,7 @@ Come visto prima l'approccio greedy non e' efficace in tutte le situazioni per c
 Nel caso in cui esistano barattoli minori o uguali ai litri di vernice da comprare devo scegliere l'$i-esimo$ barattolo di vernice tale che il numero di barattoli da comperare (+1) per 
 imbiancare $V_{tot}-V_{i-esimo\ barattolo}$ sia minimo.
 Volendo rappresentare graficamente le operazioni attraverso un albero ci si accorge che molti risultati vengono calcolati piu' volte dunque si puo' usare la \textbf{programmazione dinamica}
-per evitaredi ripetere i calcoli. In questo caso si puo' usare un array di appoggio: $SOLUZIONI[0, ..., n]$ ($con\ n = litri\ da\ comperare$) che salva la migliore soluzione per ogni $j \in [0,...,n]$ in modo da calcolre una sola volta
+per evitare di ripetere i calcoli. In questo caso si puo' usare un array di appoggio: $SOLUZIONI[0, ..., n]$ ($con\ n = litri\ da\ comperare$) che salva la migliore soluzione per ogni $j \in [0,...,n]$ in modo da calcolre una sola volta
 la soluzione ottima per ogni litro. Alla fine la soluzione al problema sara' in $SOLUZIONI[n]$.
 
 \subsection{Problema dello zaino}
@@ -683,7 +686,7 @@ Il metodo \textit{brute force} che calcola il valore di ogni combinazione ha un 
 Con il metodo \textit{divide et impera} l'idea è quella di trovare un pivot e calcolare il sottovettore massimo a destra del pivot, a sinistra del pivot e il massimo valore a cavallo con il pivot.
 Per calcolare il massimo a destra e a sinistra basta una chiamata ricorsiva mentre per il sotto-array a cavallo servono due cicli che scorrono a destra e a sinistra del pivot. 
 Per trovare il valore massimo si usano due variabili $somma$ e $massimo$: la prima viene incrementata ad ogni elemento del valore dello stesso mentre la seconda viene cambiata tutte le volte che la prima raggiunge un nuovo massimo. 
-L'equazione di ricorrenza è dunque $T(n) = 2T(n/2)+n$ con un costo totale di $O(n\ logn(n))$.
+L'equazione di ricorrenza è dunque $T(n) = 2T(n/2)+n$ con un costo totale di $O(n\ log(n))$.
 
 \subsection{Esempi di utilizzo metodo Greedy}
 \subsubsection{Problema di scheduling}
@@ -773,7 +776,7 @@ Ci sono due definizioni di grafo che distinguono i due tipi:
 \begin{itemize}
     \item \textbf{Grafo orientato}: è una coppia di insiemi, il primo è quello dei vertici e il secondo e' quello delle relazioni tra i vertici. 
     Viene definito \textbf{cappio} un nodo in relazione con se stesso.
-    \item \textbf{Grafo non orientato}: gli archi (ovvero le relazioni tra elementi) sono non ordinate (quindi non c'è una direzione) e i cappi non sono ammessi.
+    \item \textbf{Grafo non orientato}: gli archi (ovvero le relazioni tra elementi) sono non ordinati (quindi non c'è una direzione) e i cappi non sono ammessi.
 \end{itemize}
 Ci sono alcune definizioni che sono utili per questa struttura tipo l'\textbf{incidenza} che, in un grafo orientato, indica che un arco e' in relazione tra due vertici; 
 se due nodi sono \textbf{adiacenti} significa che c'è una relazione tra i due (ovvero ci si può arrivare).
@@ -946,7 +949,10 @@ L'ordinamento topologico è interessante perchè può essere interpretato come d
 
 \end{verbatim}
 
- 
+\subsection{Ordianmento Topologico (in DAG) per grafi orientati}
+Definiamo \textbf{DAG} (direct acyclic graph) come un proprità del grafo che è verificabile tramite una DFS ovvero controllando che non ci siano archi all'indietro, mentre per \textbf{Ordinamento all'indietro}
+un ordinamento lineare del grafo tale per cui se esiste l'arco $(u,v)$ allora $u$ sarà precedente a $v$. Per ottenere un ordinamento del genere è sufficiente fare una DFS che tutte le volte che chiude un nodo lo inserisce in testa ad una lista.
+Alla fine la lista rappresenterà l'ordinamento topologico del grafo.
 \subsection{Componenti connesse (grafi non orientati)}
 Due vertici $u$ e $v$ di un grafo sono \textbf{connessi} quando e' possibile raggiungere $v$ partendo da $u$, questa definizione induce un possibile partizionamento del grafo in insiemi di nodi connessi tra di loro.\
 Per risolvere questo problema basta etichettare inizialmente tutti i nodi con un valore di "non visitato" poi, per ogni nodo non ancora visitato, si chiama una funzione ricorsiva che etichetta con un valore (che per ogni insieme differente deve cambiare) il nodo, riempie il campo $parent$ dei nodi come nelle altre visite e si richiama ricorsivamente sui nodi connessi.
@@ -972,9 +978,9 @@ Il \textbf{metodo generico} per risolvere il problema è quello di creare un alb
 \subsubsection{Regole del ciclo e del taglio}
 Un \textbf{taglio} di un grafo non orientato è una partizione del grafo in due sottinsiemi disgiunti e un \textbf{arco leggero} è l'arco che che costa meno e che collega i due insiemi disgiunti dal taglio; 
 un arco \textbf{attraversa il taglio} se dato l'arco ${u, v}$ allora $u \in S \land v \in V-S$ con $V$ il grafo iniziale e $V - S$ il sottoinsieme post taglio.
-La \textbf{regola del taglio} vuole che scelto un taglio nel grafo che non "spezza" archi già considerati come ottimi e si può prendere come ottimo quello di costo minore.
+La \textbf{regola del taglio} vuole che scelto un taglio nel grafo che non "spezza" archi già considerati come ottimi l'arco migliore che lo attraversa è quello di costo minore.
 La \textbf{regola del ciclo} vuole che dato un ciclo senza archi già individuati come pessimi possiamo considerare pessimo l'arco con peso peggiore.
-Applicando queste regole si puoò individuare il MST però bisogna capire come e quando applicare queste tecniche.
+Applicando queste regole si può individuare il MST però bisogna capire come e quando applicare queste tecniche.
 
 \subsubsection{Algoritmo di Kruskal}
 Analizza gli archi in costo crescente e utilizza un approccio greedy che si basa sulle union find: se i due nodi del collegamento appartengono gia' allo stesso insieme allora esso e' un arco da scartare (si tratta di un ciclo) mentre se i due nodi sono disgiunti allora e' un ponte tra le due porzioni di taglio per cui e' il percorso ottimale.
