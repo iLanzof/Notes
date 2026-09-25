@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc} % Per caratteri accentati
+\usepackage[T1]{fontenc}    % Per una corretta codifica dei font
+\usepackage[italian]{babel} % Per sillabazione in italiano
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multicol}
+
+%VALORI SISTEMABILI
+\usepackage[a4paper, top= 1 cm, bottom= 1.5 cm, left= 2 cm, right= 2 cm]{geometry}
+
+\title{Sistemi Operativi}
+\author{Francesco Lanzarini}
+\date{ }
+
+\begin{document}
+
+\maketitle
+
+\section{Domande}
+\subsection{Ristorante}
+\subsubsection{Cosa è un sistema operativo?}
+Un sistema operativo e' un programma, piu' precisamente e' il progrmamma che viene lanciato all'accensione e terminato allo spegnimento.
+\subsubsection{Cosa è un programma?}
+Un programma e' una sequenza di istruzioni.
+\subsubsection{Cosa è un processo?}
+Un processo e' un programma che viene eseguito.
+\subsubsection{Come è strutturato il modello di macchina di Von Neumann?}
+Il modello di macchina di Von Neumann e' composto da processore che esegue le operazioni, una memoria che fornisce gli operandi delle operazioni, 
+una memoria di massa dove memorizzare informazioni a lungo termine, bus dati per il trasferimento delle informazioni e dispositivi di esterni che gestiscono l'input/output.
+\subsubsection{Cosa è un processore?}
+Il processore e' il componente del calore che esegue le operazioni di fetch-decode-execute.
+\subsubsection{Cosa è un bus?}
+Un bus e' un canale di informazioni condiviso collegato tra piu' componenti, il suo compito e' quello di tyrasportare i dati.
+\subsubsection{Cosa è un controller di Input/Output?}
+Un controller I/O è un componente che gestisce lo scambio di dati tra un sistema di controllo e i dispositivi esterni.
+\subsubsection{Cosa è un device register?}
+Un device register è la registrazione di un dispositivo in una rete o in un sistema, associandolo a un identificativo univoco per riconoscerlo e gestirlo
+\subsubsection{Cosa è un device driver?}
+Un device driver è un software che permette al sistema operativo di comunicare con un dispositivo hardware, traducendo le sue richieste in comandi comprensibili dal dispositivo
+\subsubsection{Cosa può fare un processore quando è in kernel mode?}
+Richiedere/fornire informazioni  ai bus dati
+\subsubsection{Cosa può fare un processore quando è in user mode?}
+Eseguire le istruzioni dei programmi che non siano SO
+\subsubsection{Come e in che casi avviene il passaggio da user mode in kernel mode?}
+Il passaggio avviene principalmente in tre casi: system call, interrupt opppure trap/exceptions
+\\subsubsection{Cosa è una system call?}
+La system call e' l'interfaccia con cui un programma in User Mode chiede al sistema operativo un servizio kernel.
+\subsubsection{Cosa è un Process Control Block?}
+Un PCB e' una struttura dati che serve al sistema operativo per la memorizzazione delle informazioni dei processi.
+\subsubsection{Cosa vuole dire scheduling?}
+Per scheduling si intende l'operazione del sistema operativo atta a gestire l'esecuzione da parte della CPU di processi "ready".
+\subsubsection{Come vengono sospesi i processi in attesa di operazioni di I/O?}
+I processi vengono sospesi grazie ad una system call.
+\subsubsection{Cosa significa multitasking?}
+Per multitasking si intende la capacita' della CP di eseguire piu' processi contemporaneamente.
+\subsubsection{Cosa è un interrupt e quando avviene?}
+Un interrupt (interruzione) è un segnale inviato al processore per interrompere il flusso di esecuzione corrente
+e richiedere l'esecuzione immediata di una speciale routine del kernel, puo' avvenire per diversi motivi tipo la digitazione di un carattere.
+\subsubsection{Una system call o un interrupt fa passare il controllo dal processo in esecuzione al sistema operativo. 
+Cosa deve fare il processore per consentire di poter riprendere successivamente l'esecuzione del processo dal punto dell'interruzione?}
+Per consentire la corretta proseguita del processo il sistema operativo ha a disposizione tutti i dati necessari nella PCB del singolo processo.
+\end{document}
