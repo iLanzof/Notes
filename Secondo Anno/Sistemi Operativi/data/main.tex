@@ -49,7 +49,7 @@ Richiedere/fornire informazioni  ai bus dati
 Eseguire le istruzioni dei programmi che non siano SO
 \subsubsection{Come e in che casi avviene il passaggio da user mode in kernel mode?}
 Il passaggio avviene principalmente in tre casi: system call, interrupt opppure trap/exceptions
-\\subsubsection{Cosa è una system call?}
+\subsubsection{Cosa è una system call?}
 La system call e' l'interfaccia con cui un programma in User Mode chiede al sistema operativo un servizio kernel.
 \subsubsection{Cosa è un Process Control Block?}
 Un PCB e' una struttura dati che serve al sistema operativo per la memorizzazione delle informazioni dei processi.
@@ -65,4 +65,103 @@ e richiedere l'esecuzione immediata di una speciale routine del kernel, puo' avv
 \subsubsection{Una system call o un interrupt fa passare il controllo dal processo in esecuzione al sistema operativo. 
 Cosa deve fare il processore per consentire di poter riprendere successivamente l'esecuzione del processo dal punto dell'interruzione?}
 Per consentire la corretta proseguita del processo il sistema operativo ha a disposizione tutti i dati necessari nella PCB del singolo processo.
+
+
+\section{Concorrenza}
+\subsubsection{Quale è la differenza fra programma e processo?}
+Il programma e' statico: e' un testo che contiene una sequenza di istruzioni. 
+Un processo invece e' dinamico: e' l'esecuzione delle istruzioni che sono contenute nel programma.
+
+\subsubsection{Cos'è l'assioma di finite progress? perché è necessario?}
+L'assioma di finite progress e' l'assioma che ci assicura che ogni processo viene eseguito ad una velocita' finita, ignota ma non nulla.
+Esso e' importante perche' introduce il problema maggiore della concorrenza: non essere in grado di determinare numericamente quanto un processo impiegera'
+ad essere eseguito costringendoci a un diveso approccio per la sincronizzazione dei programmi.
+
+\subsubsection{Quali sono gli stati dei processi?}
+Gli stati dei processi sono 3:
+\begin{enumerate}
+    \item Ready: il processo e' pronto ad essere eseguito m,a il processore e' impegnato in altre attivita'.
+    \item Waiting: il processo sta attendendo un qualche evento esterno, per esempio se deve ricevere un informazione.
+    \item Running: il processo sta venendo eseguito.
+\end{enumerate}
+
+\subsubsection{Cos'è la concorrenza?}
+Per concorrenza si intende la notazione e le tecniche per risolvere problemi, quali comunicazione e sincronizzazioni, associati all'esecuzione concorrente (ovvero simultanea).
+
+\subsubsection{Qual è la differenza fra concorrenza reale e apparente?}
+Per concorrenza reale si intende la capacita' delle infrastrutture di calcolo distribuite oppure di processore multicore di eseguire piu' processi contemporaneamente.
+Invece la concorrenza apparente e' un illusione data dalla velocita' con cui i processori riescono ad alternare l'esecuzione di processi diversi.
+
+\subsubsection{I problemi da risolvere per la programmazione concorrente sono diversi
+fra parallelismo reale o apparente?}
+No, i problemi di comunicazione e sincronizzazione sono sempre gli stessi percheanche se in un sistema multiprocessore i processi sono intervallati nel tempo (interleaving) mentre in un sistema
+multicore sono eseguiti simultaneamente ma sono alternati nello spazio di memoria (overlapping).
+
+\subsubsection{Cosa è una race condition?}
+Una race condition e' una condizione per la quale il risultato finale dell'esecuzione dipende dalla temporizzazione con cui vengono eseguiti i processi.
+
+\subsubsection{Cosa è una proprietà di un programma?}
+La proprieta' di un programma e' un attributo dello stesso che rimane vero per ogni istanza di esecuizione dello stesso.
+
+
+\subsubsection{Quali sono le proprietà di safety?}
+Le proprieta' di safety e' la proprieta' che garantisce che il programma vada nella direzione voluta. 
+Esse sono:
+\begin{itemize}
+    \item Mutua esclusione: in ogni istante un solo processo puo' accedere alla singola risorsa.
+    \item Assenza di deadlock.
+\end{itemize}
+
+\subsubsection{Quali sono le proprietà di liveness?}
+La proprieta' di liveness e' la proprietà che ci garantisce che il programma avanza e non si ferma.
+Esse sono:
+\begin{itemize}
+    \item Assenza di starvation.
+\end{itemize}
+
+\subsubsection{Cosa è il deadlock?}
+Il deadlock e' un fenomeno per cui 2 o piu' processi hanno bisogno della mutua esclusione sulle stesse risorse per cui si bloccano visto che non se le riescono a liberare a vicenda.
+
+\subsubsection{Cosa è la starvation?}
+La starvation e' un fenomeno per cui un processo attende in modo infinito l'accesso ad una risorsa.
+
+\subsubsection{Cosa è una azione atomica?
+(quali operazioi assumiamo atomiche nella nostra trattazione?)}
+Un'azione atomica e' un'istruzione che sicuramente il processore esegue in un ciclo di clock, per cui siamo sicuri che quando inzia ad essere esegiuta 
+essa sara' anche terminata prima che il processore ne esegua un'altra. Nella nostra trattazione consideriamo atomiche le apoerazioni di assegnamento alle variabili di valori costanti.
+
+\subsubsection{Cosa è una sezione critica?}
+Una sezione critica, o critical section, e' una parte di programma che che utilizza una o piu' risorse condivise.
+Il nostro obiettivo e' che queste sezioni critiche siano eseguite in modo mutualmente esclusivo.
+
+\subsubsection{Perché il compilatore non può individuare autonomamente le sezioni critiche?}
+Il compilatore non e' in grado di individuare le sezioni critiche perche' esso non capisce la logica del programma, compila e basta.  
+
+\subsubsection{Come possiamo definire le sezioni critiche tramite le proprietà?}
+Le sezioni critiche possono essere definite tramite le seguenti proprietà:
+\begin{enumerate}
+    \item Mutua esclusione: solo un processo alla volta deve star eseguendo una sezione critica tra tutte quelle che accedono alla stessa risorsa condivisa.
+    \item Assenza di deadlock: non e' ammissibile uno scenario in cui tutti i processi vengono bloccati.
+    \item Assenza di delay non necessari: un processo che non sta eseguendo una sezione critica non deve ritardare inutilmente l'esecuzione della sezione critica di un altro.
+    \item Asenza di starvation (Eventual Entring): prima o poi ogni processo inizia ad eseguire la propria sezione critica.
+\end{enumerate}
+
+\subsubsection{Come funziona l'algoritmo di Dekker?}
+\begin{verbatim}
+    shared int 
+\end{verbatim}
+Approcci software per implementare sezioni critiche:
+
+
+Algoritmo di Peterson per due processi, come funziona?
+Generalizzazzione dell Algoritmo di Peterson per N processi, come funziona?
+
+Sono possibili soluzioni hardware per il problema delle sezioni critiche?
+Quali?
+In quali casi può applicare la disabilitazione degli interrupt?
+SpinLock: cosa sono? quale supporto hardware serve per utilizzarli?
+GLi spinlock forniscono una soluzione al problema delle sezioni critiche?
+(tutte le quattro proprietà sono soddisfatte?)
+
+
 \end{document}
