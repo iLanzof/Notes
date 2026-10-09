@@ -10,6 +10,8 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{fancyvrb}
 
 %VALORI SISTEMABILI
 \usepackage[a4paper, top= 1 cm, bottom= 1.5 cm, left= 2 cm, right= 2 cm]{geometry}
@@ -67,7 +69,7 @@ Cosa deve fare il processore per consentire di poter riprendere successivamente 
 Per consentire la corretta proseguita del processo il sistema operativo ha a disposizione tutti i dati necessari nella PCB del singolo processo.
 
 
-\section{Concorrenza}
+\subsection{Concorrenza}
 \subsubsection{Quale è la differenza fra programma e processo?}
 Il programma e' statico: e' un testo che contiene una sequenza di istruzioni. 
 Un processo invece e' dinamico: e' l'esecuzione delle istruzioni che sono contenute nel programma.
@@ -148,20 +150,183 @@ Le sezioni critiche possono essere definite tramite le seguenti proprietà:
 
 \subsubsection{Come funziona l'algoritmo di Dekker?}
 \begin{verbatim}
-    shared int 
+    shared int turno = P;
+    shared bool needp = false;    shared bool needq = false;
 \end{verbatim}
-Approcci software per implementare sezioni critiche:
+\vspace{0.15cm}
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+\begin{verbatim}
+    process P {
+        /* entry protocol */
+        needp = true;
+        while(needq){
+            if(turn == Q){
+                needp = false;
+                while (turn == Q)
+                    ; /* do nothing */
+                needp = true;
+            }
+        }
+        critical section
+        needp = false; turn = Q;
+        non-critical section
+    }
+\end{verbatim}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\begin{verbatim}
+    process Q {
+        /* entry protocol */
+        needq = true;
+        while(needp){
+            if (turn == P){
+                needq = false;
+                while(turn == P)
+                    ; /* do nothing */
+                needq = true;
+            }
+        }
+        critical section
+        needq = false; turn = P;
+        non-critical section
+    }
+\end{verbatim}
+\end{minipage}
+
+Come si puo' vedere dal codice ci sono due variabili booleane condivise che indicano quando i processi vogliono entrare in mutua esclusione,
+con il primo while invece si va a controllare se l'altro processo vuole la mutia esclusione: nel caso non la voglia non si controlla neanche il turno e il processo entra in critical section.
+Alla fine della critical section il processo passa il turno all'altro.
+
+\subsubsection{Algoritmo di Peterson per due processi, come funziona?}
+
+\begin{verbatim}
+    shared bool needp = false; shared bool needq = false;
+    shared int turn;
+\end{verbatim}
+\vspace{0.25cm}
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+\begin{verbatim}
+    process P {
+        while(true){
+            /* entry protocol */
+            needp = true;
+            turn = Q;
+            while (needq && turn != P)
+                ; /* do nothing */
+            critical section
+            needp = false;
+            non-critical section
+        }
+    }
+\end{verbatim}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\begin{verbatim}
+    process Q{
+        while (true){
+            /* entry protocol */
+            needq = true;
+            trurn = P
+            while (needp && turn != Q)
+                ; /* do nothing */
+            critical section
+            needq = false;
+            non-critical section
+        }
+    }
+\end{verbatim}
+\end{minipage}
+
+In questo algoritmo il turno viene passato prima dell'entrata nella critical section
+
+\subsubsection{Generalizzazzione dell Algoritmo di Peterson per N processi, come funziona?}
+\begin{verbatim}
+    shared int [] stage = new int [N]; /* 0-initialized */
+    shared int [] last = new int[N];  /* 0-initialized */
+
+    process P_i {  /* i = 0, ..., N-1 */
+        while (true){
+            /* entry protocol */
+            for (int j = 0; j < N; j++){
+                stage[i] = j;
+                last[j] = i;
+
+                for (int k = 0; k < N; k++) {
+                    if (i != k) {
+                        while (stage[k] >= stage[i] && last[j] == i)
+                            ; /* do nothing */
+                    }
+                }
+            }
+            critical section
+            stage[i] = 0;
+            non-critical section
+        }
+    }
+\end{verbatim}
 
 
-Algoritmo di Peterson per due processi, come funziona?
-Generalizzazzione dell Algoritmo di Peterson per N processi, come funziona?
+\subsubsection{Sono possibili soluzioni hardware per il problema delle sezioni critiche? Quali?}
+Si, ci sono possibili soluzioni hardware: si potrebbe pensare di modificare il set di istruzioni hardware per semplificare la realizzazione di sezioni critiche coem il mascheramento degli interrup.
+Questa tecnica pero' non va bene perche' e' troppo rischioso delegare ai singoli programmi la responsabilita' di riattivare gli interrupt, riduce il grado di parallelismo e non funziona su sistemi multicore.
+Altro modo sono le istruzioni speciali Test \& set ovvero realizzare in modo atomico due istruzioni Ts(x,y) := <y = x, x = 1>.
 
-Sono possibili soluzioni hardware per il problema delle sezioni critiche?
-Quali?
-In quali casi può applicare la disabilitazione degli interrupt?
-SpinLock: cosa sono? quale supporto hardware serve per utilizzarli?
-GLi spinlock forniscono una soluzione al problema delle sezioni critiche?
-(tutte le quattro proprietà sono soddisfatte?)
+\begin{verbatim}
+    shared int lock = 0;
+\end{verbatim}
+\vspace{0.25cm}
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+\begin{verbatim}
+    process P{
+        int vp;
+        while(true) {
+            do{
+                TS(lock, vp);
+            } while (vp);
+            critical section
+            lock = 0;
+            non-critical section
+        }
+    }
+\end{verbatim}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\begin{verbatim}
+    process Q{
+        int vq;
+        while(true){
+            do{
+                TS(lock, vq);
+            } while(vp);
+            critical section
+            lock = 0;
+            non-critical section
+        }
+    }
+\end{verbatim}
+\end{minipage}
+
+Entra in critical section il primo dei due processi che riesce a "fotografare" lock a 0 e a settarlo a 1 per l'altro.
+La starvation e' evitata con qualche assunzione in piu'.
+
+\subsubsection{In quali casi può applicare la disabilitazione degli interrupt?}
+La disabilitazione degli interrupt si puo' applicare solo sui sistemi a singolo processore.
+
+\subsubsection{SpinLock: cosa sono? quale supporto hardware serve per utilizzarli?}
+Gli SpinLock sono delle quasi sezioni critiche che sono realizzate con istruzioni speciali e serve che l'hardware supporti la loro esecuzione in modo atomico.
+
+
+\subsubsection{Gli spinlock forniscono una soluzione al problema delle sezioni critiche?
+(tutte le quattro proprietà sono soddisfatte?)}
+Si, ma l'assenza di starvtion ha bisogno di ulteriori assunzioni per essere garantita.
+
+
 
 
 \end{document}
