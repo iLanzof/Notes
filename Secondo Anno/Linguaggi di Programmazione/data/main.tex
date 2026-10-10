@@ -61,7 +61,7 @@ Mentre un'implementazione comilativa pura puo' vantare un'ottima velocita' visto
 (bisognerebbe riscrivere il compilatore), astrae di piu' dal programma sorgente e occupa piu' memoria.
 \subsection{Come vengono implementate nella realtà le macchine astratte? \textcolor{blue}{Che cos'è la macchina intermedia?}}
 Nella realta' e un misto delle due interpretazioni: di solito si compila il programma in una lingua intermedia $L_i$ per una la macchina intermedia, suiccessivamente un interprete $I^{L_0}_{L_i}$ interpreta le istruzioni per l'esecuzione.
-Generalmente $I^{L_0}_L_i$ = interprete della macchina ospite + opportuni meccanismi chiamati supporto a run tim (SRT).
+Generalmente $I^{L_0}_{L_i}$ = interprete della macchina ospite + opportuni meccanismi chiamati supporto a run tim (SRT).
 \subsection{\textcolor{blue}{Quando si dice che una implementazione è di tipo interpretativo e quando di tipo compilativo?} Fare esempi di linguaggi la cui implementazione è di un tipo o dell'altro.}
 Solitamente si dice che un implementazione e' interpretativa quando la maggior parte delle istruzioni vengono interpretate e poi eseguite, tipo in python e Java; mentre 
 un'implementazione e' di tipo compilativo quando la maggior parte delle istruzioni sono prima tradotte e poi eseguite, tipo in C e C++.
@@ -69,9 +69,13 @@ un'implementazione e' di tipo compilativo quando la maggior parte delle istruzio
 La JIT e' una combinazione di AOT (ahead of time) compilation e interpretazione: si genera prima un codice intermedio (byte code in java) che viene poi eseguito passando per un compilatore
 on-demand man mano che esegue il programma tradotto in linguaggio macchina.
 \subsection{L'interprete e il compilatore si possono sempre realizzare?}
+Non sempre si possono realizzare, infatti il linguaggio di destinazione deve essere espressivo almeno quanto quello di partenza perchè se no alcune funzioni non sarebbero traducibili.
 \subsection{Che cosa è l'implementazione via kernel?}
+L'implementazione via kernel è un'implementazione che dato il linguaggio $L$ prevede di individuare un sotto-insieme $H$, si scrive un compilatore in $H$ che traduca da $L$ a $L_0$ o un interprete in $H$ per $L$
+e successivamente un compilatore/interprete per $H$. Questo fa si che si debbano scrivere due programmi ma essendo più vicini sia un lavoro più semplice e garantendo maggiore portabilità.
 \subsection{Cosa si intende per bootstrapping?}
-
+Per bootstrapping si intende una tecnica che consiste nell'utilizzare compilatori o interpreti per diverse lingue per tradurre un programma in un'altra lingua. Per esempio si consideri un compilatore 
+che traduce da A a B e un altro da B a C, se volessimo tradurre un programma scritto in A nella lingua C possiamo usare i due compilatori al posto di crearne uno nuovo.
 \section{Capitolo 2 - Descrivere un linguaggio di programmazione}
 \subsection{Quali sono i livelli di descrizione di un linguaggio?}
 \subsection{Sintassi: qual è l'aspetto lessicale e quale quello grammaticale di un linguaggio?}
