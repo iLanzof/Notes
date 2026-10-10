@@ -1,0 +1,200 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc} % Per caratteri accentati
+\usepackage[T1]{fontenc}    % Per una corretta codifica dei font
+\usepackage[italian]{babel} % Per sillabazione in italiano
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multicol}
+
+%VALORI SISTEMABILI
+\usepackage[a4paper, top= 1 cm, bottom= 1.5 cm, left= 2 cm, right= 2 cm]{geometry}
+
+\title{Linguaggi di programmazione}
+\author{Francesco Lanzarini}
+\date{ }
+
+\begin{document}
+
+\maketitle
+
+\section{Capitolo 1 - Macchine astratte, interpreti, compilatori}
+\subsection{\textcolor{blue}{Che cosa è una macchina astratta?} E in cosa si differenzia da una macchina fisica?}
+Una macchina astratta e' un insieme di strutture dati e algoritmi in grado di memorizzare e esegiure programmi, la parte esseziale di essa e' l'interprete.
+Una MA si differenza da una macchina fisica perche' e' capace, tramite alcune fasi, di eseguire programmi scritti in linguagggi diversi; infatti una macchina
+fisica e' in grado di eseguire programmi scritti nel suo linguaggio.
+\subsection{\textcolor{red}{Che cos'è un interprete?} In cosa consiste il ciclo fetch-decode-execute?}
+L'interprete e' il componente essenziale di una macchina astratta ed ha il compito di interpretare le istruzioni, esso e' costituito da: operazioni per
+elaborare istruzioni primitive, operazioni e strutture dati per controllare la sequenza di esecuzione, trasferimento dati e gestione memoria.
+Il ciclo fde consiste nel prelevare la giusta istruzione da eseguire (fetch), capire quale operzione e' necessario eseguire (decode) e eseguirla salvando eventualmente
+il risultato in una certa zona di memoria (execute).
+\subsection{Cos'è il linguaggio macchina?}
+Il linguaggio macchina e' il linguaggio che la macchina e' in grado di comprendere ed eseguire.
+\subsection{Possono esistere macchine diverse con lo stesso linguaggio macchina?}
+Si, perche' la stessa istruzione elementare puo' essere implementata in modo differente in due macchine diverse.
+\subsection{In quali modi è possibile implementare una macchina astratta? Elencare vantaggi e svantaggi delle varie tecniche.}
+Sono tre i principali modi per realizzare una macchina astratta:
+\begin{enumerate}
+    \item Hardware: e' teoricamente sempre possibile ed ha la velocita' di esecuzione massima ma non e' per nulla flessbile per cui e' usata solo per macchine di basso livello o dedicate
+    \item Microprogrammi in ROM: rende microprogrammabile la macchina ospite, ha una maggiore falessibilita' ma minore velocita'.
+    \item Software di iterpretazione o simulazione: ovvero strutture dati e algoritmi della macchina astratta scritti in lunguaggio della macchina ospite, puo' essere implementata in qualsiasi
+            macchina ospite, massima flessibilita' ma minima velocita'.
+\end{enumerate}
+Nella pratica in realta' si usa una combinazione di queste tecniche.
+\subsection{\textcolor{red}{Che cos'è un compilatore?}}
+Il compilatore e' un programma che traduce un programma da una lingua $L_1$ ad una lingua $L_0$ preservandone la semantica.
+\subsection{Relativamente alla tecnica d'implementazione software, \textcolor{blue}{descrivere la tecnica d'implementazione interpretativa pura e quella compilativa pura}.}
+Quando si esegue un'implementazione interpretativa pura si realizza un interprete scritto in $L_0$ (linguaggio macchina) per un linguaggio generico $L$, le singole istruzioni sono interpretate e poi eseguite.
+Mentre in un'implementazione compilativa pura i programmi scritti in $L$ sono tradotti in programmi equivalenti in $L_0$ e poi eseguiti sulla macchina fisica
+
+\subsection{\textcolor{red}{Quando un interprete si può dire corretto? Quando un compilatore si può dire corretto?}}
+Un interprete si puo' dire corretto quando realizza una funzione parziale: $I^{L_0}_{L}: (P_r^{L} \times D)$  tale che $I_L^{L_0}(P_r^L, Input) = P^L(Input)$.
+Un compilatore si puo' dire corretto quando realizza una funzione totale: $C_{L,L_0}:Prog^L \to Prog^L_0$ tale che $C_{L,L_0}(P_r^L)=P_rc^{L_0}$
+\subsection{Confrontare l'implementazione di una macchina astratta su una macchina ospite per mezzo di un interprete o di un compilatore.}
+In un'implementazione interpretativa pura si ha una scarsa efficienza della macchina astratta perche' bisogna sommare ai tempi di esecuzione i tempi di decodifica del codice,
+inoltre nel caso una stessa istruzione dovesse ripetersi l'interprete deve decodificarla piu' volte; essa e' pero' un implementazione piu' flessibile, piu' facile da realizzare e non genera altro codice da memorizzare.
+Mentre un'implementazione comilativa pura puo' vantare un'ottima velocita' visto che tutto il codice e' gia' tradotto, essa e' pero' piu' difficile da realizzare inoltre e' poco flesssibile
+(bisognerebbe riscrivere il compilatore), astrae di piu' dal programma sorgente e occupa piu' memoria.
+\subsection{Come vengono implementate nella realtà le macchine astratte? \textcolor{blue}{Che cos'è la macchina intermedia?}}
+Nella realta' e un misto delle due interpretazioni: di solito si compila il programma in una lingua intermedia $L_i$ per una la macchina intermedia, suiccessivamente un interprete $I^{L_0}_{L_i}$ interpreta le istruzioni per l'esecuzione.
+Generalmente $I^{L_0}_L_i$ = interprete della macchina ospite + opportuni meccanismi chiamati supporto a run tim (SRT).
+\subsection{\textcolor{blue}{Quando si dice che una implementazione è di tipo interpretativo e quando di tipo compilativo?} Fare esempi di linguaggi la cui implementazione è di un tipo o dell'altro.}
+Solitamente si dice che un implementazione e' interpretativa quando la maggior parte delle istruzioni vengono interpretate e poi eseguite, tipo in python e Java; mentre 
+un'implementazione e' di tipo compilativo quando la maggior parte delle istruzioni sono prima tradotte e poi eseguite, tipo in C e C++.
+\subsection{Cos'è la Just-in-Time compilation?}
+La JIT e' una combinazione di AOT (ahead of time) compilation e interpretazione: si genera prima un codice intermedio (byte code in java) che viene poi eseguito passando per un compilatore
+on-demand man mano che esegue il programma tradotto in linguaggio macchina.
+\subsection{L'interprete e il compilatore si possono sempre realizzare?}
+\subsection{Che cosa è l'implementazione via kernel?}
+\subsection{Cosa si intende per bootstrapping?}
+
+\section{Capitolo 2 - Descrivere un linguaggio di programmazione}
+\subsection{Quali sono i livelli di descrizione di un linguaggio?}
+\subsection{Sintassi: qual è l'aspetto lessicale e quale quello grammaticale di un linguaggio?}
+\subsection{Cos'è un alfabeto? Cos'è una parola o stringa? Cos'è A*? Tale insieme è enumerabile?}
+\subsection{Definizione di potenza di una stringa. Definizione di potenza di un linguaggio. Definizione di chiusura/iterazione (o stella di Kleene) di un linguaggio.}
+\subsection{Definizione di grammatica libera da contesto. Come si deriva una stringa? Qual è il linguaggio generato da una grammatica libera?}
+\subsection{Cos'è un albero di derivazione? Cos'è una derivazione canonica sinistra/destra (leftmost/rightmost)? Esiste una corrispondenza biunivoca tra alberi di derivazioni e derivazioni canoniche?}
+\subsection{\textbf{Quando una grammatica è ambigua? (fare un esempio) Quando un linguaggio è ambiguo? (fare un esempio)}}
+\subsection{È possibile rimuovere l'ambiguità dalla grammatica delle espressioni aritmetiche? Come?}
+\subsection{Cos'è l'albero di sintassi astratta? Che differenza c'è tra sintassi concreta e sintassi astratta? Cos'è lo zucchero sintattico?}
+\subsection{Fare esempi di vincoli sintattici contestuali. Possono essere catturati attraverso grammatiche libere?}
+\subsection{\textit{Cosa s'intende per semantica statica? E per semantica dinamica?}}
+\subsection{\textbf{Elencare le varie fasi in cui si articola un compilatore. Descrivere in dettaglio ogni singola fase.}}
+\subsection{A chi serve definire la semantica dinamica di un linguaggio e perché?}
+\subsection{Quali tecniche si usano per dare semantica dinamica ad un linguaggio di programmazione?}
+\subsection{Imparare le regole di semantica operazionale SOS per il semplice linguaggio presentato a lezione. Regole di valutazione: interna vs esterna, sinistra vs destra vs parallela.}
+\subsection{Cosa s'intende per pragmatica? Cosa si intende per implementazione di un linguaggio?}
+
+\section{Capitolo 3 - Analisi lessicale-Linguaggi regolari}
+\subsection{Cosa fa l'analizzatore lessicale?}
+\subsection{Cos'è un token?}
+\subsection{Cos'è un pattern? Come lo si rappresenta? Cos'è un lessema?}
+\subsection{\textbf{Definizione di espressioni regolari (sintassi) e di linguaggio associato (semantica).}}
+\subsection{Quali sono i linguaggi regolari? I linguaggi finiti sono tutti regolari? Esistono linguaggi infiniti regolari?}
+\subsection{Definizione di equivalenza tra espressioni regolari. Elencare alcune leggi di equivalenza.}
+\subsection{Cos'è una definizione regolare e a cosa serve?}
+\subsection{\textbf{Definizione di NFA (automa finito nondeterministico). Discutere cosa si intende per nondeterminismo. Mettere in relazione la definizione formale con la rappresentazione grafica come diagramma di transizioni.}}
+\subsection{Come si definisce il linguaggio accettato da un NFA? Definizione di equivalenza tra NFA.}
+\subsection{\textbf{Definizione di DFA (automa finito deterministico). Discutere cosa si intende per determinismo. Mostrare che un DFA è un caso speciale di NFA, ovvero la classe dei DFA è un sottoinsieme della classe degli NFA.}}
+\subsection{\textbf{Dato un NFA, come si ricava un equivalente DFA? Ovvero descrivere come è definita la costruzione per sottoinsiemi. Definizione di epsilon-closure e algoritmo associato. Qual è la complessità della costruzione per sottoinsiemi nel caso pessimo? Ovvero se NFA ha n stati, quanti stati può avere il DFA equivalente?}}
+\subsection{\textbf{Dato i due punti precedenti, enunciare il teorema che dice che la classe dei linguaggi riconosciuto da NFA coincide con la classe dei linguaggi riconosciuti da DFA.}}
+\subsection{\textbf{Come si costruisce un NFA a partire da una espressione regolare, in modo tale che il linguaggio riconosciuto dall'NFA sia lo stesso del linguaggio associato all'espressione regolare?}}
+\subsection{Definizione di grammatica regolare.}
+\subsection{Come si associa ad una grammatica regolare un equivalente NFA?}
+\subsection{Dato un DFA, come si costruisce una grammatica regolare equivalente?}
+\subsection{Data una grammatica regolare, come si costruisce un'espressione regolare equivalente?}
+\subsection{\textit{Descrivere, con un diagramma riassuntivo, tutte le relazioni fra i formalismi introdotti: NFA, DFA, grammatiche regolari, espressioni regolari. Questo diagramma dimostra che tutti questi formalismi sono equivalenti e descrivono la classe dei linguaggi regolari.}}
+\subsection{Definizione di stati equivalenti in un DFA. Quando due stati di un DFA sono distinguibili?}
+\subsection{\textit{Come funziona l'algoritmo iterativo con tabella a scala per produrre le classi di equivalenza di stati di un DFA?}}
+\subsection{Una volta determinate le classi di equivalenza degli stati di un DFA, come si costruisce l'automa minimo associato?}
+\subsection{\textit{Cos'è Lex? Qual è il suo input e il suo output?}}
+\subsection{\textit{Qual è la struttura di un file .l? Come funziona l'analizzatore lessicale prodotto da Lex?}}
+\subsection{Come si interfaccia Lex con Yacc?}
+\subsection{\textbf{Intestazione e dimostrazione del pumping lemma.}}
+\subsection{\textbf{Come si può utilizzare il pumping lemma (a rovescio) per dimostrare che un linguaggio non è regolare?}}
+\subsection{\textit{Quali sono le proprietà di chiusura dei linguaggi regolari? Quali proprietà si possono decidere (ovvero verificare algoritmicamente)?}}
+
+\section{Capitolo 4 - Analisi sintattica - linguaggi liberi}
+\subsection{Cosa si intende per analisi sintattica? Cos'è un parser?}
+\subsection{\textbf{Definizione di automa a pila nondeterministico (PDA). Definizione di configurazione (o descrizione istantanea), mossa in un passo e mossa in più passi.}}
+\subsection{\textbf{Definizione di linguaggio accettato da un PDA per stato finale o per pila vuota. Sono equivalenti queste due modalità di riconoscimento?}}
+\subsection{\textbf{Mostrare come data una grammatica libera G, sia possibile costruire un PDA P equivalente. È possibile costruire, dato un PDA P, una grammatica equivalente G? Concludere che la classe dei linguaggi liberi coincide con la classe dei linguaggi riconosciuti da PDA.}}
+\subsection{\textit{Quali sono le proprietà di chiusura dei linguaggi liberi? L'intersezione di un linguaggio libero con un regolare è un linguaggio libero?}}
+\subsection{\textbf{Intestazione e dimostrazione del "Pumping Theorem".}}
+\subsection{\textbf{Come si può utilizzare tale teorema (a rovescio) per dimostrare che un linguaggio non è libero?}}
+\subsection{\textit{Classificazione di Chomsky delle grammatiche e dei linguaggi. Definizione di grammatica dipendente dal contesto e di grammatica monotona. Quale tipo di automi corrisponde ad ogni classe?}}
+\subsection{Definizione di DPDA (automa a pila deterministico) e di linguaggio libero deterministico.}
+\subsection{La classe dei linguaggi liberi deterministici è strettamente inclusa in quella dei linguaggi liberi? Contiene strettamente la classe dei linguaggi regolari?}
+\subsection{Che cosa dice la prefix property e perché è interessante per i DPDA?}
+\subsection{Usando un endmarker \$, si può riconoscere un linguaggio libero deterministico che non gode della prefix property anche per pila vuota? Come?}
+\subsection{Un linguaggio libero deterministico è ambiguo?}
+\subsection{Proprietà di chiusura dei linguaggi liberi deterministici: chiusi per complementazione, ma non per intersezione né per unione.}
+\subsection{Da cosa si parte per costruire un analizzatore sintattico (ovvero parser)? Da una espressione regolare? Da una grammatica libera? Da un PDA?}
+\subsection{Cosa prende in input e cosa produce in output un parser?}
+\subsection{Che differenza c'è tra un parser nondeterministico ed uno deterministico?}
+\subsection{Quali sono le due tecniche essenziali per costruire parsers?}
+\subsection{Le tecniche top-down e bottom-up in che cosa differiscono?}
+\subsection{Quali tipi di grammatiche non sono adatte al top-down parsing? Quali tipi di produzioni sono poco adatte al bottom-up parsing?}
+\subsection{Cosa sono le produzioni epsilon e cosa sono i simboli non-terminali annullabili?}
+\subsection{\textit{Come si può trasformare una grammatica G che contiene produzioni epsilon in una grammatica G' che non ne contiene, preservando il linguaggio a meno di epsilon?}}
+\subsection{Cosa sono le produzioni unitarie e cosa sono le coppie unitarie?}
+\subsection{\textit{Come si può trasformare una grammatica G che contiene produzioni unitarie in una equivalente G' che non ne contiene?}}
+\subsection{Data una grammatica G, quali sono i suoi simboli utili? Quali sono i suoi simboli generatori? Quali i suoi simboli raggiungibili?}
+\subsection{\textit{Come si calcolano i generatori? Come si calcolano i raggiungibili?}}
+\subsection{\textit{In che modo si eliminano i simboli inutili di una grammatica? È importante l'ordine delle operazioni da svolgere?}}
+\subsection{\textbf{Quando si dice che una grammatica è ricorsiva sinistra? Come si elimina la ricorsione sinistra immediata? E quella non immediata? Perché serve eliminare la ricorsione sinistra?}}
+\subsection{\textbf{Cosa vuol dire fattorizzare a sinistra una grammatica? Perché serve fattorizzare?}}
+\subsection{\textbf{Definizione di First(a) e di Follow(A).}}
+\subsection{\textbf{Algoritmi per calcolare First(a) e di Follow(A).}}
+\subsection{\textbf{Come è fatta e come si riempie una tabella di parsing LL(1)?}}
+\subsection{\textbf{Quando una grammatica G si dice di classe LL(1)? Quali sono le condizioni necessarie e sufficienti per G affinché sia di classe LL(1)?}}
+\subsection{Perché un parser di questo tipo è chiamato LL?}
+\subsection{\textbf{Come funziona il parser LL(1) con una pila?}}
+\subsection{\textit{Cos'è un parser a discesa ricorsiva?}}
+\subsection{È vero che ogni linguaggio regolare è pure LL(1)?}
+\subsection{Come sono definiti Firstk(a) e di Followk (A) per $k\ge2$.}
+\subsection{Come si definisce una grammatica LL(k)? Ed un linguaggio LL(k)? Come si relazionano tra di loro?}
+\subsection{Che relazione esiste tra grammatiche LL(k) e grammatiche ambigue? E con le grammatiche ricorsive sinistre?}
+\subsection{Esistono linguaggi liberi che non sono LL(k) per nessun k? Ed esistono linguaggi liberi deterministici che non sono LL(k) per nessun k?}
+\subsection{\textbf{Cos'è un parser bottom-up (o shift-reduce)? Qual è il suo input e il suo output? Perché sono chiamati parser LR?}}
+\subsection{\textbf{Che tipo di conflitti si possono presentare in un parser del genere? Quando si presenta un conflitto (shift/reduce o reduce/reduce), quale azione bisogna scegliere?}}
+\subsection{\textit{Cos'è un prefisso viabile? Come lo si definisce in termini di una grammatica?}}
+\subsection{\textit{Cos'è un item LR(0)? Come si generano tutti gli item di una grammatica (aumentata con un simbolo iniziale nuovo S')?}}
+\subsection{\textbf{Come si ricava il DFA dei prefissi viabili, detto anche automa canonico LR(0)?}}
+\subsection{\textbf{Come è fatta una tabella di parsing LR(0)? Come la si riempie a partire dall'automa canonico LR(0)? Quando una grammatica è di classe LR(0)?}}
+\subsection{\textbf{Come è fatto il parser LR(0) che utilizza la tabella di parsing LR(0)? Quanti stack servono?}}
+\subsection{Esistono grammatiche non LR(0)? Fare un esempio semplice.}
+\subsection{\textbf{Come è fatta e come si riempie una tabella di parsing SLR(1)? Cosa vuol dire l'acronimo SLR? Perché si mette 1 come parametro?}}
+\subsection{\textbf{Quando una grammatica è di classe SLR(1)? Esistono grammatiche non di classe SLR(1)?}}
+\subsection{\textit{Cos'è un item LR(1)? Come si costruisce l'automa canonico LR(1)?}}
+\subsection{\textit{Come è fatta e come si riempie una tabella di parsing LR(1)?}}
+\subsection{\textit{Come è fatto una tabella di parsing LALR(1)? Quando una grammatica è di classe LALR(1)?}}
+\subsection{Esistono grammatiche LALR(1) che non sono SLR(1)? Esistono grammatiche LR(1) che non sono LALR(1)? Mostrare una grammatica che è LR(1) ma non LALR(1).}
+\subsection{Come si può generalizzare l'idea per ogni $k \geq 2$? Ovvero quando una grammatica è di classe LR(k), SLR(k) o LALR(k)? }
+\subsection{Come si relazionano le grammatiche della famiglia LR (LR, SLR, LALR) al variare di k? Come si relazionano le grammatiche LR(k) e LL(k) al variare di k?}
+\subsection{Le grammatiche LR(k) e LL(k) sono sempre non ambigue? Esistono grammatiche ambigue che sono LL(k) o LR(k) per qualche k? Esistono grammatiche che non sono LR(k) per nessun k?}
+\subsection{Come si relazionano i linguaggi della famiglia LR(k) rispetto a quelli LL(k)? Esistono linguaggi liberi deterministici che non sono LR(k) per qualche k? Esistono linguaggi liberi deterministici che non sono LL(k) per qualche k?}
+\subsection{Esiste un linguaggio regolare che non è LR(0)? Come si relazionano i linguaggi LR(0) rispetto a quelli LL(1)? La prefix property è una condizione necessaria e sufficiente affinché un linguaggio sia di classe LR(0)?}
+\subsection{La classe dei linguaggi SLR(1) coincide con la classe dei linguaggi liberi deterministici?}
+\subsection{\textit{Cos'è YACC? Qual è il suo input e il suo output? Come si ottiene un parser eseguibile a partire da un file .y? Come agisce il parser generato da YACC in sintonia con lo scanner generato da Lex?}}
+\subsection{\textit{Come è la struttura di un file .y di YACC? Cosa sono le regole? Cos'è l'azione semantica?}}
+\subsection{\textit{È possibile gestire grammatiche ambigue con YACC, specificando le associatività e le priorità fra gli operatori per risolvere l'ambiguità? Come si comporta YACC in presenza di conflitti?}}
+
+\section{Capitolo 5 - Fondamenti}
+\subsection{\textbf{È possibile costruire un programma Check che, preso in input un qualunque programma P, restituisce 1 se P è corretto e 0 se P è scorretto? Ovvero existe un qualche compilatore che può scovare tutti i possibili errori di un programma?}}
+\subsection{\textbf{Cosa dice il problema della fermata (Halting Problem)? (L'errore in esame è la possibilità di non terminare il calcolo.) Come si dimostra che il problema non può essere risolto?}}
+\subsection{\textit{Quando un problema è decidibile?}}
+\subsection{\textit{Quali sono tipici esempi di proprietà indecidibili per i linguaggi di programmazione?}}
+\subsection{\textbf{Cos'è una Macchina di Turing (MdT)? Che cosa calcola?}}
+\subsection{\textbf{Quando un linguaggio è detto Turing-completo? Cosa afferma la tesi di Church-Turing e perché non si può dimostrare?}}
+\subsection{I normali linguaggi di programmazione sono Turing-completi? Cosa afferma il teorema di Böhm-Jacopini?}
+\subsection{\textit{Quale relazione existe tra espressività di un formalismo e decidibilità di proprietà dello stesso? Fare una panoramica prendendo in esame i tre formalismi MdT, PDA, DFA, e le due proprietà w$\in$L(M) (è w riconosciuta dalla macchina M?) e $L(M_1)=L(M_2)$ (le due macchine sono equivalenti, ovvero riconoscono lo stesso linguaggio?).}}
+
+
+
+\end{document}
