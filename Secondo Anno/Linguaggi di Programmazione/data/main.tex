@@ -76,23 +76,63 @@ e successivamente un compilatore/interprete per $H$. Questo fa si che si debbano
 \subsection{Cosa si intende per bootstrapping?}
 Per bootstrapping si intende una tecnica che consiste nell'utilizzare compilatori o interpreti per diverse lingue per tradurre un programma in un'altra lingua. Per esempio si consideri un compilatore 
 che traduce da A a B e un altro da B a C, se volessimo tradurre un programma scritto in A nella lingua C possiamo usare i due compilatori al posto di crearne uno nuovo.
+
+
 \section{Capitolo 2 - Descrivere un linguaggio di programmazione}
 \subsection{Quali sono i livelli di descrizione di un linguaggio?}
+I livelli di descrizione di un linguaggio sono quattro:
+\begin{enumerate}
+    \item Sintassi: regole per cui una frase e' corretta.
+    \item Semantica: regole per cui una frase ha senso.
+    \item Pragmatica: il modo in cui sono usate le frasi corrette e sensate.
+    \item Implementazione: solo per i linguaggi eseguibili, come eseguire una frase rispettandone la semantica.
+\end{enumerate}
 \subsection{Sintassi: qual è l'aspetto lessicale e quale quello grammaticale di un linguaggio?}
+L'aspetto lessicale di un lunguaggio e' quello che specifica le parole che si possono usare, mentre quello grammaticale specifica come frasi corrette si possono ottenere a partire dal lessico.
 \subsection{Cos'è un alfabeto? Cos'è una parola o stringa? Cos'è A*? Tale insieme è enumerabile?}
+Un alfabeto e' un insieme tipicamente finito di simboli o caratteri, una parola o stringa e' una sequenza dinita di caratteri dell'alfabeto.
+Un linguaggio formale $L$ su un alfabeto $A$ esso e' un sottoinsieme di $A*$, $A*$ e' l'insieme di tutte le possibili parole sull'alfabeto A.
+$A*$ e' un infinito contabile, quindi e' contabile. 
 \subsection{Definizione di potenza di una stringa. Definizione di potenza di un linguaggio. Definizione di chiusura/iterazione (o stella di Kleene) di un linguaggio.}
+\begin{itemize}
+    \item Potenza di una stringa: Data w una stringa, la sua potenza e' definita come: $w^0 = \epsilon$, $w^{n+1} = ww^n$
+    \item Potenza di un linguaggio: Dato $L$ un linguaggio, la sua potenza e' definita come: $L^0 = \{\epsilon\}$, $L^{n+1}=L \cdot L^n$
+    \item Chiusura/iterazione (o stella di Kleene) di un linguaggio: $L*=U{n \geq 0} L^n$, $L^+ = U{n \geq 1} L^n$ (chiusura positiva)
+\end{itemize}
 \subsection{Definizione di grammatica libera da contesto. Come si deriva una stringa? Qual è il linguaggio generato da una grammatica libera?}
+UN grammatca libera da contesto e' una quadrupla (NT,T,R,S) tale che:
+\begin{itemize}
+    \item NT: e' l'insieme finito di non terminali.
+    \item T: e' l'insieme finito di terminali.
+    \item A $\in$ NT: e' il simbolo iniziale.
+    \item R: e' l'insieme finito di produzioni della forma $V \to \alpha$
+\end{itemize}
+Per derivare una stringa si parte da P (non terminale, per esempio $P \to \epsilon | a | b | aPa | bPb$) e si applicano le produzioni.
+Il linguaggio generato da una grammatica libera e' l'insieme: $L(G) = \{w \in T | S \Rightarrow^* w\}$
 \subsection{Cos'è un albero di derivazione? Cos'è una derivazione canonica sinistra/destra (leftmost/rightmost)? Esiste una corrispondenza biunivoca tra alberi di derivazioni e derivazioni canoniche?}
+L'albero di derivazione e' un albero binario associato ad una particolare derivazione: esso e' ordinato e ogni nodo e' etichettato con un simbolo. 
+Per derivazione canonica destra/sinistra si intende una derivazione che ad ogni passo va a riscrivere il non-terminale piu' a destra/sinistra.
+Esiste inoltre una corrispondenza biunivoca tra derivazioni leftmost/rightmost, piu' precisamente un albero di derivazione esiste una sola derivazione che lo genera.
 \subsection{\textbf{Quando una grammatica è ambigua? (fare un esempio) Quando un linguaggio è ambiguo? (fare un esempio)}}
+Una grammatica e' ambigua se esiste una stringa che ammette piu' alberi di derivazione, mentre un linguaggio ambiguo se tutte le grammatiche $G$ tali che $L(G) = L$ sono ambigue.
 \subsection{È possibile rimuovere l'ambiguità dalla grammatica delle espressioni aritmetiche? Come?}
+Si, e' possibile introducendo una precedenza tra segni e l'associativita' degli stessi.
 \subsection{Cos'è l'albero di sintassi astratta? Che differenza c'è tra sintassi concreta e sintassi astratta? Cos'è lo zucchero sintattico?}
+L'albero di sintassi astratta e' un albero di derivazione da sintassi concreta senza zucchero sintattico. 
+La sintassi concreta e' una sintassi piu' semplice ma ambigua, mentre la sintassi astratta e' piu' complessa ma non ambigua e con uso di zuccero sintattico,
+ ovvero termini ausialiari usati per disanbiguare ma sintatticamente irrilevanti.
 \subsection{Fare esempi di vincoli sintattici contestuali. Possono essere catturati attraverso grammatiche libere?}
+Degli esempi di vincoli sintattici contestuali sono le dichiarazioi di variabili, type checking, corrispondenza tra dichiarazione e chiamata di funzione, visibilita' e scope, unicita' dei nomi e correttezza del flusso.
+Non possono essere catturati attraverso grammatiche libere.
 \subsection{\textit{Cosa s'intende per semantica statica? E per semantica dinamica?}}
+Per semantica statica si intendono tutti i vincoli che possono essere verificati ispezionando il programma prima di mandarlo in esecuzione mentre quella dinamica considera il significato delle istruzioni eseguite.
 \subsection{\textbf{Elencare le varie fasi in cui si articola un compilatore. Descrivere in dettaglio ogni singola fase.}}
+
 \subsection{A chi serve definire la semantica dinamica di un linguaggio e perché?}
 \subsection{Quali tecniche si usano per dare semantica dinamica ad un linguaggio di programmazione?}
 \subsection{Imparare le regole di semantica operazionale SOS per il semplice linguaggio presentato a lezione. Regole di valutazione: interna vs esterna, sinistra vs destra vs parallela.}
 \subsection{Cosa s'intende per pragmatica? Cosa si intende per implementazione di un linguaggio?}
+
 
 \section{Capitolo 3 - Analisi lessicale-Linguaggi regolari}
 \subsection{Cosa fa l'analizzatore lessicale?}
