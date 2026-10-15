@@ -327,6 +327,72 @@ Gli SpinLock sono delle quasi sezioni critiche che sono realizzate con istruzion
 Si, ma l'assenza di starvtion ha bisogno di ulteriori assunzioni per essere garantita.
 
 
+\subsubsection{Semafori: cosa sono? Quali operazioni supportano?}
+Il semaforo è un tipo di dato astratto per il quale sono definite due operazioni:
+\begin{itemize}
+    \item V: essa viene invocata per inviare un segnale, in pratica fa finire la critical section
+    \item P: serve per attendere un segnale, in pratica serve per entrare in una critical section.
+\end{itemize}
+Queste sono due azioni atomiche. Inoltre un semaforo puo' essere visto come una variabile intera che non deve essere mai negativa: l'operazione P aspetta che il semaforo sia positivo e decrementa di 1
+mentre l'operazione V incrementa di 1 il semaforo.
+\subsubsection{Qual è l'invarinte del semaforo?}
+L'invariante è: $n_p \leq n_v - init$ con $n_p$ il numero di operazioni P completate, 
+$n_v$ il numero di operazioni V completare e $init$ il valore inixiale del semaforo.
+
+\subsubsection{Cosa è il valore del semaforo?}
+Il valore del semaforo è $n_v - init - n_p$ e non deve mai essere minore di 0.
+
+\subsubsection{Come si implementa una critical section tramite i semafori?}
+Una critical section con semafori si implementa iniziando con un'operazione P per entrare nella critical section e per terminarla si fa un'operazione V
+
+\subsubsection{Cosa significa che un semaforo è fair?}
+Un semaforo viene definito fair quando rispetta una politica FIFO ovvero che il primo processo che ha richiesto di entrare in critical section doveva essere quello che ci entrava per primo tra
+tutti quelli in attesa. In altre parole garantisce l'assenza di starvation.
+
+\subsubsection{Come possono essere implementati i semafori in un sistema operativo?}
+
+
+\begin{minipage}[t]{0.48\textwidth}
+\begin{verbatim}
+    void P() {
+        if(value > 0)
+            Value--;
+        else {
+            pid = <Process id>;
+            queue.add(pid);
+            suspend(pid);
+        }
+    }
+\end{verbatim}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\begin{verbatim}
+    void V(){
+        if(queue.empty())
+            Value++;
+        else {
+            pid = queue.remove();
+            wakeup();
+        }
+    }
+\end{verbatim}
+\end{minipage}
+
+Con suspend il sistema operativo mettere il processo nello stato di waiting mentre con wakeup lo mette in stato di ready.
+
+
+\subsubsection{Perché conviene implementare le critical section nei processi utente con i semafori anche se l'implementazione dei semafori usa busy-wait (spinlock o Peterson)?}
+Perche' queste operazioni per funzionare bene partono dall'assunto che esse siano eseguite in modo atomico per cui in un sistema uniprocessore si possono disattivare gli interrupt mentre in un multicore 
+bisogna garantire la mutua esclusione, inoltre il busy-waiting e' comunque ridotto al minimo infatti le sezioni critiche di P e Q sono molto brevi.
+
+\subsubsection{Semafori binari, cosa sono?}
+I semafori binari sono particolari tipi di semafori in cui il valore puo' assumere solo valori 0 o 1.
+
+%non ancora fatte
+Cosa è il potere espressivo di un paradigma di programmazione concorrente?
+Semafori e semafori binari hanno lo stesso potere espressivo? perché?
+
 
 
 \end{document}

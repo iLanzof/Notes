@@ -79,7 +79,7 @@ che traduce da A a B e un altro da B a C, se volessimo tradurre un programma scr
 
 
 \section{Capitolo 2 - Descrivere un linguaggio di programmazione}
-\subsection{Quali sono i livelli di descrizione di un linguaggio?}
+\subsection{\textbf{Quali sono i livelli di descrizione di un linguaggio?}}
 I livelli di descrizione di un linguaggio sono quattro:
 \begin{enumerate}
     \item Sintassi: regole per cui una frase e' corretta.
@@ -89,9 +89,9 @@ I livelli di descrizione di un linguaggio sono quattro:
 \end{enumerate}
 \subsection{Sintassi: qual è l'aspetto lessicale e quale quello grammaticale di un linguaggio?}
 L'aspetto lessicale di un lunguaggio e' quello che specifica le parole che si possono usare, mentre quello grammaticale specifica come frasi corrette si possono ottenere a partire dal lessico.
-\subsection{Cos'è un alfabeto? Cos'è una parola o stringa? Cos'è A*? Tale insieme è enumerabile?}
+\subsection{Cos'è un alfabeto? Cos'è una parola o stringa? \textbf{Cos'è A*?} Tale insieme è enumerabile?}
 Un alfabeto e' un insieme tipicamente finito di simboli o caratteri, una parola o stringa e' una sequenza dinita di caratteri dell'alfabeto.
-Un linguaggio formale $L$ su un alfabeto $A$ esso e' un sottoinsieme di $A*$, $A*$ e' l'insieme di tutte le possibili parole sull'alfabeto A.
+Un linguaggio formale $L$ su un alfabeto $A$ e' un sottoinsieme di $A*$, $A*$ e' l'insieme di tutte le possibili parole sull'alfabeto A.
 $A*$ e' un infinito contabile, quindi e' contabile. 
 \subsection{Definizione di potenza di una stringa. Definizione di potenza di un linguaggio. Definizione di chiusura/iterazione (o stella di Kleene) di un linguaggio.}
 \begin{itemize}
@@ -99,8 +99,8 @@ $A*$ e' un infinito contabile, quindi e' contabile.
     \item Potenza di un linguaggio: Dato $L$ un linguaggio, la sua potenza e' definita come: $L^0 = \{\epsilon\}$, $L^{n+1}=L \cdot L^n$
     \item Chiusura/iterazione (o stella di Kleene) di un linguaggio: $L*=U{n \geq 0} L^n$, $L^+ = U{n \geq 1} L^n$ (chiusura positiva)
 \end{itemize}
-\subsection{Definizione di grammatica libera da contesto. Come si deriva una stringa? Qual è il linguaggio generato da una grammatica libera?}
-UN grammatca libera da contesto e' una quadrupla (NT,T,R,S) tale che:
+\subsection{\textcolor{red}{Definizione di grammatica libera da contesto}. \textbf{Come si deriva una stringa? Qual è il linguaggio generato da una grammatica libera?}}
+Una grammatca libera da contesto e' una quadrupla (NT,T,R,S) tale che:
 \begin{itemize}
     \item NT: e' l'insieme finito di non terminali.
     \item T: e' l'insieme finito di terminali.
@@ -109,7 +109,7 @@ UN grammatca libera da contesto e' una quadrupla (NT,T,R,S) tale che:
 \end{itemize}
 Per derivare una stringa si parte da P (non terminale, per esempio $P \to \epsilon | a | b | aPa | bPb$) e si applicano le produzioni.
 Il linguaggio generato da una grammatica libera e' l'insieme: $L(G) = \{w \in T | S \Rightarrow^* w\}$
-\subsection{Cos'è un albero di derivazione? Cos'è una derivazione canonica sinistra/destra (leftmost/rightmost)? Esiste una corrispondenza biunivoca tra alberi di derivazioni e derivazioni canoniche?}
+\subsection{\textbf{Cos'è un albero di derivazione? Cos'è una derivazione canonica sinistra/destra (leftmost/rightmost)?} Esiste una corrispondenza biunivoca tra alberi di derivazioni e derivazioni canoniche?}
 L'albero di derivazione e' un albero binario associato ad una particolare derivazione: esso e' ordinato e ogni nodo e' etichettato con un simbolo. 
 Per derivazione canonica destra/sinistra si intende una derivazione che ad ogni passo va a riscrivere il non-terminale piu' a destra/sinistra.
 Esiste inoltre una corrispondenza biunivoca tra derivazioni leftmost/rightmost, piu' precisamente un albero di derivazione esiste una sola derivazione che lo genera.
@@ -117,42 +117,121 @@ Esiste inoltre una corrispondenza biunivoca tra derivazioni leftmost/rightmost, 
 Una grammatica e' ambigua se esiste una stringa che ammette piu' alberi di derivazione, mentre un linguaggio ambiguo se tutte le grammatiche $G$ tali che $L(G) = L$ sono ambigue.
 \subsection{È possibile rimuovere l'ambiguità dalla grammatica delle espressioni aritmetiche? Come?}
 Si, e' possibile introducendo una precedenza tra segni e l'associativita' degli stessi.
-\subsection{Cos'è l'albero di sintassi astratta? Che differenza c'è tra sintassi concreta e sintassi astratta? Cos'è lo zucchero sintattico?}
+\subsection{\textbf{Cos'è l'albero di sintassi astratta?} Che differenza c'è tra sintassi concreta e sintassi astratta? Cos'è lo zucchero sintattico?}
 L'albero di sintassi astratta e' un albero di derivazione da sintassi concreta senza zucchero sintattico. 
 La sintassi concreta e' una sintassi piu' semplice ma ambigua, mentre la sintassi astratta e' piu' complessa ma non ambigua e con uso di zuccero sintattico,
  ovvero termini ausialiari usati per disanbiguare ma sintatticamente irrilevanti.
-\subsection{Fare esempi di vincoli sintattici contestuali. Possono essere catturati attraverso grammatiche libere?}
+\subsection{\textbf{Fare esempi di vincoli sintattici contestuali.} Possono essere catturati attraverso grammatiche libere?}
 Degli esempi di vincoli sintattici contestuali sono le dichiarazioi di variabili, type checking, corrispondenza tra dichiarazione e chiamata di funzione, visibilita' e scope, unicita' dei nomi e correttezza del flusso.
 Non possono essere catturati attraverso grammatiche libere.
-\subsection{\textit{Cosa s'intende per semantica statica? E per semantica dinamica?}}
+\subsection{\textbf{Cosa s'intende per semantica statica? E per semantica dinamica?}}
 Per semantica statica si intendono tutti i vincoli che possono essere verificati ispezionando il programma prima di mandarlo in esecuzione mentre quella dinamica considera il significato delle istruzioni eseguite.
-\subsection{\textbf{Elencare le varie fasi in cui si articola un compilatore. Descrivere in dettaglio ogni singola fase.}}
-
+\subsection{\textcolor{red}{Elencare le varie fasi in cui si articola un compilatore. Descrivere in dettaglio ogni singola fase.}}
+Le fasi in cui si articola un compilatore sono 6:
+\begin{enumerate}
+    \item \textbf{Analisi Lessicale}: spezza il programma sorgente in token, controlla se il lessico sia ammissibile (se le parole sono scritte bene ed esistono) e riempie parzialmente la tabella dei simboli.
+    \item \textbf{Analisi Sintattica}: verifica che le frasi siano corrette a partire dalla lista di token e da in output l'albero di derivazione del programma.
+    \item \textbf{Analizzatore semantico}: esegue controlli di semantica statica e arricchisce l'albero di derivazione.
+    \item \textbf{Generazione della forma intermedia}: genera del codice scritto in un linguaggio intermedio che e' facilmente traducibile in linguaggio macchina, per generarlo segue la struttura dell'albero di derivazione.
+    \item \textbf{Ottimizzatore}: Ottimizza il programma scritto in pseudo codice eliminando operazioni inutili, pezzi di codice inutili ecc.
+    \item \textbf{Generazione del codice}: a questo punto il codice ottimizzato nel linguaggio intermedio viene effettivamente tradotto in linguaggio macchina.
+\end{enumerate}
 \subsection{A chi serve definire la semantica dinamica di un linguaggio e perché?}
+La semantica dinamica di un linguaggio serve al programmatore per sapere cosas fa il suo programma e per dimostrarlo, al progettista del linguaggio come specifica e per dimostrarne le proprieta' e 
+all'implementatore del linguaggio come modo per dimostrare la corrrettezza dell'implementazione.
+
+
 \subsection{Quali tecniche si usano per dare semantica dinamica ad un linguaggio di programmazione?}
-\subsection{Imparare le regole di semantica operazionale SOS per il semplice linguaggio presentato a lezione. Regole di valutazione: interna vs esterna, sinistra vs destra vs parallela.}
+Sono due le principali tecniche usate:
+\begin{itemize}
+    \item Operazionale: attraverso una macchina astratta, quindi una specie di automa, che mostra come vengono eseguite le istruzioni.
+    \item Denotazionale: ad ogni programma sequenziale si associa una funzione di input ad output, pone enfasi sul cosa si calcola.
+\end{itemize}
+
+
+
+
+
+
+
+\subsection{\textbf{Imparare le regole di semantica operazionale SOS per il semplice linguaggio presentato a lezione.} Regole di valutazione: interna vs esterna, sinistra vs destra vs parallela.}
 \subsection{Cosa s'intende per pragmatica? Cosa si intende per implementazione di un linguaggio?}
+Per pragmatica si intende un insieme di regole sul modo migliore per utilizzare le istruzioni del linguaggio di programmazione, mentre per implementazione si intende la vera e propria scrittura
+del compilatore per una macchina ospite, realizzando cosi' la macchina astratta.
 
 
 \section{Capitolo 3 - Analisi lessicale-Linguaggi regolari}
-\subsection{Cosa fa l'analizzatore lessicale?}
+\subsection{\textcolor{red}{Cosa fa l'analizzatore lessicale?}}
+L'analizzatore lessicale riconosce nella stringa in ingresso gruppi/sequenze di simboli che corrispondono a specifiche categorie sintattiche, in output la stringa viene trasformata in una serie di token.
 \subsection{Cos'è un token?}
+Il token e' una coppia $<nome, valore>$, il nome e' un simbolo astratto che rappresenta una categoria sintattica mentre il valore e' al sequenza di simboli in ingresso.
 \subsection{Cos'è un pattern? Come lo si rappresenta? Cos'è un lessema?}
-\subsection{\textbf{Definizione di espressioni regolari (sintassi) e di linguaggio associato (semantica).}}
-\subsection{Quali sono i linguaggi regolari? I linguaggi finiti sono tutti regolari? Esistono linguaggi infiniti regolari?}
+Il pattern e' la descrizione generale della forma che possono avere i valori di una classe di token e lo si rappresenta tramite un'espressione regolare, mentr eil lessema e'
+una stringa istanza di un pattern.
+\subsection{\textcolor{red}{Definizione di espressioni regolari (sintassi) e di linguaggio associato (semantica).}}
+Fissato un alfabeto A, si definiscono le espressioni regolari su A le seguenti BNF:
+\begin{center} $r::= \emptyset | \epsilon | a | r \cdot r | (r|r) | r^*$ \end{center}
+con a e' un simbolo di A, $cdot$ e' l'operazione di concatenazione, $|$ disgiunzione e $*$ la ripetizione o stella di Kleene.
+Il linguaggio associato e' la funzione $L: exp-reg \to P(A*)$ che prende un'espressione regolare e ritorna tutti i possibili linguaggi formali che ammettono quell'espressione.
+
+\subsection{\textbf{Quali sono i linguaggi regolari?} I linguaggi finiti sono tutti regolari? Esistono linguaggi infiniti regolari?}
+Un linguaggio e' definito regolare sse esiste un'espressione regolare $r$ tale che L$=L[r]$, inoltre e' sicuro che ogni linguaggio finito sia regolare ed esistono linguaggi infiniti che sono regolari.
 \subsection{Definizione di equivalenza tra espressioni regolari. Elencare alcune leggi di equivalenza.}
+Due espressioni regolari $r$ e $s$ sono equivalenti sse $L[r] = L[s]$, le leggi si trovano a pagina 285 degli appunti.
 \subsection{Cos'è una definizione regolare e a cosa serve?}
-\subsection{\textbf{Definizione di NFA (automa finito nondeterministico). Discutere cosa si intende per nondeterminismo. Mettere in relazione la definizione formale con la rappresentazione grafica come diagramma di transizioni.}}
-\subsection{Come si definisce il linguaggio accettato da un NFA? Definizione di equivalenza tra NFA.}
-\subsection{\textbf{Definizione di DFA (automa finito deterministico). Discutere cosa si intende per determinismo. Mostrare che un DFA è un caso speciale di NFA, ovvero la classe dei DFA è un sottoinsieme della classe degli NFA.}}
-\subsection{\textbf{Dato un NFA, come si ricava un equivalente DFA? Ovvero descrivere come è definita la costruzione per sottoinsiemi. Definizione di epsilon-closure e algoritmo associato. Qual è la complessità della costruzione per sottoinsiemi nel caso pessimo? Ovvero se NFA ha n stati, quanti stati può avere il DFA equivalente?}}
-\subsection{\textbf{Dato i due punti precedenti, enunciare il teorema che dice che la classe dei linguaggi riconosciuto da NFA coincide con la classe dei linguaggi riconosciuti da DFA.}}
-\subsection{\textbf{Come si costruisce un NFA a partire da una espressione regolare, in modo tale che il linguaggio riconosciuto dall'NFA sia lo stesso del linguaggio associato all'espressione regolare?}}
-\subsection{Definizione di grammatica regolare.}
+Se intende espressione regolare la definizione e' data prima e serve a specificare il pattern di una categoria sintattica.
+
+\subsection{\textcolor{red}{Definizione di NFA} (automa finito nondeterministico). Discutere cosa si intende per nondeterminismo. 
+Mettere in relazione la definizione formale con la rappresentazione grafica come diagramma di transizioni.}
+Un NFA e' una quintupla $(\Sigma, Q, \delta, q_0, F)$ dove:
+\begin{itemize}
+    \item $\Sigma$ e' un alfabeto di simboli in input
+    \item $Q$ e' un insieme finito di stati
+    \item $q_0 \in Q$ e' lo stato iniziale
+    \item $F \subseteq Q$ e' l'insieme di stati finali
+    \item $\delta$ e' la funzione di trasizione che si aspetta in input uno stato e un simbolo e in output restituisce i possibili stati raggiungibili.
+\end{itemize}
+Per non determinismo si intende la proprieta' di un automa di offrire due mosse alternative per lo stesso carattere a partire dallo stesso stato, 
+L'ultima domanda si tratta di fare un disegnino.
+
+\subsection{\textbf{Come si definisce il linguaggio accettato da un NFA? Definizione di equivalenza tra NFA.}}
+Informalmente un NFA accetta $w$ sse nel diagramma di transizione esiste un cammino da $q_0$ a $F$  nel quale la stringa che si ottiene concatenando le etichette degli archi e' $w$,
+due NFA sono equivalenti sse riconoscono lo stesso linguaggio.
+
+
+\subsection{\textcolor{red}{Definizione di DFA (automa finito deterministico)}. Discutere cosa si intende per determinismo. Mostrare che un DFA è un caso speciale di NFA, ovvero la classe dei DFA è un sottoinsieme della classe degli NFA.}
+Un DFA e' un quintupla definita esattamente come un NFA con la differenza nella funzione di transizione perche' l'insieme delle mosse possibili e' sempre un singoletto. Meno formalmente un DFA a differenza 
+di un NFA ha una e una sola transizione possibili per ogni carattere a partire da ogni stato e non ha transizioni $\epsilon$. Ne viene logicamente che $DFA \subset NFA$
+
+
+\subsection{Dato un NFA, come si ricava un equivalente DFA? Ovvero \textbf{descrivere come è definita la costruzione per sottoinsiemi}. 
+    Definizione di epsilon-closure e algoritmo associato. Qual è la complessità della costruzione per sottoinsiemi nel caso pessimo? 
+        Ovvero se NFA ha n stati, quanti stati può avere il DFA equivalente?}
+Per vedere come si fa guaradre da pagina 210 dei lucidi e appunti.
+Per $\epsilon-closure$ di q si intende l'insime di stati raggiungibili a partire da $q$ con sole mosse $\epsilon$. In altre parole per costruire lo stato di arrivo del DFA a partire dallo stato P e carattere
+b basta fare $\epsilon-closure(mossa(P,b))$ con mossa che ritorna lo stato in cui si arriva partendo da P e leggendo il carattere b.
+Algoritmo a pagina 314 di lucidi e appunti.
+Nel caso pesimo in cui stiamo costruendo il DFA dal NFA l'insieme degli stati del DFA sara' al massimo l'insieme delle parti dell'insieme degli stati dell'NFA; per cui detto $n=numero\ stati\ NFA$ il numero di stati del DFA sara' al massimo $2^n$.
+\subsection{Dato i due punti precedenti, \textbf{enunciare il teorema che dice che la classe dei linguaggi riconosciuto da NFA coincide con la classe dei linguaggi riconosciuti da DFA.}}
+Il teorema a cui l'enunciato fa da corollario e':
+
+    Sia $N=(\Sigma,Q,\delta,q_0,F)$ un NFA e sia $M_n$ l'automa ottenuto con la costruzionje per sottoinsiemi. Allora $M_N$ e' un DFA e si ha che \newline \begin{center} $L[N] = L[M_N]$
+\end{center}
+\subsection{\textcolor{red}{Come si costruisce un NFA a partire da una espressione regolare}, in modo tale che il linguaggio riconosciuto dall'NFA sia lo stesso 
+    del linguaggio associato all'espressione regolare?}
+C'e' un teoema che ci assicura la possibilita' e slide di spiegazione da pagina 326 di lucidi e appunti.
+\subsection{\textcolor{red}{Definizione di grammatica regolare.}}
+Un grammatica libera(NT,T,R,S) e' definita regolare sse ogni produzione R r' della forma A$\to$aB oppure A$\to$a oppure A$\to\epsilon$ con A,B$in$NT e A$\in$T. 
+In pratica in una forma sentenziale generata puo' occorrere al piu' un terminale che si trova nella posizione piu' a destra, quindi e' ammesso A$\to$aA ma non A$\to$aA.
 \subsection{Come si associa ad una grammatica regolare un equivalente NFA?}
-\subsection{Dato un DFA, come si costruisce una grammatica regolare equivalente?}
-\subsection{Data una grammatica regolare, come si costruisce un'espressione regolare equivalente?}
-\subsection{\textit{Descrivere, con un diagramma riassuntivo, tutte le relazioni fra i formalismi introdotti: NFA, DFA, grammatiche regolari, espressioni regolari. Questo diagramma dimostra che tutti questi formalismi sono equivalenti e descrivono la classe dei linguaggi regolari.}}
+Graze al teorema di pagina 341 di lucidi e appunti.
+\subsection{\textbf{Dato un DFA, come si costruisce una grammatica regolare equivalente?}}
+Per associare al DFA la grammatica equivalente basta prendere ogni stato guardare i caratteri uscenti e metterci in coda lo stato a cui portano (esempio pagina 344)
+\subsection{\textbf{Data una grammatica regolare, come si costruisce un'espressione regolare equivalente?}}
+Data una grammatica regolare e' sufficiente trattarla come un'espressione per ricavare ogni volta il non terminale piu' in basso e maneggiare le espressioni con le equivalenze per ottenere un'espressione regolare che e' equivalente. 
+\subsection{\textbf{Descrivere, con un diagramma riassuntivo, tutte le relazioni fra i formalismi introdotti: NFA, DFA, grammatiche regolari, espressioni regolari}.
+ Questo diagramma dimostra che tutti questi formalismi sono equivalenti e descrivono la classe dei linguaggi regolari.}
+ Pagina 351 lucidi e appunti.
 \subsection{Definizione di stati equivalenti in un DFA. Quando due stati di un DFA sono distinguibili?}
 \subsection{\textit{Come funziona l'algoritmo iterativo con tabella a scala per produrre le classi di equivalenza di stati di un DFA?}}
 \subsection{Una volta determinate le classi di equivalenza degli stati di un DFA, come si costruisce l'automa minimo associato?}

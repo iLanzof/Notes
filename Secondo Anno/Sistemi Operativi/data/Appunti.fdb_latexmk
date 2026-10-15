@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1791534037.72084 "main.tex" "/home/francesco/Desktop/University/Notes/Secondo Anno/Sistemi Operativi/Appunti.pdf" "Appunti" 1791534038.24236 0
+["pdflatex"] 1792000475.30544 "main.tex" "/home/francesco/Desktop/University/Notes/Secondo Anno/Sistemi Operativi/Appunti.pdf" "Appunti" 1792000476.2241 0
   "/etc/texmf/web2c/texmf.cnf" 1779095512.72313 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm" 1136768653 3584 2d666ecf6d466d8b007246bc2f94d9da ""
@@ -14,8 +14,10 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm" 1246382020 924 9904cf1d39e9767e7a3622f2a125a565 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm" 1246382020 928 2dc8d444221b7a635bb58038579b861a ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm" 1246382020 908 2921f8a10601f252058503cc6570e581 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm" 1246382020 940 75ac932a52f80982a9f8ea75d03a34cf ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1246382020 940 228d6584342e91276bf566bcf9716b83 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1136768653 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1136768653 1524 4414a8315f39513458b80dfc63bff03a ""
@@ -27,6 +29,9 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1136768653 1124 6c73e740cf17375f03eec0ee63599741 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1248133631 36281 c355509802a035cadc5f15869451dcee ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1461363279 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/babel-italian/italian.ldf" 1768510595 11544 73e1a196f9cb1197c32a45aa6e9ead35 ""
   "/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty" 1768770623 147019 0d4381bf532725818b265a009d12c7ac ""
@@ -105,9 +110,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1769369718 41603 27f93b3067076450172040dcd57ca8b3 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1779095931 5541477 3118940318599480888143717dd32d64 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1779096012 3638852 21021323e96c46248c82aa4aaf098c48 ""
-  "Appunti.aux" 1791534038.18547 7746 3f2a9752ba355cec3333688059a742ea "pdflatex"
-  "Appunti.out" 1791534038.18747 14708 7d70878719a2c292021a8f2ae01138da "pdflatex"
-  "main.tex" 1791534032.29048 14889 ea4197e6e4d099d1b0f6ca2fc18f364d ""
+  "Appunti.aux" 1792000476.13648 9165 9af502bfa16945db90ba82ac39514890 "pdflatex"
+  "Appunti.out" 1792000476.13748 17776 f53c2166f4af39e5fbc8a58b29f3d211 "pdflatex"
+  "main.tex" 1792000380.20925 17978 33f2ecddfcabaf9d42a144fc1d1f4d85 ""
   (generated)
   "/home/francesco/Desktop/University/Notes/Secondo Anno/Sistemi Operativi/Appunti.pdf"
   "Appunti.aux"
