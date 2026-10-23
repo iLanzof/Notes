@@ -391,7 +391,58 @@ I semafori binari sono particolari tipi di semafori in cui il valore puo' assume
 
 %non ancora fatte
 Cosa è il potere espressivo di un paradigma di programmazione concorrente?
-Semafori e semafori binari hanno lo stesso potere espressivo? perché?
+\subsubsection{Semafori e semafori binari hanno lo stesso potere espressivo? perché?}
+Si, hanno lo stesso potere espressivo.
+
+
+
+\subsubsection{Quali sono le specifiche del problema "produttore consumatore"?}
+Esistono due tipi di processi: produttori e consumatori, i primi producono un valore che i secondi utilizzano; per scambiarsi i valori viene usata una variabile comune ai due processi.
+Le proprietà da garantire sono che il produttore non scriva la memoria prima che il consumatore l'abbia letta, il consumatore non legga due volte la memoria non aggiornata dal produttore e assenza di deadlock.
+
+\subsubsection{Come si scrive una soluzione del problema "produttore consumatore" usando i semafori?}
+Slide 117 lucidi e appunti
+
+\subsubsection{Quali sono le specifiche del problema "buffer limitato"?}
+E' simile al problema produttore/consumatore ma non è più condivisa la singola locazione di memoria ma un struttura dati.
+Oltre alle proprietà da garantire del problema di prima bisogna garantire l'assenza di starvation.
+
+
+\subsubsection{Come si scrive una soluzione del problema "buffer limitato" usando i semafori?}
+Slide 119 lucidi e appunti
+
+\subsubsection{Perché nella soluzione del "buffer limitato" serve un semaforo ulteriore di mutua esclusione?}
+Perchè è quello che assicura la mutua esclusione sulle operazioni effettuate allastruttura dati.
+
+\subsubsection{Quali sono le specifiche del problema "cena dei filosofi"?}
+Ci sono 5 filosofi a cena attorno ad una tavola rotonda e possono fare 2 cose: pensare oppure mangiare.
+Per mangiare ogni filosofo deve prendere in mano le due bacchette ai lati mentre per pensare le deve posare entrambe.
+
+
+\subsubsection{Cosa succede se si considerano le forchette/bacchette come risorse
+e ogni filosofo prende prima la bacchetta di sx e poi quella a dx? perché?}
+Essendo virtualmente un cerchio si potrebbero tutti bloccare (deadlock) perchè hanno tutti una posata ma nessuno riesce a raggiungere l'altra.
+
+\subsubsection{Come si può risolvere il problema?}
+Il problema (per $n \leq 5$) si risolve rompendo la simmetria della situazione quindi facendo in modo che uno dei filosofi prenda 
+le bacchette in ordine inverso rispetto agli altri.
+
+
+\subsubsection{Esistono soluzioni che presentino starvation?}
+Facendo in modo che i filosofia prendano le bacchette in modo alternato si può verificare una \textit{congiura dei filosofi} ovvero che un filosofo non riesce mai 
+a prendere le bacchette per mangiare e muore di fame.
+
+\subsubsection{Quali sono le specifiche del problema "lettori/scrittori"?}
+UN database e' copndiviso tra una moltitudine di processi che sono divisibili in due classi principali: lettori e scrittori.
+I lettori vogliono leggere i dati del database e possono farlo a meno che non ci sia uno scrittore, gli scrittori invece vogliono scrivere sul database ma lo possono fare solo in mutua esclusione.
+
+
+
+Come funziona la metodologia di Andrews?
+Come si può costruire una soluzione esente da casi di starvation?
+
+
+
 
 
 
