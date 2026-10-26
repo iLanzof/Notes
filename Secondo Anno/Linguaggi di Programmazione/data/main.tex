@@ -291,11 +291,62 @@ La classe dei linguaggi regolari e' chiusa per:
     \item intersezione
 \end{itemize}
 Per vedere quelle decisibili aloritimicamente pagina 417 lucidi e appunti.
+
+
+
 \section{Capitolo 4 - Analisi sintattica - linguaggi liberi}
-\subsection{Cosa si intende per analisi sintattica? Cos'è un parser?}
-\subsection{\textbf{Definizione di automa a pila nondeterministico (PDA). Definizione di configurazione (o descrizione istantanea), mossa in un passo e mossa in più passi.}}
-\subsection{\textbf{Definizione di linguaggio accettato da un PDA per stato finale o per pila vuota. Sono equivalenti queste due modalità di riconoscimento?}}
-\subsection{\textbf{Mostrare come data una grammatica libera G, sia possibile costruire un PDA P equivalente. È possibile costruire, dato un PDA P, una grammatica equivalente G? Concludere che la classe dei linguaggi liberi coincide con la classe dei linguaggi riconosciuti da PDA.}}
+\subsection{Cosa si intende per analisi sintattica? \textcolor{red} {Cos'è un parser?}}
+Per analisi sintattica si intende l'analisi della sintassi, ovvero la correttezza della frase. Un parser genera, a partidre dalla lista di token, un albero di derivazione
+relativo alla grammatica libera usata per costruirlo.
+\subsection{\textcolor{red}{Definizione di automa a pila nondeterministico (PDA)}. 
+Definizione di configurazione (o descrizione istantanea),
+ mossa in un passo e mossa in più passi.}
+Un automa a pila non deterministico e' una 7-upla $(\Sigma, Q, \Gamma, \delta, q_0, \bot, F)$ dove:
+\begin{itemize}
+    \item $\Sigma$ e' l'alfabeto di simboli in input
+    \item $Q$ e' l'insieme di stati
+    \item $\Gamma$ e' l'insieme finito di simboli della pila
+    \item $\delta$ e' la funzione di transizione: $\delta: Q \times (\Gamma \cup \{\epsilon\}) \times \Gamma \rightarrow P_{fin}(Q\times \Gamma^*)$
+    \item $q_0 \in Q e' lo stato iniziale$
+    \item $\bot \in \Gamma$ e' il simbolo iniziale della pila
+    \item $F \subseteq Q$ e' l'insieme di stati finali
+\end{itemize}
+
+Mentre l'istantanea e' una tripla $(q,w,\beta)$ dove
+
+\begin{itemize}
+    \item $q \in Q$ e' lo stato corrente
+    \item $w\in\Gamma^*$ e' l'input non ancora leftmost
+    \item $\beta\in\Gamma^*$ e' la stringa sulla pila
+\end{itemize}
+Per la mossa data la sintassi atroce per riportarla guardare pagina 429 di lucidi e appunti.
+
+
+\subsection{\textcolor{blue}{Definizione di linguaggio accettato da un PDA per stato finale o per pila vuota.} Sono equivalenti queste due modalità di riconoscimento?}
+Due sono le modalita' di riconoscimento:
+\begin{itemize}
+    \item \textbf{Stato finale} $L[N] = \{w\in\Gamma^*|(q_0,w,\bot)\vdash_N^*(q,\epsilon,\alpha)\ con\ q\in F \}$
+    \item \textbf{Pila vuota} $P[N] = \{w\in\Gamma^*|(q_0,w,\bot)\vdash_N^*(q,\epsilon,\epsilon) \}$
+\end{itemize}
+La classe dei linguaggi riconosciuti dai PDA per stato finale e' la stessa di quella dei PDA per pila vuota.
+Esiste un teorema che ci assicura che:
+\begin{itemize}
+    \item Dato un PDA N, se L = P[N] (per pila vuota), possiamo costruire un PDA N' tale che L = L[N'].
+
+        Per costruire N' e' sufficiente aggiungere il simbolo $Z$ alla pila che ne rimane costantemente in fondo e, una volta rimasto solo quello, rimuoverlo con il passo che porta ad un terminale.
+        A livello pratico si tratta di introdurre uno stato iniziale $i$ con passo: $\epsilon,Z/\bot Z$ che si collega al vecchio stato inziale e collegare tutti gli stati dell'automa al nuovo finale con un passo che cancella la Z.
+    \item Dato un PDA N, se L = L[N] (per stato finale), possimo costruire un PDA N' tale che L = P[N'].
+    
+        Similmente al caso precendente aggiungo un nuovo stato $i$ come iniziale che scrive sulla pila il simbolo Z di fine pila poi da ogni stato terminale dell'automa creo un passo che porta ad una nuovo stato
+        non finale con un passo che svuota la pila (sia con il passo in se che con un cappio nello stato finale).
+\end{itemize}
+
+\subsection{\textcolor{blue}{Mostrare come data una grammatica libera G, sia possibile costruire un PDA P equivalente. 
+È possibile costruire, dato un PDA P, una grammatica equivalente G? 
+Concludere che la classe dei linguaggi liberi coincide con la classe dei linguaggi riconosciuti da PDA.}}
+Data la grammatica libera si puo' costruire un PDA equivalente seguendo l'esempio a pagina 342-344 di lucidi e appunti. 
+%da finire a lezione
+
 \subsection{\textit{Quali sono le proprietà di chiusura dei linguaggi liberi? L'intersezione di un linguaggio libero con un regolare è un linguaggio libero?}}
 \subsection{\textbf{Intestazione e dimostrazione del "Pumping Theorem".}}
 \subsection{\textbf{Come si può utilizzare tale teorema (a rovescio) per dimostrare che un linguaggio non è libero?}}

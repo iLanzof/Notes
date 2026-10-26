@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.5.18)  23 OCT 2026 10:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.5.18)  26 OCT 2026 17:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -559,64 +559,64 @@ Underfull \hbox (badness 10000) in paragraph at lines 218--218
 
  []
 
-[6] [7]
+[6] [7] [8]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 332.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\ge' on input line 332.
+(hyperref)                removing `math shift' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 332.
+(hyperref)                removing `\ge' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 350.
+(hyperref)                removing `math shift' on input line 383.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\geq' on input line 350.
+(hyperref)                removing `math shift' on input line 401.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 350.
+(hyperref)                removing `\geq' on input line 401.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 368.
+(hyperref)                removing `math shift' on input line 401.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\in' on input line 368.
+(hyperref)                removing `math shift' on input line 419.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 368.
+(hyperref)                removing `\in' on input line 419.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 368.
+(hyperref)                removing `math shift' on input line 419.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 368.
+(hyperref)                removing `math shift' on input line 419.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 368.
+(hyperref)                removing `subscript' on input line 419.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 368.
-
-[8] [9]
-Overfull \vbox (1715.77148pt too high) has occurred while \output is active []
+(hyperref)                removing `subscript' on input line 419.
 
 
-[10] (./Appunti.aux)
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 419.
+
+[9] [10]
+Overfull \vbox (1526.0441pt too high) has occurred while \output is active []
+
+
+[11] (./Appunti.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -625,9 +625,9 @@ Package rerunfilecheck Info: File `Appunti.out' has not changed.
 (rerunfilecheck)             Checksum: D13D8D28D2BD84169A68C4DF8743445D;84629.
  ) 
 Here is how much of TeX's memory you used:
- 13414 strings out of 467533
- 203976 string characters out of 5422138
- 717341 words of memory out of 5000000
+ 13415 strings out of 467533
+ 203983 string characters out of 5422138
+ 709762 words of memory out of 5000000
  41999 multiletter control sequences out of 15000+600000
  640489 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -648,10 +648,10 @@ f/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public
 fb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf
 /fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/
 cm-super/sfrm1728.pfb>
-Output written on Appunti.pdf (10 pages, 309691 bytes).
+Output written on Appunti.pdf (11 pages, 315057 bytes).
 PDF statistics:
- 741 PDF objects out of 1000 (max. 8388607)
- 685 compressed objects within 7 object streams
- 162 named destinations out of 1000 (max. 500000)
+ 746 PDF objects out of 1000 (max. 8388607)
+ 689 compressed objects within 7 object streams
+ 163 named destinations out of 1000 (max. 500000)
  1081 words of extra memory for PDF output out of 10000 (max. 10000000)
 
