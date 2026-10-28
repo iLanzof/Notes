@@ -344,17 +344,71 @@ Esiste un teorema che ci assicura che:
 \subsection{\textcolor{blue}{Mostrare come data una grammatica libera G, sia possibile costruire un PDA P equivalente. 
 È possibile costruire, dato un PDA P, una grammatica equivalente G? 
 Concludere che la classe dei linguaggi liberi coincide con la classe dei linguaggi riconosciuti da PDA.}}
-Data la grammatica libera si puo' costruire un PDA equivalente seguendo l'esempio a pagina 342-344 di lucidi e appunti. 
-%da finire a lezione
+Data una grammatica libera G è possibile costruire un PDA equivalente tramite il metodo \textit{top-down}: data la grammatica si costruisce un automa con un solo stato, con simbolo sulla pila S e che riconosca
+il linguaggio descritto dalla grammatica per pila vuota. A questo punto le transizioni (che sono sostanzialmente dei cappi) possono essere di due tipi:
+\begin{itemize}
+    \item \textbf{Espandi}: ovvero una transizione $\epsilon$ che sostituisce S in cima alla pila con la parte destra della sua produzione.
+    \item \textbf{Consuma}: trasizione che si esegue quando viene fatto match tra l'input e l'ultimo simbolo sulla pila.
+\end{itemize}
+Il PDA ottenuto è per forza di cose non deterministico perchè la scelta della transizione espandi è puramente arbitraria.
+Esiste un teorma che ci dice che un linguggio L è libero da contesto sse è accettato da PDA.
 
-\subsection{\textit{Quali sono le proprietà di chiusura dei linguaggi liberi? L'intersezione di un linguaggio libero con un regolare è un linguaggio libero?}}
-\subsection{\textbf{Intestazione e dimostrazione del "Pumping Theorem".}}
-\subsection{\textbf{Come si può utilizzare tale teorema (a rovescio) per dimostrare che un linguaggio non è libero?}}
-\subsection{\textit{Classificazione di Chomsky delle grammatiche e dei linguaggi. Definizione di grammatica dipendente dal contesto e di grammatica monotona. Quale tipo di automi corrisponde ad ogni classe?}}
-\subsection{Definizione di DPDA (automa a pila deterministico) e di linguaggio libero deterministico.}
+\subsection{\textcolor{blue}{Quali sono le proprietà di chiusura dei linguaggi liberi? L'intersezione di un linguaggio libero con un regolare è un linguaggio libero?}}
+I linguaggi liberi sono chiusi per: unione, concatenazione e ripetizione/stella di Kleene. Molto più importante è la chiusura rispetto all'intersezione con un linguaggio regolare: esiste infatti un 
+teorema che ci assicura che dato $L_1$ libero e $L_2$ regolare allora $L_1 \cap L_2$ è un linguagggio libero.
+La dimostrazione si fa prendendo $N_1$ ovvero il PDA che riconosce $L_1$ per stato finale, $N_2$ il DFA che riconosce $L_2$ e crea l'automa prodotto: in pratica si muove sul PDA salvandosi lo stato su cui 
+sarebbe nel DFA e alla fine del riconoscimento di una qualsiasi stringa appartenente al linguaggio intersezione in entrambi gli automi si arriva ad uno stato finale.
+
+
+\subsection{\textcolor{red}{Intestazione e dimostrazione del "Pumping Theorem".}}
+Se L è libero allora $\exists N > 0$ tale che $\forall Z \in L$ con $|z| \geq N, \exists u,v,w,x,y$ tali che:
+\begin{itemize}
+    \item $z = uvwxz$
+    \item $|vwz| \leq N$
+    \item $|vx| \geq 1$
+    \item $\forall K \geq uv^kwx^ky \in L$
+\end{itemize}
+
+Sia $G=(NT,T,R,S)$ una grammatica libera tale che $L=L(G)$ e sia b il massimo fattore di ramificazione in un albero di derivazione: $b = max{|\alpha| tc A\to\alpha\in R}$, con h l'altezza dell'albero (quindi il numero di foglie è $b^h$).
+Fisso $N = b^{|NT|+1}$, dunque ogni albero di derivazione per la stringa z ($|z| \geq N$) deve avere altezza almeno di $|NT|+1$. Preso dunque un qualunque z consideriamo il suo albero di derivazione
+(nel caso fosse una grammatica ambigua prendiamo quello con il numero minore di nodi).
+Dunque avendo $|z| \geq N$ il suo albero di derivazione avrà un'altezza maggiore di $|NT| + 1$ dunque il cammino dalla radice S ad una foglia tocca almeno $|NT|+2$ nodi  e $|NT|+1$  nodi non terminali;
+ma questo è in contraddizione con l'ipotesi di aver scelto sempre l'albero minimo.
+Dunque la derivazione $S \Rightarrow^* z$ può essere divisa come: $S \Rightarrow^* uAy \Rightarrow^* uvAxy \Rightarrow^* uvwxy$ con la sotto-derivazione $A \Rightarrow^* vAx$ ripetibile più volte.
+Quindi anche l'ultima condizione è soddisfatta, basta ora verificare che $|vw| \geq 1$ vero perchè se entrambe $\epsilon$ l'albero per $k=0$ genererebbe ancora $z$ avendo meno nodi e contraddicendo l'ipotesi 
+dell'albero più piccolo e che $|vwx| \leq N$ ovvio perchè il cammino da A alla foglia è minore o uguale a $|NT|+1$ quindi la A non può genrare parole più lunghe di $b^{|NT|+1} = N$.
+
+\subsection{\textcolor{red}{Come si può utilizzare tale teorema (a rovescio) per dimostrare che un linguaggio non è libero?}}
+Se L è libero allora $\forall N > 0$ tale che $\exists Z \in L$ con $|z| \geq N, \forall u,v,w,x,y$ tali che:
+\begin{itemize}
+    \item $z = uvwxz$
+    \item $|vwz| \leq N$
+    \item $|vx| \geq 1$
+    \item $\exists K \geq uv^kwx^ky \not\in L$
+\end{itemize}
+Allora L non è libero
+
+
+\subsection{\textcolor{blue}{Classificazione di Chomsky delle grammatiche e dei linguaggi}. Definizione di grammatica dipendente dal contesto e di grammatica monotona. Quale tipo di automi corrisponde ad ogni classe?}
+Slides 465-472 lucidi e appunti
+\subsection{\textcolor{red}{Definizione di DPDA (automa a pila deterministico) e di linguaggio libero deterministico.}}
+Un PDA $N=(\Sigma,Q,\Gamma,\delta,q_0,\bot,F)$ è un DPDA se valgono le seguenti condizioni:
+\begin{itemize}
+    \item $\forall q \in Q, \forall Z \in \Gamma,\forall a\in\Sigma\cup\{\epsilon\}$, vale $|\delta(q,a,Z)|\leq 1$
+    \item $\forall q   \in Q, \forall Z\in\Gamma, se \ \delta(q,\epsilon,Z) = \emptyset$, allora $\delta(q,a,Z) = \emptyset \forall a\in\Sigma$
+\end{itemize}
+Che, al netto di questa sintassi atroce, può essere scritto come: $|\delta(q,a,Z)|+|\delta(q,\epsilon,Z)| \leq 1$ ovvero che c'è sempre una sola mossa possibile.
+Un linguaggio libero è deterministico se è accettato per stato finale da un DPDA.
 \subsection{La classe dei linguaggi liberi deterministici è strettamente inclusa in quella dei linguaggi liberi? Contiene strettamente la classe dei linguaggi regolari?}
-\subsection{Che cosa dice la prefix property e perché è interessante per i DPDA?}
-\subsection{Usando un endmarker \$, si può riconoscere un linguaggio libero deterministico che non gode della prefix property anche per pila vuota? Come?}
+Un teorema ci dice che la classe dei linguaggi liberi deterministici è inclusa propriamente nella classe dei linguaggi liberi.
+
+\subsection{\textcolor{blue}{Che cosa dice la prefix property e perché è interessante per i DPDA?}}
+La prefix property dice che un linguaggio deterministico L è riconosciuto da un PDPA per pila vuota sse L è prefix free ovvero $\not\exists x,y \in L$ tali che x è prefisso di y.
+
+\subsection{Usando un endmarker \$ , si può riconoscere un linguaggio libero deterministico che non gode della prefix property anche per pila vuota? Come?}
+Il trucco che rende possibile riconoscere un linguaggio libero deterministico tramite un DPDA è quello di aggiungere un endmarker alla fine di ogni stringa in modo tale da rendere impossibile che 
+un'altra stringa del linguaggio ne sia prefisso. 
+
 \subsection{Un linguaggio libero deterministico è ambiguo?}
 \subsection{Proprietà di chiusura dei linguaggi liberi deterministici: chiusi per complementazione, ma non per intersezione né per unione.}
 \subsection{Da cosa si parte per costruire un analizzatore sintattico (ovvero parser)? Da una espressione regolare? Da una grammatica libera? Da un PDA?}
