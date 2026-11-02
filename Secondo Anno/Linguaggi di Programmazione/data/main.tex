@@ -410,13 +410,27 @@ Il trucco che rende possibile riconoscere un linguaggio libero deterministico tr
 un'altra stringa del linguaggio ne sia prefisso. 
 
 \subsection{Un linguaggio libero deterministico è ambiguo?}
+No, un linguaggio libero non e' ambiguo perche' esso e' generabile da una grammatica libera non ambigua (proposizione).
+
 \subsection{Proprietà di chiusura dei linguaggi liberi deterministici: chiusi per complementazione, ma non per intersezione né per unione.}
+I linguagggi liberi appunto sono chiusi per complementazione e l'intersezione tra un linguaggio libero deterministico e uno regolare e' un linguaggio a sua volta libero deterministico.
+Invece, non sono chiusi per intersezione, per unione e concatenzaione/stella di Kleene.
 \subsection{Da cosa si parte per costruire un analizzatore sintattico (ovvero parser)? Da una espressione regolare? Da una grammatica libera? Da un PDA?}
+Si parte da un PDA.
 \subsection{Cosa prende in input e cosa produce in output un parser?}
-\subsection{Che differenza c'è tra un parser nondeterministico ed uno deterministico?}
+Un parser prende in input una lista di token e produce un albero di derivazione.
 \subsection{Quali sono le due tecniche essenziali per costruire parsers?}
+Le due tecniche essenziali per costruire un parser sono Top-down e Bottom-up.
 \subsection{Le tecniche top-down e bottom-up in che cosa differiscono?}
+\begin{itemize}
+    \item \textbf{Top-down}: ricostruiscono una derivazione left-most per w a partire da S.
+    \item \textbf{Bottom-up}: ricostruiscono una derivazione right-most per w a partire da S.
+\end{itemize}
+
 \subsection{Quali tipi di grammatiche non sono adatte al top-down parsing? Quali tipi di produzioni sono poco adatte al bottom-up parsing?}
+Le grammatiche left recursive sono quelle meno adatte al top-down parsing perchè mantendo ricorsivamente S il piu' a sinistra possibile finiscono per bloccare la prima meta' della parola (sl. 501).
+Invece le grammatiche libere con produzioni $\epsilon$ sono quelle meno adatte al botto-upm parsing.
+
 \subsection{Cosa sono le produzioni epsilon e cosa sono i simboli non-terminali annullabili?}
 \subsection{\textit{Come si può trasformare una grammatica G che contiene produzioni epsilon in una grammatica G' che non ne contiene, preservando il linguaggio a meno di epsilon?}}
 \subsection{Cosa sono le produzioni unitarie e cosa sono le coppie unitarie?}

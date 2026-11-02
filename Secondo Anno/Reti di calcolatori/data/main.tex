@@ -1,0 +1,198 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc} % Per caratteri accentati
+\usepackage[T1]{fontenc}    % Per una corretta codifica dei font
+\usepackage[italian]{babel} % Per sillabazione in italiano
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage{etaremune}
+
+%VALORI SISTEMABILI
+\usepackage[a4paper, top= 1 cm, bottom= 1.5 cm, left= 2 cm, right= 2 cm]{geometry}
+
+\title{Reti di Calcolatori}
+\author{Francesco Lanzarini}
+\date{ }
+
+\begin{document}
+
+\maketitle
+
+\section{Introduzione}
+Per \textbf{rete di calcolatori} si intende un insieme di dispositivi autonomi e interconnessi tra di loro, essa è necessaria per supportare la comunicazione tra utenti e, soprattutto, tra macchine
+(\textit{internet of things}). Le principlai comnunicazioni riguardano la condivisione di informazioni, di dispositivi, di risorse, l'accesso a calcolatori remoti e il calcolo distribuito.
+Le reti possono essere classificate in base alla loro dimensione geografica:
+\begin{itemize}
+    \item \textbf{PAN (Personal Area Network)}: connessioni di dispositivi molto vicini tipo all'interno di una stanza oppure la chiave di un automobile con apertura al tocco.
+    \item \textbf{LAN (Local Area Network)}: connessione tra dipositivi all'interno di un edificio, è la tipologia più diffusa perchè offre ottimi compromessi
+    \item \textbf{MAN (Metropolitan Area Network)}: sono le connessioni urbane, vicolate dai tronchi di fibra otica soot il terreno
+    \item \textbf{WAN (Wide Area Network)}: connessioni molto ampie come reti nazionali e internazionali.
+    \item \textbf{Internet}: è la rete globale che è formata da tante tipologie di reti differenti ma tutte conformi ai protocolli usati per la trasmissione e ricezione di informazioni.
+\end{itemize}
+
+Per comunicare sul mezzo di rete (cavo fisico/onde radio) i calcolatori devono interfacciarsi con la \textbf{scheda di rete}, essa è personale e presenta il proprio \textbf{MAC address} che è 
+un codice di 48 bit unico per ogni scheda.
+\paragraph{Evoluzione delle reti}
+La nascita di internet è dovuta allo sviluppo globale delle reti, volendo tracciare una data di inizio essa ricadrebbe nel 1969 quando un gruppo di ricercatori universitari collegarono tra loro 4 
+computer di 4 università americane; da quel momento molte entità, provate e pubbliche, hanno contribuito allo sviluppo e distribuzione delle reti.
+Nel 2003 il mondo realizzò che internet poteva essere un'enorme vetrina commerciale veisibile da tutti gli utenti connessi, questi sono gli anni delle \textit{dot com} e si contavano circa 172 milioni
+ di calcolatori connessi. Ad oggi il numero di dispositivi connessi risultano essere oltre i 4 miliardi, 25 se si considerano nche quelli dell'internet of things.
+Il denaro usato per la realizzazione e manutenzione delle infrastrutture di rete viene principalmente dalle grandi multinazionali che lo recuperano facendo pagare l'acesso alla rete globale (\textit{last mile}) 
+al singolo utente attraverso tariffe mensili.
+\paragraph{Le prestazioni di rete}
+Un tema estremamente importante sono le prestazioni con cui le reti di calcolatori riescono a trasmettere e ricevere, due sono le miusre importanti a riguardo:
+\begin{itemize}
+    \item \textbf{Capacità di trasmissione}: il numero di bit o byte trasmessi o ricevuti in un secondo, esso dipende principalmente dall'infrastruttura di rete.
+    \item \textbf{Ritardo nel collegamento}: il tempo richiesto ai dati per transitre dal mittente al destinatario, esso è quindi la somma tra \textit{tempo di trasmissione} (durata del collegamenti) e \textit{ritardo intermedio}.
+                                            esso è influenzato sia dalla distanza tra mittente e destinatario che dalla gestione intermedia della trasmissione (protocolli).
+\end{itemize}
+
+Un altro parametro molto importante è il \textbf{Jitter del ritardo di rete} ovvero la differenza, rispetto alla media, di ritardo tra i vari pacchetti. Questo parametro è molto importante perchè in base
+all'utilizzo che si fa della rete si può decidere se prediligere un Jitter basso: se stessimo giocando ad un videogioco online l'interesse principale sarebbe avere il ritardo medio del pacchetto il 
+più basso possibile, senza particolare preoccupazione se i pacchetti hanno una distanza molto alta dalla media. Viceversa, se stessimo guardando un contenuto in streaming, al fine di mantenere il 
+\textit{buffer} più pieno possibile un Jitter basso è essenziale: se so che i pachetti mi arrivano molto vicini alla media del ritardo posso mantenere un buffer più ristrestto.
+Ultimo parametro molto importante è il \textbf{RTT (Round Trip Home) o Ping} ovvero il tempo che un pacchetto ci mette a fare andata e ritorno.
+
+\paragraph{Componenti per la connessione di rete}
+PEr connettersi ad una rete un calcolatore ha bisogno di un numero minimo di componenti, tra cui:
+\begin{itemize}
+    \item \textbf{Scheda di rete}: distpositivo hardware per la codifica, trasmissione, ricezione e decodifica delle informazioni. E' dotata di tutte le funzionalità di cui il PC può usufruire come
+    firmware, API garantiti dal produttore.
+    \item \textbf{Mezzo di trasmissione}: supporto fisico alla trasmissione dei segnali, realizza l'infrastruttura di rete.
+    \item \textbf{Connettore di rete}: è un connettore standard (RJ45) per collegare il dispositivo al mezzo di trasmissione di rete.
+    \item \textbf{Protocollo di rete}: software del calcolatore atto a garantire la compatibilità tra tutti i dispositivi connessi alla rete.
+\end{itemize}
+
+\paragraph{Collegamenti e infrastrutture di rete}
+Per attuare il collegamento di rete è necessario un mezzo di trasmissione comune tra tutti i dispositivi della retec che supporti la trasmissione fisica dei segnali secondo una codifica stabilita a priori.
+L'\textbf{infrastruttura di rete} è la struttura dei collegamenti tra i calcolatori della rete, essa può essere:
+\begin{itemize}
+    \item \textit{Punto a punto}: è la struttura più semplice, l'unica difficoltà è che non possono parlare entrambi i calcolatori nello stesso momento.
+    \item \textit{Completamente connese}: ogni calcolatore è connesso in modo diretto con ogni altro, oltre alla comunicazione diretta è possibile una comunicazione in più step. Il grande problema è che non 
+    è per nulla scalabile.
+    \item \textit{Parzialmente connesse}: ogni calcolatore è connesso solo con altri due calcolatori tipo corda, si usano poche risorse ed è sclabile ma la possibilità di trasmissione dipende dagli altri 
+    calcolatori (mutua esclusione) e in caso di problemi diventa una partizione di rete.
+    \item \textit{Partizione di rete}: gruppi di calcolatori isolati tra di loro, da evitare assolutamente.
+\end{itemize}
+
+\paragraph{Topologie di rete}
+Le strutture di rete possono assumere vari schemi di connessione dei dispositivi, queste disposizioni sono chiamate topologie:
+\begin{itemize}
+    \item \textbf{Anello}: Il numero di collegamenti neccessario e di 1 superiore al minimo, questo rende però molto meno complicata la parte di spedizione perchè una volta che mi ritorna il messaggio mandato
+    so che esso è stato ricevuto. Più precisamente per la trasmissione dei dati si usa un \textbf{token} ovvero una serie di bit che quando ricevuta rende possibile al calcolatore trasmettere i dati, inoltre chiamato Q il
+    tempo che un calcolatore può tenere il token prima di ritrasmetterlo si può calcolare dopo quanto il token tornerà o se è stato perso. Questa topologia può supportare una rotture senza creare delle partizioni
+    di rete ma il bottleneck è proprio il token: se esso viene corrotto durante la trasmissione è perso e non si può far generare, indipendentemente, ai calcolatori un nuovo token; inoltre è facilmente implementabile
+    un hack al protocollo che permette di tenere per più tempo il token.
+    \item \textbf{Stella}: Ha il minimo numero di collegamenti necessari ma alla prima rottura si forma almeno una partizione di rete, nel caso si rompa il calcolatore centrale però ognuno rimane isolato.
+    Per i singoli host sembra un trasmissione punto a punto però, a livello fisico, può cambiare molto dal tipo di device installato:
+    \begin{itemize}
+        \item \textit{HUB}: manda elettricamente il segnale a tutti i dispositivi collegati alla rete.
+        \item \textit{Switch}: riceve i pacchetti, sale di un livello del protocollo, e capisce dove mandarli e li trasmette solo alla porta giusta; può supportare il parallelismo e in generale è un
+        dispositivo un pò più nobile dell'HUB.
+    \end{itemize}
+    Questo tipo di topologia, ad oggi, è una di quelle più utilizzate.
+    \item \textbf{Bus}: è stata la prima topologia implementata, ha delle criticità tipo il fatto che se si rompe il bus si interrompono tutte le connessioni, i segnali perdono di intensità sulle  lunghe 
+    distanze e due dispositivi non possono comunicare nello stesso momento (\textbf{collisione}). Per evitare collisioni inizialmente si ascoltava la dorsale: se era libera si trasmetteva se inveece era 
+    occupata si aspettava un tempo random e si riprovava ma anche questo non proteggeva al 100\% dalle collisioni per cui servirebbe un token ma a quel punto risulterebbe un anello fatto male.
+    \item \textbf{Albero}: \textit{topologia minimale} (se si rompe un filo qualcuno resta escluso), non ha vantaggi rispetto alle altre se non che garantisce che la distanza media tra calcolatori sia minima.
+\end{itemize}
+
+\paragraph{Mezzo fisico di trasmissione}
+Il mezzo utilizzato per la trasmissione delle informazioni a livello fisico può essere di tre tipi:
+\begin{enumerate}
+    \item \textit{Cavetti o fili metallici}: trasmettono segnali elettrici, sono molto usati perchè affidabili e con buon compromesso tra costo e prestazioni.
+    \item \textit{Fibre ottiche}: trasmettono segnali luminosi tramite la riflessione totale, hanno ottime prestazioni ma anche un costo considerevole.
+    \item \textit{Wireless}: trasmissione attraverso le onde elettromagnetiche, permettono mobilità ma il collegamento non è sempre affidabile, capacità e distanza sono ancora abbastanza limitate.
+\end{enumerate}
+
+\paragraph{Scheda di rete}
+E' il componente del calcolatore che realizza la connessione fisica, attraverso un connettore, alla rete e il suo compito è quello di trasmettere e ricevere i dati.
+Questo componente ha un codice identificativo chiamato \textbf{MAC (medium access control)} chè è un codice di 48 bit scritti in esdecimale, si riconosce un indirizzo MAC perchè è scritto sempre come 6 coppie di cifre decimali
+separate dai ":". La scheda di rete ha uno stack che gestisce tutte le trasmissioni, le quali possono anche avere destinatari diversi; generalmente distinguiamo due categorie di trasmissioni:
+\begin{itemize}
+    \item \textbf{Unicast}: trasmissione verso un solo destinatario.
+    \item \textbf{Broadcast}: trasmissione verso tutti i destinatari, anche se è poco probabile che tutti riescano a ricevere il messaggio per cui il MAC address standard per una trasmissione broadcast è: FF:FF:FF:FF:FF:FF
+\end{itemize}
+
+\paragraph{Canali di comunicazione}
+Un canale di comunicazione è una visione astratta del mezzo di trasmissione, distinguiamo il \textbf{canale punto a punto} da quello \textbf{ad accesso multiplo}.
+Il canale punto a punto è un canale riservto alla comunicazione tra due soli host mentre quello ad accesso multiplo permette la connessione tra più host sullo stesso canale; questo però richiede 
+arbitraggio di trasmissione per evitare collisione e l'inidirizzamento, per fare in modo che ogni pacchetto arrivi al giusto destinatario. Questo obbliga la definizione di un \textit{protocollo}.
+
+\paragraph{Modalità di trasferimento}
+Una serie di canali in cascata può realizzare un servizio di comunicazione in due modi diversi:
+\begin{enumerate}
+    \item \textbf{Commutazione di circuito}: viene riservato un circuito di canali per la singola comunicazione punto a punto,  il ritardo di connessione è basso ma si utilizza poco anche la risorsa di rete.
+    Non è difficile da implementare, l'unica difficoltà è quella di trovare quale sia il circuito vero e proprio da riservare.
+    \item \textbf{Commutazione di pacchetto}: i dati da trasmettere vengono divisi in pacchetti indipendenti e spediti sul canale separatamente. Ogni pacchetto conserva diverse informazioni tra cui 
+    l'indirizzo del destinatario e i canali sono condivisi. Le risorse di rete vengono sfruttate al meglio in caso di canale condivisione ma ne 
+    perde la velocità di connessione. Internet si basa sulla commutazione di pacchetto.
+\end{enumerate}
+
+\paragraph{Servizi orientati alla connessione}
+Nelle reti a commutazione di pacchetto il servizio di trasmissione ha un ruolo determinato dei protocolli di rete utilizzati: ogni nodo intermedio immagazzina e rispedisce i pacchetti di dati. Ci sono due tipi di servizi:
+\begin{itemize}
+    \item \textit{Orientati alla connessione}: garantiscono la consegna ordinata dei pacchetti ricevuti e ritrasmettono quelli che sono stati eventualmente persi.
+    \item \textit{Non orientati alla connessione}: i pacchetti possono seguire strade diverse, arrivare in ordine errato o non arrivare mai. Internet è fatto così perchè il protocollo TCP riesce a rendere
+    la rete affidabile gestendo le problematiche.
+\end{itemize}
+
+Il collo di bottiglia è il router, soprattutto se tutti i pacchetti ci devono passare, per evitare che si perdano i pacchetti il mittente regola la velocità di trasmissione in base a 
+quante conferme di ricezione gli arrivano (\textbf{windowing}).
+
+
+\paragraph{I protocolli di rete}
+Per protocollo si intende l'insieme di regole e procedure di gestione dei processi di comunicazione (\textit{come devo fare le cose}) e l'insimee di regole e formati per lo scambio di messaggi non ambigui
+(\textit{come sono disposti i dati nei pacchetti}). A livello di architettura i protocolli di rete sono divisi in livelli, ogni livello risolve un problema di comunicazione e rimane estraneo agli altri 
+comunicando attraverso un interfaccia per richieste e servizi. La compartimentazione dei protocolli è molto utile per renderli felssibili ai casi d'uso: si possono aggiungere/rimuovere livelli.
+Il riferimento standard per definire l'architettura dei protocolli di rete è lo \textbf{Standard ISO/OSI RM} che organizza i protocolli in sette livelli:
+\begin{etaremune}
+    \item \textbf{Livello Applicazione}: è il livello che mette a disposizione delle singole applicazioni utente i metodi per connettersi alla rete.
+    \item \textbf{Livello Presentazione}: serviva a tradurre i messaggi quando non erano identici i metodi di lettura bit (big/little endian), oggi in disuso.
+    \item \textbf{Livello Sessione}: all'inizio della connessione identificava il client in modo univoco in modo tale che se la connessione veniva perduta non bsognava ritrasmettere da capo, oggi è
+    in disuso perchè alle applicazioni conviene profilare gli utenti.
+    \item \textbf{Livello trasporto}: è il livello fondamentale oggi realizzato da TCP/UDP, rende la connessione affidabile e controlla la congestione del traffico
+    \item \textbf{Livello rete}: è il livello massimo a cui lavorano anche i router, serve per l'instradamento ed è realizzato grazie alle gerarchie \textbf{IP} (internet protocol).
+    \item \textbf{Livello MAC/LCC}: è il livello che controlla l'accesso al medium: si occuppa della trasmissione evitando le collisioni.
+    \item \textbf{Livello fisico}: generazione dei segnali.
+\end{etaremune}
+
+\paragraph{architettura dei protocolli internet}
+L'architettura dei livelli di protocollo di internet utilizza solo 5 dei 7 livelli dello standard, in trasmissione ogni livello riceve dai dal livello superiore e gli incapsula con ulteriori dati che servono
+a istruire il livello corrispondente del ricevitore. Alla ricezione ogni livello decapsula i dati leggendo le proprie istruzioni e li trasmette ai livelli superiori.
+
+\begin{etaremune}
+    \item \textbf{Livello Applicazione}: è il livello che mette a disposizione delle singole applicazioni utente i metodi per connettersi alla rete.
+    \item \textbf{Livello trasporto}: imbusta i dati aggiungendo informazioni utili all'ordinamento e controllo della velocità d'invio. Il pacchetto è chiamato \textbf{segmento}.
+    \item \textbf{Livello rete}: frammenta i dati in pacchetti e decide il cammino sul quale inviare il pacchetto.
+    \item \textbf{Livello MAC/LCC}: esegue la consegna dei dati ai dispositivi di una rete locale capendo se quando è il momento più opportuno per evitare collisioni, il pacchetto è chiamato \textbf{frame}.
+    \item \textbf{Livello fisico}: generazione dei segnali.
+\end{etaremune}
+Durante l'incapsulamento il livello trasporto scrive l'indirizzo IP del mittente e quello del destinatario, successivamente il livello MAC scrive l'indirizzo MAC del trsmettitore e del diretto ricevente.
+In questo modo nel livello MAC cambiano sempre gli indirizzi perchè i vari router scrivono i loro inditizzi; questo porta alla presenza di 2 \textbf{Acknoledgment} uno fatto con i MAC address da ruouter a router, 
+utili per evitare di dover rimandare i pacchetti da capo nel caso un router sia congestionato, e uno fatto con gli indirizzi IP nel caso il pacchetto si sia proprio perso e debba essere ritrasmesso dall'inizio.
+inoltre ogni livello che incapsula insierisce un \textbf{header} con tutte le informazioni più rilevanti all'inizio e un \textbf{FCS (frame control system)} in coda.
+
+\paragraph{Lielli e integrazioni delle reti}
+In questo paragrafo vengono presentate le problematiche di ogni livello e come viene vista la rete da ogni livello:
+\begin{etaremune}
+    \item \textbf{Livello Applicazione}: la rete esiste come viene intesa da noi ed è utilizzabile dalle applicazioni utente
+    \item \textbf{Livello trasporto}: la rete è una collezione di reti organizzate gerarchicamente, ha regole per la spedizione affidabile dei pacchetti e controlla la congestione di rete spingendo 
+    sempre al massimo la portata della rete per poi rallentare.
+    \item \textbf{Livello rete}: la rete è una collezione di reti organizzate gerarchicamente, ci sono regole per indirizzi di rete che nascondono i dettagli locali e i rputer sono i rappresentanti della ret locale.
+    \item \textbf{Livello MAC/LCC}: la rete è locale, il livello può interagire con i mezzi trasmissivi con regole per indirizzi dei dispositivi, tempi di accesso e gestione errori
+    \item \textbf{Livello fisico}: la rete è il mezzo di trasmissione, ha regole per la codifica e trasmissione dei dati che vede come segnali.
+\end{etaremune}
+
+
+
+
+
+
+
+\end{document}
