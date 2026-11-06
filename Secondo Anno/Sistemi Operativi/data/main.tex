@@ -436,11 +436,44 @@ a prendere le bacchette per mangiare e muore di fame.
 UN database e' copndiviso tra una moltitudine di processi che sono divisibili in due classi principali: lettori e scrittori.
 I lettori vogliono leggere i dati del database e possono farlo a meno che non ci sia uno scrittore, gli scrittori invece vogliono scrivere sul database ma lo possono fare solo in mutua esclusione.
 
+\subsubsection{Come funziona la metodologia di Andrews?}
+La metodologia di Andrews serve per derivare soluzioni basate sui semafori e si basa su 4 fasi:
+\begin{enumerate}
+    \item \textbf{definizione del problema}: si identificano i processi, i problemi di sincronizzazione e si introducono le variabili necessarie per la definizione di un invariante.
+    \item \textbf{abbozzo di una soluzione}: si fa un primo schema della soluzione e si identificano le regioni che richiedono la mutua esclusione.
+    \item \textbf{garanzia di un invariante}: si verifica che l'invariante sia sempre verificato.
+    \item \textbf{implementazione delle azioni atomiche}: si esprimono le azioni atomiche e gli await utilizzando le primitive di sincronizzazione disponibili.
+\end{enumerate}
+
+Per trasformare le istruzioni await è innanzitutto necessario un semaforo mutex per garantire la mutua esclusione, successivamente serve prevedere un array di semafori associati ad ogni
+condizione degli await. E' necessario anche un array di interi che contiene il numero di processi che aspettano il realizzarsi della tale condizione di await. QUesta trasormzaione si 
+chiama passaggio del testimone perchè c'è al funzione SIGNAL che controlla lo stato del vettore waiting per mandare avanti i processi in attesa che possono essere eseguiti, 
+se non ci sono processi in attesa passa la mutua esclusione. Questo tipo di soluzione però potrebbe portare starvation.
 
 
-Come funziona la metodologia di Andrews?
-Come si può costruire una soluzione esente da casi di starvation?
+\subsubsection{Come si può costruire una soluzione esente da casi di starvation?}
+Per costruire soluzioni esenti da starvation è necessario ragionare e tendenzialmente apportare modifiche alle condizioni.
+\subsubsection{Quali sono i problemi dei semafori?}
+I semafori sono costrutti di basso livello per cui molto lavoro viene riversato sui programmatori (non commettere errori banali, accedere ai dati condivisi correttamente...) e producono programmi difficilmente leggibili.
 
+
+
+\subsubsection{Cosa sono e come funzionano i Monitor?}
+\subsubsection{A cosa servono le variabili di condizione?}
+\subsubsection{Quali sono i metodi delle variabili di condizione e quali sono gli effetti?}
+\subsubsection{Cosa è lo urgent stack?}
+\subsubsection{Quali sono le differenze di uso delle variabili di condizione e dei semafori?}
+\subsubsection{Perché la politica signal urgent è più comoda delle alte per scrivere programmi concorrenti?}
+\subsubsection{Come si implementano i semafori usando i monitor?}
+\subsubsection{Come si implementano i monitor usando i semafori?}
+\subsubsection{Come si implementano i problemi campione (producer-consumer, buffer limitato cena dei filosofi, lettori\&scrittori) con i monitor?}
+\subsubsection{Qual è la differenza fre i modelli di programmazione concorrente a memoria condivisa e a memoria privata?}
+\subsubsection{Cosa è il Message passing sincrono e quali sono le operazioni definite?}
+\subsubsection{Cosa è il Message passing asincrono e quali sono le operazioni definite?}
+\subsubsection{Cosa è il Message passing completamente asincrono e quali sono le operazioni definite?}
+\subsubsection{Come si implementa un meccanismo di MP sicrono dato quello asincrono?}
+\subsubsection{Come si implementa un meccanismo di MP asicrono dato quello sincrono?}
+\subsubsection{MP sincrono e asincrono hanno lo stesso potere espressivo? perché?}
 
 
 
