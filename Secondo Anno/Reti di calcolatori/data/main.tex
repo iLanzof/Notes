@@ -189,10 +189,50 @@ In questo paragrafo vengono presentate le problematiche di ogni livello e come v
     \item \textbf{Livello fisico}: la rete è il mezzo di trasmissione, ha regole per la codifica e trasmissione dei dati che vede come segnali.
 \end{etaremune}
 
+\paragraph{Funzionamento degli switch}
+Un elemento molto importante delle reti è lo switch, questo elemento riesce a rendere la connessione tra i diversi dispositivi collegati alla rete una connessione \textit{point to point}.
+Per fare ciò, a differenza dell'HUB, lavora al secondo livello del protocollo TCP/IP e smista i pacchetti sulle varie porte grazie al MAC address; per fare ciò si dota di una tabella
+con tante righe quante le porte e e tre colonne: una per il MAC address del dispositivo collegato alla porta, una per il numero della porta e infine una che memorizza la durata della connessione alla porta.
+Lo switch non ha bisogno necessariamente di una configurazione infatti è in grado di riempire e aggiornare la tabella in modo molto semplice: appena acceso la tabella è vuota e alla prima
+trasmissione di un pacchetto esegue 3 operazioni:
+\begin{itemize}
+    \item Attraverso il livello 2 del protocollo decodifica chi sia il mandante e il ricevente.
+    \item Scrive nella tabella l'indirizzo MAC del mandante e la porta a cui esso è collegato.
+    \item Trasmette il pacchetto in broadcast a tutti i dispositivi collegati ad esso perchè non sa a quale porta il ricevente è collegato.
+\end{itemize}
+Non appena sarà trasmesso l'acknowledgement di livello 2 allo switch esso si salverà nella tabella l'indirizzo MAC e la porta a cui è collegato il tal dispositivo.
+A questo punto per ogni pacchetto che dovrà trasmettere se il mittenete è ignoto se lo salverà nella tabella e se il destinatario è ignoto manderà il pacchetto su tutte le porte a cui sono 
+collegati dispositivi che non conosce. Andando avanti a trasmettere pacchetti la tabella viene sempre di più popolata e lo switch diventa sempre più efficiente, la colonne del tempo servono perchè
+dopo una certa quantità le infromazioni della riga vengono eliminate in modo tale da evitare continui errori in caso di disconnessione. Altra funzionalità molto utile dello switch è quella
+di riconoscere se il sistemista ha sbagliato a collegare i cavi e ha così generato un anello: questo può succedere quando due switch diversi sono collegati con due cavi e ci si accorge di ciò
+quando un messaggio broadcast trasmesso da uno switch arriva due volte all'altro oppure qundo arriva due volte lo stesso pacchetto allo switch perchè diretto ad uno dei dispositivi a lui collegato.
+Lo switch rende la rete componibile, un altro dispositivo usato per la componibilità della rete è il \textbf{bridge} che permette di cambiare il mezzo trasmissivo ai segnali. Altro dispositivo
+centrale per le reti è il \textbf{router} esso lavore a livello 3 e collega tra di loro le reti locali e smista i pacchetti eleggendo un rappresentante all'interno delle reti che collega.
 
+\paragraph{Il livello fisico e la codifica dei dati digitali}
+Per trasmettere i dati digitali (bit) attraverso mezzi di trasmissioni fisici (cavi, onde EM) è necessaria una conversione da digitale ad analogico e viceversa una volta all'arrivo.
+Due sono i parametri fondamentali dei mezzi di trasmissione: velocità di trasmisssione e capacità di trasmissione. 
+Approssimativamente in tutti i mezzi di trasmissione i dati viaggiano alla velocità della luce a differenza della quantità di informazione che è estremamente variabile.
+La grande variabilità della quantità di informazione trasmessa dipende principalmente dal fatto che la decodifica all'arrivo deve essere il più affidabile possibile nonostante le
+interferenze che ci sono durante il tragitto. Dunque in base a ciò avviene la decione di quanti bit mandare alla volta per dare più o meno tempo alla decodifica di capire quale valore sia trasmesso:
+una fibra ottica non subisce interferenze per cui si possono trasmettere molti dati a diffferenza di una rete wireless che subisce molte interferenze.
+Ovviamente la codifica utilizzata deve essere decisa via software e deve essere quella più adatta al mezzo di trasmissione (NZR, Manchester, 4B/5B, 8B/10B, PAM-3).
 
+\paragraph{Errori di trasmissione}
+Durante la trasmissione possono avvenire degli errori sia di instradamento che nei bit veri e propri per cui ogni segmento ha nella prima parte dell'intestazione il MAC del destinatario (per riconocere immediatamente se è quello giusto)
+poi quello del mittente e in coda a tutta la busta sono aggiunti i bit di controllo dell'errore. Il funzionamento della rilevazione e correzione del pacchetto si basa sul bit di parità e consiste nel mettere tutti i bit rilevanit 
+in una matrice $n \times m$ e per ogni riga e colonna salvarsi il bit di parità; con questo metodo si possono individuare fino a 3 errori (quando si forma una sotto-matrce di bit sbagliati non sono rilevabili) ma correggerne soltanto 1.
+La correzzione fattibile con questo metodo si chiama \textbf{forward error correction (FEC)} e aggiunge un \textit{overhead} al \textit{payload} inziale del pacchetto.
+La trasmissione dunque se è giusta oppure si riesce a correggere l'errore è considerata di successo e si invia la conferma al mittente tramite un \textbf{frame di conferma}, al contrario, se è errata, si scarta il apcchetto in attesa che venga rimandato.
 
+\paragraph{Affidabilità nella cominicazione di rete}
+All'interno di grandi reti tipo internet è possibile che un router possa indirizzare un pacchetto in diverse vie a cui viene collegato per cui nasce l'esigenza di capire quale delle via sia la migliore.
+Ogni ruouter ha una sua tabella di inidirizzamento che gli dice quale sia la strada migliore per arrivare al destinatario ma ci potrebbero essere dei problemi alla linea per cui se il router 1 non riceve, dopo 
+svariati tentativi, la conferma di ricezione da parte del router 2 cambia le proprie tabelle di routing va al livello superiore e rimanda in dietro il pacchetto in modo che possa prendere un'altra strada.
+Per ogni segmento mandato ci si aspetta un solo acknoledgment e se non arriva, magari a causa della non ricezione di un solo pacchetto, viene rispedito interamente.
 
-
+\paragraph{Virtual LAN}
+Gli switch possono essere "menaged" riuscendo così a partizionare i dispositivi della rete rendendo impossibile vedere i pacchetti mandati all'altra partizione, a questo punto l'unico mezzo di trasmissione
+su cui viaggiano tutti i pacchetti è il \textbf{trunk} ovvero ciò che connette tra loro due switch menaged.
 
 \end{document}
