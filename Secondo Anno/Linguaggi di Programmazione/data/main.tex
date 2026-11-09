@@ -531,11 +531,26 @@ Per eliminare la ricorsione sinistra immediata data la produzione: $A \to A\alph
     $A'\to \alpha_1A'|...|\alpha_nA'|\epsilon$
 \end{center}
 Esempio pagina 546 lucidi e appunti.
-%da finire con la nuova spiegazione.
 
-\subsection{\textbf{Cosa vuol dire fattorizzare a sinistra una grammatica? Perché serve fattorizzare?}}
-\subsection{\textbf{Definizione di First(a) e di Follow(A).}}
-\subsection{\textbf{Algoritmi per calcolare First(a) e di Follow(A).}}
+Per eliminare la ricorsione sinistra non immediata si deve avere innanzi tutto una gramma tica libera senza $\epsilon$-produzioni e senza produzioni unitarie se no l'algoritmo non funziona.
+L'algoritmo sostanzialmente funziona andando ad analizzare un non-terminale alla volte e, una volta indivuduata la produzione che genera ricorsione sinistra non immediata,
+rimpiazzare il non terminale incriminato con le sue produzioni. A questo punto, se necessario, si elimina la ricorsione sinistra immediata.
+E' necessario eliminare la ricorsione sinistra perchè non e' adatta al top-down parsing.
+
+\subsection{\textcolor{blue}{Cosa vuol dire fattorizzare a sinistra una grammatica? Perché serve fattorizzare?}}
+Fattorizzarte a sinistra una grammatica significa raccogliere il prefisso piu' lungo delle produzioni della stessa, questo procedimento si fa per evitare il non-determinismo iniseme al look-ahead.
+\subsection{\textcolor{red}{Definizione di First(a) e di Follow(A).}}
+Con $first(a)$ intendiamo tutti i simboli terminali che possono stare all'inizio di una produzione derviata da $a$, mentre con $Follo(A)$ intendiamo tutti i simboli che possono essere direttamente
+a destra del simbolo $A$ in una derivazione a partire da S.
+\subsection{\textcolor{blue}{Algoritmi per calcolare First(a) e di Follow(A).}}
+\begin{itemize}
+    \item \textbf{first}: per determiare il first bisogna prima vedere se si ha la forma $\alpha A$ oppure $A\alpha$, nel primo caso il first e' proprio $\alpha$ essendo un non terminale. Nel
+    secondo caso il first e' il first delle produzioni di A (l'insieme dei first puo' essere composto da piu' elementi).
+    \item \textbf{follow}: il follow di tutte le sentenze e' di base \$, per espandere l'insieme basta applicare le regole \begin{itemize}
+        \item Per ogni produzione $X \to \alpha Y\beta$  $Follow(Y) := Follow(Y) \cup (First(\beta) - \{\epsilon\}) $
+        \item Per ogni produzione $X \to \alpha Y$ oppure $X \to \alpha Y\beta \ con\ \epsilon \in First(\beta)$  $Follow(Y) := Follow(Y) \cup Follow(X) $
+    \end{itemize}
+\end{itemize}
 \subsection{\textbf{Come è fatta e come si riempie una tabella di parsing LL(1)?}}
 \subsection{\textbf{Quando una grammatica G si dice di classe LL(1)? Quali sono le condizioni necessarie e sufficienti per G affinché sia di classe LL(1)?}}
 \subsection{Perché un parser di questo tipo è chiamato LL?}
