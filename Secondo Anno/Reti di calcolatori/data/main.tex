@@ -24,9 +24,13 @@
 \maketitle
 
 \section{Introduzione}
-Per \textbf{rete di calcolatori} si intende un insieme di dispositivi autonomi e interconnessi tra di loro, essa è necessaria per supportare la comunicazione tra utenti e, soprattutto, tra macchine
-(\textit{internet of things}). Le principlai comnunicazioni riguardano la condivisione di informazioni, di dispositivi, di risorse, l'accesso a calcolatori remoti e il calcolo distribuito.
-Le reti possono essere classificate in base alla loro dimensione geografica:
+Per \textbf{rete di calcolatori} si intende un insieme di dispositivi autonomi
+e interconnessi tra di loro, essa è necessaria per supportare la comunicazione
+tra utenti e, soprattutto, tra macchine (\textit{internet of things}). Le
+principlai comnunicazioni riguardano la condivisione di informazioni, di
+dispositivi, di risorse, l'accesso a calcolatori remoti e il calcolo
+distribuito. Le reti possono essere classificate in base alla loro dimensione
+geografica:
 \begin{itemize}
     \item \textbf{PAN (Personal Area Network)}: connessioni di dispositivi molto vicini tipo all'interno di una stanza oppure la chiave di un automobile con apertura al tocco.
     \item \textbf{LAN (Local Area Network)}: connessione tra dipositivi all'interno di un edificio, è la tipologia più diffusa perchè offre ottimi compromessi
@@ -35,75 +39,99 @@ Le reti possono essere classificate in base alla loro dimensione geografica:
     \item \textbf{Internet}: è la rete globale che è formata da tante tipologie di reti differenti ma tutte conformi ai protocolli usati per la trasmissione e ricezione di informazioni.
 \end{itemize}
 
-Per comunicare sul mezzo di rete (cavo fisico/onde radio) i calcolatori devono interfacciarsi con la \textbf{scheda di rete}, essa è personale e presenta il proprio \textbf{MAC address} che è 
-un codice di 48 bit unico per ogni scheda.
+Per comunicare sul mezzo di rete (cavo fisico/onde radio) i calcolatori devono
+interfacciarsi con la \textbf{scheda di rete}, essa è personale e presenta il
+proprio \textbf{MAC address} che è un codice di 48 bit unico per ogni scheda.
 \paragraph{Evoluzione delle reti}
-La nascita di internet è dovuta allo sviluppo globale delle reti, volendo tracciare una data di inizio essa ricadrebbe nel 1969 quando un gruppo di ricercatori universitari collegarono tra loro 4 
-computer di 4 università americane; da quel momento molte entità, provate e pubbliche, hanno contribuito allo sviluppo e distribuzione delle reti.
-Nel 2003 il mondo realizzò che internet poteva essere un'enorme vetrina commerciale veisibile da tutti gli utenti connessi, questi sono gli anni delle \textit{dot com} e si contavano circa 172 milioni
- di calcolatori connessi. Ad oggi il numero di dispositivi connessi risultano essere oltre i 4 miliardi, 25 se si considerano nche quelli dell'internet of things.
-Il denaro usato per la realizzazione e manutenzione delle infrastrutture di rete viene principalmente dalle grandi multinazionali che lo recuperano facendo pagare l'acesso alla rete globale (\textit{last mile}) 
-al singolo utente attraverso tariffe mensili.
+La nascita di internet è dovuta allo sviluppo globale delle reti, volendo
+tracciare una data di inizio essa ricadrebbe nel 1969 quando un gruppo di
+ricercatori universitari collegarono tra loro 4 computer di 4 università
+americane; da quel momento molte entità, provate e pubbliche, hanno contribuito
+allo sviluppo e distribuzione delle reti. Nel 2003 il mondo realizzò che
+internet poteva essere un'enorme vetrina commerciale veisibile da tutti gli
+utenti connessi, questi sono gli anni delle \textit{dot com} e si contavano
+circa 172 milioni di calcolatori connessi. Ad oggi il numero di dispositivi
+connessi risultano essere oltre i 4 miliardi, 25 se si considerano nche quelli
+dell'internet of things. Il denaro usato per la realizzazione e manutenzione
+delle infrastrutture di rete viene principalmente dalle grandi multinazionali
+che lo recuperano facendo pagare l'acesso alla rete globale (\textit{last
+    mile}) al singolo utente attraverso tariffe mensili.
 \paragraph{Le prestazioni di rete}
-Un tema estremamente importante sono le prestazioni con cui le reti di calcolatori riescono a trasmettere e ricevere, due sono le miusre importanti a riguardo:
+Un tema estremamente importante sono le prestazioni con cui le reti di
+calcolatori riescono a trasmettere e ricevere, due sono le miusre importanti a
+riguardo:
 \begin{itemize}
     \item \textbf{Capacità di trasmissione}: il numero di bit o byte trasmessi o ricevuti in un secondo, esso dipende principalmente dall'infrastruttura di rete.
     \item \textbf{Ritardo nel collegamento}: il tempo richiesto ai dati per transitre dal mittente al destinatario, esso è quindi la somma tra \textit{tempo di trasmissione} (durata del collegamenti) e \textit{ritardo intermedio}.
-                                            esso è influenzato sia dalla distanza tra mittente e destinatario che dalla gestione intermedia della trasmissione (protocolli).
+          esso è influenzato sia dalla distanza tra mittente e destinatario che dalla gestione intermedia della trasmissione (protocolli).
 \end{itemize}
 
-Un altro parametro molto importante è il \textbf{Jitter del ritardo di rete} ovvero la differenza, rispetto alla media, di ritardo tra i vari pacchetti. Questo parametro è molto importante perchè in base
-all'utilizzo che si fa della rete si può decidere se prediligere un Jitter basso: se stessimo giocando ad un videogioco online l'interesse principale sarebbe avere il ritardo medio del pacchetto il 
-più basso possibile, senza particolare preoccupazione se i pacchetti hanno una distanza molto alta dalla media. Viceversa, se stessimo guardando un contenuto in streaming, al fine di mantenere il 
-\textit{buffer} più pieno possibile un Jitter basso è essenziale: se so che i pachetti mi arrivano molto vicini alla media del ritardo posso mantenere un buffer più ristrestto.
-Ultimo parametro molto importante è il \textbf{RTT (Round Trip Home) o Ping} ovvero il tempo che un pacchetto ci mette a fare andata e ritorno.
+Un altro parametro molto importante è il \textbf{Jitter del ritardo di rete}
+ovvero la differenza, rispetto alla media, di ritardo tra i vari pacchetti.
+Questo parametro è molto importante perchè in base all'utilizzo che si fa della
+rete si può decidere se prediligere un Jitter basso: se stessimo giocando ad un
+videogioco online l'interesse principale sarebbe avere il ritardo medio del
+pacchetto il più basso possibile, senza particolare preoccupazione se i
+pacchetti hanno una distanza molto alta dalla media. Viceversa, se stessimo
+guardando un contenuto in streaming, al fine di mantenere il \textit{buffer}
+più pieno possibile un Jitter basso è essenziale: se so che i pachetti mi
+arrivano molto vicini alla media del ritardo posso mantenere un buffer più
+ristrestto. Ultimo parametro molto importante è il \textbf{RTT (Round Trip
+    Home) o Ping} ovvero il tempo che un pacchetto ci mette a fare andata e
+ritorno.
 
 \paragraph{Componenti per la connessione di rete}
-PEr connettersi ad una rete un calcolatore ha bisogno di un numero minimo di componenti, tra cui:
+PEr connettersi ad una rete un calcolatore ha bisogno di un numero minimo di
+componenti, tra cui:
 \begin{itemize}
     \item \textbf{Scheda di rete}: distpositivo hardware per la codifica, trasmissione, ricezione e decodifica delle informazioni. E' dotata di tutte le funzionalità di cui il PC può usufruire come
-    firmware, API garantiti dal produttore.
+          firmware, API garantiti dal produttore.
     \item \textbf{Mezzo di trasmissione}: supporto fisico alla trasmissione dei segnali, realizza l'infrastruttura di rete.
     \item \textbf{Connettore di rete}: è un connettore standard (RJ45) per collegare il dispositivo al mezzo di trasmissione di rete.
     \item \textbf{Protocollo di rete}: software del calcolatore atto a garantire la compatibilità tra tutti i dispositivi connessi alla rete.
 \end{itemize}
 
 \paragraph{Collegamenti e infrastrutture di rete}
-Per attuare il collegamento di rete è necessario un mezzo di trasmissione comune tra tutti i dispositivi della retec che supporti la trasmissione fisica dei segnali secondo una codifica stabilita a priori.
-L'\textbf{infrastruttura di rete} è la struttura dei collegamenti tra i calcolatori della rete, essa può essere:
+Per attuare il collegamento di rete è necessario un mezzo di trasmissione
+comune tra tutti i dispositivi della retec che supporti la trasmissione fisica
+dei segnali secondo una codifica stabilita a priori. L'\textbf{infrastruttura
+    di rete} è la struttura dei collegamenti tra i calcolatori della rete, essa può
+essere:
 \begin{itemize}
     \item \textit{Punto a punto}: è la struttura più semplice, l'unica difficoltà è che non possono parlare entrambi i calcolatori nello stesso momento.
-    \item \textit{Completamente connese}: ogni calcolatore è connesso in modo diretto con ogni altro, oltre alla comunicazione diretta è possibile una comunicazione in più step. Il grande problema è che non 
-    è per nulla scalabile.
-    \item \textit{Parzialmente connesse}: ogni calcolatore è connesso solo con altri due calcolatori tipo corda, si usano poche risorse ed è sclabile ma la possibilità di trasmissione dipende dagli altri 
-    calcolatori (mutua esclusione) e in caso di problemi diventa una partizione di rete.
+    \item \textit{Completamente connesse}: ogni calcolatore è connesso in modo diretto con ogni altro, oltre alla comunicazione diretta è possibile una comunicazione in più step. Il grande problema è che non
+          è per nulla scalabile.
+    \item \textit{Parzialmente connesse}: ogni calcolatore è connesso solo con altri due calcolatori tipo corda, si usano poche risorse ed è sclabile ma la possibilità di trasmissione dipende dagli altri
+          calcolatori (mutua esclusione) e in caso di problemi diventa una partizione di rete.
     \item \textit{Partizione di rete}: gruppi di calcolatori isolati tra di loro, da evitare assolutamente.
 \end{itemize}
 
 \paragraph{Topologie di rete}
-Le strutture di rete possono assumere vari schemi di connessione dei dispositivi, queste disposizioni sono chiamate topologie:
+Le strutture di rete possono assumere vari schemi di connessione dei
+dispositivi, queste disposizioni sono chiamate topologie:
 \begin{itemize}
     \item \textbf{Anello}: Il numero di collegamenti neccessario e di 1 superiore al minimo, questo rende però molto meno complicata la parte di spedizione perchè una volta che mi ritorna il messaggio mandato
-    so che esso è stato ricevuto. Più precisamente per la trasmissione dei dati si usa un \textbf{token} ovvero una serie di bit che quando ricevuta rende possibile al calcolatore trasmettere i dati, inoltre chiamato Q il
-    tempo che un calcolatore può tenere il token prima di ritrasmetterlo si può calcolare dopo quanto il token tornerà o se è stato perso. Questa topologia può supportare una rotture senza creare delle partizioni
-    di rete ma il bottleneck è proprio il token: se esso viene corrotto durante la trasmissione è perso e non si può far generare, indipendentemente, ai calcolatori un nuovo token; inoltre è facilmente implementabile
-    un hack al protocollo che permette di tenere per più tempo il token.
+          so che esso è stato ricevuto. Più precisamente per la trasmissione dei dati si usa un \textbf{token} ovvero una serie di bit che quando ricevuta rende possibile al calcolatore trasmettere i dati, inoltre chiamato Q il
+          tempo che un calcolatore può tenere il token prima di ritrasmetterlo si può calcolare dopo quanto il token tornerà o se è stato perso. Questa topologia può supportare una rotture senza creare delle partizioni
+          di rete ma il bottleneck è proprio il token: se esso viene corrotto durante la trasmissione è perso e non si può far generare, indipendentemente, ai calcolatori un nuovo token; inoltre è facilmente implementabile
+          un hack al protocollo che permette di tenere per più tempo il token.
     \item \textbf{Stella}: Ha il minimo numero di collegamenti necessari ma alla prima rottura si forma almeno una partizione di rete, nel caso si rompa il calcolatore centrale però ognuno rimane isolato.
-    Per i singoli host sembra un trasmissione punto a punto però, a livello fisico, può cambiare molto dal tipo di device installato:
-    \begin{itemize}
-        \item \textit{HUB}: manda elettricamente il segnale a tutti i dispositivi collegati alla rete.
-        \item \textit{Switch}: riceve i pacchetti, sale di un livello del protocollo, e capisce dove mandarli e li trasmette solo alla porta giusta; può supportare il parallelismo e in generale è un
-        dispositivo un pò più nobile dell'HUB.
-    \end{itemize}
-    Questo tipo di topologia, ad oggi, è una di quelle più utilizzate.
-    \item \textbf{Bus}: è stata la prima topologia implementata, ha delle criticità tipo il fatto che se si rompe il bus si interrompono tutte le connessioni, i segnali perdono di intensità sulle  lunghe 
-    distanze e due dispositivi non possono comunicare nello stesso momento (\textbf{collisione}). Per evitare collisioni inizialmente si ascoltava la dorsale: se era libera si trasmetteva se inveece era 
-    occupata si aspettava un tempo random e si riprovava ma anche questo non proteggeva al 100\% dalle collisioni per cui servirebbe un token ma a quel punto risulterebbe un anello fatto male.
+          Per i singoli host sembra un trasmissione punto a punto però, a livello fisico, può cambiare molto dal tipo di device installato:
+          \begin{itemize}
+              \item \textit{HUB}: manda elettricamente il segnale a tutti i dispositivi collegati alla rete.
+              \item \textit{Switch}: riceve i pacchetti, sale di un livello del protocollo, e capisce dove mandarli e li trasmette solo alla porta giusta; può supportare il parallelismo e in generale è un
+                    dispositivo un pò più nobile dell'HUB.
+          \end{itemize}
+          Questo tipo di topologia, ad oggi, è una di quelle più utilizzate.
+    \item \textbf{Bus}: è stata la prima topologia implementata, ha delle criticità tipo il fatto che se si rompe il bus si interrompono tutte le connessioni, i segnali perdono di intensità sulle  lunghe
+          distanze e due dispositivi non possono comunicare nello stesso momento (\textbf{collisione}). Per evitare collisioni inizialmente si ascoltava la dorsale: se era libera si trasmetteva se inveece era
+          occupata si aspettava un tempo random e si riprovava ma anche questo non proteggeva al 100\% dalle collisioni per cui servirebbe un token ma a quel punto risulterebbe un anello fatto male.
     \item \textbf{Albero}: \textit{topologia minimale} (se si rompe un filo qualcuno resta escluso), non ha vantaggi rispetto alle altre se non che garantisce che la distanza media tra calcolatori sia minima.
 \end{itemize}
 
 \paragraph{Mezzo fisico di trasmissione}
-Il mezzo utilizzato per la trasmissione delle informazioni a livello fisico può essere di tre tipi:
+Il mezzo utilizzato per la trasmissione delle informazioni a livello fisico può
+essere di tre tipi:
 \begin{enumerate}
     \item \textit{Cavetti o fili metallici}: trasmettono segnali elettrici, sono molto usati perchè affidabili e con buon compromesso tra costo e prestazioni.
     \item \textit{Fibre ottiche}: trasmettono segnali luminosi tramite la riflessione totale, hanno ottime prestazioni ma anche un costo considerevole.
@@ -111,46 +139,66 @@ Il mezzo utilizzato per la trasmissione delle informazioni a livello fisico può
 \end{enumerate}
 
 \paragraph{Scheda di rete}
-E' il componente del calcolatore che realizza la connessione fisica, attraverso un connettore, alla rete e il suo compito è quello di trasmettere e ricevere i dati.
-Questo componente ha un codice identificativo chiamato \textbf{MAC (medium access control)} chè è un codice di 48 bit scritti in esdecimale, si riconosce un indirizzo MAC perchè è scritto sempre come 6 coppie di cifre decimali
-separate dai ":". La scheda di rete ha uno stack che gestisce tutte le trasmissioni, le quali possono anche avere destinatari diversi; generalmente distinguiamo due categorie di trasmissioni:
+E' il componente del calcolatore che realizza la connessione fisica, attraverso
+un connettore, alla rete e il suo compito è quello di trasmettere e ricevere i
+dati. Questo componente ha un codice identificativo chiamato \textbf{MAC
+    (medium access control)} chè è un codice di 48 bit scritti in esdecimale, si
+riconosce un indirizzo MAC perchè è scritto sempre come 6 coppie di cifre
+decimali separate dai ":". La scheda di rete ha uno stack che gestisce tutte le
+trasmissioni, le quali possono anche avere destinatari diversi; generalmente
+distinguiamo due categorie di trasmissioni:
 \begin{itemize}
     \item \textbf{Unicast}: trasmissione verso un solo destinatario.
     \item \textbf{Broadcast}: trasmissione verso tutti i destinatari, anche se è poco probabile che tutti riescano a ricevere il messaggio per cui il MAC address standard per una trasmissione broadcast è: FF:FF:FF:FF:FF:FF
 \end{itemize}
 
 \paragraph{Canali di comunicazione}
-Un canale di comunicazione è una visione astratta del mezzo di trasmissione, distinguiamo il \textbf{canale punto a punto} da quello \textbf{ad accesso multiplo}.
-Il canale punto a punto è un canale riservto alla comunicazione tra due soli host mentre quello ad accesso multiplo permette la connessione tra più host sullo stesso canale; questo però richiede 
-arbitraggio di trasmissione per evitare collisione e l'inidirizzamento, per fare in modo che ogni pacchetto arrivi al giusto destinatario. Questo obbliga la definizione di un \textit{protocollo}.
+Un canale di comunicazione è una visione astratta del mezzo di trasmissione,
+distinguiamo il \textbf{canale punto a punto} da quello \textbf{ad accesso
+    multiplo}. Il canale punto a punto è un canale riservto alla comunicazione tra
+due soli host mentre quello ad accesso multiplo permette la connessione tra più
+host sullo stesso canale; questo però richiede arbitraggio di trasmissione per
+evitare collisione e l'inidirizzamento, per fare in modo che ogni pacchetto
+arrivi al giusto destinatario. Questo obbliga la definizione di un
+\textit{protocollo}.
 
 \paragraph{Modalità di trasferimento}
-Una serie di canali in cascata può realizzare un servizio di comunicazione in due modi diversi:
+Una serie di canali in cascata può realizzare un servizio di comunicazione in
+due modi diversi:
 \begin{enumerate}
     \item \textbf{Commutazione di circuito}: viene riservato un circuito di canali per la singola comunicazione punto a punto,  il ritardo di connessione è basso ma si utilizza poco anche la risorsa di rete.
-    Non è difficile da implementare, l'unica difficoltà è quella di trovare quale sia il circuito vero e proprio da riservare.
-    \item \textbf{Commutazione di pacchetto}: i dati da trasmettere vengono divisi in pacchetti indipendenti e spediti sul canale separatamente. Ogni pacchetto conserva diverse informazioni tra cui 
-    l'indirizzo del destinatario e i canali sono condivisi. Le risorse di rete vengono sfruttate al meglio in caso di canale condivisione ma ne 
-    perde la velocità di connessione. Internet si basa sulla commutazione di pacchetto.
+          Non è difficile da implementare, l'unica difficoltà è quella di trovare quale sia il circuito vero e proprio da riservare.
+    \item \textbf{Commutazione di pacchetto}: i dati da trasmettere vengono divisi in pacchetti indipendenti e spediti sul canale separatamente. Ogni pacchetto conserva diverse informazioni tra cui
+          l'indirizzo del destinatario e i canali sono condivisi. Le risorse di rete vengono sfruttate al meglio in caso di canale condivisione ma ne
+          perde la velocità di connessione. Internet si basa sulla commutazione di pacchetto.
 \end{enumerate}
 
 \paragraph{Servizi orientati alla connessione}
-Nelle reti a commutazione di pacchetto il servizio di trasmissione ha un ruolo determinato dei protocolli di rete utilizzati: ogni nodo intermedio immagazzina e rispedisce i pacchetti di dati. Ci sono due tipi di servizi:
+Nelle reti a commutazione di pacchetto il servizio di trasmissione ha un ruolo
+determinato dei protocolli di rete utilizzati: ogni nodo intermedio immagazzina
+e rispedisce i pacchetti di dati. Ci sono due tipi di servizi:
 \begin{itemize}
     \item \textit{Orientati alla connessione}: garantiscono la consegna ordinata dei pacchetti ricevuti e ritrasmettono quelli che sono stati eventualmente persi.
     \item \textit{Non orientati alla connessione}: i pacchetti possono seguire strade diverse, arrivare in ordine errato o non arrivare mai. Internet è fatto così perchè il protocollo TCP riesce a rendere
-    la rete affidabile gestendo le problematiche.
+          la rete affidabile gestendo le problematiche.
 \end{itemize}
 
-Il collo di bottiglia è il router, soprattutto se tutti i pacchetti ci devono passare, per evitare che si perdano i pacchetti il mittente regola la velocità di trasmissione in base a 
-quante conferme di ricezione gli arrivano (\textbf{windowing}).
-
+Il collo di bottiglia è il router, soprattutto se tutti i pacchetti ci devono
+passare, per evitare che si perdano i pacchetti il mittente regola la velocità
+di trasmissione in base a quante conferme di ricezione gli arrivano
+(\textbf{windowing}).
 
 \paragraph{I protocolli di rete}
-Per protocollo si intende l'insieme di regole e procedure di gestione dei processi di comunicazione (\textit{come devo fare le cose}) e l'insimee di regole e formati per lo scambio di messaggi non ambigui
-(\textit{come sono disposti i dati nei pacchetti}). A livello di architettura i protocolli di rete sono divisi in livelli, ogni livello risolve un problema di comunicazione e rimane estraneo agli altri 
-comunicando attraverso un interfaccia per richieste e servizi. La compartimentazione dei protocolli è molto utile per renderli felssibili ai casi d'uso: si possono aggiungere/rimuovere livelli.
-Il riferimento standard per definire l'architettura dei protocolli di rete è lo \textbf{Standard ISO/OSI RM} che organizza i protocolli in sette livelli:
+Per protocollo si intende l'insieme di regole e procedure di gestione dei
+processi di comunicazione (\textit{come devo fare le cose}) e l'insimee di
+regole e formati per lo scambio di messaggi non ambigui (\textit{come sono
+    disposti i dati nei pacchetti}). A livello di architettura i protocolli di rete
+sono divisi in livelli, ogni livello risolve un problema di comunicazione e
+rimane estraneo agli altri comunicando attraverso un interfaccia per richieste
+e servizi. La compartimentazione dei protocolli è molto utile per renderli
+felssibili ai casi d'uso: si possono aggiungere/rimuovere livelli. Il
+riferimento standard per definire l'architettura dei protocolli di rete è lo
+\textbf{Standard ISO/OSI RM} che organizza i protocolli in sette livelli:
 \begin{etaremune}
     \item \textbf{Livello Applicazione}: è il livello che mette a disposizione delle singole applicazioni utente i metodi per connettersi alla rete.
     \item \textbf{Livello Presentazione}: serviva a tradurre i messaggi quando non erano identici i metodi di lettura bit (big/little endian), oggi in disuso.
@@ -163,8 +211,11 @@ Il riferimento standard per definire l'architettura dei protocolli di rete è lo
 \end{etaremune}
 
 \paragraph{architettura dei protocolli internet}
-L'architettura dei livelli di protocollo di internet utilizza solo 5 dei 7 livelli dello standard, in trasmissione ogni livello riceve dai dal livello superiore e gli incapsula con ulteriori dati che servono
-a istruire il livello corrispondente del ricevitore. Alla ricezione ogni livello decapsula i dati leggendo le proprie istruzioni e li trasmette ai livelli superiori.
+L'architettura dei livelli di protocollo di internet utilizza solo 5 dei 7
+livelli dello standard, in trasmissione ogni livello riceve dai dal livello
+superiore e gli incapsula con ulteriori dati che servono a istruire il livello
+corrispondente del ricevitore. Alla ricezione ogni livello decapsula i dati
+leggendo le proprie istruzioni e li trasmette ai livelli superiori.
 
 \begin{etaremune}
     \item \textbf{Livello Applicazione}: è il livello che mette a disposizione delle singole applicazioni utente i metodi per connettersi alla rete.
@@ -174,15 +225,16 @@ a istruire il livello corrispondente del ricevitore. Alla ricezione ogni livello
     \item \textbf{Livello fisico}: generazione dei segnali.
 \end{etaremune}
 Durante l'incapsulamento il livello trasporto scrive l'indirizzo IP del mittente e quello del destinatario, successivamente il livello MAC scrive l'indirizzo MAC del trsmettitore e del diretto ricevente.
-In questo modo nel livello MAC cambiano sempre gli indirizzi perchè i vari router scrivono i loro inditizzi; questo porta alla presenza di 2 \textbf{Acknoledgment} uno fatto con i MAC address da ruouter a router, 
+In questo modo nel livello MAC cambiano sempre gli indirizzi perchè i vari router scrivono i loro inditizzi; questo porta alla presenza di 2 \textbf{Acknoledgment} uno fatto con i MAC address da ruouter a router,
 utili per evitare di dover rimandare i pacchetti da capo nel caso un router sia congestionato, e uno fatto con gli indirizzi IP nel caso il pacchetto si sia proprio perso e debba essere ritrasmesso dall'inizio.
 inoltre ogni livello che incapsula insierisce un \textbf{header} con tutte le informazioni più rilevanti all'inizio e un \textbf{FCS (frame control system)} in coda.
 
 \paragraph{Lielli e integrazioni delle reti}
-In questo paragrafo vengono presentate le problematiche di ogni livello e come viene vista la rete da ogni livello:
+In questo paragrafo vengono presentate le problematiche di ogni livello e come
+viene vista la rete da ogni livello:
 \begin{etaremune}
     \item \textbf{Livello Applicazione}: la rete esiste come viene intesa da noi ed è utilizzabile dalle applicazioni utente
-    \item \textbf{Livello trasporto}: la rete è una collezione di reti organizzate gerarchicamente, ha regole per la spedizione affidabile dei pacchetti e controlla la congestione di rete spingendo 
+    \item \textbf{Livello trasporto}: la rete è una collezione di reti organizzate gerarchicamente, ha regole per la spedizione affidabile dei pacchetti e controlla la congestione di rete spingendo
     sempre al massimo la portata della rete per poi rallentare.
     \item \textbf{Livello rete}: la rete è una collezione di reti organizzate gerarchicamente, ci sono regole per indirizzi di rete che nascondono i dettagli locali e i rputer sono i rappresentanti della ret locale.
     \item \textbf{Livello MAC/LCC}: la rete è locale, il livello può interagire con i mezzi trasmissivi con regole per indirizzi dei dispositivi, tempi di accesso e gestione errori
@@ -190,18 +242,27 @@ In questo paragrafo vengono presentate le problematiche di ogni livello e come v
 \end{etaremune}
 
 \paragraph{Funzionamento degli switch}
-Un elemento molto importante delle reti è lo switch, questo elemento riesce a rendere la connessione tra i diversi dispositivi collegati alla rete una connessione \textit{point to point}.
-Per fare ciò, a differenza dell'HUB, lavora al secondo livello del protocollo TCP/IP e smista i pacchetti sulle varie porte grazie al MAC address; per fare ciò si dota di una tabella
-con tante righe quante le porte e e tre colonne: una per il MAC address del dispositivo collegato alla porta, una per il numero della porta e infine una che memorizza la durata della connessione alla porta.
-Lo switch non ha bisogno necessariamente di una configurazione infatti è in grado di riempire e aggiornare la tabella in modo molto semplice: appena acceso la tabella è vuota e alla prima
-trasmissione di un pacchetto esegue 3 operazioni:
+Un elemento molto importante delle reti è lo switch, questo elemento riesce a
+rendere la connessione tra i diversi dispositivi collegati alla rete una
+connessione \textit{point to point}. Per fare ciò, a differenza dell'HUB,
+lavora al secondo livello del protocollo TCP/IP e smista i pacchetti sulle
+varie porte grazie al MAC address; per fare ciò si dota di una tabella con
+tante righe quante le porte e e tre colonne: una per il MAC address del
+dispositivo collegato alla porta, una per il numero della porta e infine una
+che memorizza la durata della connessione alla porta. Lo switch non ha bisogno
+necessariamente di una configurazione infatti è in grado di riempire e
+aggiornare la tabella in modo molto semplice: appena acceso la tabella è vuota
+e alla prima trasmissione di un pacchetto esegue 3 operazioni:
 \begin{itemize}
-    \item Attraverso il livello 2 del protocollo decodifica chi sia il mandante e il ricevente.
-    \item Scrive nella tabella l'indirizzo MAC del mandante e la porta a cui esso è collegato.
-    \item Trasmette il pacchetto in broadcast a tutti i dispositivi collegati ad esso perchè non sa a quale porta il ricevente è collegato.
+    \item Attraverso il livello 2 del protocollo decodifica chi sia il mandante e il
+          ricevente.
+    \item Scrive nella tabella l'indirizzo MAC del mandante e la porta a cui esso è
+          collegato.
+    \item Trasmette il pacchetto in broadcast a tutti i dispositivi collegati ad esso
+          perchè non sa a quale porta il ricevente è collegato.
 \end{itemize}
 Non appena sarà trasmesso l'acknowledgement di livello 2 allo switch esso si salverà nella tabella l'indirizzo MAC e la porta a cui è collegato il tal dispositivo.
-A questo punto per ogni pacchetto che dovrà trasmettere se il mittenete è ignoto se lo salverà nella tabella e se il destinatario è ignoto manderà il pacchetto su tutte le porte a cui sono 
+A questo punto per ogni pacchetto che dovrà trasmettere se il mittenete è ignoto se lo salverà nella tabella e se il destinatario è ignoto manderà il pacchetto su tutte le porte a cui sono
 collegati dispositivi che non conosce. Andando avanti a trasmettere pacchetti la tabella viene sempre di più popolata e lo switch diventa sempre più efficiente, la colonne del tempo servono perchè
 dopo una certa quantità le infromazioni della riga vengono eliminate in modo tale da evitare continui errori in caso di disconnessione. Altra funzionalità molto utile dello switch è quella
 di riconoscere se il sistemista ha sbagliato a collegare i cavi e ha così generato un anello: questo può succedere quando due switch diversi sono collegati con due cavi e ci si accorge di ciò
@@ -210,29 +271,154 @@ Lo switch rende la rete componibile, un altro dispositivo usato per la componibi
 centrale per le reti è il \textbf{router} esso lavore a livello 3 e collega tra di loro le reti locali e smista i pacchetti eleggendo un rappresentante all'interno delle reti che collega.
 
 \paragraph{Il livello fisico e la codifica dei dati digitali}
-Per trasmettere i dati digitali (bit) attraverso mezzi di trasmissioni fisici (cavi, onde EM) è necessaria una conversione da digitale ad analogico e viceversa una volta all'arrivo.
-Due sono i parametri fondamentali dei mezzi di trasmissione: velocità di trasmisssione e capacità di trasmissione. 
-Approssimativamente in tutti i mezzi di trasmissione i dati viaggiano alla velocità della luce a differenza della quantità di informazione che è estremamente variabile.
-La grande variabilità della quantità di informazione trasmessa dipende principalmente dal fatto che la decodifica all'arrivo deve essere il più affidabile possibile nonostante le
-interferenze che ci sono durante il tragitto. Dunque in base a ciò avviene la decione di quanti bit mandare alla volta per dare più o meno tempo alla decodifica di capire quale valore sia trasmesso:
-una fibra ottica non subisce interferenze per cui si possono trasmettere molti dati a diffferenza di una rete wireless che subisce molte interferenze.
-Ovviamente la codifica utilizzata deve essere decisa via software e deve essere quella più adatta al mezzo di trasmissione (NZR, Manchester, 4B/5B, 8B/10B, PAM-3).
+Per trasmettere i dati digitali (bit) attraverso mezzi di trasmissioni fisici
+(cavi, onde EM) è necessaria una conversione da digitale ad analogico e
+viceversa una volta all'arrivo. Due sono i parametri fondamentali dei mezzi di
+trasmissione: velocità di trasmisssione e capacità di trasmissione.
+Approssimativamente in tutti i mezzi di trasmissione i dati viaggiano alla
+velocità della luce a differenza della quantità di informazione che è
+estremamente variabile. La grande variabilità della quantità di informazione
+trasmessa dipende principalmente dal fatto che la decodifica all'arrivo deve
+essere il più affidabile possibile nonostante le interferenze che ci sono
+durante il tragitto. Dunque in base a ciò avviene la decione di quanti bit
+mandare alla volta per dare più o meno tempo alla decodifica di capire quale
+valore sia trasmesso: una fibra ottica non subisce interferenze per cui si
+possono trasmettere molti dati a diffferenza di una rete wireless che subisce
+molte interferenze. Ovviamente la codifica utilizzata deve essere decisa via
+software e deve essere quella più adatta al mezzo di trasmissione (NZR,
+Manchester, 4B/5B, 8B/10B, PAM-3).
 
 \paragraph{Errori di trasmissione}
-Durante la trasmissione possono avvenire degli errori sia di instradamento che nei bit veri e propri per cui ogni segmento ha nella prima parte dell'intestazione il MAC del destinatario (per riconocere immediatamente se è quello giusto)
-poi quello del mittente e in coda a tutta la busta sono aggiunti i bit di controllo dell'errore. Il funzionamento della rilevazione e correzione del pacchetto si basa sul bit di parità e consiste nel mettere tutti i bit rilevanit 
-in una matrice $n \times m$ e per ogni riga e colonna salvarsi il bit di parità; con questo metodo si possono individuare fino a 3 errori (quando si forma una sotto-matrce di bit sbagliati non sono rilevabili) ma correggerne soltanto 1.
-La correzzione fattibile con questo metodo si chiama \textbf{forward error correction (FEC)} e aggiunge un \textit{overhead} al \textit{payload} inziale del pacchetto.
-La trasmissione dunque se è giusta oppure si riesce a correggere l'errore è considerata di successo e si invia la conferma al mittente tramite un \textbf{frame di conferma}, al contrario, se è errata, si scarta il apcchetto in attesa che venga rimandato.
+Durante la trasmissione possono avvenire degli errori sia di instradamento che
+nei bit veri e propri per cui ogni segmento ha nella prima parte
+dell'intestazione il MAC del destinatario (per riconocere immediatamente se è
+quello giusto) poi quello del mittente e in coda a tutta la busta sono aggiunti
+i bit di controllo dell'errore. Il funzionamento della rilevazione e correzione
+del pacchetto si basa sul bit di parità e consiste nel mettere tutti i bit
+rilevanit in una matrice $n \times m$ e per ogni riga e colonna salvarsi il bit
+di parità; con questo metodo si possono individuare fino a 3 errori (quando si
+forma una sotto-matrce di bit sbagliati non sono rilevabili) ma correggerne
+soltanto 1. La correzzione fattibile con questo metodo si chiama
+\textbf{forward error correction (FEC)} e aggiunge un \textit{overhead} al
+\textit{payload} inziale del pacchetto. La trasmissione dunque se è giusta
+oppure si riesce a correggere l'errore è considerata di successo e si invia la
+conferma al mittente tramite un \textbf{frame di conferma}, al contrario, se è
+errata, si scarta il apcchetto in attesa che venga rimandato.
 
 \paragraph{Affidabilità nella cominicazione di rete}
-All'interno di grandi reti tipo internet è possibile che un router possa indirizzare un pacchetto in diverse vie a cui viene collegato per cui nasce l'esigenza di capire quale delle via sia la migliore.
-Ogni ruouter ha una sua tabella di inidirizzamento che gli dice quale sia la strada migliore per arrivare al destinatario ma ci potrebbero essere dei problemi alla linea per cui se il router 1 non riceve, dopo 
-svariati tentativi, la conferma di ricezione da parte del router 2 cambia le proprie tabelle di routing va al livello superiore e rimanda in dietro il pacchetto in modo che possa prendere un'altra strada.
-Per ogni segmento mandato ci si aspetta un solo acknoledgment e se non arriva, magari a causa della non ricezione di un solo pacchetto, viene rispedito interamente.
+All'interno di grandi reti tipo internet è possibile che un router possa
+indirizzare un pacchetto in diverse vie a cui viene collegato per cui nasce
+l'esigenza di capire quale delle via sia la migliore. Ogni ruouter ha una sua
+tabella di inidirizzamento che gli dice quale sia la strada migliore per
+arrivare al destinatario ma ci potrebbero essere dei problemi alla linea per
+cui se il router 1 non riceve, dopo svariati tentativi, la conferma di
+ricezione da parte del router 2 cambia le proprie tabelle di routing va al
+livello superiore e rimanda in dietro il pacchetto in modo che possa prendere
+un'altra strada. Per ogni segmento mandato ci si aspetta un solo acknoledgment
+e se non arriva, magari a causa della non ricezione di un solo pacchetto, viene
+rispedito interamente.
 
 \paragraph{Virtual LAN}
-Gli switch possono essere "menaged" riuscendo così a partizionare i dispositivi della rete rendendo impossibile vedere i pacchetti mandati all'altra partizione, a questo punto l'unico mezzo di trasmissione
-su cui viaggiano tutti i pacchetti è il \textbf{trunk} ovvero ciò che connette tra loro due switch menaged.
+Gli switch possono essere "menaged" riuscendo così a partizionare i dispositivi
+della rete rendendo impossibile vedere i pacchetti mandati all'altra
+partizione, a questo punto l'unico mezzo di trasmissione su cui viaggiano tutti
+i pacchetti è il \textbf{trunk} ovvero ciò che connette tra loro due switch
+menaged.
+
+\paragraph{Internet working}
+Salendo a livello rete nel protocollo, le reti locali sono connesse tra di loro
+secondo un sistema gerarchico e strutturato basato su calcolatori
+rappresentanti della rete locale (\textbf{router}). I contesti locali sono
+quelli studiati fino ad ora, rimangono indipendenti e i meccanismi sono gli
+stessi ma c'è uno dei collegati alla rete è il router che discrimina se i
+pacchetti sono per la rete LAN interna oppure per un'altra rete LAN esterna. Il
+router, una volta arrivato un pacchetto, consulta la sua \textbf{tabella di
+    instradamento} e decide come instradarlo verso il ricevente; quello che conta a
+livello di instradamento è che esse rispecchia la topologia dei colegamenti tra
+i vari router infatti, a livello pratico, sono tutti collegati attraverso una
+\textbf{beckbone} ovvero collegamenti particolarmente veloci tra i vari router.
+Ovviamente non è una rete a stella per cui se un pacchetto è destinato ad un
+router non immediatamente raggiungibile lo si inoltra al router migliore (a
+livello di distanza) rispetto al destinatario, una volta che arriva un
+pacchetto destinato al router esso lo inoltra alla rete in modo che l'host
+giusto lo riesca a ricevere. La grande semplificazione del livello 3 è che ai
+router non interessa nulla del singolo destinatario, infatti essi lavorano
+sulle reti che sono sicuramente minori degli host collegati. Il \textit{default
+    gateway} è il nodo padre di ogni router a cui tendenzialmente manda sempre
+tutti i dati perchè la topologia per eccellenza gerarchica è l'albero, da qui
+il nome
+
+\paragraph{Internet Protocol (IP)}
+Fa da collante architetturale tra tutte le reti del mondo, serve ad
+identificare il mittente e destinatario della trasmissione all'interno di tutta
+la rete internet. Nella struttura dell'indirizzo IP posso inserire informazioni
+sulla gerarchia degli indirizzi, per esempio posso specificare delle
+\textit{sotto reti} interne alla rete del router; ancora una volta ognuno
+conosce solo il proprio default gateway in modo tale da nascondere ai router
+ogni tipo di annidamento all'interno delle reti. I router non si preoccupano di
+rinviare più volte ne della perdita, infatti nel caso di coda piena del router
+i pacchetti in più vengono cestinati perchè il loro compito è indirizzare e
+instradare i pacchetti. Le tabelle di instradamento sono la struttura dati che
+contengono le informazioni necessarie, esse sono abbastanza piccole in modo
+tale da riuscire a calcolare il migliore destinatario (check della tabella) in
+1 ciclo di clock. Per gestire anche i casi in cui cambia la topologia della
+rete esiste un protocollo che modifica e mantiene aggiornate le tabelle di
+instradamento. Bisogna prestare attenzione tra \textbf{instradare} ovvero
+l'inoltro in base la tabella e il \textbf{routing} ovvero tenere aggiornata la
+tabella. Ci sono altre 2 operazioni aggiuntive che devono gestire i router:
+
+\begin{itemize}
+    \item \textbf{frammentazione}: si spezza un pacchetto arrivato in pacchetti di dimensioni più ridotte,
+          l'intestazione di ogni paccheto deve essere la stessa di quello grande.
+          Questo lavoro rallenta la velocità dei router e genera una quantità enorme
+          di pacchetti in giro per la rete.
+    \item \textbf{riassemblamento}: arrivati tutti i pacchetti frammentati essi vengono riassemblati in ordine corretto
+\end{itemize}
+
+Questi due compiti erano molto utili agli inizi di internet, ora sono solo
+degli svantaggi per cui il grande cambiamento tra \textbf{IPv4} e \textbf{IPv6}
+è l'eliminazione della frammentazione, per rendere le tecnologie
+retrocompatibili ogni pacchetto ha 4 bit usati per gestire la verione del
+pacchetto in modo tale che se nasce un nuovo protocollo non tocca aggiornare
+tutto.
+
+\paragraph{Indirizzamento IPv4}
+Un indirizzo IP viene associato univocamente ad una scheda di rete una volta
+effettuata la connessione alla rete locale, più precisamente se l'IP cambia in
+base a quale rete locale si è collegato o alla singola connessione si dice
+\textbf{dinamico}; se invece l'indirizzo non cambia si dice \textbf{statico}.
+Queste differenze sono utili perchè IP di servizi di rete devono essere statici
+in modo sìche siano sempre raggiungibili nello stesso modo, diversamente i
+dispositivi principalmente client non vengono usati tutto il tempo per cui si
+evita di riservare indirizzi IP per troppo tempo, anche perchè gli indirizzi
+IPv4 sono limitati. Per evidenti necessità l'indirizzo IP deve contenere il
+numero identificativo della rete e del dispositivo a cui mandare i pacchetti,
+più precisamente sono \textbf{32 bit} che codificano 4 valori esadecimali
+distanziati da un punto ed è sempre composto da almeno due parti:
+\begin{enumerate}
+    \item \textbf{network number}: numero della rete a cui appartiene la rete. Sono i primi due byte (più valenti).
+    \item \textbf{host number}: numero dell'interfaccia di rete all'interno della rete. Sono gli ultimi due byte (meno valenti).
+\end{enumerate}
+
+Data la struttura gerarchica dei router (1 padre e alcuni figli) in realtà la
+sua tabella non deve discriminare tra tutte le possibili rete del mondo ma gli
+basta capire se è uno dei figlio oppure è del resto del mondo.
+
+Il valore dell'indirizzo IP inoltre serve a discriminare diversi tipi di rete:
+\begin{itemize}
+    \item \textbf{Classe A}: indicata dal primo byte, per questa rete posso identificare 3 byte di host, \textbf{l'IP inizia con 0, sono gli IP tra 1. e 126.} e in tutto possono avere 16 milioni di host.
+          Questi IP costano e sono già stati tutti comperati dai provider per dare un IP che inizia con quel byte.
+    \item \textbf{Classe B}: indicata dai primi 2 byte, per questa rete posso identificare 2 byte di host, \textbf{l'IP inizia con 10, sono gli IP da 128.0 a 191.255} e in tutto possono avere 65 mila host.
+    \item \textbf{Classe C}: indicata dai primi 3 byte, per questa rete posso identificare 1 byte di host, \textbf{l'IP inizia con 110, sono gli IP da 192.0.0 a 223.255.255} e in tutto possono avere 254 host.
+\end{itemize}
+
+Ovviamente ci sono dei numeri riservati per gli host: tutti i bit a 0
+identificano \textbf{la rete} e non l'host 0 mentre sono tutti 1 quello è
+\textbf{l'indirizzo del broadcast della rete}.
+
+Il protocollo IP mette nell'head del pacchetto l'IP del mittente e del
+destinatario, poi passa tutto al livello MAC che mette la sua intestazione e
+per trovare il MAC si usa il protocollo \textbf{arp} che, sapendo l'IP del
+padre, ne deduce il MAC per l'inoltro al prossimo router.
 
 \end{document}
