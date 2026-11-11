@@ -510,19 +510,23 @@ Esempio a pagina 526 lucidi e appunti.
 Un simbolo $X \in T \cup NT$ è:
 \begin{itemize}
     \item Generatore sse $\exists w \in T^*$ con $X \Rightarrow^* w$.
-    \item Raggiungibile sse $S \Rightarrow^* \alpha X \beta$ per qualche $\alpha, \beta \in (T \cup NT)$.
+    \item Raggiungibile sse $S \Rightarrow^* \alpha X \beta$ per qualche $\alpha, \beta
+              \in (T \cup NT)$.
     \item Utile sse è generatore e raggiungibile.
 \end{itemize}
 
 \subsection{Come si calcolano i generatori? Come si calcolano i raggiungibili?}
-Data la grammatica G per calcolare i generatori è sufficiente calcolare quali terminali riescono a produrre dei terminali in modo induttivo per ottenere l'insieme dei generatori, 
-una volta eliminati dalla grammatica tutti i terminali raggiungibili in modo induttivo guardando tutti i non terminali che riesco a ragiungere, partendo da S, in un numero $i$ di passi.
+Data la grammatica G per calcolare i generatori è sufficiente calcolare quali
+terminali riescono a produrre dei terminali in modo induttivo per ottenere
+l'insieme dei generatori, una volta eliminati dalla grammatica tutti i
+terminali raggiungibili in modo induttivo guardando tutti i non terminali che
+riesco a ragiungere, partendo da S, in un numero $i$ di passi.
 \subsection{\textcolor{blue}{In che modo si eliminano i simboli inutili di una grammatica? È importante l'ordine delle operazioni da svolgere?}}
-Per eliminare i simboli inutili di una grammatica prima si trovano i simboli non generatori e si eliminano tutte le produzioni che contengono almeno uno di questi simboli, ssuccessivamente 
+Per eliminare i simboli inutili di una grammatica prima si trovano i simboli non generatori e si eliminano tutte le produzioni che contengono almeno uno di questi simboli, ssuccessivamente
 calcolo tutti i simboli non raggiungibili ed elimino tutte le produzioni che ne contengono. L'ordine di esecuzione delle due fasi è vitale, la grammatica risultante potrebbe essere errata.
 
-\subsection{\textcolor{blue}{Quando si dice che una grammatica è ricorsiva sinistra? Come si elimina la ricorsione sinistra immediata? 
-E quella non immediata? Perché serve eliminare la ricorsione sinistra?}}
+\subsection{\textcolor{blue}{Quando si dice che una grammatica è ricorsiva sinistra? Come si elimina la ricorsione sinistra immediata?
+        E quella non immediata? Perché serve eliminare la ricorsione sinistra?}}
 UNa grammatica si dice ricorsiva sinistra se ha una qualche produzione ricorsiva sinistra; una produzione è ricorsiva sinistra se è del tipo $A \to a\alpha$.
 Per eliminare la ricorsione sinistra immediata data la produzione: $A \to A\alpha_1|...| A\alpha_n|\beta_\|...|\beta_n$ è sufficiente rimpiazzare le produzioni nel seguente modo:
 \begin{center}
@@ -532,10 +536,14 @@ Per eliminare la ricorsione sinistra immediata data la produzione: $A \to A\alph
 \end{center}
 Esempio pagina 546 lucidi e appunti.
 
-Per eliminare la ricorsione sinistra non immediata si deve avere innanzi tutto una gramma tica libera senza $\epsilon$-produzioni e senza produzioni unitarie se no l'algoritmo non funziona.
-L'algoritmo sostanzialmente funziona andando ad analizzare un non-terminale alla volte e, una volta indivuduata la produzione che genera ricorsione sinistra non immediata,
-rimpiazzare il non terminale incriminato con le sue produzioni. A questo punto, se necessario, si elimina la ricorsione sinistra immediata.
-E' necessario eliminare la ricorsione sinistra perchè non e' adatta al top-down parsing.
+Per eliminare la ricorsione sinistra non immediata si deve avere innanzi tutto
+una gramma tica libera senza $\epsilon$-produzioni e senza produzioni unitarie
+se no l'algoritmo non funziona. L'algoritmo sostanzialmente funziona andando ad
+analizzare un non-terminale alla volte e, una volta indivuduata la produzione
+che genera ricorsione sinistra non immediata, rimpiazzare il non terminale
+incriminato con le sue produzioni. A questo punto, se necessario, si elimina la
+ricorsione sinistra immediata. E' necessario eliminare la ricorsione sinistra
+perchè non e' adatta al top-down parsing.
 
 \subsection{\textcolor{blue}{Cosa vuol dire fattorizzare a sinistra una grammatica? Perché serve fattorizzare?}}
 Fattorizzarte a sinistra una grammatica significa raccogliere il prefisso piu' lungo delle produzioni della stessa, questo procedimento si fa per evitare il non-determinismo iniseme al look-ahead.
@@ -545,22 +553,68 @@ a destra del simbolo $A$ in una derivazione a partire da S.
 \subsection{\textcolor{blue}{Algoritmi per calcolare First(a) e di Follow(A).}}
 \begin{itemize}
     \item \textbf{first}: per determiare il first bisogna prima vedere se si ha la forma $\alpha A$ oppure $A\alpha$, nel primo caso il first e' proprio $\alpha$ essendo un non terminale. Nel
-    secondo caso il first e' il first delle produzioni di A (l'insieme dei first puo' essere composto da piu' elementi).
+          secondo caso il first e' il first delle produzioni di A (l'insieme dei first puo' essere composto da piu' elementi).
     \item \textbf{follow}: il follow di tutte le sentenze e' di base \$, per espandere l'insieme basta applicare le regole \begin{itemize}
-        \item Per ogni produzione $X \to \alpha Y\beta$  $Follow(Y) := Follow(Y) \cup (First(\beta) - \{\epsilon\}) $
-        \item Per ogni produzione $X \to \alpha Y$ oppure $X \to \alpha Y\beta \ con\ \epsilon \in First(\beta)$  $Follow(Y) := Follow(Y) \cup Follow(X) $
-    \end{itemize}
+              \item Per ogni produzione $X \to \alpha Y\beta$ $Follow(Y) := Follow(Y) \cup
+                        (First(\beta) - \{\epsilon\}) $
+              \item Per ogni produzione $X \to \alpha Y$ oppure $X \to \alpha Y\beta \ con\
+                        \epsilon \in First(\beta)$ $Follow(Y) := Follow(Y) \cup Follow(X) $
+          \end{itemize}
 \end{itemize}
-\subsection{\textbf{Come è fatta e come si riempie una tabella di parsing LL(1)?}}
-\subsection{\textbf{Quando una grammatica G si dice di classe LL(1)? Quali sono le condizioni necessarie e sufficienti per G affinché sia di classe LL(1)?}}
-\subsection{Perché un parser di questo tipo è chiamato LL?}
-\subsection{\textbf{Come funziona il parser LL(1) con una pila?}}
-\subsection{\textit{Cos'è un parser a discesa ricorsiva?}}
-\subsection{È vero che ogni linguaggio regolare è pure LL(1)?}
+
+\subsection{\textcolor{blue}{Come è fatta e come si riempie una tabella di parsing LL(1)?}}
+Una tabella di parsing LL1 ha come righe i non terminali della grammatica e come colonne i terminali,
+nelle caselle sono contenute le produzioni che possono essere scelte dal parser mentre cerca di espandere il
+non terminale e come simbolo in input c'e' il non terminale.
+Per riempirla si analizza ogni pruduzione e:
+\begin{itemize}
+    \item $M[a,b] = A \to \alpha$ per ogni $b \in T \land b \in First(\alpha)$
+    \item se $\epsilon \in First(\alpha)$ inserisci $A \to \alpha$ in tutte le caselle
+          $M[A,x]$ dove $x \in Follow(A)$
+\end{itemize}
+
+\subsection{\textcolor{red}{Quando una grammatica G si dice di classe LL(1)? Quali sono le condizioni necessarie e sufficienti per G affinché sia di classe LL(1)?}}
+Una grammatica e' di classe LL(1) se e solo se ogni casella della tabella si parsing LL(1) contiene al piu' una produzione.
+Mentre le condizioni necessarie e sufficienti per G affinche' sia LL(1) sono: se per ogni coppia di produzioni distinte con la stessa testa $A \to \alpha|\beta$
+\begin{itemize}
+    \item $First(\alpha) \cup First(\beta) = \emptyset$
+    \item se $\epsilon \in First(\alpha)$ allora $Follow(A) \cap Follow(\beta) =
+              \emptyset$
+    \item se $\epsilon \in First(\beta)$ allora $Follow(\alpha) \cap Follow(A) =
+              \emptyset$
+\end{itemize}
+
+\subsection{\textcolor{blue}{Perché un parser di questo tipo è chiamato LL?}}
+I parser di questo tipo sono chiamati LL perche' leggono l'input \textit{left
+    to right} e generano un albero di derivazione \textit{leftmost}.
+\subsection{Come funziona il parser LL(1) con una pila?}
+Si mette il simbolo iniziale sulla testa della pila poi si analizza l'input: per ogni coppia $(T,NT)$ si guarda $M[T,NT]$ e si fa l'operazione nella casella fino a quando non si consuma tutto l'input.
+\subsection{Cos'è un parser a discesa ricorsiva?}
+Un parser a discesa ricorsiva e' un parser che e' costituito da un insieme di procedure, possibilmente mutualmente ricorsive, per ognio nonterminale della grammatica che riconosce.
+\subsection{\textcolor{blue}{È vero che ogni linguaggio regolare è pure LL(1)?}}
+Si, non ho voglia di scrivere la dimostrazione per cui vedere pagina 598 di
+lucidi e appunti.
 \subsection{Come sono definiti Firstk(a) e di Followk (A) per $k\ge2$.}
+\begin{itemize}
+\item $First_k(\alpha)$: $w\in First_k(\alpha)$ se e solo se:
+\begin{itemize}
+    \item $\alpha\Rightarrow^*w\beta\ con\ |w|=k, w \in T^+, \beta\in(T\cup NT)^*$, oppure
+    \item $\alpha \Rightarrow^*w\ con\ |w|\leqk, w\in T^*$ (w puo' essere $\epsilon)$
+\end{itemize}
+\item $Follow_k(A)$: $w\in Follow_k(A)$ se e solo se:
+\begin{itemize}
+    \item $S\Rightarrow^*w\alpha A\beta\ con\ |w|\in First_k(\beta)-\{\epsilon\}$, oppure
+    \item $S\Rightarrow^*w\alpha A\beta\ con\ \epsilon\in First_k(\beta)\land w=\$ $, oppure
+    \item $S\Rightarrow^*w\alpha A \land w=\$ $
+\end{itemize}
 \subsection{Come si definisce una grammatica LL(k)? Ed un linguaggio LL(k)? Come si relazionano tra di loro?}
+Una grammatica e' LL(K) se la tabella di parsing per riconoscerla ha al piu'
+una produzione in ogni casslla; un linguaggio LL(K) e' tale se esiste una
+grammatica LL(K) in grado di riconoscerlo tale che $L=L(G)$.
 \subsection{Che relazione esiste tra grammatiche LL(k) e grammatiche ambigue? E con le grammatiche ricorsive sinistre?}
+Una grammatica ambigua non puo' essere una grammatica LL(K) e nemmeno una grammatica ricorsiva sinistra puo' esserlo.
 \subsection{Esistono linguaggi liberi che non sono LL(k) per nessun k? Ed esistono linguaggi liberi deterministici che non sono LL(k) per nessun k?}
+Si, esistono perche' la classe dei linguaggi LL(K) non copre totalmente la classe dei linguaggi liberi deterministici, per esempio il linguaggio $L\{=a^ib^j|i\geq j\}$
 \subsection{\textbf{Cos'è un parser bottom-up (o shift-reduce)? Qual è il suo input e il suo output? Perché sono chiamati parser LR?}}
 \subsection{\textbf{Che tipo di conflitti si possono presentare in un parser del genere? Quando si presenta un conflitto (shift/reduce o reduce/reduce), quale azione bisogna scegliere?}}
 \subsection{\textit{Cos'è un prefisso viabile? Come lo si definisce in termini di una grammatica?}}
