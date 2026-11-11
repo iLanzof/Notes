@@ -421,4 +421,22 @@ destinatario, poi passa tutto al livello MAC che mette la sua intestazione e
 per trovare il MAC si usa il protocollo \textbf{arp} che, sapendo l'IP del
 padre, ne deduce il MAC per l'inoltro al prossimo router.
 
+\paragraph{Subnetwork e Netmask}
+Tra le informazioni essenziali a far funzionare una scheda di rete sono il
+default gateway, l'indirizzo IP e la \textbf{maschera di rete} che permette di
+capire a che livello di gerarchia si trova il calcolatore. La maschera di rete
+permette inoltre di creare delle sottoreti gestite dai vari router che
+permettono di individuare i rispettivi host. La maschera di rete spezza
+l'indirizzo IP in due parti logiche ovvero l'indirizzo di sottorete e l'host
+number: grazie alla maschera di rete ho la possibilità di estendere la quantità
+di bit che uso per referenziare la rete. Più precisamente, per creare una
+sottorete, basta settare a 1 tutti i bit degli host che ci interessano
+(contiguamente) e con lo 0 si indicano gli host. La maschera di rete è un
+indirizzo a parte rispetto all'IP. Inoltre, per convenzione si assegna al
+router l'indirizzo precedente a quello di broadcast per quella sotto-rete. Ogni
+router, a questo punto, per capire se un pacchetto ha come destinatario un host
+della sua sottorete deve incrociare indirizzo IP e subnet mask, le cose sono
+più complicate: finchè sono router di periferia le strutture sono abbastanza
+gerarchiche (tutti hanno un solo padre e alcuni figli) ma nell'\textbf{internet
+    core} i router sono tutti fratelli e hanno algoritmi più complessi.
 \end{document}
