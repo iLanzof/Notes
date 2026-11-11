@@ -27,125 +27,170 @@
 \section{Domande}
 \subsection{Ristorante}
 \subsubsection{Cosa è un sistema operativo?}
-Un sistema operativo e' un programma, piu' precisamente e' il progrmamma che viene lanciato all'accensione e terminato allo spegnimento.
+Un sistema operativo e' un programma, piu' precisamente e' il progrmamma che
+viene lanciato all'accensione e terminato allo spegnimento.
 \subsubsection{Cosa è un programma?}
 Un programma e' una sequenza di istruzioni.
 \subsubsection{Cosa è un processo?}
 Un processo e' un programma che viene eseguito.
 \subsubsection{Come è strutturato il modello di macchina di Von Neumann?}
-Il modello di macchina di Von Neumann e' composto da processore che esegue le operazioni, una memoria che fornisce gli operandi delle operazioni, 
-una memoria di massa dove memorizzare informazioni a lungo termine, bus dati per il trasferimento delle informazioni e dispositivi di esterni che gestiscono l'input/output.
+Il modello di macchina di Von Neumann e' composto da processore che esegue le
+operazioni, una memoria che fornisce gli operandi delle operazioni, una memoria
+di massa dove memorizzare informazioni a lungo termine, bus dati per il
+trasferimento delle informazioni e dispositivi di esterni che gestiscono
+l'input/output.
 \subsubsection{Cosa è un processore?}
-Il processore e' il componente del calore che esegue le operazioni di fetch-decode-execute.
+Il processore e' il componente del calore che esegue le operazioni di
+fetch-decode-execute.
 \subsubsection{Cosa è un bus?}
-Un bus e' un canale di informazioni condiviso collegato tra piu' componenti, il suo compito e' quello di tyrasportare i dati.
+Un bus e' un canale di informazioni condiviso collegato tra piu' componenti, il
+suo compito e' quello di tyrasportare i dati.
 \subsubsection{Cosa è un controller di Input/Output?}
-Un controller I/O è un componente che gestisce lo scambio di dati tra un sistema di controllo e i dispositivi esterni.
+Un controller I/O è un componente che gestisce lo scambio di dati tra un
+sistema di controllo e i dispositivi esterni.
 \subsubsection{Cosa è un device register?}
-Un device register è la registrazione di un dispositivo in una rete o in un sistema, associandolo a un identificativo univoco per riconoscerlo e gestirlo
+Un device register è la registrazione di un dispositivo in una rete o in un
+sistema, associandolo a un identificativo univoco per riconoscerlo e gestirlo
 \subsubsection{Cosa è un device driver?}
-Un device driver è un software che permette al sistema operativo di comunicare con un dispositivo hardware, traducendo le sue richieste in comandi comprensibili dal dispositivo
+Un device driver è un software che permette al sistema operativo di comunicare
+con un dispositivo hardware, traducendo le sue richieste in comandi
+comprensibili dal dispositivo
 \subsubsection{Cosa può fare un processore quando è in kernel mode?}
-Richiedere/fornire informazioni  ai bus dati
+Richiedere/fornire informazioni ai bus dati
 \subsubsection{Cosa può fare un processore quando è in user mode?}
 Eseguire le istruzioni dei programmi che non siano SO
 \subsubsection{Come e in che casi avviene il passaggio da user mode in kernel mode?}
-Il passaggio avviene principalmente in tre casi: system call, interrupt opppure trap/exceptions
+Il passaggio avviene principalmente in tre casi: system call, interrupt opppure
+trap/exceptions
 \subsubsection{Cosa è una system call?}
-La system call e' l'interfaccia con cui un programma in User Mode chiede al sistema operativo un servizio kernel.
+La system call e' l'interfaccia con cui un programma in User Mode chiede al
+sistema operativo un servizio kernel.
 \subsubsection{Cosa è un Process Control Block?}
-Un PCB e' una struttura dati che serve al sistema operativo per la memorizzazione delle informazioni dei processi.
+Un PCB e' una struttura dati che serve al sistema operativo per la
+memorizzazione delle informazioni dei processi.
 \subsubsection{Cosa vuole dire scheduling?}
-Per scheduling si intende l'operazione del sistema operativo atta a gestire l'esecuzione da parte della CPU di processi "ready".
+Per scheduling si intende l'operazione del sistema operativo atta a gestire
+l'esecuzione da parte della CPU di processi "ready".
 \subsubsection{Come vengono sospesi i processi in attesa di operazioni di I/O?}
 I processi vengono sospesi grazie ad una system call.
 \subsubsection{Cosa significa multitasking?}
-Per multitasking si intende la capacita' della CP di eseguire piu' processi contemporaneamente.
+Per multitasking si intende la capacita' della CP di eseguire piu' processi
+contemporaneamente.
 \subsubsection{Cosa è un interrupt e quando avviene?}
-Un interrupt (interruzione) è un segnale inviato al processore per interrompere il flusso di esecuzione corrente
-e richiedere l'esecuzione immediata di una speciale routine del kernel, puo' avvenire per diversi motivi tipo la digitazione di un carattere.
-\subsubsection{Una system call o un interrupt fa passare il controllo dal processo in esecuzione al sistema operativo. 
-Cosa deve fare il processore per consentire di poter riprendere successivamente l'esecuzione del processo dal punto dell'interruzione?}
-Per consentire la corretta proseguita del processo il sistema operativo ha a disposizione tutti i dati necessari nella PCB del singolo processo.
-
+Un interrupt (interruzione) è un segnale inviato al processore per interrompere
+il flusso di esecuzione corrente e richiedere l'esecuzione immediata di una
+speciale routine del kernel, puo' avvenire per diversi motivi tipo la
+digitazione di un carattere.
+\subsubsection{Una system call o un interrupt fa passare il controllo dal processo in esecuzione al sistema operativo.
+    Cosa deve fare il processore per consentire di poter riprendere successivamente l'esecuzione del processo dal punto dell'interruzione?}
+Per consentire la corretta proseguita del processo il sistema operativo ha a
+disposizione tutti i dati necessari nella PCB del singolo processo.
 
 \subsection{Concorrenza}
 \subsubsection{Quale è la differenza fra programma e processo?}
-Il programma e' statico: e' un testo che contiene una sequenza di istruzioni. 
-Un processo invece e' dinamico: e' l'esecuzione delle istruzioni che sono contenute nel programma.
+Il programma e' statico: e' un testo che contiene una sequenza di istruzioni.
+Un processo invece e' dinamico: e' l'esecuzione delle istruzioni che sono
+contenute nel programma.
 
 \subsubsection{Cos'è l'assioma di finite progress? perché è necessario?}
-L'assioma di finite progress e' l'assioma che ci assicura che ogni processo viene eseguito ad una velocita' finita, ignota ma non nulla.
-Esso e' importante perche' introduce il problema maggiore della concorrenza: non essere in grado di determinare numericamente quanto un processo impiegera'
-ad essere eseguito costringendoci a un diveso approccio per la sincronizzazione dei programmi.
+L'assioma di finite progress e' l'assioma che ci assicura che ogni processo
+viene eseguito ad una velocita' finita, ignota ma non nulla. Esso e' importante
+perche' introduce il problema maggiore della concorrenza: non essere in grado
+di determinare numericamente quanto un processo impiegera' ad essere eseguito
+costringendoci a un diveso approccio per la sincronizzazione dei programmi.
 
 \subsubsection{Quali sono gli stati dei processi?}
 Gli stati dei processi sono 3:
 \begin{enumerate}
-    \item Ready: il processo e' pronto ad essere eseguito m,a il processore e' impegnato in altre attivita'.
-    \item Waiting: il processo sta attendendo un qualche evento esterno, per esempio se deve ricevere un informazione.
+    \item Ready: il processo e' pronto ad essere eseguito m,a il processore e' impegnato
+          in altre attivita'.
+    \item Waiting: il processo sta attendendo un qualche evento esterno, per esempio se
+          deve ricevere un informazione.
     \item Running: il processo sta venendo eseguito.
 \end{enumerate}
 
 \subsubsection{Cos'è la concorrenza?}
-Per concorrenza si intende la notazione e le tecniche per risolvere problemi, quali comunicazione e sincronizzazioni, associati all'esecuzione concorrente (ovvero simultanea).
+Per concorrenza si intende la notazione e le tecniche per risolvere problemi,
+quali comunicazione e sincronizzazioni, associati all'esecuzione concorrente
+(ovvero simultanea).
 
 \subsubsection{Qual è la differenza fra concorrenza reale e apparente?}
-Per concorrenza reale si intende la capacita' delle infrastrutture di calcolo distribuite oppure di processore multicore di eseguire piu' processi contemporaneamente.
-Invece la concorrenza apparente e' un illusione data dalla velocita' con cui i processori riescono ad alternare l'esecuzione di processi diversi.
+Per concorrenza reale si intende la capacita' delle infrastrutture di calcolo
+distribuite oppure di processore multicore di eseguire piu' processi
+contemporaneamente. Invece la concorrenza apparente e' un illusione data dalla
+velocita' con cui i processori riescono ad alternare l'esecuzione di processi
+diversi.
 
 \subsubsection{I problemi da risolvere per la programmazione concorrente sono diversi
-fra parallelismo reale o apparente?}
-No, i problemi di comunicazione e sincronizzazione sono sempre gli stessi percheanche se in un sistema multiprocessore i processi sono intervallati nel tempo (interleaving) mentre in un sistema
-multicore sono eseguiti simultaneamente ma sono alternati nello spazio di memoria (overlapping).
+    fra parallelismo reale o apparente?}
+No, i problemi di comunicazione e sincronizzazione sono sempre gli stessi
+percheanche se in un sistema multiprocessore i processi sono intervallati nel
+tempo (interleaving) mentre in un sistema multicore sono eseguiti
+simultaneamente ma sono alternati nello spazio di memoria (overlapping).
 
 \subsubsection{Cosa è una race condition?}
-Una race condition e' una condizione per la quale il risultato finale dell'esecuzione dipende dalla temporizzazione con cui vengono eseguiti i processi.
+Una race condition e' una condizione per la quale il risultato finale
+dell'esecuzione dipende dalla temporizzazione con cui vengono eseguiti i
+processi.
 
 \subsubsection{Cosa è una proprietà di un programma?}
-La proprieta' di un programma e' un attributo dello stesso che rimane vero per ogni istanza di esecuizione dello stesso.
-
+La proprieta' di un programma e' un attributo dello stesso che rimane vero per
+ogni istanza di esecuizione dello stesso.
 
 \subsubsection{Quali sono le proprietà di safety?}
-Le proprieta' di safety e' la proprieta' che garantisce che il programma vada nella direzione voluta. 
-Esse sono:
+Le proprieta' di safety e' la proprieta' che garantisce che il programma vada
+nella direzione voluta. Esse sono:
 \begin{itemize}
-    \item Mutua esclusione: in ogni istante un solo processo puo' accedere alla singola risorsa.
+    \item Mutua esclusione: in ogni istante un solo processo puo' accedere alla singola
+          risorsa.
     \item Assenza di deadlock.
 \end{itemize}
 
 \subsubsection{Quali sono le proprietà di liveness?}
-La proprieta' di liveness e' la proprietà che ci garantisce che il programma avanza e non si ferma.
-Esse sono:
+La proprieta' di liveness e' la proprietà che ci garantisce che il programma
+avanza e non si ferma. Esse sono:
 \begin{itemize}
     \item Assenza di starvation.
 \end{itemize}
 
 \subsubsection{Cosa è il deadlock?}
-Il deadlock e' un fenomeno per cui 2 o piu' processi hanno bisogno della mutua esclusione sulle stesse risorse per cui si bloccano visto che non se le riescono a liberare a vicenda.
+Il deadlock e' un fenomeno per cui 2 o piu' processi hanno bisogno della mutua
+esclusione sulle stesse risorse per cui si bloccano visto che non se le
+riescono a liberare a vicenda.
 
 \subsubsection{Cosa è la starvation?}
-La starvation e' un fenomeno per cui un processo attende in modo infinito l'accesso ad una risorsa.
+La starvation e' un fenomeno per cui un processo attende in modo infinito
+l'accesso ad una risorsa.
 
 \subsubsection{Cosa è una azione atomica?
-(quali operazioi assumiamo atomiche nella nostra trattazione?)}
-Un'azione atomica e' un'istruzione che sicuramente il processore esegue in un ciclo di clock, per cui siamo sicuri che quando inzia ad essere esegiuta 
-essa sara' anche terminata prima che il processore ne esegua un'altra. Nella nostra trattazione consideriamo atomiche le apoerazioni di assegnamento alle variabili di valori costanti.
+    (quali operazioi assumiamo atomiche nella nostra trattazione?)}
+Un'azione atomica e' un'istruzione che sicuramente il processore esegue in un
+ciclo di clock, per cui siamo sicuri che quando inzia ad essere esegiuta essa
+sara' anche terminata prima che il processore ne esegua un'altra. Nella nostra
+trattazione consideriamo atomiche le apoerazioni di assegnamento alle variabili
+di valori costanti.
 
 \subsubsection{Cosa è una sezione critica?}
-Una sezione critica, o critical section, e' una parte di programma che che utilizza una o piu' risorse condivise.
-Il nostro obiettivo e' che queste sezioni critiche siano eseguite in modo mutualmente esclusivo.
+Una sezione critica, o critical section, e' una parte di programma che che
+utilizza una o piu' risorse condivise. Il nostro obiettivo e' che queste
+sezioni critiche siano eseguite in modo mutualmente esclusivo.
 
 \subsubsection{Perché il compilatore non può individuare autonomamente le sezioni critiche?}
-Il compilatore non e' in grado di individuare le sezioni critiche perche' esso non capisce la logica del programma, compila e basta.  
+Il compilatore non e' in grado di individuare le sezioni critiche perche' esso
+non capisce la logica del programma, compila e basta.
 
 \subsubsection{Come possiamo definire le sezioni critiche tramite le proprietà?}
 Le sezioni critiche possono essere definite tramite le seguenti proprietà:
 \begin{enumerate}
-    \item Mutua esclusione: solo un processo alla volta deve star eseguendo una sezione critica tra tutte quelle che accedono alla stessa risorsa condivisa.
-    \item Assenza di deadlock: non e' ammissibile uno scenario in cui tutti i processi vengono bloccati.
-    \item Assenza di delay non necessari: un processo che non sta eseguendo una sezione critica non deve ritardare inutilmente l'esecuzione della sezione critica di un altro.
-    \item Asenza di starvation (Eventual Entring): prima o poi ogni processo inizia ad eseguire la propria sezione critica.
+    \item Mutua esclusione: solo un processo alla volta deve star eseguendo una sezione
+          critica tra tutte quelle che accedono alla stessa risorsa condivisa.
+    \item Assenza di deadlock: non e' ammissibile uno scenario in cui tutti i processi
+          vengono bloccati.
+    \item Assenza di delay non necessari: un processo che non sta eseguendo una sezione
+          critica non deve ritardare inutilmente l'esecuzione della sezione critica di un
+          altro.
+    \item Asenza di starvation (Eventual Entring): prima o poi ogni processo inizia ad
+          eseguire la propria sezione critica.
 \end{enumerate}
 
 \subsubsection{Come funziona l'algoritmo di Dekker?}
@@ -156,7 +201,7 @@ Le sezioni critiche possono essere definite tramite le seguenti proprietà:
 \vspace{0.15cm}
 \noindent
 \begin{minipage}[t]{0.48\textwidth}
-\begin{verbatim}
+    \begin{verbatim}
     process P {
         /* entry protocol */
         needp = true;
@@ -176,7 +221,7 @@ Le sezioni critiche possono essere definite tramite le seguenti proprietà:
 \end{minipage}%
 \hfill
 \begin{minipage}[t]{0.48\textwidth}
-\begin{verbatim}
+    \begin{verbatim}
     process Q {
         /* entry protocol */
         needq = true;
@@ -195,9 +240,12 @@ Le sezioni critiche possono essere definite tramite le seguenti proprietà:
 \end{verbatim}
 \end{minipage}
 
-Come si puo' vedere dal codice ci sono due variabili booleane condivise che indicano quando i processi vogliono entrare in mutua esclusione,
-con il primo while invece si va a controllare se l'altro processo vuole la mutia esclusione: nel caso non la voglia non si controlla neanche il turno e il processo entra in critical section.
-Alla fine della critical section il processo passa il turno all'altro.
+Come si puo' vedere dal codice ci sono due variabili booleane condivise che
+indicano quando i processi vogliono entrare in mutua esclusione, con il primo
+while invece si va a controllare se l'altro processo vuole la mutia esclusione:
+nel caso non la voglia non si controlla neanche il turno e il processo entra in
+critical section. Alla fine della critical section il processo passa il turno
+all'altro.
 
 \subsubsection{Algoritmo di Peterson per due processi, come funziona?}
 
@@ -208,7 +256,7 @@ Alla fine della critical section il processo passa il turno all'altro.
 \vspace{0.25cm}
 \noindent
 \begin{minipage}[t]{0.48\textwidth}
-\begin{verbatim}
+    \begin{verbatim}
     process P {
         while(true){
             /* entry protocol */
@@ -225,7 +273,7 @@ Alla fine della critical section il processo passa il turno all'altro.
 \end{minipage}%
 \hfill
 \begin{minipage}[t]{0.48\textwidth}
-\begin{verbatim}
+    \begin{verbatim}
     process Q{
         while (true){
             /* entry protocol */
@@ -241,7 +289,8 @@ Alla fine della critical section il processo passa il turno all'altro.
 \end{verbatim}
 \end{minipage}
 
-In questo algoritmo il turno viene passato prima dell'entrata nella critical section
+In questo algoritmo il turno viene passato prima dell'entrata nella critical
+section
 
 \subsubsection{Generalizzazzione dell Algoritmo di Peterson per N processi, come funziona?}
 \begin{verbatim}
@@ -269,11 +318,14 @@ In questo algoritmo il turno viene passato prima dell'entrata nella critical sec
     }
 \end{verbatim}
 
-
 \subsubsection{Sono possibili soluzioni hardware per il problema delle sezioni critiche? Quali?}
-Si, ci sono possibili soluzioni hardware: si potrebbe pensare di modificare il set di istruzioni hardware per semplificare la realizzazione di sezioni critiche coem il mascheramento degli interrup.
-Questa tecnica pero' non va bene perche' e' troppo rischioso delegare ai singoli programmi la responsabilita' di riattivare gli interrupt, riduce il grado di parallelismo e non funziona su sistemi multicore.
-Altro modo sono le istruzioni speciali Test \& set ovvero realizzare in modo atomico due istruzioni Ts(x,y) := <y = x, x = 1>.
+Si, ci sono possibili soluzioni hardware: si potrebbe pensare di modificare il
+set di istruzioni hardware per semplificare la realizzazione di sezioni
+critiche coem il mascheramento degli interrup. Questa tecnica pero' non va bene
+perche' e' troppo rischioso delegare ai singoli programmi la responsabilita' di
+riattivare gli interrupt, riduce il grado di parallelismo e non funziona su
+sistemi multicore. Altro modo sono le istruzioni speciali Test \& set ovvero
+realizzare in modo atomico due istruzioni Ts(x,y) := <y = x, x = 1>.
 
 \begin{verbatim}
     shared int lock = 0;
@@ -281,7 +333,7 @@ Altro modo sono le istruzioni speciali Test \& set ovvero realizzare in modo ato
 \vspace{0.25cm}
 \noindent
 \begin{minipage}[t]{0.48\textwidth}
-\begin{verbatim}
+    \begin{verbatim}
     process P{
         int vp;
         while(true) {
@@ -297,7 +349,7 @@ Altro modo sono le istruzioni speciali Test \& set ovvero realizzare in modo ato
 \end{minipage}%
 \hfill
 \begin{minipage}[t]{0.48\textwidth}
-\begin{verbatim}
+    \begin{verbatim}
     process Q{
         int vq;
         while(true){
@@ -312,48 +364,57 @@ Altro modo sono le istruzioni speciali Test \& set ovvero realizzare in modo ato
 \end{verbatim}
 \end{minipage}
 
-Entra in critical section il primo dei due processi che riesce a "fotografare" lock a 0 e a settarlo a 1 per l'altro.
-La starvation e' evitata con qualche assunzione in piu'.
+Entra in critical section il primo dei due processi che riesce a "fotografare"
+lock a 0 e a settarlo a 1 per l'altro. La starvation e' evitata con qualche
+assunzione in piu'.
 
 \subsubsection{In quali casi può applicare la disabilitazione degli interrupt?}
-La disabilitazione degli interrupt si puo' applicare solo sui sistemi a singolo processore.
+La disabilitazione degli interrupt si puo' applicare solo sui sistemi a singolo
+processore.
 
 \subsubsection{SpinLock: cosa sono? quale supporto hardware serve per utilizzarli?}
-Gli SpinLock sono delle quasi sezioni critiche che sono realizzate con istruzioni speciali e serve che l'hardware supporti la loro esecuzione in modo atomico.
-
+Gli SpinLock sono delle quasi sezioni critiche che sono realizzate con
+istruzioni speciali e serve che l'hardware supporti la loro esecuzione in modo
+atomico.
 
 \subsubsection{Gli spinlock forniscono una soluzione al problema delle sezioni critiche?
-(tutte le quattro proprietà sono soddisfatte?)}
-Si, ma l'assenza di starvtion ha bisogno di ulteriori assunzioni per essere garantita.
-
+    (tutte le quattro proprietà sono soddisfatte?)}
+Si, ma l'assenza di starvtion ha bisogno di ulteriori assunzioni per essere
+garantita.
 
 \subsubsection{Semafori: cosa sono? Quali operazioni supportano?}
-Il semaforo è un tipo di dato astratto per il quale sono definite due operazioni:
+Il semaforo è un tipo di dato astratto per il quale sono definite due
+operazioni:
 \begin{itemize}
-    \item V: essa viene invocata per inviare un segnale, in pratica fa finire la critical section
-    \item P: serve per attendere un segnale, in pratica serve per entrare in una critical section.
+    \item V: essa viene invocata per inviare un segnale, in pratica fa finire la critical
+          section
+    \item P: serve per attendere un segnale, in pratica serve per entrare in una critical
+          section.
 \end{itemize}
 Queste sono due azioni atomiche. Inoltre un semaforo puo' essere visto come una variabile intera che non deve essere mai negativa: l'operazione P aspetta che il semaforo sia positivo e decrementa di 1
 mentre l'operazione V incrementa di 1 il semaforo.
 \subsubsection{Qual è l'invarinte del semaforo?}
-L'invariante è: $n_p \leq n_v - init$ con $n_p$ il numero di operazioni P completate, 
-$n_v$ il numero di operazioni V completare e $init$ il valore inixiale del semaforo.
+L'invariante è: $n_p \leq n_v - init$ con $n_p$ il numero di operazioni P
+completate, $n_v$ il numero di operazioni V completare e $init$ il valore
+inixiale del semaforo.
 
 \subsubsection{Cosa è il valore del semaforo?}
 Il valore del semaforo è $n_v - init - n_p$ e non deve mai essere minore di 0.
 
 \subsubsection{Come si implementa una critical section tramite i semafori?}
-Una critical section con semafori si implementa iniziando con un'operazione P per entrare nella critical section e per terminarla si fa un'operazione V
+Una critical section con semafori si implementa iniziando con un'operazione P
+per entrare nella critical section e per terminarla si fa un'operazione V
 
 \subsubsection{Cosa significa che un semaforo è fair?}
-Un semaforo viene definito fair quando rispetta una politica FIFO ovvero che il primo processo che ha richiesto di entrare in critical section doveva essere quello che ci entrava per primo tra
-tutti quelli in attesa. In altre parole garantisce l'assenza di starvation.
+Un semaforo viene definito fair quando rispetta una politica FIFO ovvero che il
+primo processo che ha richiesto di entrare in critical section doveva essere
+quello che ci entrava per primo tra tutti quelli in attesa. In altre parole
+garantisce l'assenza di starvation.
 
 \subsubsection{Come possono essere implementati i semafori in un sistema operativo?}
 
-
 \begin{minipage}[t]{0.48\textwidth}
-\begin{verbatim}
+    \begin{verbatim}
     void P() {
         if(value > 0)
             Value--;
@@ -367,7 +428,7 @@ tutti quelli in attesa. In altre parole garantisce l'assenza di starvation.
 \end{minipage}%
 \hfill
 \begin{minipage}[t]{0.48\textwidth}
-\begin{verbatim}
+    \begin{verbatim}
     void V(){
         if(queue.empty())
             Value++;
@@ -379,65 +440,78 @@ tutti quelli in attesa. In altre parole garantisce l'assenza di starvation.
 \end{verbatim}
 \end{minipage}
 
-Con suspend il sistema operativo mettere il processo nello stato di waiting mentre con wakeup lo mette in stato di ready.
-
+Con suspend il sistema operativo mettere il processo nello stato di waiting
+mentre con wakeup lo mette in stato di ready.
 
 \subsubsection{Perché conviene implementare le critical section nei processi utente con i semafori anche se l'implementazione dei semafori usa busy-wait (spinlock o Peterson)?}
-Perche' queste operazioni per funzionare bene partono dall'assunto che esse siano eseguite in modo atomico per cui in un sistema uniprocessore si possono disattivare gli interrupt mentre in un multicore 
-bisogna garantire la mutua esclusione, inoltre il busy-waiting e' comunque ridotto al minimo infatti le sezioni critiche di P e Q sono molto brevi.
+Perche' queste operazioni per funzionare bene partono dall'assunto che esse
+siano eseguite in modo atomico per cui in un sistema uniprocessore si possono
+disattivare gli interrupt mentre in un multicore bisogna garantire la mutua
+esclusione, inoltre il busy-waiting e' comunque ridotto al minimo infatti le
+sezioni critiche di P e Q sono molto brevi.
 
 \subsubsection{Semafori binari, cosa sono?}
-I semafori binari sono particolari tipi di semafori in cui il valore puo' assumere solo valori 0 o 1.
+I semafori binari sono particolari tipi di semafori in cui il valore puo'
+assumere solo valori 0 o 1.
 
 %non ancora fatte
 Cosa è il potere espressivo di un paradigma di programmazione concorrente?
 \subsubsection{Semafori e semafori binari hanno lo stesso potere espressivo? perché?}
 Si, hanno lo stesso potere espressivo.
 
-
-
 \subsubsection{Quali sono le specifiche del problema "produttore consumatore"?}
-Esistono due tipi di processi: produttori e consumatori, i primi producono un valore che i secondi utilizzano; per scambiarsi i valori viene usata una variabile comune ai due processi.
-Le proprietà da garantire sono che il produttore non scriva la memoria prima che il consumatore l'abbia letta, il consumatore non legga due volte la memoria non aggiornata dal produttore e assenza di deadlock.
+Esistono due tipi di processi: produttori e consumatori, i primi producono un
+valore che i secondi utilizzano; per scambiarsi i valori viene usata una
+variabile comune ai due processi. Le proprietà da garantire sono che il
+produttore non scriva la memoria prima che il consumatore l'abbia letta, il
+consumatore non legga due volte la memoria non aggiornata dal produttore e
+assenza di deadlock.
 
 \subsubsection{Come si scrive una soluzione del problema "produttore consumatore" usando i semafori?}
 Slide 117 lucidi e appunti
 
 \subsubsection{Quali sono le specifiche del problema "buffer limitato"?}
-E' simile al problema produttore/consumatore ma non è più condivisa la singola locazione di memoria ma un struttura dati.
-Oltre alle proprietà da garantire del problema di prima bisogna garantire l'assenza di starvation.
-
+E' simile al problema produttore/consumatore ma non è più condivisa la singola
+locazione di memoria ma un struttura dati. Oltre alle proprietà da garantire
+del problema di prima bisogna garantire l'assenza di starvation.
 
 \subsubsection{Come si scrive una soluzione del problema "buffer limitato" usando i semafori?}
 Slide 119 lucidi e appunti
 
 \subsubsection{Perché nella soluzione del "buffer limitato" serve un semaforo ulteriore di mutua esclusione?}
-Perchè è quello che assicura la mutua esclusione sulle operazioni effettuate allastruttura dati.
+Perchè è quello che assicura la mutua esclusione sulle operazioni effettuate
+allastruttura dati.
 
 \subsubsection{Quali sono le specifiche del problema "cena dei filosofi"?}
-Ci sono 5 filosofi a cena attorno ad una tavola rotonda e possono fare 2 cose: pensare oppure mangiare.
-Per mangiare ogni filosofo deve prendere in mano le due bacchette ai lati mentre per pensare le deve posare entrambe.
-
+Ci sono 5 filosofi a cena attorno ad una tavola rotonda e possono fare 2 cose:
+pensare oppure mangiare. Per mangiare ogni filosofo deve prendere in mano le
+due bacchette ai lati mentre per pensare le deve posare entrambe.
 
 \subsubsection{Cosa succede se si considerano le forchette/bacchette come risorse
-e ogni filosofo prende prima la bacchetta di sx e poi quella a dx? perché?}
-Essendo virtualmente un cerchio si potrebbero tutti bloccare (deadlock) perchè hanno tutti una posata ma nessuno riesce a raggiungere l'altra.
+    e ogni filosofo prende prima la bacchetta di sx e poi quella a dx? perché?}
+Essendo virtualmente un cerchio si potrebbero tutti bloccare (deadlock) perchè
+hanno tutti una posata ma nessuno riesce a raggiungere l'altra.
 
 \subsubsection{Come si può risolvere il problema?}
-Il problema (per $n \leq 5$) si risolve rompendo la simmetria della situazione quindi facendo in modo che uno dei filosofi prenda 
-le bacchette in ordine inverso rispetto agli altri.
-
+Il problema (per $n \leq 5$) si risolve rompendo la simmetria della situazione
+quindi facendo in modo che uno dei filosofi prenda le bacchette in ordine
+inverso rispetto agli altri.
 
 \subsubsection{Esistono soluzioni che presentino starvation?}
-Facendo in modo che i filosofia prendano le bacchette in modo alternato si può verificare una \textit{congiura dei filosofi} ovvero che un filosofo non riesce mai 
-a prendere le bacchette per mangiare e muore di fame.
+Facendo in modo che i filosofia prendano le bacchette in modo alternato si può
+verificare una \textit{congiura dei filosofi} ovvero che un filosofo non riesce
+mai a prendere le bacchette per mangiare e muore di fame.
 
 \subsubsection{Quali sono le specifiche del problema "lettori/scrittori"?}
-UN database e' copndiviso tra una moltitudine di processi che sono divisibili in due classi principali: lettori e scrittori.
-I lettori vogliono leggere i dati del database e possono farlo a meno che non ci sia uno scrittore, gli scrittori invece vogliono scrivere sul database ma lo possono fare solo in mutua esclusione.
+UN database e' copndiviso tra una moltitudine di processi che sono divisibili
+in due classi principali: lettori e scrittori. I lettori vogliono leggere i
+dati del database e possono farlo a meno che non ci sia uno scrittore, gli
+scrittori invece vogliono scrivere sul database ma lo possono fare solo in
+mutua esclusione.
 
 \subsubsection{Come funziona la metodologia di Andrews?}
-La metodologia di Andrews serve per derivare soluzioni basate sui semafori e si basa su 4 fasi:
+La metodologia di Andrews serve per derivare soluzioni basate sui semafori e si
+basa su 4 fasi:
 \begin{enumerate}
     \item \textbf{definizione del problema}: si identificano i processi, i problemi di sincronizzazione e si introducono le variabili necessarie per la definizione di un invariante.
     \item \textbf{abbozzo di una soluzione}: si fa un primo schema della soluzione e si identificano le regioni che richiedono la mutua esclusione.
@@ -445,25 +519,45 @@ La metodologia di Andrews serve per derivare soluzioni basate sui semafori e si 
     \item \textbf{implementazione delle azioni atomiche}: si esprimono le azioni atomiche e gli await utilizzando le primitive di sincronizzazione disponibili.
 \end{enumerate}
 
-Per trasformare le istruzioni await è innanzitutto necessario un semaforo mutex per garantire la mutua esclusione, successivamente serve prevedere un array di semafori associati ad ogni
-condizione degli await. E' necessario anche un array di interi che contiene il numero di processi che aspettano il realizzarsi della tale condizione di await. QUesta trasormzaione si 
-chiama passaggio del testimone perchè c'è al funzione SIGNAL che controlla lo stato del vettore waiting per mandare avanti i processi in attesa che possono essere eseguiti, 
-se non ci sono processi in attesa passa la mutua esclusione. Questo tipo di soluzione però potrebbe portare starvation.
-
+Per trasformare le istruzioni await è innanzitutto necessario un semaforo mutex
+per garantire la mutua esclusione, successivamente serve prevedere un array di
+semafori associati ad ogni condizione degli await. E' necessario anche un array
+di interi che contiene il numero di processi che aspettano il realizzarsi della
+tale condizione di await. QUesta trasormzaione si chiama passaggio del
+testimone perchè c'è al funzione SIGNAL che controlla lo stato del vettore
+waiting per mandare avanti i processi in attesa che possono essere eseguiti, se
+non ci sono processi in attesa passa la mutua esclusione. Questo tipo di
+soluzione però potrebbe portare starvation.
 
 \subsubsection{Come si può costruire una soluzione esente da casi di starvation?}
-Per costruire soluzioni esenti da starvation è necessario ragionare e tendenzialmente apportare modifiche alle condizioni.
+Per costruire soluzioni esenti da starvation è necessario ragionare e
+tendenzialmente apportare modifiche alle condizioni.
 \subsubsection{Quali sono i problemi dei semafori?}
-I semafori sono costrutti di basso livello per cui molto lavoro viene riversato sui programmatori (non commettere errori banali, accedere ai dati condivisi correttamente...) e producono programmi difficilmente leggibili.
-
-
+I semafori sono costrutti di basso livello per cui molto lavoro viene riversato
+sui programmatori (non commettere errori banali, accedere ai dati condivisi
+correttamente...) e producono programmi difficilmente leggibili.
 
 \subsubsection{Cosa sono e come funzionano i Monitor?}
+I monitor sono un paradigma che fornisce un approccio piu' strutturato alla
+programmazione concorrente, esso funziona fornendo un semplice meccanismo di
+mutua esclusione attraverso due meccanismi principali: wait e signal. Con wait
+si rilascia la mutua esclusione e il processo chiamante viene sospeso in una
+coda di attesa della condizione c, mentre con signal si riattiva uno dei
+processi sospesi e il chiamante sara' inserito nell'urgent stack.
 \subsubsection{A cosa servono le variabili di condizione?}
+Le variabili di condizione sono delle code che servono a contenere, in modo
+ordinato (FIFO), i processi in attesa che si verifichi una certa condizione c.
 \subsubsection{Quali sono i metodi delle variabili di condizione e quali sono gli effetti?}
+I metodi sono quelli di una normale coda con effetti diversi: la enqueue e'
+conseguenza di un wait mentre la dequeue generera' un signal.
 \subsubsection{Cosa è lo urgent stack?}
+L'urgent stack e' una pila che viene riempita man mano da tutti i processi che
+fanno un signal, dopo l'esecuzione di tutti i processi risvegliati dal signal
+il resto del processo viene eseguito.
 \subsubsection{Quali sono le differenze di uso delle variabili di condizione e dei semafori?}
+Signal, a differenza di V, non ha nessun effetto se nessun processo sta attendendo la condizione mentre wait, a differenza di P, e' sempre bloccante.
 \subsubsection{Perché la politica signal urgent è più comoda delle alte per scrivere programmi concorrenti?}
+Perchè e' la piu' semplice per il programmatore e la piu' leggibile.
 \subsubsection{Come si implementano i semafori usando i monitor?}
 \subsubsection{Come si implementano i monitor usando i semafori?}
 \subsubsection{Come si implementano i problemi campione (producer-consumer, buffer limitato cena dei filosofi, lettori\&scrittori) con i monitor?}
@@ -474,9 +568,5 @@ I semafori sono costrutti di basso livello per cui molto lavoro viene riversato 
 \subsubsection{Come si implementa un meccanismo di MP sicrono dato quello asincrono?}
 \subsubsection{Come si implementa un meccanismo di MP asicrono dato quello sincrono?}
 \subsubsection{MP sincrono e asincrono hanno lo stesso potere espressivo? perché?}
-
-
-
-
 
 \end{document}
