@@ -599,13 +599,14 @@ lucidi e appunti.
 \item $First_k(\alpha)$: $w\in First_k(\alpha)$ se e solo se:
 \begin{itemize}
     \item $\alpha\Rightarrow^*w\beta\ con\ |w|=k, w \in T^+, \beta\in(T\cup NT)^*$, oppure
-    \item $\alpha \Rightarrow^*w\ con\ |w|\leqk, w\in T^*$ (w puo' essere $\epsilon)$
+    \item $\alpha \Rightarrow^*w\ con\ |w|\leq k, w\in T^*$ (w puo' essere $\epsilon)$
 \end{itemize}
 \item $Follow_k(A)$: $w\in Follow_k(A)$ se e solo se:
 \begin{itemize}
-    \item $S\Rightarrow^*w\alpha A\beta\ con\ |w|\in First_k(\beta)-\{\epsilon\}$, oppure
-    \item $S\Rightarrow^*w\alpha A\beta\ con\ \epsilon\in First_k(\beta)\land w=\$ $, oppure
-    \item $S\Rightarrow^*w\alpha A \land w=\$ $
+    \item $S\Rightarrow^*\alpha A\beta\ con\ |w|\in First_k(\beta)-\{\epsilon\}$, oppure
+    \item $S\Rightarrow^*\alpha A\beta\ con\ \epsilon\in First_k(\beta)\land w=\$ $, oppure
+    \item $S\Rightarrow^*\alpha A \land w=\$ $
+\end{itemize}
 \end{itemize}
 \subsection{Come si definisce una grammatica LL(k)? Ed un linguaggio LL(k)? Come si relazionano tra di loro?}
 Una grammatica e' LL(K) se la tabella di parsing per riconoscerla ha al piu'
@@ -615,14 +616,35 @@ grammatica LL(K) in grado di riconoscerlo tale che $L=L(G)$.
 Una grammatica ambigua non puo' essere una grammatica LL(K) e nemmeno una grammatica ricorsiva sinistra puo' esserlo.
 \subsection{Esistono linguaggi liberi che non sono LL(k) per nessun k? Ed esistono linguaggi liberi deterministici che non sono LL(k) per nessun k?}
 Si, esistono perche' la classe dei linguaggi LL(K) non copre totalmente la classe dei linguaggi liberi deterministici, per esempio il linguaggio $L\{=a^ib^j|i\geq j\}$
-\subsection{\textbf{Cos'è un parser bottom-up (o shift-reduce)? Qual è il suo input e il suo output? Perché sono chiamati parser LR?}}
-\subsection{\textbf{Che tipo di conflitti si possono presentare in un parser del genere? Quando si presenta un conflitto (shift/reduce o reduce/reduce), quale azione bisogna scegliere?}}
-\subsection{\textit{Cos'è un prefisso viabile? Come lo si definisce in termini di una grammatica?}}
-\subsection{\textit{Cos'è un item LR(0)? Come si generano tutti gli item di una grammatica (aumentata con un simbolo iniziale nuovo S')?}}
-\subsection{\textbf{Come si ricava il DFA dei prefissi viabili, detto anche automa canonico LR(0)?}}
-\subsection{\textbf{Come è fatta una tabella di parsing LR(0)? Come la si riempie a partire dall'automa canonico LR(0)? Quando una grammatica è di classe LR(0)?}}
-\subsection{\textbf{Come è fatto il parser LR(0) che utilizza la tabella di parsing LR(0)? Quanti stack servono?}}
+
+
+\subsection{\textcolor{red}{Cos'è un parser bottom-up (o shift-reduce)? Qual è il suo input e il suo output? Perché sono chiamati parser LR?}}
+Un parser bottom up eà un parser che supporta le operazioni di shift e di reduceç la prima sposta un terminale  dall'input alla pila e l'altro rimuove una serie di simboli dalla pila e li sostituisce con un non-terminale.
+In input prendeono una grammatica libera G, il simbolo iniziale s e la stringa w, in output restituisce la derivazione rightmost a rovescio di w se $w \in L(G)$.
+LR sta per lettura da sinistra a destra (L) e produzione dio una derivazione rightmost (R).
+\subsection{Che tipo di conflitti si possono presentare in un parser del genere? Quando si presenta un conflitto (shift/reduce o reduce/reduce), quale azione bisogna scegliere?}
+Tutti i conflitti sono di natura non deterministra e possono avvenire tra shift e reduce oppure due diverse reduce; per risolverli e' buona norma scegliere l'azione in modo tale da avere sulla pila un prefisso di una parte destra di una grammatica.
+\subsection{\textcolor{blue}{Cos'è un prefisso viabile?} Come lo si definisce in termini di una grammatica?}
+Un prefisso viabile e' una sequenza mista che puo' apparire sulla pila di un parser bottom-up per una computazione che accetta in input. In termini di grammatica sia G e una sua derivazione rightmost:
+\begin{center}
+    $S \Rightarrow^*_r \alpha Aw \Rightarrow_r \alpha\beta w$
+    e' detta prefisso viabile completo la sequenza $\alpha\beta$, con $\beta$ maniglia. Ogni prefisso viabile completo e' anche un prefisso viabile.
+\end{center}
+\subsection{\textcolor{red}{Cos'è un item LR(0)?} Come si generano tutti gli item di una grammatica (aumentata con un simbolo iniziale nuovo S')?}
+Un item LR(0) e' una produzioone con indicata, attraverso un punto, una posizione della sua parte destra, per generare tutti gli item di una grammatica basta scrivere tutte le posizioni in cui si puo' trovare il punto.
+\subsection{\textcolor{blue}{Come si ricava il DFA dei prefissi viabili, detto anche automa canonico LR(0)?}}
+L'automa canonico viene costruito tramite le funzioni Clos e Goto, gli atroci pseudocosdici sono reperibili a slide 634-635 di lucidi e appunti.
+\subsection{\textcolor{blue}{Come è fatta una tabella di parsing LR(0)? Come la si riempie a partire dall'automa canonico LR(0)? Quando una grammatica è di classe LR(0)?}}
+La tabella e' una matrice bidimensionale che ha come righe gli stati dell'automa canonico, come colonne i terminali nella sezione azione e i non terminali nella sezione goto.
+Ogni casella $M[q,X]$ contiene le azione che il parser puo' compiere con q in cima alla pila degli stati e X il simbolo in input o un non terminale (sezione goto).
+Una grammatica si dice di classe LR(0) quando nelle caselle della sua tabelle di parsin LL(1) c'e' al piu' un'azione percorribile.
+\subsection{\textcolor{blue}{Come è fatto il parser LR(0) che utilizza la tabella di parsing LR(0)? Quanti stack servono?}}
+Il parser LL(0) necessita di un solo stack dove impila gli stati dell'automa canonico LR(0), esamina l'input $w \$ $ un carattere alla volta ed esegue le azioni indcate nella tabella. (La cose e' piu' fine ma sostanzialmente il concetto e' questo).
 \subsection{Esistono grammatiche non LR(0)? Fare un esempio semplice.}
+Si, $S \to Sa|a$.
+
+
+
 \subsection{\textbf{Come è fatta e come si riempie una tabella di parsing SLR(1)? Cosa vuol dire l'acronimo SLR? Perché si mette 1 come parametro?}}
 \subsection{\textbf{Quando una grammatica è di classe SLR(1)? Esistono grammatiche non di classe SLR(1)?}}
 \subsection{\textit{Cos'è un item LR(1)? Come si costruisce l'automa canonico LR(1)?}}
