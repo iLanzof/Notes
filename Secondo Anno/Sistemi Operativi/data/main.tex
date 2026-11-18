@@ -555,18 +555,261 @@ L'urgent stack e' una pila che viene riempita man mano da tutti i processi che
 fanno un signal, dopo l'esecuzione di tutti i processi risvegliati dal signal
 il resto del processo viene eseguito.
 \subsubsection{Quali sono le differenze di uso delle variabili di condizione e dei semafori?}
-Signal, a differenza di V, non ha nessun effetto se nessun processo sta attendendo la condizione mentre wait, a differenza di P, e' sempre bloccante.
+Signal, a differenza di V, non ha nessun effetto se nessun processo sta
+attendendo la condizione mentre wait, a differenza di P, e' sempre bloccante.
 \subsubsection{Perché la politica signal urgent è più comoda delle alte per scrivere programmi concorrenti?}
 Perchè e' la piu' semplice per il programmatore e la piu' leggibile.
 \subsubsection{Come si implementano i semafori usando i monitor?}
+\begin{verbatim}
+    monitor Semaphore{
+        int value;
+        condition c;
+    }
+
+    Semaphore (int init){
+        value = init;
+    }
+
+    procedure entry void P(){
+        if (value == 0)
+            c.wait();
+        value--;
+    }
+
+    procedure entry void v(){
+        value++;
+        c.signal();
+    }
+\end{verbatim}
 \subsubsection{Come si implementano i monitor usando i semafori?}
+\begin{verbatim}
+    //Inizializzazione 
+    Semaphore mutex(1);
+    Stack urgent;
+    Queue waiting[COND];
+    //Entrata nel monitor
+    mutex.P();
+    //Waiting sulla condizione i
+    Semaphore ws = new Semaphore(0);
+    waiting[i].enqueue(ws);
+    if(urgent.empty())
+        mutex.V();
+    else {
+        Semaphore s = urgent.pop();
+        s.V();
+    }
+    ws.P();
+    free(ws);
+    //Signal sulla condizione i
+    if (!waiting[i].empty()){
+        Semaphore ws = waiting[i].dequeue();
+        Semaphore s = new SemaPHORE(0);
+        urgent.push(s);
+        ws.V()
+        s.P()
+        free(s);
+    }
+    //Uscita dal monitor
+    if(urgent.empty())
+        mutex.V();
+    else{
+        Semaphore s = urgent.pop();
+        s.V();
+    }
+\end{verbatim}
 \subsubsection{Come si implementano i problemi campione (producer-consumer, buffer limitato cena dei filosofi, lettori\&scrittori) con i monitor?}
+\paragraph{Lettori e scrittori}
+\begin{verbatim}
+    monitor rwController {
+        int r_number;
+        int w_number;
+        int waiting_writers;
+        condition readers;
+        condition writers;
+    }
+
+    void startRead (){
+        if (w_number != 0 && waiting_writers != 0)
+            readers.wait();
+        r_number++;
+        readers.signal()
+    }
+
+    void EndRead (){
+        r_number--;
+        if (r_number == 0)
+            writers.signal();
+    }
+
+    void startWrite (){
+        if (r_number != 0 && w_number != 0){
+            waiting_writers++;
+            writers.wait();
+            waiting_writers--;
+        }
+        n_writers++;
+    }
+
+    void endWrite (){
+        n_writers--;
+        readers.signal()
+        if(r_number == 0)
+            writers.signal();
+    }
+\end{verbatim}
+\paragraph{Producer/Consumer}
+\begin{verbatim}
+    monitor pcController{
+        int value;
+        condition empty;
+        condition full;
+        bool isFull;
+    }
+
+    pcController (){
+        isFull = false;
+    }
+
+    void write (int x){
+        if (isFull)
+            empty.wait();
+        value = x;
+        isFull = true;
+        full.signal();
+    }
+
+    int read (){
+        if (!isFull)
+            full.wait();
+        int x = value;
+        isFulll = false;
+        empty.signal();
+        return x;
+    }
+\end{verbatim}
+\paragraph{Buffer limitato}
+\begin{verbatim}
+    monitor PCController{
+        QueueofObj q;
+        int max_size;
+        condition empty;
+        condition full;
+    }
+
+    PCController(int size){
+        max_size = size;
+    }
+    
+    void write (Obj val){
+        if(q.size() >= max_size)
+            full.wait();
+        q.enqueue(val);
+        full.signal();
+    }
+
+    Obj read (){
+        if(q.size() == 0)
+            empty.wait();
+        Obj x = q.dequeue();
+        empty.signal();
+        return x;
+    }
+\end{verbatim}
+\paragraph{Filosofi a cena}
+\begin{verbatim}
+    monitor DPcontroller{
+        condition oktoeat[5];
+        boolean eating;
+    }
+
+    void start_eating (int i){
+        if (eating[(i+1)%5] || eating(i+4)%5)
+            oktoeat[i].wait();
+        eating[i] = true;
+    }
+
+    void finish_eating (int i){
+        eating[i] = false;
+        if (!eating[(i+2)%5])
+            oktoeat[(i+1)%5].signal();
+        if (!eating[(i+3)%5])
+            oktoeat[(i+4)%5].signal();
+    }
+\end{verbatim}
+
 \subsubsection{Qual è la differenza fre i modelli di programmazione concorrente a memoria condivisa e a memoria privata?}
+La differenza sta nel fatto che nei modelli a memoria condivisa la
+comunicazione avviene tramite la sincronizzazione mentre nei modelli a memoria
+privata la sincronizzazione avviene tramite la comunicazione.
 \subsubsection{Cosa è il Message passing sincrono e quali sono le operazioni definite?}
+In tutti i message passing sono due le operazioni definite: send e receive. La
+prima e' utilizzata dal processo mittente per spedire un messaggio al
+destinatario mentre la secondo e' usata dal destinatario che puo' ricevere un
+messaggio da un mittente specificato o meno. Piu' precisamente nel MP sincrono
+la send e' sincrona, ovvero il mittente attende la ricezione da parte del
+destinatario, e la receive e' bloccante, cioe' aspetta di ricevere un
+messaggio.
 \subsubsection{Cosa è il Message passing asincrono e quali sono le operazioni definite?}
+Come prima ma in questo caso la receive e' asincrona, ovvero spedisce il
+messaggio ma non aspetta che il destinatario lo riceva.
 \subsubsection{Cosa è il Message passing completamente asincrono e quali sono le operazioni definite?}
+Come nel primo caso ma la send e' asincrona e il receive non e' bloccante,
+cioe' se il mittente specificato non ha ancora mandato il messaggio ritorna un
+messaggio nullo.
 \subsubsection{Come si implementa un meccanismo di MP sicrono dato quello asincrono?}
+\begin{verbatim}
+    void ssend(msg_t msg, pid_t dst){
+        Asend(<get_pid(), msg>, dst);
+        mas_t ack + areceive(dst);
+    }
+
+    msg_t sreceive (pid snd){
+        msg_t msg;
+        pid_t sender;
+        <sender, msg> = areceive (snd);
+        asend(ack, sender);
+        return msg;
+    }
+\end{verbatim}
 \subsubsection{Come si implementa un meccanismo di MP asicrono dato quello sincrono?}
+\begin{verbatim}
+    void asend (msg_t msg, pid_t dst){
+        ssend("SND(msg, get_pid(), dst)", server);
+    }
+
+    msg_t areceive (pid_t snd){
+        ssend("RCV(get_pid(), snd)", server);
+        msg_t m = sreceive(server);
+        return m;
+    }
+
+    process server {
+        int waiting [][];
+        Queue queue [][];
+        while(true){
+            handleMessage();
+        }
+    }
+
+    void handleMessage(){
+        msg = sreceive();
+        if (msg == <SND(m,p,q)>){
+            if (waiting[p][q] > 0){
+                ssend(m, q);
+                waiting[p][q]--;
+            } else
+                queue[p,q].add(m);
+        } else if (msg == <RCV(q,p)>){
+            if (queue[p][q].isEmpty())
+                waiting[p][q]++;
+            else{
+                m = quque.dequeue[p][q];
+                ssend(m,q);
+            }
+        }
+    }
+\end{verbatim}
 \subsubsection{MP sincrono e asincrono hanno lo stesso potere espressivo? perché?}
+No, non hanno lo steso potere espressivo perche' non riesco ad implementare un MP asincrono dato quello sincrono senza ricorrere ad un server.
 
 \end{document}
