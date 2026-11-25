@@ -312,11 +312,11 @@ l'esigenza di capire quale delle via sia la migliore. Ogni ruouter ha una sua
 tabella di inidirizzamento che gli dice quale sia la strada migliore per
 arrivare al destinatario ma ci potrebbero essere dei problemi alla linea per
 cui se il router 1 non riceve, dopo svariati tentativi, la conferma di
-ricezione da parte del router 2 cambia le proprie tabelle di routing va al
-livello superiore e rimanda in dietro il pacchetto in modo che possa prendere
-un'altra strada. Per ogni segmento mandato ci si aspetta un solo acknoledgment
-e se non arriva, magari a causa della non ricezione di un solo pacchetto, viene
-rispedito interamente.
+ricezione da parte del router 2 cambia le proprie tabelle di instradamento va
+al livello superiore e rimanda in dietro il pacchetto in modo che possa
+prendere un'altra strada. Per ogni segmento mandato ci si aspetta un solo
+acknoledgment e se non arriva, magari a causa della non ricezione di un solo
+pacchetto, viene rispedito interamente.
 
 \paragraph{Virtual LAN}
 Gli switch possono essere "menaged" riuscendo così a partizionare i dispositivi
@@ -439,4 +439,55 @@ della sua sottorete deve incrociare indirizzo IP e subnet mask, le cose sono
 più complicate: finchè sono router di periferia le strutture sono abbastanza
 gerarchiche (tutti hanno un solo padre e alcuni figli) ma nell'\textbf{internet
     core} i router sono tutti fratelli e hanno algoritmi più complessi.
+
+\paragraph{Backbone}
+L'instradamento analizzato fino ad ora riguarda le reti locali o mediamente
+grandi, nel caso di internet le reti che compongono la \textbf{Backbone} non
+sono arganizzate gerarchicamente ma più a grafo. Questo rende gli algoritmi
+usati per riconoscere i pacchetti molto più complicati. I \textbf{router edge}
+sono i router connessi ai \textbf{router core} della backbone, quindi gli edge
+sono tali perchè interfacciano la backbone (tutti fratelli) con le reti
+gerarchiche.
+
+\paragraph{Routing}
+Il problema del routing è quello di mantenere sempre aggiornate le
+\textit{tabelle di fowarding} dei router. Le tabelle devono esser emolto veloci
+da scorrere in modo tale da non rallentare il processo del router, avere il
+minor numero di righe possibili ed essere capaci di avere una risposta ad ogni
+input, in particolare per 4 uscite la tabella ne deve avere 5: 4 per ogni
+uscita e una di default. Purtroppo queste tabelle non possono essere statiche
+perchè si devono riuscire a gestire in modo efficiente tutti i tipi di
+problemi, tipo i congestionamenti di un singolo routing, dunque queste tabellle
+devono essere dinamiche. La dinamicità è essenziale anche per gestire modifiche
+dei cammini: esse sono molto comuni per le reti wireless a cui si
+attacca/stacca un sacco di gente. Il protocollo che gestisce il ruoting può
+variare e rendere i sistemi \textbf{autonomi} per cui bisogna rendere questi
+sistemi compatibili tra di loro: decidere di che sistema far parte è anche una
+decisione politica perchè allarga il nostro sistema autonomo. IN realtà sono
+gli accordi commerciali e gestire queste cose: si va da chi fa pagare di meno.
+Le tabelle di trasmissione possono essere:
+
+\begin{itemize}
+    \item \textbf{Reattive}: hanno bisogno di una notifica quando c'è un problema e allora viene risolto.
+          Perde pacchetti e per un periodo la rete non funziona, quindi servirebbe un modo per andare non creare disservizio mentre si lavora.
+    \item \textbf{Proattivo}: decidono in modo da evitare i problemi sempre, potrebbero fare del lavoro inutile e lavorano sempre.
+\end{itemize}
+
+A questo punto il problema che rimane è: se sta cambiando un router e ne cambia
+una ltro non è un problema? IN effetti è così ma se si sta tutti sotto lo
+stesso sistema autonomo il protocollo evita che questo succeda. Per cui nella
+realtà la parte molto difficile è quella di cambiamento di \textbf{autonomus
+    system} perchè all'interno di ognuno si usa lo stesso protocollo che evita
+particolari problemi. Oggigiorno i principali protocolli sono RIP, OSPF e BGP.
+
+\paragraph{Protocollo ICMP}
+Serve per definire la comunicazione di informazioni utili per la gestione alla
+rete, notifica errori di configurazione, gestione dei cammini e collegamenti.
+Queste informazioni però sono difficili da reperire per cui ci sono protocolli
+come ICMP (internet control message protocol) che pian piano le imparano o le
+ricavano usando i pacchetti di livello IP (arancione). In pratica quando
+qualcosa ha un problema manda la notifica a tutti i router o il gestore in modo
+tale che tutti possano ricalcolre le loro tabelle. Per verificare la
+connessione tra due dispositivi si usa il comando ping che invia richieste ICMP all-host mentre per verificare la
+sequenza di router attraversati si usa traceroute, spedisce messaggi ICMP in sequenza sempre più lontano (cambiano i TTL).
 \end{document}
