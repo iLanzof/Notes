@@ -149,7 +149,7 @@ stessi.
 \subsection{\textcolor{blue}{Cos'è l'albero di sintassi astratta?} Che differenza c'è tra sintassi concreta e sintassi astratta? Cos'è lo zucchero sintattico?}
 L'albero di sintassi astratta e' un albero di derivazione da sintassi concreta senza zucchero sintattico.
 La sintassi concreta e' una sintassi piu' semplice ma ambigua, mentre la sintassi astratta e' piu' complessa ma non ambigua e con uso di zuccero sintattico,
-ovvero termini ausialiari usati per disanbiguare ma sintatticamente irrilevanti.
+ovvero termini ausiliari usati per disanbiguare ma sintatticamente irrilevanti.
 \subsection{\textcolor{blue}{Fare esempi di vincoli sintattici contestuali.} Possono essere catturati attraverso grammatiche libere?}
 Degli esempi di vincoli sintattici contestuali sono le dichiarazioi di variabili, type checking, corrispondenza tra dichiarazione e chiamata di funzione, visibilita' e scope, unicita' dei nomi e correttezza del flusso.
 Non possono essere catturati attraverso grammatiche libere.
@@ -279,7 +279,7 @@ Il file .l e' strutturato in tre parti:
     \item Dichiarazioni: cioe' le definizioni regolari
     \item Regole: ovvero un dupla {espressione regolare} (pattern) {azione} (scritto in
           C)
-    \item Funzioni ausialiari: definizioni di possibili funzioni complesse che si usano
+    \item Funzioni ausiliari: definizioni di possibili funzioni complesse che si usano
           nell'azione.
 \end{enumerate}
 Il programma prodotto da Lex implementa il DFA che riconosce le espressioni regolari definite dalle regole per cui scandisce il testo sorgente e quando riconosce
@@ -625,7 +625,7 @@ classe dei linguaggi liberi deterministici, per esempio il linguaggio
 $L\{=a^ib^j|i\geq j\}$
 
 \subsection{\textcolor{red}{Cos'è un parser bottom-up (o shift-reduce)? Qual è il suo input e il suo output? Perché sono chiamati parser LR?}}
-Un parser bottom up eà un parser che supporta le operazioni di shift e di reduceç la prima sposta un terminale  dall'input alla pila e l'altro rimuove una serie di simboli dalla pila e li sostituisce con un non-terminale.
+Un parser bottom up eà un parser che supporta le operazioni di shift e di reduce la prima sposta un terminale  dall'input alla pila e l'altro rimuove una serie di simboli dalla pila e li sostituisce con un non-terminale.
 In input prendeono una grammatica libera G, il simbolo iniziale s e la stringa w, in output restituisce la derivazione rightmost a rovescio di w se $w \in L(G)$.
 LR sta per lettura da sinistra a destra (L) e produzione dio una derivazione rightmost (R).
 \subsection{Che tipo di conflitti si possono presentare in un parser del genere? Quando si presenta un conflitto (shift/reduce o reduce/reduce), quale azione bisogna scegliere?}
@@ -649,49 +649,167 @@ Ogni casella $M[q,X]$ contiene le azione che il parser puo' compiere con q in ci
 Una grammatica si dice di classe LR(0) quando nelle caselle della sua tabelle di parsing LL(1) c'e' al piu' un'azione percorribile.
 \subsection{\textcolor{blue}{Come è fatto il parser LR(0) che utilizza la tabella di parsing LR(0)? Quanti stack servono?}}
 Il parser LL(0) necessita di un solo stack dove impila gli stati dell'automa canonico LR(0), esamina l'input $w \$ $ un carattere alla volta ed esegue le azioni indcate nella tabella. (La cose e' piu' fine ma sostanzialmente il concetto e' questo).
-\subsection{Esistono grammatiche non LR(0)? Fare un esempio semplice.}
-Si, $S \to Sa|a$.
-\subsection{\textcolor{blue}{Come è fatta e come si riempie una tabella di parsing SLR(1)?} Cosa vuol dire l'acronimo SLR? Perché si mette 1 come parametro?}
-La tabella di parsing SLR(1) e' praticamente indentica a quella di parsing LR(0) con l'unica differenza nel modo in cui viene riempita: per evitare
-la collisione di operazioni reduce e limitare cosi' l'operazione solo ai casi plausibili si inserisce $reduce \ A \to\alpha$ in $M[q,x], \forall x \in
+
+    \subsection{Esistono grammatiche non LR(0)? Fare un esempio semplice.}
+    Si, $S \to Sa|a$.
+    \subsection{\textcolor{blue}{Come è fatta e come si riempie una tabella di parsing SLR(1)?} Cosa vuol dire l'acronimo SLR? Perché si mette 1 come parametro?}
+    La tabella di parsing SLR(1) e' praticamente indentica a quella di parsing LR(0) con l'unica differenza nel modo in cui viene riempita: per evitare
+    la collisione di operazioni reduce e limitare cosi' l'operazione solo ai casi plausibili si inserisce $reduce \ A \to\alpha$ in $M[q,x], \forall x \in
 Follow(A)$. L'acronimo significa Simple, Left-toRight, Rightmost 1 (simbolo di look-ahead).
-\subsection{Quando una grammatica è di classe SLR(1)? Esistono grammatiche non di classe SLR(1)?}
-Una grammatica non e' di classe SLR(1) sse la sua tabella di parsing SLR(1) non presenta collisioni, esistono grammatiche non di classe SLR(1).
-\subsection{\textcolor{blue}{Cos'è un item LR(1)? Come si costruisce l'automa canonico LR(1)?}}
-Un item LR(1) e' una coppia formata da un item LR(0), detto nucleo o core, e un simbolo $T\cup\{\$\}$ di look ahead. L'automa canonico viene costruito in maniera molto simile A
-quello LR(0) tranne per il fatto che la funzione close aggiunge il simbolo di look ahead ad ogni produzione. Questo si ripercuote nell'intero automa che in ogni stato avra' item LR(1) diversi. (esempi e 
-pseudocodici atroci a pagina 664-667 di lucidi e appunti)
-\subsection{\textcolor{blue}{Come è fatta e come si riempie una tabella di parsing LR(1)?}}
-E' fatta come quella per il parsing LR(0) ma le operazioni reduce sono inserite solo in corrispondenza della colonna di un simbolo di look ahead.
-\subsection{\textcolor{blue}{Come è fatta una tabella di parsing LALR(1)? Quando una grammatica è di classe LALR(1)?}}
-Una tabella di parsing LALR(1) e' come una tabella di parsing SLR(1) ma con molti meno stati poiche' gli stati con lo stesso nucleo vengono aggregati, questo port ad avere tabelle piu' gestibili ma comunque problemi di collissionireduce/reduce.
-Una grammatica e' di classe LALR(1) sse la sua tabella di parsing LALR(1) non presenta alcuna collisione.
-\subsection{Esistono grammatiche LALR(1) che non sono SLR(1)? Esistono grammatiche LR(1) che non sono LALR(1)? Mostrare una grammatica che è LR(1) ma non LALR(1).}
-Non esistono grammatiche LALR(1) che non siano anche SLR(1) ma possono esistere grammatiche che sono SLR(1) ma non LALR(1); esistono grammatiche LALR(1) che non sono grammatiche SLR(1).
-Una grammatica LR(1) ma non LALR(1) e' la grammatica:
+    \subsection{Quando una grammatica è di classe SLR(1)? Esistono grammatiche non di classe SLR(1)?}
+    Una grammatica non e' di classe SLR(1) sse la sua tabella di parsing SLR(1) non
+    presenta collisioni, esistono grammatiche non di classe SLR(1).
+    \subsection{\textcolor{blue}{Cos'è un item LR(1)? Come si costruisce l'automa canonico LR(1)?}}
+    Un item LR(1) e' una coppia formata da un item LR(0), detto nucleo o core, e un simbolo $T\cup\{\$\}$ di look ahead. L'automa canonico viene costruito in maniera molto simile A
+    quello LR(0) tranne per il fatto che la funzione close aggiunge il simbolo di look ahead ad ogni produzione. Questo si ripercuote nell'intero automa che in ogni stato avra' item LR(1) diversi. (esempi e
+    pseudocodici atroci a pagina 664-667 di lucidi e appunti)
+    \subsection{\textcolor{blue}{Come è fatta e come si riempie una tabella di parsing LR(1)?}}
+    E' fatta come quella per il parsing LR(0) ma le operazioni reduce sono inserite solo in corrispondenza della colonna di un simbolo di look ahead.
+    \subsection{\textcolor{blue}{Come è fatta una tabella di parsing LALR(1)? Quando una grammatica è di classe LALR(1)?}}
+    Una tabella di parsing LALR(1) e' come una tabella di parsing SLR(1) ma con molti meno stati poiche' gli stati con lo stesso nucleo vengono aggregati, questo port ad avere tabelle piu' gestibili ma comunque problemi di collissionireduce/reduce.
+    Una grammatica e' di classe LALR(1) sse la sua tabella di parsing LALR(1) non presenta alcuna collisione.
+    \subsection{Esistono grammatiche LALR(1) che non sono SLR(1)? Esistono grammatiche LR(1) che non sono LALR(1)? Mostrare una grammatica che è LR(1) ma non LALR(1).}
+    Non esistono grammatiche LALR(1) che non siano anche SLR(1) ma possono esistere
+    grammatiche che sono SLR(1) ma non LALR(1); esistono grammatiche LALR(1) che
+    non sono grammatiche SLR(1). Una grammatica LR(1) ma non LALR(1) e' la
+    grammatica:
+    \begin{center}
+        $S\to aAa|bAb|aBb|bBb$
+
+        $A\to c\   \    \   B\to c$
+    \end{center}
+
+    \subsection{Come si può generalizzare l'idea per ogni $k \geq 2$? Ovvero quando una grammatica è di classe LR(k), SLR(k) o LALR(k)? }
+    E' possibile generalizzare l'idea a $k \geq 2$, una grammatica e' di classe
+    LR(k), SLR(k) o LALR(k) quando la corrispondente tabella di parsine, che e'
+    molto grande, non contiene conflitti.
+    \subsection{\textcolor{blue}{Come si relazionano le grammatiche della famiglia LR (LR, SLR, LALR) al variare di k?
+            Come si relazionano le grammatiche LR(k) e LL(k) al variare di k?}}
+    I diagrammi con le relazioni si trovano a slide 685-686 di lucidi e appunti.
+    \subsection{\textcolor{blue}{Le grammatiche LR(k) e LL(k) sono sempre non ambigue?
+            Esistono grammatiche ambigue che sono LL(k) o LR(k) per qualche k?
+            Esistono grammatiche che non sono LR(k) per nessun k?}}
+    Esiste una proposizione che ci assicura che le grammatiche LL(k) e LR(k) non
+    sono mai ambigue, questo vale anche per per grammatiche SLR(k) e LALR(k). La
+    grammatica G:
+    \begin{center}
+        $S \to aAc$
+
+        $A \to bAb| b$
+    \end{center}
+
+    si puo' dimostrare che non sia LL(k) per nessun k ma il linguaggio
+$L(G)=\{ab^{2n+1}c|n\geq 0\}$ e' generabile da una grammatica di classe LL(0).
+
+    \subsection{Come si relazionano i linguaggi della famiglia LR(k) rispetto a quelli LL(k)?
+        Esistono linguaggi liberi deterministici che non sono LR(k) per qualche k? \textcolor{blue}{Esistono linguaggi liberi deterministici che non sono LL(k) per qualche k?}}
+    Il diagramma con le relazioni tra linguaggi si trova a slide 692 di lucidi e
+    appunti. Non esistono linguaggi liberi deterministici che non siano LR(k)
+    perche' la classe dei linguaggi LR(k) copre totalmente quella dei linguaggi
+    liberi deterministici. Esistono linguaggi liberi deterministici che non sono
+    LL(k) per nessun k, tipo $L=\{a^ib^j|i\geq j\geq 0\}$.
+
+    \subsection{\textcolor{blue}{Esiste un linguaggio regolare che non è LR(0)?}
+        Come si relazionano i linguaggi LR(0) rispetto a quelli LL(1)?
+        La prefix property è una condizione necessaria e sufficiente affinché un linguaggio sia di classe LR(0)?}
+    Esiste il linguaggio $L=\{a,ab\}$ che e' regolare ma non e' LR(0). Per la
+    relazione tra linguaggi vedere slide 692, la prefix property non e' una
+    condizione necessaria e sufficiente affinche' un linguaggio sia di classe LR(0)
+    perche' il linguaggio $L=\{a,aa\}$ e' LR(0) ma non gode della prefix property.
+\subsection{\textcolor{blue}{La classe dei linguaggi SLR(1) coincide con la classe dei linguaggi liberi deterministici?}}
+Si, la classe del linguagggi SLR(1) coincide con la classe dei linguaggi liberi
+e deterministici.
+\subsection{\textcolor{red}{Cos'è YACC? Qual è il suo input e il suo output?}
+    Come si ottiene un parser eseguibile a partire da un file .y?
+    Come agisce il parser generato da YACC in sintonia con lo scanner generato da Lex?}
+YACC e' un generatore di analizzatori sintattici che prende in input un file .y che contiene delle regole e in output produce un programma C che realizza il parser LALR(1) per quelle regole.
+La catena di per cui si ottiene l'eseguibile e':
 \begin{center}
-$S\to aAa|bAb|aBb|bBb$
-
-$A\to c\   \    \   B\to c$
+    translate.y $\to$ YACC $\to$ y.tab.c $\to$ C Compiler $\to$ a.out.
 \end{center}
-\subsection{Come si può generalizzare l'idea per ogni $k \geq 2$? Ovvero quando una grammatica è di classe LR(k), SLR(k) o LALR(k)? }
-\subsection{Come si relazionano le grammatiche della famiglia LR (LR, SLR, LALR) al variare di k? Come si relazionano le grammatiche LR(k) e LL(k) al variare di k?}
-\subsection{Le grammatiche LR(k) e LL(k) sono sempre non ambigue? Esistono grammatiche ambigue che sono LL(k) o LR(k) per qualche k? Esistono grammatiche che non sono LR(k) per nessun k?}
-\subsection{Come si relazionano i linguaggi della famiglia LR(k) rispetto a quelli LL(k)? Esistono linguaggi liberi deterministici che non sono LR(k) per qualche k? Esistono linguaggi liberi deterministici che non sono LL(k) per qualche k?}
-\subsection{Esiste un linguaggio regolare che non è LR(0)? Come si relazionano i linguaggi LR(0) rispetto a quelli LL(1)? La prefix property è una condizione necessaria e sufficiente affinché un linguaggio sia di classe LR(0)?}
-\subsection{La classe dei linguaggi SLR(1) coincide con la classe dei linguaggi liberi deterministici?}
-\subsection{\textit{Cos'è YACC? Qual è il suo input e il suo output? Come si ottiene un parser eseguibile a partire da un file .y? Come agisce il parser generato da YACC in sintonia con lo scanner generato da Lex?}}
-\subsection{\textit{Come è la struttura di un file .y di YACC? Cosa sono le regole? Cos'è l'azione semantica?}}
-\subsection{\textit{È possibile gestire grammatiche ambigue con YACC, specificando le associatività e le priorità fra gli operatori per risolvere l'ambiguità? Come si comporta YACC in presenza di conflitti?}}
-
+L'analizzatore sintattico in realta' usa l'analizzatore lessicale come subroutine chiedendo il token successivo, i due programmi comunicano tramite variabili in comune.
+\subsection{\textcolor{blue}{{Come è la struttura di un file .y di YACC?} Cosa sono le regole? Cos'è l'azione semantica?}}
+Un file YACC e' diviso in 4 parti:
+\begin{itemize}
+    \item Prologo: opzionale, contiene macro e altre dichiaranzioni.
+    \item Definizioni: dichiarazione ddei simboli e specifica dell'associatività degli
+          operandi.
+    \item Regole: in cui la produzione della forma $nonterm \to corpo_1|...|corpo_n$
+          viene espressa con el regole:
+          \begin{verbatim}
+        nontermi: corpo_1 {azione semantica 1}
+                  \dots
+                  corpo_n {azione semantica n}
+    \end{verbatim}
+          Le azioni semantiche sono il pezzo di codice che viene eseguito quando il
+          parser riduce mediante la produzione $nonterm \to corpo_k$.
+    \item Funzioni ausiliari: tipo yylex(), cioe' l'invocazione dell'analizzatore
+          lessicale.
+\end{itemize}
+\subsection{È possibile gestire grammatiche ambigue con YACC, specificando le associatività e le priorità fra gli operatori per risolvere l'ambiguità?
+    Come si comporta YACC in presenza di conflitti?}
+Si, con YACC si puo' gestire grammatiche ambigue specificando le associatività
+e le priorità fra gli operatori, in presenza di ulteriori conflitti YACC
+risolve i conflitti shift/reduce a favore dello shift e i conflitti
+reduce/reduce a favore della prima produzione.
 \section{Capitolo 5 - Fondamenti}
-\subsection{\textbf{È possibile costruire un programma Check che, preso in input un qualunque programma P, restituisce 1 se P è corretto e 0 se P è scorretto? Ovvero existe un qualche compilatore che può scovare tutti i possibili errori di un programma?}}
-\subsection{\textbf{Cosa dice il problema della fermata (Halting Problem)? (L'errore in esame è la possibilità di non terminare il calcolo.) Come si dimostra che il problema non può essere risolto?}}
-\subsection{\textit{Quando un problema è decidibile?}}
-\subsection{\textit{Quali sono tipici esempi di proprietà indecidibili per i linguaggi di programmazione?}}
-\subsection{\textbf{Cos'è una Macchina di Turing (MdT)? Che cosa calcola?}}
-\subsection{\textbf{Quando un linguaggio è detto Turing-completo? Cosa afferma la tesi di Church-Turing e perché non si può dimostrare?}}
+\subsection{È possibile costruire un programma Check che, preso in input un qualunque programma P, restituisce 1 se P è corretto e 0 se P è scorretto?
+    Ovvero esiste un qualche compilatore che può scovare tutti i possibili errori di un programma?}
+No, non esiste un programma del genere perche' se il programma che prende in
+input diverge e non termina mai si avrebbe un programma che in un tempo finito
+riesce a capire che il calcolo del programma da controllare non finira' mai.
+\subsection{\textcolor{blue}{Cosa dice il problema della fermata (Halting Problem)? (L'errore in esame è la possibilità di non terminare il calcolo.)
+        Come si dimostra che il problema non può essere risolto?}}
+L'halting problem e': dato H il programma che deve stabilire se un programma P, con inpu x, diverga o meno esso (H)
+si troverebbe a dover riconoscere in tempo finito che il programma P non terminera' mai. Supponendo per assurdo che questo programma H esista e:
+H(P,x) =
+$
+\begin{cases}
+    1 & se P(x) \downarrow \\
+    0 & se P(x) \uparrow
+\end{cases}
+$
+realizzo dunque l'applicazione K(P):
+$
+\begin{cases}
+    1 & se P(P) \downarrow \\
+    0 & se p(p) \uparrow
+\end{cases}
+$
+Si noti che K(P) = H(P,P) dunque se esiste il programma H allora anche il programma K esiste, a questo punto posso scrivere il programma G(P) tale che:
+$
+\begin{cases}
+    1        & se K(P) = 0 \\
+    \uparrow & se K(P) = 1
+\end{cases}
+$
+dunque anche G esiste, ma cosa succede se calcolo G(G)?
+$
+\begin{cases}
+    G(G) = 1        & sse K(G) = 0  sse G(G) \uparrow   \\
+    G(G) = \uparrow & sse K(G) = 1  sse G(G) \downarrow
+\end{cases}
+$
+Questo pero' porta ad un assurdo.
+\subsection{Quando un problema è decidibile?}
+Un problema e' decidibile se gli si riesce a dare una risposta binaria in tempo
+finito.
+\subsection{\textcolor{blue}{Quali sono tipici esempi di proprietà indecidibili per i linguaggi di programmazione?}}
+Terminazione, divergenza, equivalenza tra programmi, calcolo di una costante in modo esatto, generazione di errori a runtime\dots
+Tutto questo fino a quando e' un linguaggio touring completo.
+\subsection{Cos'è una Macchina di Turing (MdT)? Che cosa calcola?}
+Una macchina di Turing e' una sestupla che riconosce un linguaggio calcolando
+funzioni parziali binarie. E' un automa in praitca, risposta dettagliata slide
+718/719 di lucidi e appunti.
+\subsection{\textcolor{red}{Quando un linguaggio è detto Turing-completo? Cosa afferma la tesi di Church-Turing e perché non si può dimostrare?}}
+Un linguaggio di programmazione e' Turing completo se ha la stessa potenza espressiva di una macchina di touring, cioe' ne calcola le stesse funzioni.
+La tesi di Church Turing afferma che una funzione matematica che puo' essere calcolata algoritmicamente allora e' 
+anche calcolabile con una macchina di Turing, non e' dimostrabile perche' non c'e' una definizione precisa di algoritmicamente 
+e non si puo' provare sull'insieme infinito di formalismi (troppo tempo).
 \subsection{I normali linguaggi di programmazione sono Turing-completi? Cosa afferma il teorema di Böhm-Jacopini?}
-\subsection{\textit{Quale relazione existe tra espressività di un formalismo e decidibilità di proprietà dello stesso? Fare una panoramica prendendo in esame i tre formalismi MdT, PDA, DFA, e le due proprietà w$\in$L(M) (è w riconosciuta dalla macchina M?) e $L(M_1)=L(M_2)$ (le due macchine sono equivalenti, ovvero riconoscono lo stesso linguaggio?).}}
-
+Si, il teorema di Böhm-Jacopini afferma che un linguaggio di programmazione imperativo che contiene if-then-else, while, composizionesequenziale e asseganmentoi di base e' Turing completo.
+\subsection{Quale relazione esiste tra espressività di un formalismo e decidibilità di proprietà dello stesso? 
+Fare una panoramica prendendo in esame i tre formalismi MdT, PDA, DFA, e le due proprietà w$\in$L(M) (è w riconosciuta dalla macchina M?) 
+e $L(M_1)=L(M_2)$ (le due macchine sono equivalenti, ovvero riconoscono lo stesso linguaggio?).}
+Ultima slide, letteralmente.
 \end{document}
